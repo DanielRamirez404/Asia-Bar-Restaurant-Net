@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import { Menu, ChevronDown, ChevronRight } from 'lucide-react'
+import React, { useState } from 'react';
+import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
+import './dashboard.css';
 
-function Dashboard() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [expandedItem, setExpandedItem] = useState(null)
+const Dashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [expandedItem, setExpandedItem] = useState(null);
 
   const menuItems = [
     {
@@ -19,79 +20,80 @@ function Dashboard() {
     {
       title: "etc..."
     }
-  ]
+  ];
 
   // Simple function to replace cn
-  const classNames = (...classes) => classes.filter(Boolean).join(' ')
+  const classNames = (...classes) => classes.filter(Boolean).join(' ');
 
   return (
-    <div className="min-h-screen bg-[#FFF8DC]">
+    <div className="dashboard">
       {/* Botón de menú */}
       <button
-        className="fixed left-4 top-4 z-50 p-2 bg-transparent hover:bg-gray-200 rounded-full"
+        className={`menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`}
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        <Menu className="h-6 w-6" />
+        <Menu size={24} color="#000" /> {/* Cambia el color a negro */}
       </button>
 
       {/* Sidebar */}
       <aside
         className={classNames(
-          "fixed inset-y-0 left-0 z-40 w-64 transform bg-[#B22222] transition-transform duration-300 ease-in-out",
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+          "sidebar",
+          isSidebarOpen ? "open" : ""
         )}
       >
         {/* Espacio para logo */}
-        <div className="h-40 w-full flex items-center justify-center">
-          <div className="w-32 h-32 bg-white/10 rounded flex items-center justify-center text-white text-sm">
+        <div className="logo-container">
+          <div className="logo-placeholder">
             Espacio para logo
           </div>
         </div>
 
         {/* Título del menú */}
-        <div className="px-4 py-2 text-lg font-medium text-white">
+        <div className="menu-title">
           Asia Menú
         </div>
 
         {/* Items del menú */}
-        <nav className="mt-4">
-          {menuItems.map((item, index) => (
-            <div key={index} className="px-2">
-              <button
-                className="w-full flex items-center justify-between rounded-lg px-4 py-2 text-white hover:bg-red-900"
-                onClick={() => setExpandedItem(expandedItem === index ? null : index)}
-              >
-                <span>{item.title}</span>
-                {item.subItems && (
-                  expandedItem === index ?
-                    <ChevronDown className="h-4 w-4" /> :
-                    <ChevronRight className="h-4 w-4" />
+        <nav className="menu">
+          <ul className="menu-items">
+            {menuItems.map((item, index) => (
+              <li key={index} className="menu-item">
+                <button
+                  className="menu-button"
+                  onClick={() => setExpandedItem(expandedItem === index ? null : index)}
+                >
+                  <span>{item.title}</span>
+                  {item.subItems && (
+                    expandedItem === index ? 
+                      <ChevronDown size={16} /> : 
+                      <ChevronRight size={16} />
+                  )}
+                </button>
+                
+                {item.subItems && expandedItem === index && (
+                  <ul className="submenu">
+                    {item.subItems.map((subItem, subIndex) => (
+                      <li key={subIndex}>
+                        <button className="submenu-button">
+                          {subItem}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 )}
-              </button>
-
-              {item.subItems && expandedItem === index && (
-                <div className="ml-4 mt-1 space-y-1">
-                  {item.subItems.map((subItem, subIndex) => (
-                    <button
-                      key={subIndex}
-                      className="w-full rounded-lg px-4 py-1 text-left text-sm text-white hover:bg-red-900"
-                    >
-                      {subItem}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+              </li>
+            ))}
+          </ul>
         </nav>
       </aside>
 
       {/* Contenido principal */}
-      <main className="flex-1">
+      <main className="main">
         {/* Área de contenido vacía como solicitado */}
       </main>
     </div>
-  )
+  );
 }
 
 export default Dashboard;
