@@ -5,6 +5,7 @@ import { DashboardPageOrder, PagePaths } from "./paths";
 
 import Welcome from "../pages/welcome";
 import Login from '../pages/login'
+import Dashboard from "../pages/dashboard";
 
 class Page {
     constructor(path, component, title = null, roles = AllRoles) {
@@ -18,6 +19,7 @@ class Page {
 export const PageList = [
     new Page(PagePaths['Welcome'], <Welcome />, "Bienvenida"),
     new Page(PagePaths['Login'], <Login/>,"Login"), 
+    new Page(PagePaths['Dashboard'], <Dashboard />, "Dashboard"),
 ];
 
 export const DashboardPageList = PageList

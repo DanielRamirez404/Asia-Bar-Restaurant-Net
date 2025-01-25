@@ -1,6 +1,6 @@
 export const PagePaths = {
     'Welcome': '/',
-    'Dashboard': '/menu',
+    'Dashboard': '/dashboard',
     'Example': '/link-de-ejemplo',
     'Login':'/login'
 };
