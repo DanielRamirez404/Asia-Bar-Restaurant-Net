@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from 'react';
+=======
+
+>>>>>>> 5d7686561efa99b3fb10107dbc005f7312189533
 import './login.css'
 
 function Login() {

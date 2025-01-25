@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import SessionContext from "session";
+import SessionContext from "./session";
 import { Roles } from "./roles";
 
 export const RestrictedComponent = ({ component, permissions }) => {
