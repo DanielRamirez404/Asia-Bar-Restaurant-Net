@@ -1,9 +1,8 @@
 export const PagePaths = {
-    'Welcome': '/',
-    'Dashboard': '/dashboard',
+    'Home': '/',
     'Example': '/link-de-ejemplo',
     'Login':'/login',
     'Pedido':'/Pedido'
 };
 
-export const DashboardPageOrder = [ PagePaths['Welcome'], PagePaths['Dashboard'] ];
+export const DashboardPageOrder = [ PagePaths['Home'] ];

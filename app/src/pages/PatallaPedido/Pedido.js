@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "../reusables/constants.css"
 import './Pedido.css'
 import { Rellenar } from "./prueba";
 import { Producto } from "./Widgets";

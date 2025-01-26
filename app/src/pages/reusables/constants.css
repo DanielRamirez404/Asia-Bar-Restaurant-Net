@@ -1,0 +1,26 @@
+:root {
+    --red-hue: #B22222;
+    --bright-red-hue: #ff2929;
+    --dark-red-hue: #a72121;
+    --yellow-background-hue: #f9f7dc;
+    --gray-hue: #aaaaaa;
+    --platinum-hue: #cccccc;
+    --scrollbar-background-hue: #8884;
+    --shadow-hue: #9992;
+    --white-hue: #fefefe;
+}
+
+::-webkit-scrollbar{
+    width: 12px;
+    background: var(--scrollbar-background-hue);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+   
+::-webkit-scrollbar-thumb {
+   background-color: var(--white-hue);
+   border-radius: 20px;   
+}

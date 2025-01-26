@@ -1,5 +1,5 @@
 import React from "react";
-import "../reusables/colors.css"
+import "../reusables/constants.css"
 import "./Widgets.css"
 
 

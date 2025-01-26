@@ -39,26 +39,6 @@
     border-radius: 20px;
 }
 
-::-webkit-scrollbar{
-
-    
-        
-    width: 12px;
-    background: var(--scrollbar-background-hue);
-    border-radius: 20px;
-
-}
-
-::-webkit-scrollbar-track {
-    background: transparent; 
-  }
-   
-::-webkit-scrollbar-thumb {
-   background-color: var(--white-hue);
-   border-radius: 20px;
-   
-  }
-
 .scrollFrame{
 
     margin: auto;
