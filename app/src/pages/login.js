@@ -1,50 +1,18 @@
-import React from 'react';
-import './reusables/constants.css'
-import './login.css'
+import FormPage from './reusables/form-page';
+import { RequiredInputBox } from './reusables/form-page';
+import './reusables/styles.css'
 
 function Login() {
-
   return (
-
-    <div className="Login">
-
-        <div class='frameLogin'>
-
-            <h1>Iniciar Sesión</h1>
-
-            <hr></hr>
-            <form id='inicioDeSesion'>
-                <div class='inputBox'>
-
-                    <label for = 'user'>Usuario</label>
-
-                    <input type='text'  id = 'user'placeholder="Nombre de usuario" required></input>
-
-                </div>
-
-                
-                <div class='inputBox'>
-
-                    <label for = 'password'>Contraseña</label>
-
-                    <input type='password' id='password'   placeholder="Contraseña" required ></input>
-
-                </div>
-
-
-                <button type='submit'>Acceder</button>
-            </form>
-        </div>
-      
-    </div>
-
-
-
+    <FormPage title={ "Inicio de Sesión" } content= {(
+        <>
+            <RequiredInputBox title={ "Nombre de Usuario" } />
+            <RequiredInputBox title={ "Contraseña" } />
+           
+            <button className='submit-button' type='submit'>Acceder</button>
+        </>
+    )} />
   );
 }
-
-
-
-
 
 export default Login;

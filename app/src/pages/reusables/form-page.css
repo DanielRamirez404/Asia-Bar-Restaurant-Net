@@ -1,15 +1,10 @@
-.Login{
-    
-    height: 100%;
-    width: 100%;
+.form-page {
+    size: 100%;
     margin: 0px;
     padding: 0px;
-
-   
 }
 
-.frameLogin{
-
+.frame-form {
     font-family:'Segoe UI';
 
     width: 40%;
@@ -22,35 +17,27 @@
     text-align: center;
     border-radius: 40px;
 
-    
-
-
     box-shadow: 0 0 10px 9px var(--shadow-hue);
 }
 
-.frameLogin h1{
-
+.frame-form h1 {
     padding-top: 40px;
     font-size: 40px;
     color: var(--red-hue);
-
 }
 
-.inputBox{
+.frame-form hr {
+    margin: 6% 15%;
+}
 
+.input-box {
     display: flex;
     flex-direction: column;
     text-align: left;
     padding: 0 20px;
-    
-    
-    
-
 }
 
-input{
-
-   
+.input-box input {
     margin: 20px;
     height: 30px;
     border-radius: 30px;
@@ -59,71 +46,20 @@ input{
     padding: 10px;
 
     font-size: 16px;
-
-   
-  
 }
 
-
-label{
-
+.input-box label {
     font-size: 18px;
     padding: 0 20px;
-    
-
-}
-
-button{
-
-    width: 80%;
-    height: 50px;
-    margin: 20px 0;
-    cursor: pointer;
-
-    border-radius: 30px;
-
-    border: none;
-    background: var(--red-hue);
-
-    color: var(--white-hue);
-    font-size: 20px;
     font-weight: bold;
 }
 
-
-
-button:hover{
-
-
-    transform: scale(1.05);
-    background: var(--bright-red-hue);
-
-}
-
-hr{
-
-    margin: 6% 15%;
-
-}
-
-
-
-/*Media Query*/
-
 @media (max-width : 768px){
-
-
-
-    .frameLogin{
-
+    .frame-form {
         width: 90%;
-
     }
 
-    .frameLogin h1{
-
+    .frame-form h1{
         font-size: 30px;
-        
     }
-
 }

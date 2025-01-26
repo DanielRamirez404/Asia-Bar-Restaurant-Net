@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
-import './constants.css'
+import './constants.css';
 import './dashboard-page.css';
 
 function MenuToggleButton({ className, onClick }) {
