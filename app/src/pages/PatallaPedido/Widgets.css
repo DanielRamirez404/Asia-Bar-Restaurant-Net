@@ -1,0 +1,117 @@
+
+
+.frameProducto{
+
+    background: #ccc;
+    height: 130px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
+
+    border-radius: 20px;
+    
+    position: relative;
+    display: flex;
+}
+
+.imgComida{
+
+    height: 130px;
+    width: 130px;
+    background: #111;
+
+    object-fit: cover;
+
+}
+
+.descripcion{
+
+    height: 100%;
+    width: 9vw;
+    margin: 6px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.descripcion p{
+    
+    border-bottom: solid 2px #7777;
+    margin: 0 ;
+    font-size: 14px;
+
+}
+
+#productoTitulo{
+
+    font-size: 18px;
+    font-weight: bold;
+    color: #b60c0c;
+}
+
+.btnAgregarPoducto{
+
+    
+
+    font-size: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #666;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:  .4s;
+    margin: auto;
+    margin-right: 6px;
+    
+
+}
+
+.btnAgregarPoducto:hover{
+
+    transform: none;
+    
+
+}
+
+
+
+@media (max-width : 768px){
+
+    
+
+    .frameProducto{
+
+        width: 100%;
+
+    }
+
+    .btnAgregarPoducto{
+
+        height: 70px;
+        width: 70px;
+        font-size: 28px;
+    }
+
+    .descripcion{
+
+        width: 36% ;
+        margin: 5px;
+        
+    }
+
+}
+
+@media (max-width : 1024px){
+
+
+    .frameProducto{
+
+        width: 90%;
+    }
+}
+
+@media (max-width : 768px)
