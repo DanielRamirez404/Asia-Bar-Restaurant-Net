@@ -2,7 +2,7 @@
 
 .frameProducto{
 
-    background: #ccc;
+    background: var(--platinum-hue);
     height: 130px;
     width: 80%;
     margin: auto;
@@ -47,7 +47,7 @@
 
     font-size: 18px;
     font-weight: bold;
-    color: #b60c0c;
+    color: var(--red-hue);
 }
 
 .btnAgregarPoducto{
@@ -59,7 +59,7 @@
     height: 80px;
     border-radius: 50%;
     background: #666;
-    color: #fff;
+    color: var(--white-hue);
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,13 +1,10 @@
 import React from 'react';
+import './reusables/colors.css'
 import './login.css'
 
 function Login() {
 
-
-
-
   return (
-
 
     <div className="Login">
 

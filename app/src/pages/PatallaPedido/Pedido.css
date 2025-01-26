@@ -42,9 +42,9 @@
 ::-webkit-scrollbar{
 
     
-    
+        
     width: 12px;
-    background: #8884;
+    background: var(--scrollbar-background-hue);
     border-radius: 20px;
 
 }
@@ -54,7 +54,7 @@
   }
    
 ::-webkit-scrollbar-thumb {
-   background-color: #fff;
+   background-color: var(--white-hue);
    border-radius: 20px;
    
   }
@@ -140,8 +140,8 @@
 #btnCancelar{
 
     background: transparent;
-    color: #b60c0c;
-    border: solid 2px #b60c0c;
+    color: var(--red-hue);
+    border: solid 2px var(--red-hue);
 
 }
 
@@ -168,7 +168,7 @@
 .btnEsconder:hover{
 
     transform: none;
-    background: #ff2929;   
+    background: var(--bright-red-hue);   
 
 }
 

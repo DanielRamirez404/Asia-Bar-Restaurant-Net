@@ -14,7 +14,7 @@
 
     width: 40%;
     
-    background: #fff;
+    background: var(--white-hue);
     
     margin: auto;
     margin-top: 100px;
@@ -25,14 +25,14 @@
     
 
 
-    box-shadow: 0 0 10px 9px #9992;
+    box-shadow: 0 0 10px 9px var(--shadow-hue);
 }
 
 .frameLogin h1{
 
     padding-top: 40px;
     font-size: 40px;
-    color: #b60c0c;
+    color: var(--red-hue);
 
 }
 
@@ -55,7 +55,7 @@ input{
     height: 30px;
     border-radius: 30px;
     
-    border:  solid #999 2px;
+    border:  solid var(--gray-hue) 2px;
     padding: 10px;
 
     font-size: 16px;
@@ -83,9 +83,9 @@ button{
     border-radius: 30px;
 
     border: none;
-    background: #b60c0c;
+    background: var(--red-hue);
 
-    color: #fff;
+    color: var(--white-hue);
     font-size: 20px;
     font-weight: bold;
 }
@@ -96,7 +96,7 @@ button:hover{
 
 
     transform: scale(1.05);
-    background: #ff2929;
+    background: var(--bright-red-hue);
 
 }
 

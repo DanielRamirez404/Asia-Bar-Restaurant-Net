@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
+import './reusables/colors.css'
 import './dashboard.css';
 
 const Dashboard = () => {
