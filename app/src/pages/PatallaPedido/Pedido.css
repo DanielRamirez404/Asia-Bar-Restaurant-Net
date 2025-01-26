@@ -1,0 +1,276 @@
+
+
+.contenedorFramesPedido{
+
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+  
+  
+
+
+}
+
+
+
+.tituloPedido{
+
+    font-size: 30px;
+    margin: 0;
+    text-align: center;
+
+    box-shadow: 0px 10px 20px 1px #5552;
+    padding: 10px 0;
+    
+
+    border-bottom: solid #bbb 2px;
+
+}
+
+.framePedido{
+
+    background: #eee;
+    width: 35%;
+    height: 70vh;
+    margin: auto;
+    
+    max-height: 600px;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar{
+
+    
+    
+    width: 12px;
+    background: #8884;
+    border-radius: 20px;
+
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+::-webkit-scrollbar-thumb {
+   background-color: #fff;
+   border-radius: 20px;
+   
+  }
+
+.scrollFrame{
+
+    margin: auto;
+    margin-top: 20px;
+    height: 80%;
+    width: 90%;
+    background: transparent;
+
+
+
+    overflow-y:scroll;
+}
+
+#frameOrden{
+
+    position: relative;
+}
+
+.overlay{
+
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0009;
+    z-index: 10;
+
+}
+
+
+
+
+
+.frameBotones{
+    
+    background: transparent;
+    width: 100%;
+    height: 10vh;
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+   
+
+    
+}
+
+
+
+.btnPedido{
+
+    width: 15%;
+    font-size: 15px;
+    
+    margin: 10px;
+    text-align: center;
+
+}
+
+.nota{
+
+    width: 100px;
+
+    font-size: 13px;
+    background: #333;
+    box-shadow: 0 4px 6px #0003;
+
+
+    position: absolute;
+    bottom: 5px;
+    right: 50px;
+    z-index: 2;
+
+
+    
+}
+
+#btnCancelar{
+
+    background: transparent;
+    color: #b60c0c;
+    border: solid 2px #b60c0c;
+
+}
+
+.esconderPedido{
+    height: 100%;
+    width: 100%;
+    
+}
+
+.btnEsconder{
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    margin: auto;
+    align-items: center;
+    height: 48px;
+
+    font-size: 25px;
+    font-weight: bold;
+    
+    display: none;
+
+}
+
+.btnEsconder:hover{
+
+    transform: none;
+    background: #ff2929;   
+
+}
+
+
+
+@media (max-width : 768px){
+
+
+    .contenedorFramesPedido{
+        flex-direction: column;
+        flex-flow: column-reverse;
+
+        align-items: center;
+    }
+
+    .framePedido{
+
+        background: #eee;
+        width: 95%;
+        height: 70vh;
+        margin-bottom: 10px;
+        
+        border-radius: 20px;
+    }
+    
+
+    #framePlatos{
+
+        position: fixed;
+        bottom: -100%;
+        left: 0;
+        width: 100%;
+        height: 70vh;
+        transition: bottom 0.5s ease-in-out;
+        z-index: 20;
+        display:block;
+        border-radius: 0;
+        margin: 0;
+        
+
+    }
+
+    #framePlatos.visible{
+
+        bottom: 0;
+
+
+    }
+
+    .btnPedido{
+
+        width: 30%;
+        font-size: 18px;
+        
+    }
+
+    .frameBotones{
+        position: relative;
+    }
+
+    #btnEsconder{
+
+        
+
+        display: block;
+        position: fixed;
+        
+        bottom: 2px;
+        left: 10px;
+        width: 20%;
+        z-index: 25;
+        transition: bottom 0.5s ease-in-out;
+        
+    }
+
+    #btnEsconder.active{
+
+        bottom:70vh;
+    }
+
+    .frameBotones{
+
+        margin-top: 0;
+
+    }
+
+    .nota{
+
+
+        font-size: 15px;
+        right: 32px;
+        bottom: -5px;
+
+    }
+
+    .scrollFrame{
+
+        width: 100%;
+    }
+
+    #scrollFramePedido{
+
+        width: 90%;
+    }
+}

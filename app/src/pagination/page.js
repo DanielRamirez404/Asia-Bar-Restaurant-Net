@@ -5,6 +5,7 @@ import { DashboardPageOrder, PagePaths } from "./paths";
 
 import Welcome from "../pages/welcome";
 import Login from '../pages/login'
+import Pedido from "../pages/PatallaPedido/Pedido";
 import Dashboard from "../pages/dashboard";
 
 class Page {
@@ -19,6 +20,7 @@ class Page {
 export const PageList = [
     new Page(PagePaths['Welcome'], <Welcome />, "Bienvenida"),
     new Page(PagePaths['Login'], <Login/>,"Login"), 
+    new Page(PagePaths['Pedido'], <Pedido/>,"ventanaPedido"),
     new Page(PagePaths['Dashboard'], <Dashboard />, "Dashboard"),
 ];
 

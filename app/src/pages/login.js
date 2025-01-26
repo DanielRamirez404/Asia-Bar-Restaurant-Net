@@ -21,7 +21,7 @@ function Login() {
 
                     <label for = 'user'>Usuario</label>
 
-                    <input type='text' placeholder='usuario' id = 'user'placeholder="Nombre de usuario" required></input>
+                    <input type='text'  id = 'user'placeholder="Nombre de usuario" required></input>
 
                 </div>
 
@@ -30,7 +30,7 @@ function Login() {
 
                     <label for = 'password'>Contraseña</label>
 
-                    <input type='password' id='password'   placeholder='contraseña' placeholder="Contraseña" required ></input>
+                    <input type='password' id='password'   placeholder="Contraseña" required ></input>
 
                 </div>
 
