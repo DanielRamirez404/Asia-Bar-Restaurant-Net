@@ -1,4 +1,5 @@
 
+
 .contenedorFramesPedido{
 
   display: flex;
@@ -266,5 +267,10 @@
     .scrollFrame{
 
         width: 100%;
+    }
+
+    #scrollFramePedido{
+
+        width: 90%;
     }
 }
