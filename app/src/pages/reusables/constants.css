@@ -8,6 +8,8 @@
     --scrollbar-background-hue: #8884;
     --shadow-hue: #9992;
     --white-hue: #fefefe;
+    --black-hue: #000000;
+    --blue-hyperlink-hue: #13407c;
 }
 
 ::-webkit-scrollbar{

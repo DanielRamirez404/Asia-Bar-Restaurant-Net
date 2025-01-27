@@ -1,7 +1,6 @@
 .submit-button {
     width: 80%;
     height: 50px;
-    margin: 20px 0;
     cursor: pointer;
 
     border-radius: 30px;
@@ -12,4 +11,24 @@
     color: var(--white-hue);
     font-size: 20px;
     font-weight: bold;
+}
+
+.go-back-button {
+    width: 80%;
+    height: 50px;
+    cursor: pointer;
+
+    border-radius: 30px;
+    border-color: var(--black-hue);
+    background: none;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hyperlink {
+    color: var(--blue-hyperlink-hue);
+    margin: 5px 0px;
+    text-decoration: underline;
+    text-align: left;
 }
