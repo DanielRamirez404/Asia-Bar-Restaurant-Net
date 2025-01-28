@@ -3,6 +3,8 @@ import "../reusables/constants.css"
 import './Pedido.css'
 import { Rellenar } from "./prueba";
 import { Producto } from "./Widgets";
+import { Pedido as WidgethPedido } from "./Widgets" ;
+import { WidgetNota } from "./Widgets";
 
 function Pedido() {
 
@@ -35,8 +37,8 @@ function Pedido() {
 
     return (
             
-        <div className="main">
-            <h1>Pedido</h1>
+        <div className="mainPedido">
+            <h1 id="tituloPedido">Pedido</h1>
 
             <div className = "contenedorFramesPedido">
 
@@ -45,13 +47,7 @@ function Pedido() {
                     onclick={toggleMostrarProductor}>
                     </div>
                     
-                <button className={`btnEsconder ${isVisible ? "active" : ""}`}
-                        id="btnEsconder"
-                        onClick={toggleMostrarProductor}>
-                            
-                            {isVisible ? "v":"∧"}
-
-                        </button>
+                
 
                 <div className={`framePedido ${isVisible ? "visible" : ""}`}  id="framePlatos">
                     
@@ -61,7 +57,13 @@ function Pedido() {
 
                     <div className="scrollFrame" id="scrollFrameProductos">
 
-                        
+                        <Producto/>
+                        <Producto/>
+                        <Producto/>
+                        <Producto/>
+                        <Producto/>
+                        <Producto/>
+                        <Producto/>
 
                         <Producto/>
                         <Producto/>
@@ -70,6 +72,18 @@ function Pedido() {
                         <Producto/>
                         <Producto/>
                         <Producto/>
+                        
+                        
+
+                    </div>
+
+                    <div className="frameSegmentedButtonsPedidos">
+
+                        <button className="segmentedButtonPedidos">Combos</button>
+                        <button className="segmentedButtonPedidos">Bebidas</button>
+                        <button className="segmentedButtonPedidos">Platillos</button>
+                        <button className="segmentedButtonPedidos">Postres</button>
+                        <button className="segmentedButtonPedidos">Extras</button>
 
                     </div>
 
@@ -88,12 +102,17 @@ function Pedido() {
 
                     <div className="scrollFrame" id="scrollFramePedido">
 
-                        <Rellenar/>
-
+                        <WidgethPedido/>
+                        <WidgethPedido/>
+                        <WidgetNota/>
+                        <WidgethPedido/>
+                        <WidgethPedido/>
+                        <WidgethPedido/>
+                        <WidgethPedido/>
 
                     </div>
 
-                    <button className="nota">+ | Agregar Nota</button>
+                    <button id="nota">+ | Agregar Nota</button>
                     
                         
             
@@ -110,6 +129,14 @@ function Pedido() {
 
 
             </div>
+
+            <button className={`btnEsconder ${isVisible ? "active" : ""}`}
+                        id="btnEsconder"
+                        onClick={toggleMostrarProductor}>
+                            
+                            {isVisible ? "▼":"▲"}
+
+            </button>
 
 
 
