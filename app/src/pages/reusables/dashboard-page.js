@@ -5,25 +5,23 @@ import './dashboard-page.css';
 
 function MenuToggleButton({ className, onClick }) {
     return (
-        <button className={className} onClick={ onClick } >
+        <button className={className} onClick={onClick}>
             <Menu size={30} color="#000" />
         </button>
     );
 }
 
-function MenuItem({item, index}) {
-
-    const [expandedItem, setExpandedItem] = useState(null);
+function MenuItem({ item, index, expandedItem, setExpandedItem }) {
+    const isExpanded = expandedItem === index;
 
     return (
         <li key={index} className="menu-item">
-                        
-            <button className="menu-button" onClick={() => setExpandedItem(expandedItem === index ? null : index)} >
+            <button className="menu-button" onClick={() => setExpandedItem(isExpanded ? null : index)}>
                 <span>{item.title}</span>
-                { item.subItems && (expandedItem === index ? <ChevronDown size={30} /> : <ChevronRight size={30} /> ) }
+                {item.subItems && (isExpanded ? <ChevronDown size={30} /> : <ChevronRight size={30} />)}
             </button>
 
-            {item.subItems && expandedItem === index && (
+            {item.subItems && isExpanded && (
                 <ul className="submenu">
                     {item.subItems.map((subItem, subIndex) => (
                         <li key={subIndex}>
@@ -34,13 +32,11 @@ function MenuItem({item, index}) {
                     ))}
                 </ul>
             )}
-
         </li>
     );
 }
 
-function SideBarMenu() {
-
+function SideBarMenu({ expandedItem, setExpandedItem }) {
     const menuItems = [
         {
             title: "Control de Pedidos",
@@ -56,55 +52,90 @@ function SideBarMenu() {
         }
     ];
 
-    return(
+    return (
         <nav className="menu">
             <ul className="menu-items">
-                {menuItems.map((item, index) => ( <MenuItem item={item} index={index} />) ) }
+                {menuItems.map((item, index) => (
+                    <MenuItem
+                        key={index}
+                        item={item}
+                        index={index}
+                        expandedItem={expandedItem}
+                        setExpandedItem={setExpandedItem}
+                    />
+                ))}
             </ul>
         </nav>
     );
 }
 
-function Sidebar({isSidebarOpen}) {
-
+function Sidebar({ isSidebarOpen, expandedItem, setExpandedItem }) {
     const classNames = (...classes) => classes.filter(Boolean).join(' ');
 
+    const handleSidebarClick = (e) => {
+        // Verificar si el clic fue en un área en blanco del sidebar
+        if (e.target.classList.contains('sidebar')) {
+            setExpandedItem(null);
+        }
+    };
+
     return (
-        <aside className = { classNames("sidebar", isSidebarOpen ? "open" : "") } >
-                
-                <div className="logo-container">
-                    <div className="logo-placeholder">
-                        Espacio para logo
-                    </div>
+        <aside className={classNames("sidebar", isSidebarOpen ? "open" : "")} onClick={handleSidebarClick}>
+            <div className="logo-container">
+                <div className="logo-placeholder">
+                    Espacio para logo
                 </div>
+            </div>
 
-                
-                <div className="menu-title">
-                    Asia Menú
-                </div>
+            <div className="menu-title">
+                Asia Menú
+            </div>
 
-                <SideBarMenu />
-                
+            <SideBarMenu expandedItem={expandedItem} setExpandedItem={setExpandedItem} />
         </aside>
     );
 }
 
 const DashboardPage = ({ content }) => {
-
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [expandedItem, setExpandedItem] = useState(null);
+
+    const handleMainClick = () => {
+        if (isSidebarOpen) {
+            setIsSidebarOpen(false);
+            setTimeout(() => {
+                setExpandedItem(null); // Cerrar el menú desplegado después de cerrar el sidebar
+            }, 500); // Ajusta el tiempo según la duración de la animación de cierre del sidebar
+        }
+    };
+
+    const handleToggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+        if (isSidebarOpen) {
+            setTimeout(() => {
+                setExpandedItem(null); // Cerrar el menú desplegado después de cerrar el sidebar
+            }, 500); // Ajusta el tiempo según la duración de la animación de cierre del sidebar
+        }
+
+        // Agregar clase temporalmente para el cambio de color
+        const button = document.querySelector('.menu-toggle-button');
+        button.classList.add('clicked');
+        setTimeout(() => {
+            button.classList.remove('clicked');
+        }, 1000); // Quitar la clase después de 1 segundo
+    };
 
     return (
         <div className="dashboard">
-            
             <MenuToggleButton
                 className={`menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`}
-                onClick={ () => setIsSidebarOpen(!isSidebarOpen) }
+                onClick={handleToggleSidebar}
             />
 
-            <Sidebar isSidebarOpen={ isSidebarOpen } /> 
+            <Sidebar isSidebarOpen={isSidebarOpen} expandedItem={expandedItem} setExpandedItem={setExpandedItem} />
 
-            <main className="main">
-                { content }
+            <main className="main" onClick={handleMainClick}>
+                {content}
             </main>
         </div>
     );
