@@ -1,10 +1,59 @@
+.mainPedido{
+    margin: 0;
+    padding: 0;
+    
+    
 
+    
+}
+
+
+
+*{
+
+    margin: 0;
+    padding: 0;
+
+    
+
+}
+
+
+#tituloPedido{
+
+    padding: 30px;
+
+}
+
+#nota , .btnPedido, .btnEsconder {
+
+    border-radius: 30px;
+    
+
+    background: var(--red-hue);
+    color: #fff;
+    border: none;
+
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.btnPedido:hover{
+
+    background: var(--bright-red-hue);
+    
+
+
+}
 
 .contenedorFramesPedido{
 
   display: flex;
   flex-direction: row;
   width: 100%;
+
+  
   
   
   
@@ -18,10 +67,10 @@
 
     font-size: 30px;
     margin: 0;
-    text-align: center;
-
+    
+    
     box-shadow: 0px 10px 20px 1px #5552;
-    padding: 10px 0;
+    padding: 10px;
     
 
     border-bottom: solid #bbb 2px;
@@ -31,25 +80,70 @@
 .framePedido{
 
     background: #eee;
-    width: 35%;
-    height: 70vh;
+    width: 30%;
+    height: 560px;
     margin: auto;
     
     max-height: 600px;
     border-radius: 20px;
+
 }
 
 .scrollFrame{
 
     margin: auto;
     margin-top: 20px;
-    height: 80%;
+    height: 76%;
     width: 90%;
     background: transparent;
 
 
 
     overflow-y:scroll;
+    overflow-x: hidden;
+    
+}
+
+#scrollFrameProductos{
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill,250px);
+    gap: 7px;
+    
+
+    justify-content: center;
+    width: 99%;
+    padding: 20px 0;
+    box-sizing: border-box;
+
+}
+
+.frameSegmentedButtonsPedidos{
+
+    display:flex;
+    height: 30px;
+    width: 90%;
+    margin: auto;
+    overflow-x: auto;
+    
+
+    
+
+}
+
+.segmentedButtonPedidos{
+    
+    border: none;
+    border-right: solid 2px #1114;
+    width: 200px;
+    font-size: 17px;
+
+}
+
+.segmentedButtonPedidos:hover{
+
+    background: #ddd;
+
 }
 
 #frameOrden{
@@ -65,7 +159,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #0009;
+    background-color: #000c;
+    
     z-index: 10;
 
 }
@@ -79,7 +174,7 @@
     background: transparent;
     width: 100%;
     height: 10vh;
-    margin-top: 30px;
+    margin-top: 20px;
     display: flex;
     justify-content: flex-end;
    
@@ -91,25 +186,26 @@
 
 .btnPedido{
 
-    width: 15%;
+    width: 10%;
     font-size: 15px;
+    height: 55px;
     
     margin: 10px;
     text-align: center;
 
 }
 
-.nota{
+#nota{
 
-    width: 100px;
-
-    font-size: 13px;
+    width: 120px;
+    height: 60px;
+    font-size: 16px;
     background: #333;
     box-shadow: 0 4px 6px #0003;
 
 
     position: absolute;
-    bottom: 5px;
+    bottom: 30px;
     right: 50px;
     z-index: 2;
 
@@ -131,31 +227,75 @@
     
 }
 
-.btnEsconder{
+#btnEsconder{
     width: 100%;
     border-radius: 10px 10px 0 0;
-    margin: auto;
+    
     align-items: center;
     height: 48px;
 
-    font-size: 25px;
+    font-size: 35px;
+    
     font-weight: bold;
     
     display: none;
+    color: var(--red-hue);
+    
+    background: transparent;
+   
+    
 
 }
 
-.btnEsconder:hover{
 
-    transform: none;
-    background: var(--bright-red-hue);   
+
+#btnEsconder:hover{
+
+   color: var(--bright-red-hue);
+     
 
 }
 
+#framePlatos{
+    width: 68%;
+}
 
+@media (max-width : 1024px){
+
+
+    #framePlatos{
+
+        width: 55%;
+
+    }
+    #frameOrden{
+
+        width: 40%;
+
+    }
+
+
+}
 
 @media (max-width : 768px){
 
+    .frameSegmentedButtonsPedidos{
+
+        padding:  12px 0;
+        
+
+    }
+
+    .segmentedButton{
+
+        font-size: 30px;
+
+    }
+
+    #tituloPedido{ 
+        font-size: 22px;
+        padding: 10px;
+    }
 
     .contenedorFramesPedido{
         flex-direction: column;
@@ -167,11 +307,13 @@
     .framePedido{
 
         background: #eee;
-        width: 95%;
+        
+        width: 100%;
+        border-radius: 0;
         height: 70vh;
         margin-bottom: 10px;
         
-        border-radius: 20px;
+       
     }
     
 
@@ -181,12 +323,15 @@
         bottom: -100%;
         left: 0;
         width: 100%;
+        
         height: 70vh;
         transition: bottom 0.5s ease-in-out;
         z-index: 20;
         display:block;
         border-radius: 0;
         margin: 0;
+
+        
         
 
     }
@@ -198,6 +343,12 @@
 
     }
 
+    #frameOrden{
+
+        width: 100%;
+
+    }
+
     .btnPedido{
 
         width: 30%;
@@ -206,26 +357,25 @@
     }
 
     .frameBotones{
-        position: relative;
+        position:relative;
     }
 
     #btnEsconder{
 
         
 
-        display: block;
-        position: fixed;
         
-        bottom: 2px;
-        left: 10px;
-        width: 20%;
+        position:fixed;
+        display:flex;
+        justify-content: center;
+        
         z-index: 25;
-        transition: bottom 0.5s ease-in-out;
+        
         
     }
 
     #btnEsconder.active{
-
+        
         bottom:70vh;
     }
 
@@ -235,22 +385,45 @@
 
     }
 
-    .nota{
+    #nota{
 
 
         font-size: 15px;
+        height: 55px;
         right: 32px;
-        bottom: -5px;
+        bottom: 30px;
 
     }
 
     .scrollFrame{
 
         width: 100%;
+        
+        height: 76%;
+
+    }
+
+    .frameSegmentedButtonsPedidos{
+
+        height: 30px;
+
     }
 
     #scrollFramePedido{
 
         width: 90%;
     }
+
+    #scrollFrameProductos{
+        
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        padding: 10px;
+        justify-content: center;
+        
+        
+        gap:10px;
+        width: 100%;
+    }
 }
+

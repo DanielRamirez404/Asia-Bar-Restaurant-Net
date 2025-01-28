@@ -2,108 +2,279 @@
 
 .frameProducto{
 
-    background: var(--platinum-hue);
-    height: 130px;
-    width: 80%;
+    background: var(--white-hue);
+    height: 250px;
+    min-width: 220px;
+    max-width: 230px;
     margin: auto;
     margin-bottom: 10px;
+    
 
     border-radius: 20px;
     
+
     position: relative;
-    display: flex;
+    display: grid;
+    grid-template-rows: auto 1fr;
+
+    box-shadow: 0 0 10px 10px #6662;
+}
+
+.frameProducto .productoInformacion{
+
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+        
+    
 }
 
 .imgComida{
 
-    height: 130px;
+    height: 120px;
     width: 130px;
+    border-radius: 50%;
+    margin: auto;
     background: #111;
 
-    object-fit: cover;
+    object-fit:contain;
 
 }
 
 .descripcion{
 
-    height: 100%;
-    width: 9vw;
-    margin: 6px;
+    height: 90%;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    
     display: flex;
     flex-direction: column;
     
+    
 }
 
+.descripcion #productoPrecio{
 
+    font-size: 18px;
+    color: var(--red-hue);
+
+}
 .descripcion p{
     
-    border-bottom: solid 2px #7777;
+    
     margin: 0 ;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: bold;
 
 }
 
-#productoTitulo{
+#productoNombre{
 
     font-size: 18px;
     font-weight: bold;
-    color: var(--red-hue);
+    
 }
 
-.btnAgregarPoducto{
+#btnAgregarPoducto{
 
     
 
     font-size: 30px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #666;
+    width: 80%;
+    height: 40px;
+    border-radius: 30px;
+    border: 0;
+    background: var(--red-hue);
     color: var(--white-hue);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition:  .4s;
+    
     margin: auto;
-    margin-right: 6px;
     
-
-}
-
-.btnAgregarPoducto:hover{
-
-    transform: none;
     
 
 }
 
 
 
-@media (max-width : 768px){
+#btnAgregarPoducto:hover{
 
+    background: var(--bright-red-hue);
     
 
-    .frameProducto{
+}
 
-        width: 100%;
 
-    }
 
-    .btnAgregarPoducto{
 
-        height: 70px;
-        width: 70px;
-        font-size: 28px;
-    }
+                                                                    /* PEDIDO */
+.framePedidoWidget{
 
-    .descripcion{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+    height: 70px;
+    font-size: 20px;
 
-        width: 36% ;
-        margin: 5px;
-        
-    }
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    
+    border-radius: 30px;
+    box-shadow: 0 0 10px 2px #1112;
+    background: #fff;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
 
 }
+
+.pedidoTotal{
+
+    background: #444;
+    color: #fff;
+    height: 38px;
+    width: 50px;
+    border-radius: 20px;
+    margin: 0 5px;
+    text-align: center;
+    align-content: center;
+    font-size: 18px;
+
+}
+
+#btnSumarProducto{
+
+    background: #00b62a;
+
+}
+
+.btnSumarRestar{
+
+    height: 40px;
+    font-size: 23px;
+    font-weight: bold;
+    color: #fff;
+    background: var(--bright-red-hue);
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    
+
+}
+
+.pedidoCantidad{
+
+    background: #ddd;
+    border-radius: 30px;
+    padding: 5px;
+    font-size: 18px;
+}
+
+.pedidoNombre{
+
+    font-size: 16px;
+    
+
+}
+
+.mainNotaWidget{
+
+    width: 95%;
+    
+    margin: auto;
+
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+
+    background: #444;
+    color: #fff;
+    
+    box-sizing: border-box;
+
+   
+
+}
+
+.frameTituloNota{
+
+    width: 100%;
+    height: 20px;
+    background: transparent;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    margin-bottom: 10px;
+    
+    
+
+}
+
+.notaTitulo{
+
+    
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    
+
+}
+
+
+.notaContenido{
+
+   
+    background: #333;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    
+    color: #fff;
+   
+
+}
+
+
+#btneliminarNota{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+
+    align-self: flex-end;
+   
+
+    font-size: 20px;
+    font-weight: bold;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+
+
+
+}
+
+#btneliminarNota:hover{
+
+   color: var(--bright-red-hue);
+
+}
+
+
+
+
+                                  /*MEDIA QUERYS*/
+
+
 
 @media (max-width : 1024px){
 
@@ -112,5 +283,98 @@
 
         width: 90%;
     }
+
+    .btnSumarRestar{
+        height: 35px;
+    }
+
+    #nota{
+
+        height: 50px;
+        bottom: 20px;
+
+    }
+
 }
+
+@media (max-width : 768px){
+
+    .mainPedidoWidget{
+        font-size: 15px;
+    }
+
+    .pedidoNombre{
+
+        font-size: 12px;
+
+    }
+
+    
+
+    #nota{
+
+        height: 40px;
+        width: 100px;
+
+    }
+
+    .frameProducto{
+
+        max-width: 100%;
+        width: 100%;
+        margin: 10px 0;
+        padding: 0;
+
+        grid-template-rows: auto 1fr;
+
+        height: 200px;
+        
+        
+
+    }
+
+    .frameProducto .productoInformacion{
+
+
+        grid-template-columns: auto 1fr;
+
+    }
+
+    #btnAgregarPoducto{
+
+        height: 48px;
+        width: 80%;
+        font-size: 28px;
+
+        
+
+    }
+
+    .descripcion{
+
+        margin: auto;
+        
+        
+    }
+
+        
+    .descripcion #productoPrecio{
+
+        font-size: 30px;
+     
+
+    }
+
+    #productoNombre{
+
+        font-size: 25px;
+
+        
+        
+        
+    }
+
+}
+
+
 
