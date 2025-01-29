@@ -5,13 +5,20 @@ import { Rellenar } from "./prueba";
 import { Producto } from "./Widgets";
 import { Pedido as WidgethPedido } from "./Widgets" ;
 import { WidgetNota } from "./Widgets";
+import Dashboard from "../reusables/dashboard-page";
 
-function Pedido() {
+function ContenidoPedido() {
 
     const [isVisible, setIsVisible] = useState(false);
 
     const  toggleMostrarProductor = () =>{
         setIsVisible(!isVisible);
+    };
+
+    const cerrarProductos = () => {
+
+        setIsVisible(false);
+
     };
 
     useEffect(()=>{
@@ -38,13 +45,16 @@ function Pedido() {
     return (
             
         <div className="mainPedido">
+
+            
+
             <h1 id="tituloPedido">Pedido</h1>
 
             <div className = "contenedorFramesPedido">
 
                 <div className="overlay"  
                     style={{display: isVisible ? "block":"none"}} 
-                    onclick={toggleMostrarProductor}>
+                    onlick={cerrarProductos}>
                     </div>
                     
                 
@@ -148,4 +158,15 @@ function Pedido() {
     );
 }
 
+
+
+const Pedido = () => {
+    return (
+        <Dashboard content={ <ContenidoPedido/> } />
+    );
+}
+
 export default Pedido;
+
+
+//Nota
