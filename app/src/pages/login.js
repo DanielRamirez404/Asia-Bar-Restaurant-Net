@@ -9,18 +9,22 @@ function Login() {
     <FormPage title={ "Inicio de Sesión" } content= {(
         <>
             <RequiredInputBox title={ "Nombre de Usuario" } />
-            <RequiredInputBox title={ "Contraseña" } />
+            <RequiredInputBox type='password' title={ "Contraseña" } />
            
             <Link to={ PagePaths['Home'] } >
                <button className='submit-button' type='submit'>Acceder</button>       
             </Link>
 
+{
+/*
             <Link to={ PagePaths['SignUp'] }>
                 <p className='hyperlink'>Solicitar nueva cuenta</p>
             </Link>
             <Link to={ PagePaths['PasswordChange'] }>
                 <p className='hyperlink'>Solicitar nueva contraseña</p>
             </Link>
+*/
+}
         </>
     )} />
   );

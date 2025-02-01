@@ -2,11 +2,11 @@ import React from 'react';
 import './constants.css';
 import './form-page.css';
 
-export function RequiredInputBox({ title }) {
+export function RequiredInputBox({ title, type='text' }) {
     return(
         <div class='input-box'>
             <label for={ title }>{ title }</label>
-            <input type='text' id={ title } placeholder={ title } required></input>
+            <input type={type} id={ title } placeholder={ title } required></input>
         </div>
     );
 } 

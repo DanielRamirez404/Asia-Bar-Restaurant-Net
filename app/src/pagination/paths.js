@@ -5,6 +5,10 @@ export const PagePaths = {
     'Pedido': '/Pedido',
     'SignUp': '/solicitud-de-cuenta',
     'PasswordChange': '/cambio-de-contraseña',
+    'AddUser': '/agregar-usuario',
+    'EditUser': '/modificar-usuario',
+    'AddClient': '/agregar-cliente',
+    'EditClient': '/modificar-cliente',
 };
 
 export const DashboardPageOrder = [ PagePaths['Home'] ];
