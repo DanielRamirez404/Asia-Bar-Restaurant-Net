@@ -60,6 +60,29 @@ export function SelectableInput({title, options, isOptionalInput = false}) {
     );
 }
 
+export function SelectablePhoneInput({title, prefixes}) {
+
+    const [doesPrefixExist, setPrefixExistence] = useState(true);
+    
+    const noValue = "N/A";
+    prefixes.push(noValue);
+
+    return (
+        <div className='input-box'>
+            <label for={title}>{title}</label>
+            <div className='input-row'>
+                <SimpleSelector mainTitle={title} options={prefixes} onChange={ (value) => setPrefixExistence( value != noValue ) } />
+                { 
+                    (doesPrefixExist) 
+                        ? <input type='tel' id={ title } placeholder={ title } pattern="[0-9]{7}" required></input>   
+                        : <input type='text' id={ title } placeholder={ title } required></input>
+                }
+            </div>
+            { (doesPrefixExist) ? <p className='input-note'>Formato: 0000-1234567</p> : null }  
+        </div>
+    );
+}
+
 function FormPage({ title, content }) {
     return (
         <div className='form-page'>
