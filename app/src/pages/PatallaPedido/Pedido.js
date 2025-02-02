@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../reusables/constants.css"
 import './Pedido.css'
-import { Rellenar } from "./prueba";
+
 import { Producto } from "./Widgets";
 import { Pedido as WidgethPedido } from "./Widgets" ;
 import { WidgetNota } from "./Widgets";
@@ -54,7 +54,7 @@ function ContenidoPedido() {
 
                 <div className="overlay"  
                     style={{display: isVisible ? "block":"none"}} 
-                    onlick={cerrarProductos}>
+                    onClick={cerrarProductos}>
                     </div>
                     
                 
