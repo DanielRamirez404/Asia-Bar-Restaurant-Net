@@ -1,0 +1,237 @@
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f7dc; /* Color de fondo del body */
+  color: #111827;
+}
+
+.encabezado-ventas {
+  display: flex; /* Mostrar elementos en línea */
+  align-items: center;
+  justify-content: flex-start; /* Alinear elementos al inicio */
+  margin-bottom: 1rem;
+  margin-top: 2rem; 
+  padding-left: 12rem; /* Añadir relleno a la izquierda */
+}
+
+.titulo-ventas {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  margin-right: 30rem; /* Reducir la separación entre el título y la barra de búsqueda */
+}
+
+.contenedor-busqueda {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 350px; /* Ajusta el tamaño de la barra de búsqueda */
+  margin-left: 5; /* Mover la barra de búsqueda a la derecha */
+}
+
+.icono-busqueda {
+  position: absolute;
+  left: 0.75rem;
+}
+
+.entrada-busqueda {
+  padding-left: 2.5rem;
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  line-height: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.75rem;
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+.contenedor-tabla {
+  background-color: white; /* Color de fondo del contenedor de la tabla */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto; /* Espacio alrededor del contenedor */
+  width: 80%; /* Ajusta el ancho del contenedor */
+  overflow-x: auto; /* Habilitar scroll horizontal */
+}
+
+.tabla-ventas {
+  width: 100%;
+  border-collapse: collapse; /* Colapsar los bordes de la tabla */
+  margin-top: 1rem; /* Espacio superior */ 
+  margin-bottom: 1rem; /* Espacio inferior */
+}
+
+.tabla-ventas th,
+.tabla-ventas td {
+  border: 1px solid #ce2525;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.tabla-ventas th {
+  background-color: #ce2525;
+  font-weight: bold;
+}
+
+.tabla-ventas tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.etiqueta-delivery {
+  background-color: #dbeafe;
+  color: #1e40af;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.etiqueta-local {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.boton-info {
+  color: #9ca3af;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-info:hover {
+  color: #4b5563;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay.activo {
+  display: flex;
+}
+
+.modal {
+  background: #f9f7dc; /* Color de fondo de la ventana de ventas */
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-titulo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #111827;
+  padding-right: 1.5rem;
+}
+
+.modal-contenido {
+  margin-bottom: 1rem;
+}
+
+.modal-campo {
+  margin-bottom: 0.75rem;
+}
+
+.modal-etiqueta {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #374151;
+}
+
+.modal-valor {
+  color: #111827;
+}
+
+.modal-lista {
+  list-style-type: none;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.modal-lista-item {
+  margin-bottom: 0.25rem;
+  color: #111827;
+}
+
+.boton-cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  color: #9ca3af;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-cerrar:hover {
+  color: #4b5563;
+}
+
+/* Media Queries para hacer la tabla responsive */
+@media (max-width: 768px) {
+  .encabezado-ventas {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 1rem; /* Ajustar el relleno a la izquierda */
+  }
+
+  .titulo-ventas {
+    margin-bottom: 1rem; /* Añadir margen inferior */
+    margin-right: 0; /* Eliminar margen derecho */
+  }
+
+  .contenedor-busqueda {
+    width: 70%; /* Ajustar el tamaño de la barra de búsqueda */
+    margin-left: 10px; /* Ajustar margen izquierdo */
+  }
+
+  .contenedor-tabla {
+    width: 100%; /* Ajustar el ancho del contenedor */
+    padding: 0.5rem; /* Reducir el relleno */
+    overflow-x: auto; /* Habilitar scroll horizontal */
+  }
+
+  .tabla-ventas {
+    width: auto; /* Permitir que la tabla se ajuste al contenido */
+    min-width: 800px; /* Ancho mínimo para mostrar 4 columnas */
+  }
+
+  .tabla-ventas th,
+  .tabla-ventas td {
+    padding: 0.5rem; /* Reducir el relleno de las celdas */
+  }
+
+  .tabla-ventas th {
+    font-size: 0.875rem; /* Reducir el tamaño de la fuente */
+  }
+
+  .tabla-ventas td {
+    font-size: 0.875rem; /* Reducir el tamaño de la fuente */
+  }
+}

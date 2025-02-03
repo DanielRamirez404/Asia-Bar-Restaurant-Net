@@ -1,3 +1,5 @@
+import TablaVentas from "../pages/tabla-ventas";
+
 export const PagePaths = {
     'Home': '/menu',
     'Example': '/link-de-ejemplo',
@@ -10,9 +12,8 @@ export const PagePaths = {
     'AddUser': '/agregar-usuario',
     'EditUser': '/modificar-usuario',
     'AddClient': '/agregar-cliente',
-    'EditClient': '/modificar-cliente',
-
-    
+    'EditClient': '/modificar-cliente', 
+    'TablaVentas' : '/tabla-ventas',
 };
 
 export const DashboardPageOrder = [ PagePaths['Home'] ];
