@@ -4,11 +4,12 @@ import { RestrictedPage } from "../session/permissions";
 import { DashboardPageOrder, PagePaths } from "./paths";
 
 import Home from "../pages/home";
-import Login from '../pages/login'
+import Login from '../pages/login';
 import Pedido from "../pages/PatallaPedido/Pedido";
 import Request from "../pages/request";
 import Users from "../pages/users";
 import Clients from "../pages/clients";
+import TablaVentas from '../pages/tabla-ventas';
 
 class Page {
     constructor(path, component, title = null, roles = AllRoles) {
@@ -29,6 +30,7 @@ export const PageList = [
     new Page(PagePaths['EditUser'], <Users title="Modificar Usuario"/>, "Modificar Usuario"),
     new Page(PagePaths['AddClient'], <Clients title="Añadir Cliente" />, "Añadir Cliente"),
     new Page(PagePaths['EditClient'], <Clients title="Modificar Cliente" />, "Modificar Cliente"),
+    new Page(PagePaths['TablaVentas'], <TablaVentas title="Tabla de Ventas" />, "Tabla de Ventas")
 ];
 
 export const DashboardPageList = PageList
