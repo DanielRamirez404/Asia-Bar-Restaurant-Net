@@ -5,11 +5,14 @@ import { DashboardPageOrder, PagePaths } from "./paths";
 
 import Home from "../pages/home";
 import Login from '../pages/login';
+import InformacionVenta from "../pages/InformacionDeVenta/informacionDeVenta";
 import Pedido from "../pages/PatallaPedido/Pedido";
+import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 import Request from "../pages/request";
 import Users from "../pages/users";
 import Clients from "../pages/clients";
 import TablaVentas from '../pages/tabla-ventas';
+
 
 class Page {
     constructor(path, component, title = null, roles = AllRoles) {
@@ -23,7 +26,9 @@ class Page {
 export const PageList = [
     new Page(PagePaths['Home'], <Home />, "Menú default"),
     new Page(PagePaths['Login'], <Login/>,"Login"), 
+    new Page(PagePaths['InformacionVenta'], <InformacionVenta/>,"informacion venta"),
     new Page(PagePaths['Pedido'], <Pedido/>,"ventanaPedido"),
+    new Page(PagePaths['ConfirmacionVenta'],<ConfirmacionVenta/>,"Confirmacion Venta"),
     new Page(PagePaths['SignUp'], <Request title="Nuevo Ingreso" />, "Nuevo Ingreso"),
     new Page(PagePaths['PasswordChange'], <Request title="Nueva Contraseña" />, "Cambio de Contraseña"),
     new Page(PagePaths['AddUser'], <Users title="Agregar Usuario"/>, "Agregar Usuario"),
