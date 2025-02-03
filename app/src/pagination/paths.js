@@ -1,7 +1,7 @@
 import TablaVentas from "../pages/tabla-ventas";
 
 export const PagePaths = {
-    'Home': '/',
+    'Home': '/menu',
     'Example': '/link-de-ejemplo',
     'Login': '/login',
     'Pedido': '/Pedido',
