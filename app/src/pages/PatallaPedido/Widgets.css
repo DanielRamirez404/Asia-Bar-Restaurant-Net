@@ -11,13 +11,13 @@
     
 
     border-radius: 20px;
-    
+   
 
     position: relative;
     display: grid;
     grid-template-rows: auto 1fr;
 
-    box-shadow: 0 0 10px 10px #6662;
+    box-shadow: 0 0 5px 5px #6666660d;
 }
 
 .frameProducto .productoInformacion{

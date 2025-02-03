@@ -1,0 +1,194 @@
+
+.tituloConfirmacionVenta{
+
+    text-align: end;
+    padding: 20px;
+
+}
+.contenedorResumenVenta{
+
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: auto;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+
+}
+
+.frameResumenVenta{
+
+
+    width: 400px;
+    height: 520px;
+
+    background: #fff;
+    border: 2px #ddd solid;
+    
+    
+   
+
+}
+
+.frameResumenCliente{
+
+    justify-self: end;
+
+    background: #fff;
+    width: 350px;
+    height: auto;
+    
+    border: 2px #ddd solid;
+    
+    
+
+}
+
+#resumenVenta{
+
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    padding: 20px;
+
+}
+
+.totalVenta{
+
+    width: 100%;
+    height: 50px;
+
+    background: #ccc;
+    display: flex;
+    flex-direction: row-reverse;
+
+    padding: 15px;
+    box-sizing: border-box;
+
+    border-radius: 50px;
+
+  
+
+}
+
+.scrollResumenProductos{
+
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+    scrollbar-width: none;
+    
+
+}
+
+.infromacionCliente{
+
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+
+    border-bottom: 1px solid #ddd;
+
+}
+
+.informacionRepartidor{
+
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+}
+
+.nombreApeliido{
+
+    font-size: 30px;
+   
+
+}
+
+.datoCliente{
+
+    margin-left: 15px;
+    color: #333;
+
+}
+
+#ci{
+
+    font-size: 20px;
+    margin-left: 5px;
+    color: #111;
+
+}
+
+.repartidor{
+
+    font-size: 25px;
+    margin-bottom: 10px;
+
+}
+
+.nombreRepartidor{
+
+    margin-left: 10px;
+    font-size: 20px;
+
+}
+
+.totalTexto{
+
+    font-size: 18px;
+    font-weight: bold;
+
+
+}
+
+@media (max-width : 768px){
+
+    .contenedorResumenVenta{
+
+        flex-direction: column;
+        gap: 10px;
+
+    }
+
+    .frameResumenCliente{
+
+        width: 90%;
+        margin: auto;
+        
+        border-radius: 20px;
+
+
+    }
+
+    .frameResumenVenta{
+
+        width: 80%;
+        
+        margin: auto;
+        border-radius: 20px;
+       
+        
+
+    }
+    
+    .totalVenta{
+
+        width: 90%;
+        margin: auto;
+
+    }
+
+    .tituloConfirmacionVenta{
+
+        text-align: center;
+        margin-top: 40px;
+
+    }
+
+}
