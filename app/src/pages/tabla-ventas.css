@@ -46,6 +46,20 @@ body {
   border-radius: 8px; /* Bordes redondeados */
 }
 
+.boton-buscar {
+  padding: 0.5rem 1rem;
+  margin-left: 0.5rem;
+  border: none;
+  background-color: #4b5563;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.boton-buscar:hover {
+  background-color: #374151;
+}
+
 .contenedor-tabla {
   background-color: white; /* Color de fondo del contenedor de la tabla */
   padding: 1rem;
@@ -75,8 +89,8 @@ body {
   font-weight: bold;
 }
 
-.tabla-ventas tr:nth-child(even) {
-  background-color: #f9fafb;
+.tabla-ventas tr {
+  background-color: #ffffff; /* Color de fondo para todas las filas */
 }
 
 .etiqueta-delivery {
@@ -127,7 +141,7 @@ body {
 }
 
 .modal {
-  background: #f9f7dc; /* Color de fondo de la ventana de ventas */
+  background: white; /* Color de fondo de la ventana de ventas */
   padding: 1.5rem;
   border-radius: 8px;
   width: 90%;
@@ -190,25 +204,141 @@ body {
 }
 
 .boton-cerrar:hover {
-  color: #4b5563;
+  color: #4b5563; 
+}
+
+/* Estilos para los botones en la parte inferior */
+.contenedor-botones {
+  position: fixed; 
+  bottom: 1rem; /* Ajustar la posición hacia abajo */
+  right: 1rem; /* Ajustar la posición a la derecha */
+  display: flex; 
+  gap: 1rem; /* Espacio entre los botones */
+}
+
+.boton-eliminar, .boton-modificar {
+  padding: 0.5rem 1rem; 
+  border: none; 
+  outline: none; 
+  transition: background-color 0.2s;
+  background-color: #111827; 
+  font-size: 1rem; 
+  font-family: inherit; 
+  font-weight: 500; 
+  color: white; 
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.boton-eliminar { 
+  background-color: #ef4444; 
+  border-radius: 15px; 
+  margin-right: 1rem;
+}
+
+.boton-eliminar:hover { 
+  background-color: #dc2626; 
+}
+
+/* Estilos para mensaje de advertencia */
+.mensaje-advertencia {
+  color: red;
+  font-weight: bold;
+  margin-left: 1rem;
+  white-space: pre-line; /* Permite que el texto se divida en líneas */
+}
+
+.contenedor-boton-eliminar {
+  display: flex;
+  align-items: center;
+}
+
+.contenedor-boton-modificar {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para el registro seleccionado */
+.registro-seleccionado { 
+  background-color: #f9f7dc; /* Color de fondo del registro seleccionado */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.campo-seleccionado {
+  color: #000000; /* Color del texto */ 
+  background-color: #ffffff; /* Color de fondo más oscuro con transparencia */
+}
+
+/* Estilos para el formulario de modificación */
+.formulario-modificacion {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-titulo {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.formulario-contenido {
+  display: flex;
+  flex-direction: column;
+}
+
+.formulario-campo {
+  margin-bottom: 1rem;
+}
+
+.formulario-etiqueta {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.formulario-input {
+  padding: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.formulario-boton {
+  padding: 0.75rem;
+  background-color: #4b5563;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.formulario-boton:hover {
+  background-color: #374151;
 }
 
 /* Media Queries para hacer la tabla responsive */
 @media (max-width: 768px) {
   .encabezado-ventas {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start;     
     padding-left: 1rem; /* Ajustar el relleno a la izquierda */
   }
 
   .titulo-ventas {
-    margin-bottom: 1rem; /* Añadir margen inferior */
+    margin-bottom: 3rem; /* Añadir margen inferior */
     margin-right: 0; /* Eliminar margen derecho */
   }
 
   .contenedor-busqueda {
-    width: 70%; /* Ajustar el tamaño de la barra de búsqueda */
-    margin-left: 10px; /* Ajustar margen izquierdo */
+    width: 98%; /* Ajustar el tamaño de la barra de búsqueda */
+    margin-left: 0px; /* Ajustar margen izquierdo */
   }
 
   .contenedor-tabla {
@@ -233,5 +363,13 @@ body {
 
   .tabla-ventas td {
     font-size: 0.875rem; /* Reducir el tamaño de la fuente */
+  }
+
+  .contenedor-botones { /* Ajustar el contenedor de los botones */
+    flex-direction: column; /* Orientar los botones en columna */
+    align-items: flex-end; /* Alinear los botones a la derecha */
+    right: 1rem; /* Ajustar la posición a la derecha */
+    bottom: 1rem; /* Ajustar la posición hacia abajo */
+    gap: 0.5rem; /* Espacio entre los botones en la parte inferior */
   }
 }
