@@ -47,17 +47,17 @@ body {
 }
 
 .boton-buscar {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.5rem;  
   margin-left: 0.5rem;
   border: none;
-  background-color: #4b5563;
+  background-color: #B22222; /*Color extraido de constant*/
   color: white;
   border-radius: 8px;
   cursor: pointer;
 }
 
-.boton-buscar:hover {
-  background-color: #374151;
+.boton-buscar:hover { /*Oscurece al pasar el mouse*/
+  background-color: #a72121; /*Color extraido de constant*/
 }
 
 .contenedor-tabla {
@@ -210,14 +210,14 @@ body {
 /* Estilos para los botones en la parte inferior */
 .contenedor-botones {
   position: fixed; 
-  bottom: 1rem; /* Ajustar la posición hacia abajo */
-  right: 1rem; /* Ajustar la posición a la derecha */
+  bottom: 2rem; /* Ajustar la posición hacia abajo */
+  right: 4rem; /* Ajustar la posición a la derecha */
   display: flex; 
   gap: 1rem; /* Espacio entre los botones */
 }
 
 .boton-eliminar, .boton-modificar {
-  padding: 0.5rem 1rem; 
+  padding: 0.7rem 2rem;   
   border: none; 
   outline: none; 
   transition: background-color 0.2s;
@@ -226,18 +226,25 @@ body {
   font-family: inherit; 
   font-weight: 500; 
   color: white; 
-  border-radius: 8px;
+  border-radius: 15px; /* Bordes redondeados */
   cursor: pointer;
 }
 
 .boton-eliminar { 
   background-color: #ef4444; 
-  border-radius: 15px; 
   margin-right: 1rem;
 }
 
 .boton-eliminar:hover { 
   background-color: #dc2626; 
+}
+
+.boton-modificar { 
+  background-color: #3b82f6; 
+}
+
+.boton-modificar:hover { 
+  background-color: #2563eb; 
 }
 
 /* Estilos para mensaje de advertencia */
@@ -333,12 +340,14 @@ body {
 
   .titulo-ventas {
     margin-bottom: 3rem; /* Añadir margen inferior */
-    margin-right: 0; /* Eliminar margen derecho */
+    margin-right: 1rem; /* Eliminar margen derecho */
+    padding-left: 4rem; /* Ajustar el relleno a la izquierda */
   }
 
   .contenedor-busqueda {
-    width: 98%; /* Ajustar el tamaño de la barra de búsqueda */
+    width: 40%; /* Ajustar el tamaño de la barra de búsqueda */
     margin-left: 0px; /* Ajustar margen izquierdo */
+    padding-left: 0rem;
   }
 
   .contenedor-tabla {
@@ -368,7 +377,7 @@ body {
   .contenedor-botones { /* Ajustar el contenedor de los botones */
     flex-direction: column; /* Orientar los botones en columna */
     align-items: flex-end; /* Alinear los botones a la derecha */
-    right: 1rem; /* Ajustar la posición a la derecha */
+    right: 2rem; /* Ajustar la posición a la derecha */
     bottom: 1rem; /* Ajustar la posición hacia abajo */
     gap: 0.5rem; /* Espacio entre los botones en la parte inferior */
   }
