@@ -38,14 +38,6 @@ export const PageList = [
     new Page(PagePaths['TablaVentas'], <TablaVentas title="Tabla de Ventas" />, "Tabla de Ventas")
 ];
 
-export const DashboardPageList = PageList
-    .filter( page => { 
-        return DashboardPageOrder.includes(page.path); 
-    })
-    .sort((firstPage, nextPage) => {
-        return DashboardPageOrder.indexOf(firstPage.path) - DashboardPageOrder.indexOf(nextPage.path);
-    });
-
-export function GetPathTitle(path) {
-    return DashboardPageList.find(page => page.path === path).title;
+export function GetPageFromPath(path) {
+    return PageList.find(page => page.path === path);
 }

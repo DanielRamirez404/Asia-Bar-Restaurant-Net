@@ -1,33 +1,52 @@
 import React, { useState } from 'react';
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
+import { DashboardMenuItems } from '../../pagination/paths';
+import { GetPageFromPath } from '../../pagination/page';
 import './constants.css';
 import './dashboard-page.css';
+import { Link } from 'react-router-dom';
 
-function MenuToggleButton({ className, onClick }) {
+function MenuToggleButton({ isSidebarOpen, onClick }) {
+    const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
+
     return (
-        <button className={className} onClick={onClick}>
+        <button className={ className } onClick={ onClick }>
             <Menu size={30} color="#000" />
         </button>
     );
 }
 
-function MenuItem({ item, index, expandedItem, setExpandedItem }) {
+function MenuSubItemButton({ path }) {
+    const title = GetPageFromPath(path).title;
+
+    return (
+        <Link to={ path }>
+            <button className="submenu-button">
+                { title }
+            </button>
+        </Link>
+    )
+}
+
+function MenuItem({ menuItem, index, expandedItem, setExpandedItem }) {
     const isExpanded = expandedItem === index;
+    const arrowIcon = isExpanded ? <ChevronDown size={30} /> : <ChevronRight size={30} />;
 
     return (
         <li key={index} className="menu-item">
             <button className="menu-button" onClick={() => setExpandedItem(isExpanded ? null : index)}>
-                <span>{item.title}</span>
-                {item.subItems && (isExpanded ? <ChevronDown size={30} /> : <ChevronRight size={30} />)}
+                <span>
+                    {menuItem.title}
+                </span>
+                { menuItem.subItems ? arrowIcon : null }
             </button>
 
-            {item.subItems && isExpanded && (
+            {
+                menuItem.subItems && isExpanded && (
                 <ul className="submenu">
-                    {item.subItems.map((subItem, subIndex) => (
+                    {menuItem.subItems.map((subItem, subIndex) => (
                         <li key={subIndex}>
-                            <button className="submenu-button">
-                                {subItem}
-                            </button>
+                            <MenuSubItemButton path={ subItem } />
                         </li>
                     ))}
                 </ul>
@@ -37,28 +56,13 @@ function MenuItem({ item, index, expandedItem, setExpandedItem }) {
 }
 
 function SideBarMenu({ expandedItem, setExpandedItem }) {
-    const menuItems = [
-        {
-            title: "Control de Pedidos",
-            subItems: ["Nuevo Pedido", "Pedidos Pendientes"]
-        },
-        {
-            title: "Control de Productos",
-            subItems: ["Nuevo Producto", "Lista de Productos"]
-        },
-        {
-            title: "Control de Ventas",
-            subItems: ["Lista de Ventas"]
-        }
-    ];
-
     return (
         <nav className="menu">
             <ul className="menu-items">
-                {menuItems.map((item, index) => (
+                {DashboardMenuItems.map((menuItem, index) => (
                     <MenuItem
                         key={index}
-                        item={item}
+                        menuItem={menuItem}
                         index={index}
                         expandedItem={expandedItem}
                         setExpandedItem={setExpandedItem}
@@ -128,13 +132,17 @@ const DashboardPage = ({ content }) => {
     return (
         <div className="dashboard">
             <MenuToggleButton
-                className={`menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`}
-                onClick={handleToggleSidebar}
+                isSidebarOpen={ isSidebarOpen }
+                onClick={ handleToggleSidebar }
             />
 
-            <Sidebar isSidebarOpen={isSidebarOpen} expandedItem={expandedItem} setExpandedItem={setExpandedItem} />
+            <Sidebar 
+                isSidebarOpen={ isSidebarOpen }
+                expandedItem={ expandedItem }
+                setExpandedItem={ setExpandedItem } 
+            />
 
-            <main className="main" onClick={handleMainClick}>
+            <main className="main"  onClick={ handleMainClick }>
                 {content}
             </main>
         </div>

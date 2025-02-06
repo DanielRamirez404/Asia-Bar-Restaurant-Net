@@ -16,4 +16,11 @@ export const PagePaths = {
     'TablaVentas' : '/tabla-ventas',
 };
 
+export const DashboardMenuItems = [
+    {
+        title: "Control de Ventas",
+        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']]
+    },
+];
+
 export const DashboardPageOrder = [ PagePaths['Home'] ];
