@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Info, Search, X } from "lucide-react";
 import "./tabla-ventas.css";
+import Dashboard from "./reusables/dashboard-page.js";
 
 const ventasIniciales = [
   { id: 1, idCliente: "V-2765293", cliente: "Ramon", tipo: "Delivery", precio: 20 },
@@ -234,83 +235,85 @@ function TablaVentas() {
   }, [registroSeleccionado]);
 
   return (
-    <div className="contenedor-ventas">
-      <div className="encabezado-ventas">
-        <h1 className="titulo-ventas">Registro de ventas</h1>
-        <div className="contenedor-busqueda">
-          <Search className="icono-busqueda" />
-          <input
-            type="text"
-            className="entrada-busqueda"
-            placeholder="Buscar por cliente"
-            value={terminoBusqueda}
-            onChange={(e) => setTerminoBusqueda(e.target.value)}
-            ref={inputRef}
-          />
-          <button onClick={handleBuscar} className="boton-buscar">Buscar</button>
+    <Dashboard content={
+      <div className="contenedor-ventas">
+        <div className="encabezado-ventas">
+          <h1 className="titulo-ventas">Registro de ventas</h1>
+          <div className="contenedor-busqueda">
+            <Search className="icono-busqueda" />
+            <input
+              type="text"
+              className="entrada-busqueda"
+              placeholder="Buscar por cliente"
+              value={terminoBusqueda}
+              onChange={(e) => setTerminoBusqueda(e.target.value)}
+              ref={inputRef}
+            />
+            <button onClick={handleBuscar} className="boton-buscar">Buscar</button>
+          </div>
         </div>
-      </div>
-      <div className="contenedor-tabla">
-        <div className="envoltorio-tabla">
-          <table className="tabla-ventas">
-            <thead className="encabezado-tabla">
-              <tr>
-                <th>ID</th>
-                <th>ID Cliente</th>
-                <th>Cliente</th>
-                <th>Tipo</th>
-                <th>Precio</th>
-                <th>Info</th>
-              </tr>
-            </thead>
-            <tbody className="cuerpo-tabla">
-              {ventasFiltradas.length > 0 ? (
-                ventasFiltradas.map((venta) => (
-                  <tr
-                    key={venta.id}
-                    className={registroSeleccionado?.id === venta.id ? "registro-seleccionado" : ""}
-                    onClick={() => handleSeleccionarRegistro(venta)}
-                  >
-                    <td>{venta.id}</td>
-                    <td>{venta.idCliente}</td>
-                    <td>{venta.cliente}</td>
-                    <td>
-                      <span className={`etiqueta ${venta.tipo === "Delivery" ? "etiqueta-delivery" : "etiqueta-local"}`}>
-                        {venta.tipo}
-                      </span>
-                    </td>
-                    <td>{venta.precio}</td>
-                    <td>
-                      <ModalVenta datos={venta} />
-                    </td>
-                  </tr>
-                ))
-              ) : (
+        <div className="contenedor-tabla">
+          <div className="envoltorio-tabla">
+            <table className="tabla-ventas">
+              <thead className="encabezado-tabla">
                 <tr>
-                  <td colSpan="6" className="celda-tabla">No se encuentra cliente o identificación con dichas especificaciones</td>
+                  <th>ID</th>
+                  <th>ID Cliente</th>
+                  <th>Cliente</th>
+                  <th>Tipo</th>
+                  <th>Precio</th>
+                  <th>Info</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="cuerpo-tabla">
+                {ventasFiltradas.length > 0 ? (
+                  ventasFiltradas.map((venta) => (
+                    <tr
+                      key={venta.id}
+                      className={registroSeleccionado?.id === venta.id ? "registro-seleccionado" : ""}
+                      onClick={() => handleSeleccionarRegistro(venta)}
+                    >
+                      <td>{venta.id}</td>
+                      <td>{venta.idCliente}</td>
+                      <td>{venta.cliente}</td>
+                      <td>
+                        <span className={`etiqueta ${venta.tipo === "Delivery" ? "etiqueta-delivery" : "etiqueta-local"}`}>
+                          {venta.tipo}
+                        </span>
+                      </td>
+                      <td>{venta.precio}</td>
+                      <td>
+                        <ModalVenta datos={venta} />
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="celda-tabla">No se encuentra cliente o identificación con dichas especificaciones</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
+        <div className="contenedor-botones">
+          <div className="contenedor-boton-eliminar">
+            <button onClick={handleEliminar} className="boton-eliminar">Eliminar</button>
+            {mensajeAdvertenciaEliminar && <p className="mensaje-advertencia">{mensajeAdvertenciaEliminar}</p>}
+          </div>
+          <div className="contenedor-boton-modificar">
+            <button onClick={handleModificar} className="boton-modificar">Modificar</button>
+            {mensajeAdvertenciaModificar && <p className="mensaje-advertencia">{mensajeAdvertenciaModificar}</p>}
+          </div>
+        </div>
+        <FormularioModificacion
+          datos={registroSeleccionado}
+          estaAbierto={formularioAbierto}
+          cerrarFormulario={cerrarFormulario}
+          guardarCambios={guardarCambios}
+        />
       </div>
-      <div className="contenedor-botones">
-        <div className="contenedor-boton-eliminar">
-          <button onClick={handleEliminar} className="boton-eliminar">Eliminar</button>
-          {mensajeAdvertenciaEliminar && <p className="mensaje-advertencia">{mensajeAdvertenciaEliminar}</p>}
-        </div>
-        <div className="contenedor-boton-modificar">
-          <button onClick={handleModificar} className="boton-modificar">Modificar</button>
-          {mensajeAdvertenciaModificar && <p className="mensaje-advertencia">{mensajeAdvertenciaModificar}</p>}
-        </div>
-      </div>
-      <FormularioModificacion
-        datos={registroSeleccionado}
-        estaAbierto={formularioAbierto}
-        cerrarFormulario={cerrarFormulario}
-        guardarCambios={guardarCambios}
-      />
-    </div>
+    } />
   );
 }
 
