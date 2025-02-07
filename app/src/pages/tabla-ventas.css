@@ -60,7 +60,7 @@ body {
   background-color: #a72121; /*Color extraido de constant*/
 }
 
-.contenedor-tabla {
+.table-container {
   background-color: white; /* Color de fondo del contenedor de la tabla */
   padding: 1rem;
   border-radius: 8px;
@@ -207,64 +207,6 @@ body {
   color: #4b5563; 
 }
 
-/* Estilos para los botones en la parte inferior */
-.contenedor-botones {
-  position: fixed; 
-  bottom: 2rem; /* Ajustar la posición hacia abajo */
-  right: 4rem; /* Ajustar la posición a la derecha */
-  display: flex; 
-  gap: 1rem; /* Espacio entre los botones */
-}
-
-.boton-eliminar, .boton-modificar {
-  padding: 0.7rem 2rem;   
-  border: none; 
-  outline: none; 
-  transition: background-color 0.2s;
-  background-color: #111827; 
-  font-size: 1rem; 
-  font-family: inherit; 
-  font-weight: 500; 
-  color: white; 
-  border-radius: 15px; /* Bordes redondeados */
-  cursor: pointer;
-}
-
-.boton-eliminar { 
-  background-color: #ef4444; 
-  margin-right: 1rem;
-}
-
-.boton-eliminar:hover { 
-  background-color: #dc2626; 
-}
-
-.boton-modificar { 
-  background-color: #3b82f6; 
-}
-
-.boton-modificar:hover { 
-  background-color: #2563eb; 
-}
-
-/* Estilos para mensaje de advertencia */
-.mensaje-advertencia {
-  color: red;
-  font-weight: bold;
-  margin-left: 1rem;
-  white-space: pre-line; /* Permite que el texto se divida en líneas */
-}
-
-.contenedor-boton-eliminar {
-  display: flex;
-  align-items: center;
-}
-
-.contenedor-boton-modificar {
-  display: flex;
-  align-items: center;
-}
-
 /* Estilos para el registro seleccionado */
 .registro-seleccionado { 
   background-color: #f9f7dc; /* Color de fondo del registro seleccionado */
@@ -350,7 +292,7 @@ body {
     padding-left: 0rem;
   }
 
-  .contenedor-tabla {
+  .table-container {
     width: 100%; /* Ajustar el ancho del contenedor */
     padding: 0.5rem; /* Reducir el relleno */
     overflow-x: auto; /* Habilitar scroll horizontal */
@@ -381,4 +323,10 @@ body {
     bottom: 1rem; /* Ajustar la posición hacia abajo */
     gap: 0.5rem; /* Espacio entre los botones en la parte inferior */
   }
+}
+
+
+.action-buttons-container {
+  display: flex;
+  flex-direction: row;
 }
