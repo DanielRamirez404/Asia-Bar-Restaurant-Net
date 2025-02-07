@@ -4,16 +4,20 @@
     display: flex;  
     flex-direction: row;
     background-color: var(--yellow-background-hue);
-    /* Color de fondo */
     transition: transform 0.3s ease;
 }
 
+.dashboard-main {
+    width: 100%;
+    min-height: 100vh;
+}
+
 .menu-toggle-button {
-    position: fixed;    /* Posición fija del botón */
+    position: fixed;
     left: 1rem;
     top: 1rem;
     z-index: 50;
-    background-color: transparent;  /* Fondo transparente del botón */
+    background-color: transparent; 
     border: none;
     cursor: pointer;
     width: 40px;
@@ -25,15 +29,11 @@
 }
 
 .menu-toggle-button:hover {
-    background-color: var(--red-hue); /* Color del botón al pasar el mouse sin el sidebar desplegado */
+    background-color: var(--red-hue);
 }
 
 .menu-toggle-button.sidebar-open:hover {
-    background-color: var(--yellow-background-hue); /* Color del botón al pasar el mouse con el sidebar desplegado */
-}
-
-.menu-toggle-button.clicked {
-    background-color: transparent !important; /* Quitar el cambio de color */
+    background-color: var(--yellow-background-hue);
 }
 
 .sidebar {
@@ -43,14 +43,13 @@
     bottom: 0;
     width: 16rem;
     background-color: var(--red-hue);
-    /* Color del sidebar */
     transform: translateX(-100%);
     transition: transform 0.5s ease-in-out;
     z-index: 30;
-    overflow-y: scroll; /* Hacer scrollbar siempre visible */
-    padding-right: 8px; /* Espacio para el scrollbar */
-    direction: rtl; /* Cambiar la dirección del contenido */
-    box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.277); /* Efecto de profundidad 3D al borde interno derecho */
+    overflow-y: scroll;
+    padding-right: 8px;
+    direction: rtl;
+    box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.277);
 }
 
 .sidebar::-webkit-scrollbar {

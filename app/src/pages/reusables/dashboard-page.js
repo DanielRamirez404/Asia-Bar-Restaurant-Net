@@ -28,17 +28,16 @@ function MenuSubItemButton({ path }) {
     )
 }
 
-function MenuItem({ menuItem, index, expandedItem, setExpandedItem }) {
-    const isExpanded = expandedItem === index;
+function MenuItem({ menuItem, index, isExpanded, onClick }) {
     const arrowIcon = isExpanded ? <ChevronDown size={30} /> : <ChevronRight size={30} />;
 
     return (
         <li key={index} className="menu-item">
-            <button className="menu-button" onClick={() => setExpandedItem(isExpanded ? null : index)}>
+            <button className="menu-button" onClick={ onClick }>
                 <span>
-                    {menuItem.title}
+                    { menuItem.title }
                 </span>
-                { menuItem.subItems ? arrowIcon : null }
+                { menuItem.subItems && arrowIcon }
             </button>
 
             {
@@ -55,17 +54,16 @@ function MenuItem({ menuItem, index, expandedItem, setExpandedItem }) {
     );
 }
 
-function SideBarMenu({ expandedItem, setExpandedItem }) {
+function SideBarMenu({ expandedIndex, setExpandedIndex }) {
     return (
         <nav className="menu">
             <ul className="menu-items">
                 {DashboardMenuItems.map((menuItem, index) => (
                     <MenuItem
-                        key={index}
-                        menuItem={menuItem}
-                        index={index}
-                        expandedItem={expandedItem}
-                        setExpandedItem={setExpandedItem}
+                        index={ index }
+                        menuItem={ menuItem }
+                        isExpanded={ expandedIndex === index }
+                        onClick={() => setExpandedIndex((expandedIndex === index) ? null : index)}
                     />
                 ))}
             </ul>
@@ -73,18 +71,12 @@ function SideBarMenu({ expandedItem, setExpandedItem }) {
     );
 }
 
-function Sidebar({ isSidebarOpen, expandedItem, setExpandedItem }) {
-    const classNames = (...classes) => classes.filter(Boolean).join(' ');
-
-    const handleSidebarClick = (e) => {
-        // Verificar si el clic fue en un área en blanco del sidebar
-        if (e.target.classList.contains('sidebar')) {
-            setExpandedItem(null);
-        }
-    };
+function Sidebar({ isSidebarOpen, expandedIndex, setExpandedIndex, onSidebarClick }) {
+    const statusString = (isSidebarOpen) ? "open" : "";
+    const className = "sidebar " + statusString;
 
     return (
-        <aside className={classNames("sidebar", isSidebarOpen ? "open" : "")} onClick={handleSidebarClick}>
+        <aside className={className} onClick={ onSidebarClick }>
             <div className="logo-container">
                 <div className="logo-placeholder">
                     Espacio para logo
@@ -95,54 +87,49 @@ function Sidebar({ isSidebarOpen, expandedItem, setExpandedItem }) {
                 Asia Menú
             </div>
 
-            <SideBarMenu expandedItem={expandedItem} setExpandedItem={setExpandedItem} />
+            <SideBarMenu expandedIndex={ expandedIndex } setExpandedIndex={setExpandedIndex} />
         </aside>
     );
 }
 
+function handleSidebarClick(event, setExpandedIndex) {
+    if (event.target.classList.contains('sidebar')) {
+        setExpandedIndex(null);
+    }
+}
+
+function handleDashboardEvent(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) {
+    if (!isSidebarOpen)
+        return;
+
+    setIsSidebarOpen(false);
+    setTimeout(() => { setExpandedIndex(null) }, 500);
+}
+
+function handleToggleSidebar(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) {
+    setIsSidebarOpen(!isSidebarOpen);
+    handleDashboardEvent(isSidebarOpen, setIsSidebarOpen, setExpandedIndex);
+}
+
 const DashboardPage = ({ content }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [expandedItem, setExpandedItem] = useState(null);
-
-    const handleMainClick = () => {
-        if (isSidebarOpen) {
-            setIsSidebarOpen(false);
-            setTimeout(() => {
-                setExpandedItem(null); // Cerrar el menú desplegado después de cerrar el sidebar
-            }, 500); // Ajusta el tiempo según la duración de la animación de cierre del sidebar
-        }
-    };
-
-    const handleToggleSidebar = () => {
-        setIsSidebarOpen(!isSidebarOpen);
-        if (isSidebarOpen) {
-            setTimeout(() => {
-                setExpandedItem(null); // Cerrar el menú desplegado después de cerrar el sidebar
-            }, 500); // Ajusta el tiempo según la duración de la animación de cierre del sidebar
-        }
-
-        // Agregar clase temporalmente para el cambio de color
-        const button = document.querySelector('.menu-toggle-button');
-        button.classList.add('clicked');
-        setTimeout(() => {
-            button.classList.remove('clicked');
-        }, 1000); // Quitar la clase después de 1 segundo
-    };
+    const [expandedIndex, setExpandedIndex] = useState(null);
 
     return (
         <div className="dashboard">
             <MenuToggleButton
                 isSidebarOpen={ isSidebarOpen }
-                onClick={ handleToggleSidebar }
+                onClick={ () => handleToggleSidebar(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) }
             />
 
             <Sidebar 
                 isSidebarOpen={ isSidebarOpen }
-                expandedItem={ expandedItem }
-                setExpandedItem={ setExpandedItem } 
+                expandedIndex={ expandedIndex }
+                setExpandedIndex={ setExpandedIndex } 
+                onSidebarClick={ (event) => handleSidebarClick(event, setExpandedIndex) }
             />
 
-            <main className="main"  onClick={ handleMainClick }>
+            <main className="dashboard-main"  onClick={ () => handleDashboardEvent(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) }>
                 {content}
             </main>
         </div>
