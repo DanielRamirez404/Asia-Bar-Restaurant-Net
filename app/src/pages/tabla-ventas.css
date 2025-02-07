@@ -8,6 +8,7 @@ body {
 
 .encabezado-ventas {
   display: flex; /* Mostrar elementos en línea */
+  
   align-items: center;
   justify-content: flex-start; /* Alinear elementos al inicio */
   margin-bottom: 1rem;
@@ -309,6 +310,12 @@ body {
   color: #374151;
 }
 
+.encabezado-tabla{
+  
+  color: #fff;
+
+}
+
 .formulario-input {
   padding: 0.5rem;
   border: 1px solid #e5e7eb;
@@ -330,6 +337,7 @@ body {
   background-color: #374151;
 }
 
+
 /* Media Queries para hacer la tabla responsive */
 @media (max-width: 768px) {
   .encabezado-ventas {
@@ -339,13 +347,13 @@ body {
   }
 
   .titulo-ventas {
-    margin-bottom: 3rem; /* Añadir margen inferior */
-    margin-right: 1rem; /* Eliminar margen derecho */
-    padding-left: 4rem; /* Ajustar el relleno a la izquierda */
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 30px; /* Ajustar el relleno a la izquierda */
   }
 
   .contenedor-busqueda {
-    width: 40%; /* Ajustar el tamaño de la barra de búsqueda */
+    width: 100%; /* Ajustar el tamaño de la barra de búsqueda */
     margin-left: 0px; /* Ajustar margen izquierdo */
     padding-left: 0rem;
   }
@@ -354,6 +362,9 @@ body {
     width: 100%; /* Ajustar el ancho del contenedor */
     padding: 0.5rem; /* Reducir el relleno */
     overflow-x: auto; /* Habilitar scroll horizontal */
+    scrollbar-width: none;
+    box-sizing: border-box;
+   
   }
 
   .tabla-ventas {
@@ -381,4 +392,20 @@ body {
     bottom: 1rem; /* Ajustar la posición hacia abajo */
     gap: 0.5rem; /* Espacio entre los botones en la parte inferior */
   }
+}
+
+@media (max-width: 1024px){
+
+  .encabezado-ventas{
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .titulo-ventas{
+    margin: 0;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+
 }
