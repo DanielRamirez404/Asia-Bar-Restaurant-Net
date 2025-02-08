@@ -13,13 +13,18 @@ export const PagePaths = {
     'EditClient': '/modificar-cliente', 
     'TablaVentas' : '/tabla-ventas',
     'FormularioProducto': 'formulario-producto',
+    'UserControl': '/control-de-usuarios',
 };
 
 export const DashboardMenuItems = [
     {
         title: "Control de Ventas",
-        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas'] ],
+        subItems: [ PagePaths['InformacionVenta'], PagePaths['TablaVentas'] ],
     },
+    {
+        title: "Usuarios",
+        subItems: [ PagePaths['UserControl'] ]
+    }
 ];
 
 export const DashboardPageOrder = [ PagePaths['Home'] ];
