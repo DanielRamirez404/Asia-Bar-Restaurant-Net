@@ -12,8 +12,7 @@ import Request from "../pages/request";
 import Users from "../pages/users";
 import Clients from "../pages/clients";
 import TablaVentas from '../pages/tabla-ventas';
-
-
+import FormularioProducto from '../pages/Formularios/formulario_prod'; // Importar FormularioProducto
 class Page {
     constructor(path, component, title = null, roles = AllRoles) {
         this.path = path;
@@ -35,7 +34,8 @@ export const PageList = [
     new Page(PagePaths['EditUser'], <Users title="Modificar Usuario"/>, "Modificar Usuario"),
     new Page(PagePaths['AddClient'], <Clients title="Añadir Cliente" />, "Añadir Cliente"),
     new Page(PagePaths['EditClient'], <Clients title="Modificar Cliente" />, "Modificar Cliente"),
-    new Page(PagePaths['TablaVentas'], <TablaVentas title="Tabla de Ventas" />, "Tabla de Ventas")
+    new Page(PagePaths['TablaVentas'], <TablaVentas title="Tabla de Ventas" />, "Tabla de Ventas"),
+    new Page(PagePaths['FormularioProducto'], <FormularioProducto title="Formulario de Producto" />, "Formulario de Producto") // Añadir FormularioProducto a la lista de páginas
 ];
 
 export function GetPageFromPath(path) {

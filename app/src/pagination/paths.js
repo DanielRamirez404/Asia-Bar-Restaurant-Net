@@ -1,4 +1,5 @@
 import TablaVentas from "../pages/tabla-ventas";
+import FormularioProducto from "../pages/Formularios/formulario_prod";
 
 export const PagePaths = {
     'Home': '/menu',
@@ -14,12 +15,13 @@ export const PagePaths = {
     'AddClient': '/agregar-cliente',
     'EditClient': '/modificar-cliente', 
     'TablaVentas' : '/tabla-ventas',
+    'FormularioProducto': 'formulario-producto', // Añadir la ruta para FormularioProducto
 };
 
 export const DashboardMenuItems = [
     {
         title: "Control de Ventas",
-        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']]
+        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas'], PagePaths['FormularioProducto']] // Añadir FormularioProducto al menú
     },
 ];
 
