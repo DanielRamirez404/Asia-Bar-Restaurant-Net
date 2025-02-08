@@ -1,5 +1,5 @@
 export const PagePaths = {
-    'Home': '/menu',
+    'Home': '/inicio',
     'Example': '/link-de-ejemplo',
     'Login': '/login',
     'InformacionVenta': '/informacion_venta',

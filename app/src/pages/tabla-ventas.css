@@ -8,6 +8,7 @@ body {
 
 .table-page-header {
   display: flex; /* Mostrar elementos en línea */
+  
   align-items: center;
   justify-content: flex-start; /* Alinear elementos al inicio */
   margin-bottom: 1rem;
@@ -251,6 +252,12 @@ body {
   color: #374151;
 }
 
+.encabezado-tabla{
+  
+  color: #fff;
+
+}
+
 .formulario-input {
   padding: 0.5rem;
   border: 1px solid #e5e7eb;
@@ -272,6 +279,15 @@ body {
   background-color: #374151;
 }
 
+
+.action-buttons-container {
+  display: flex;
+  flex-direction: row;
+}
+
+
+
+
 /* Media Queries para hacer la tabla responsive */
 @media (max-width: 768px) {
   .table-page-header {
@@ -288,6 +304,7 @@ body {
 
   .search-container {
     width: 40%; /* Ajustar el tamaño de la barra de búsqueda */
+>>>>>>> 1a1d8fe9fc55a85bb419335ecdaa4eb38e536084
     margin-left: 0px; /* Ajustar margen izquierdo */
     padding-left: 0rem;
   }
@@ -296,6 +313,9 @@ body {
     width: 100%; /* Ajustar el ancho del contenedor */
     padding: 0.5rem; /* Reducir el relleno */
     overflow-x: auto; /* Habilitar scroll horizontal */
+    scrollbar-width: none;
+    box-sizing: border-box;
+   
   }
 
   .tabla-ventas {
@@ -325,8 +345,20 @@ body {
   }
 }
 
+@media (max-width: 1024px){
 
-.action-buttons-container {
-  display: flex;
-  flex-direction: row;
+  .encabezado-ventas{
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .titulo-ventas{
+    margin: 0;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+
+
 }
+
+

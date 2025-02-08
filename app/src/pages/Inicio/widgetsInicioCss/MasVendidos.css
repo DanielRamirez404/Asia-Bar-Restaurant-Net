@@ -1,0 +1,97 @@
+.mainMasVendidos{
+
+    display: flex;
+    flex-direction: column;
+    
+    width: 200px;
+    
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+   
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0  8px 10px 2px #0003;
+    text-align: center;
+    position: relative;
+}
+
+.imgenMasVendido{
+    margin: auto;
+    width: 130px;
+
+}
+.nombreMasVendido{
+
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--bright-red-hue);
+}
+
+.precioMasVendido{
+
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.totalDeVentas{
+
+    font-size: 13px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+
+}
+
+.btnInformacionMasVendidos{
+
+    color: #fff;
+    background: #3870ff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    margin: auto;
+    
+    width: 70%;
+
+    cursor: pointer;
+
+}
+
+.masVendidoCoronaIcono{
+
+    font-size: 45px;
+    position: absolute;
+    top: -15%;
+    left: -10%;
+    display: none;
+
+}
+
+.mainMasVendidos.top1{
+
+    margin-top: 0;
+
+    .masVendidoCoronaIcono{
+        display: flex;
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .masVendidoCoronaIcono{
+
+        top: -5%;
+
+    }
+
+    .mainMasVendidos.top1{
+
+        margin-top: 10px;
+    }
+
+
+}
+
+

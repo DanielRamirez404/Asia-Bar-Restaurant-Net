@@ -10,6 +10,8 @@ const ventasIniciales = [
 	{ id: 2, idCliente: "J-9782659838-2", cliente: "Empresa polar", tipo: "Local", precio: 76 },
 	{ id: 3, idCliente: "V-2765293", cliente: "Maître Gims", tipo: "Local", precio: 12 },
 	{ id: 4, idCliente: "V-2765293", cliente: "Maluma", tipo: "Delivery", precio: 15 },
+	
+
 ];
 
 const columnNames = Object.keys(ventasIniciales[0]);

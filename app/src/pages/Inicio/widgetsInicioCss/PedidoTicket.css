@@ -1,0 +1,80 @@
+
+.mainPedidoTicket{
+
+    min-width: 220px;
+    min-height: 220px;
+
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    
+    background: #efff96;
+    padding: 15px;
+    border-radius: 5px;
+  
+    box-sizing: border-box;
+
+}
+
+.contenedorBtnPedidoTicket{
+
+    width: 90%;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    gap:10px;
+   
+
+}
+
+.botonInformacionTicket{
+
+    width: 80%;
+    color: #fff;
+    background: #3870ff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    
+
+}
+
+
+.totalTicket{
+
+    font-size: 26px;
+    font-weight: bold;
+    text-align: end;
+    padding: 5px;
+
+}
+
+.numeroDePedido{
+
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+
+}
+
+.informacionPedidoTicket{
+
+    display: flex;
+    flex-direction: column;
+
+    
+
+}
+
+.NombreComprador{
+
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.totalProductosTicket , .tipoDePedidoTicket{
+
+    color: #333;
+    font-size: 15px;
+    margin-top: 10px;
+
+}
