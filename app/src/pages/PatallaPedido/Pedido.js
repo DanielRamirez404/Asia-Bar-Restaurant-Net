@@ -52,7 +52,7 @@ function ContenidoPedido() {
 
             <div className = "contenedorFramesPedido">
 
-                <div className="overlay"  
+                <div className="overlayPedidos"  
                     style={{display: isVisible ? "block":"none"}} 
                     onClick={cerrarProductos}>
                     </div>

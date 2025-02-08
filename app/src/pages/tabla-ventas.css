@@ -296,16 +296,6 @@ body {
     padding-left: 1rem; /* Ajustar el relleno a la izquierda */
   }
 
-<<<<<<< HEAD
-  .titulo-ventas {
-    margin: auto;
-    margin-top: 40px;
-    margin-bottom: 30px; /* Ajustar el relleno a la izquierda */
-  }
-
-  .contenedor-busqueda {
-    width: 100%; /* Ajustar el tamaño de la barra de búsqueda */
-=======
   .table-page-header h1 {
     margin-bottom: 3rem; /* Añadir margen inferior */
     margin-right: 1rem; /* Eliminar margen derecho */
