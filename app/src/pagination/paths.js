@@ -18,7 +18,7 @@ export const PagePaths = {
 export const DashboardMenuItems = [
     {
         title: "Control de Ventas",
-        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']
+        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas'] ],
     },
 ];
 
