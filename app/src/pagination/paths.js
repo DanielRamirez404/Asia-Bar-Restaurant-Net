@@ -1,5 +1,3 @@
-import TablaVentas from "../pages/tabla-ventas";
-
 export const PagePaths = {
     'Home': '/inicio',
     'Example': '/link-de-ejemplo',
@@ -14,12 +12,31 @@ export const PagePaths = {
     'AddClient': '/agregar-cliente',
     'EditClient': '/modificar-cliente', 
     'TablaVentas' : '/tabla-ventas',
+    'FormularioProducto': 'formulario-producto',
+    
+    'UserControl': '/control-de-usuarios',
+    'ClientControl': '/control-de-clientes',
+    'ProductControl': '/control-de-productos',
+    'SideDishControl': '/control-de-contornos',
+    'MainDishControl': '/control-de-platos',
 };
 
 export const DashboardMenuItems = [
     {
         title: "Control de Ventas",
-        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']]
+        subItems: [ PagePaths['InformacionVenta'], PagePaths['TablaVentas'] ],
+    },
+    {
+        title: "Control de Servicios",
+        subItems: [ PagePaths['MainDishControl'], PagePaths['SideDishControl'], PagePaths['ProductControl'] ]
+    },
+    {
+        title: "Control de Clientes",
+        subItems: [ PagePaths['ClientControl'] ]
+    },
+    {
+        title: "Control de Usuarios",
+        subItems: [ PagePaths['UserControl'] ]
     },
 ];
 

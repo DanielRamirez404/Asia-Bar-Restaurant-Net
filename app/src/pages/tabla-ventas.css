@@ -6,7 +6,7 @@ body {
   color: #111827;
 }
 
-.encabezado-ventas {
+.table-page-header {
   display: flex; /* Mostrar elementos en línea */
   
   align-items: center;
@@ -16,14 +16,14 @@ body {
   padding-left: 12rem; /* Añadir relleno a la izquierda */
 }
 
-.titulo-ventas {
+.table-page-header h1 {
   font-size: 2rem;
   font-weight: bold;
   margin: 0;
   margin-right: 30rem; /* Reducir la separación entre el título y la barra de búsqueda */
 }
 
-.contenedor-busqueda {
+.search-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@ body {
   margin-left: 5; /* Mover la barra de búsqueda a la derecha */
 }
 
-.icono-busqueda {
+.search-icon {
   position: absolute;
   left: 0.75rem;
 }
@@ -47,7 +47,7 @@ body {
   border-radius: 8px; /* Bordes redondeados */
 }
 
-.boton-buscar {
+.search-button {
   padding: 0.6rem 1.5rem;  
   margin-left: 0.5rem;
   border: none;
@@ -57,7 +57,7 @@ body {
   cursor: pointer;
 }
 
-.boton-buscar:hover { /*Oscurece al pasar el mouse*/
+.search-button:hover { /*Oscurece al pasar el mouse*/
   background-color: #a72121; /*Color extraido de constant*/
 }
 
@@ -290,12 +290,13 @@ body {
 
 /* Media Queries para hacer la tabla responsive */
 @media (max-width: 768px) {
-  .encabezado-ventas {
+  .table-page-header {
     flex-direction: column;
     align-items: flex-start;     
     padding-left: 1rem; /* Ajustar el relleno a la izquierda */
   }
 
+<<<<<<< HEAD
   .titulo-ventas {
     margin: auto;
     margin-top: 40px;
@@ -304,6 +305,16 @@ body {
 
   .contenedor-busqueda {
     width: 100%; /* Ajustar el tamaño de la barra de búsqueda */
+=======
+  .table-page-header h1 {
+    margin-bottom: 3rem; /* Añadir margen inferior */
+    margin-right: 1rem; /* Eliminar margen derecho */
+    padding-left: 4rem; /* Ajustar el relleno a la izquierda */
+  }
+
+  .search-container {
+    width: 40%; /* Ajustar el tamaño de la barra de búsqueda */
+>>>>>>> 1a1d8fe9fc55a85bb419335ecdaa4eb38e536084
     margin-left: 0px; /* Ajustar margen izquierdo */
     padding-left: 0rem;
   }
