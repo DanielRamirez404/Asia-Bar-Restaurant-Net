@@ -1,5 +1,3 @@
-import TablaVentas from "../pages/tabla-ventas";
-
 export const PagePaths = {
     'Home': '/menu',
     'Example': '/link-de-ejemplo',
@@ -14,12 +12,13 @@ export const PagePaths = {
     'AddClient': '/agregar-cliente',
     'EditClient': '/modificar-cliente', 
     'TablaVentas' : '/tabla-ventas',
+    'FormularioProducto': 'formulario-producto',
 };
 
 export const DashboardMenuItems = [
     {
         title: "Control de Ventas",
-        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']]
+        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']
     },
 ];
 
