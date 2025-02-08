@@ -1,0 +1,49 @@
+import TablePage from "../reusables/tablePage";
+
+const mainDishFields = [ "Nombre del Plato", "Categoría", "Disponibilidad", "Precio" ];
+
+const mainDishData = [
+    ["Paella Valenciana", "Arroz", "Disponible", 25.00],
+    ["Hamburguesa con Queso", "Carnes", "No Disponible", 12.50],
+    ["Ensalada César", "Ensaladas", "Disponible", 8.00],
+    ["Tacos al Pastor", "Tacos", "Disponible", 15.00]
+];
+
+export const MainDishControl = () => {
+    return(
+        <TablePage title={ "Control de Menú" } fields={ mainDishFields } data={ mainDishData }/>
+    );
+}
+
+const sideDishFields = [ "Nombre", "Categoría", "Disponibilidad", "Precio" ];
+
+const sideDishData = [
+    ["Papas Fritas", "Guarnición", "Disponible", 3.50],
+    ["Ensalada Mixta", "Guarnición", "Disponible", 5.00],
+    ["Arroz Blanco", "Acompañamiento", "Disponible", 2.00],
+    ["Puré de Papas", "Guarnición", "No Disponible", 4.00],
+    ["Vegetales al Vapor", "Saludable", "Disponible", 6.00]
+];
+
+export const SideDishControl = () => {
+    return(
+        <TablePage title={ "Control de Contornos" } fields={ sideDishFields } data={ sideDishData }/>
+    );
+}
+
+const productFields = [ "Nombre", "Categoría", "Cantidad", "Disponibilidad", "Precio" ];
+
+const productData = [
+    ["Refresco de Cola", "Bebida", 27, "Disponible", 2.50],
+    ["Agua Mineral", "Bebida", 32, "Disponible", 1.50],
+    ["Papas Fritas", "Snack", 45, "Disponible", 3.00],
+    ["Galletas", "Snack", 0, "No Disponible", 2.00],
+    ["Helado", "Postre", 12, "Disponible", 4.00],
+    ["Jugo de Naranja", 14, "Bebida", "Disponible", 3.50]
+  ];
+
+export const ProductControl = () => {
+    return(
+        <TablePage title={ "Control de Productos" } fields={ productFields } data={ productData }/>
+    );
+}

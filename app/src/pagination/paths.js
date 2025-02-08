@@ -13,6 +13,7 @@ export const PagePaths = {
     'EditClient': '/modificar-cliente', 
     'TablaVentas' : '/tabla-ventas',
     'FormularioProducto': 'formulario-producto',
+    
     'UserControl': '/control-de-usuarios',
     'ClientControl': '/control-de-clientes',
     'ProductControl': '/control-de-productos',
