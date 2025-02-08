@@ -1,6 +1,3 @@
-import TablaVentas from "../pages/tabla-ventas";
-import FormularioProducto from "../pages/Formularios/formulario_prod";
-
 export const PagePaths = {
     'Home': '/menu',
     'Example': '/link-de-ejemplo',
