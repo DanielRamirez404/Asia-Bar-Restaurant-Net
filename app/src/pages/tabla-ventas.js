@@ -160,6 +160,35 @@ function FormularioModificacion({ datos, estaAbierto, cerrarFormulario, guardarC
 	);
 }
 
+function TablePageSearch() {
+	const [searchQuery, setSearchQuery] = useState("");
+	const inputRef = useRef(null);
+
+	return(
+		<div className="search-container">
+			<Search className="search-icon" />
+			<input
+				type="text"
+				className="entrada-busqueda"
+				placeholder="Buscar"
+				value={ searchQuery }
+				onChange={ (e) => setSearchQuery(e.target.value) }
+				ref={ inputRef }
+			/>
+			<button onClick={ () => alert("Query: " + searchQuery) } className="search-button">Buscar</button>
+		</div>
+	);
+}
+
+function TablePageHeader({ title }) {
+	return (
+		<div className="table-page-header">
+			<h1>{ title }</h1>
+			<TablePageSearch />
+		</div>
+	);
+}
+
 function Header({ fields }) {
     return(
         <thead className="encabezado-tabla">
@@ -191,31 +220,17 @@ function Table({ fields, data }) {
 }
 
 function TablaVentas() {
-	const [terminoBusqueda, setTerminoBusqueda] = useState("");
 	const [ventas, setVentas] = useState(ventasIniciales);
 	const [ventasFiltradas, setVentasFiltradas] = useState(ventas);
 	const [registroSeleccionado, setRegistroSeleccionado] = useState(null);
 	const [formularioAbierto, setFormularioAbierto] = useState(false);
 	const inputRef = useRef(null);
 
-	const handleBuscar = () => {
-		const filtradas = ventas.filter((venta) =>
-			venta.cliente.toLowerCase().includes(terminoBusqueda.toLowerCase())
-		);
-		setVentasFiltradas(filtradas);
-	};
-
 	useEffect(() => {
 		if (ventasFiltradas.length === 0) {
 			inputRef.current.focus();
 		}
 	}, [ventasFiltradas]);
-
-	useEffect(() => {
-		if (terminoBusqueda === "") {
-			setVentasFiltradas(ventas);
-		}
-	}, [terminoBusqueda, ventas]);
 
 	const cerrarFormulario = () => {
 		setFormularioAbierto(false);
@@ -229,37 +244,11 @@ function TablaVentas() {
 		setVentasFiltradas(nuevasVentas);
 	};
 
-	const handleDeseleccionarRegistro = (e) => {
-		if (registroSeleccionado && !e.target.closest('.contenedor-ventas')) {
-			setRegistroSeleccionado(null);
-		}
-	};
-
-	useEffect(() => {
-		document.addEventListener('click', handleDeseleccionarRegistro);
-		return () => {
-			document.removeEventListener('click', handleDeseleccionarRegistro);
-		};
-	}, [registroSeleccionado]);
-
 	return (
 		<DashboardPage content={
-			<div className="contenedor-ventas">
-				<div className="encabezado-ventas">
-					<h1 className="titulo-ventas">Registro de ventas</h1>
-					<div className="contenedor-busqueda">
-						<Search className="icono-busqueda" />
-						<input
-							type="text"
-							className="entrada-busqueda"
-							placeholder="Buscar por cliente"
-							value={terminoBusqueda}
-							onChange={(e) => setTerminoBusqueda(e.target.value)}
-							ref={inputRef}
-						/>
-						<button onClick={handleBuscar} className="boton-buscar">Buscar</button>
-					</div>
-				</div>
+			<>
+
+				<TablePageHeader title="Registro de Ventas"/>
 				
                 <div className="table-container">
 					<Table fields={ campos } data={ data } />
@@ -272,7 +261,7 @@ function TablaVentas() {
 					guardarCambios={guardarCambios}
 				/>
 
-			</div>
+			</>
 		} />
 	);
 }
