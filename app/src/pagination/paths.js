@@ -15,13 +15,13 @@ export const PagePaths = {
     'AddClient': '/agregar-cliente',
     'EditClient': '/modificar-cliente', 
     'TablaVentas' : '/tabla-ventas',
-    'FormularioProducto': 'formulario-producto', // Añadir la ruta para FormularioProducto
+    'FormularioProducto': 'formulario-producto',
 };
 
 export const DashboardMenuItems = [
     {
         title: "Control de Ventas",
-        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas'], PagePaths['FormularioProducto']] // Añadir FormularioProducto al menú
+        subItems: [PagePaths['InformacionVenta'], PagePaths['TablaVentas']
     },
 ];
 
