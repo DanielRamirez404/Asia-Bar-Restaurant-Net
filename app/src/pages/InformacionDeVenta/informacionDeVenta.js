@@ -23,19 +23,7 @@ function ContenidoInformacionVenta(){
                     <input className="inputInformacionVenta" id='inputCIComprador' placeholder='44000111' type='text' required></input>    
 
 
-                    {/* 
-                    <label className='tituloInputVenta' htmlFor='inputNombreComprador'>Nombre</label>
-                    <input className="inputInformacionVenta" id='inputNombreComprador' placeholder='Nombre*' type='text' required></input>    
-
-                    <label className='tituloInputVenta' htmlFor='inputApellidoComprador'>Apellido</label>
-                    <input className="inputInformacionVenta" id='inputApellidoComprador' placeholder='Apellido*' type='text' required></input>    
-
-                    <label className='tituloInputVenta' htmlFor='inputTelefonoComprador'>Numero de Telefono</label>
-                    <input className="inputInformacionVenta" id='inputTelefonoComprador' placeholder='Numero de telefono' type='text'></input>    
-
-                    <label className='tituloInputVenta' htmlFor='inputDireccionComprador'>Direccion</label>
-                    <input className="inputInformacionVenta" id='inputDireccionComprador' placeholder='Direccion' type='text'></input>     */}
-
+                   
 
                 
 

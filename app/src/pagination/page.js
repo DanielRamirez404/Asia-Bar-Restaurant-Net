@@ -3,7 +3,8 @@ import { AllRoles } from "../session/roles";
 import { RestrictedPage } from "../session/permissions";
 import { DashboardPageOrder, PagePaths } from "./paths";
 
-import Home from "../pages/home";
+
+import Home from "../pages/Inicio/Inicio";
 import Login from '../pages/login';
 import InformacionVenta from "../pages/InformacionDeVenta/informacionDeVenta";
 import Pedido from "../pages/PatallaPedido/Pedido";

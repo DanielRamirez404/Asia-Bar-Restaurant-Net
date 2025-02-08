@@ -1,0 +1,44 @@
+.mainRecienAgregado{
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    height: 100px;
+    background: #fdfdfd;
+    width: 90%;
+    margin: auto;
+    margin-top: 10px;
+   
+    box-sizing: border-box;
+    border: 1px solid #888;
+
+}
+
+.categoriaRecienAgregado{
+
+    color: #666;
+
+}
+.precioRecienAgregadoTexto{
+    color: var(--bright-red-hue);
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.informacionRecienAgregado{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.btnInformacionRecienAgregado{
+
+    height: 80%;
+    margin: auto;
+    width: 60px;
+
+    background: #3870ff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

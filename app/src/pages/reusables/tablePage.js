@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Info, Pencil, Search, Trash, X } from "lucide-react";
-import "./tabla-ventas.css";
-import DashboardPage from "./reusables/dashboard-page";
+import { Info, Search, X } from "lucide-react";
+import "./tablePage.css";
+import DashboardPage from "./dashboard-page";
 
-const campos = ["N°", "ID Cliente", "Cliente", "Tipo", "Precio", "Acciones"];
+const campos = ["ID", "ID Cliente", "Cliente", "Tipo", "Precio", "Info"];
 
 const ventasIniciales = [
 	{ id: 1, idCliente: "V-2765293", cliente: "Ramon", tipo: "Delivery", precio: 20 },
 	{ id: 2, idCliente: "J-9782659838-2", cliente: "Empresa polar", tipo: "Local", precio: 76 },
 	{ id: 3, idCliente: "V-2765293", cliente: "Maître Gims", tipo: "Local", precio: 12 },
 	{ id: 4, idCliente: "V-2765293", cliente: "Maluma", tipo: "Delivery", precio: 15 },
-	
-
 ];
 
-const columnNames = Object.keys(ventasIniciales[0]);
+const columnNames = Object.keys(ventasIniciales[0]).filter(key => key !== 'id');
 const data = ventasIniciales.map(item => columnNames.map(col => item[col]));
 
 function ModalVenta({ datos }) {
@@ -30,18 +28,9 @@ function ModalVenta({ datos }) {
 
 	return (
 		<>
-
-			<div className="action-buttons-container">
-				<button onClick={abrirModal} className="boton-info">
-					<Info size={20} />
-				</button>
-				<button onClick={abrirModal} className="boton-info">
-					<Pencil size={20} />
-				</button>
-				<button onClick={abrirModal} className="boton-info">
-					<Trash size={20} />
-				</button>
-			</div>
+			<button onClick={abrirModal} className="boton-info">
+				<Info size={20} />
+			</button>
 
 			{estaAbierto && (
 				<div
@@ -58,6 +47,9 @@ function ModalVenta({ datos }) {
 						</button>
 						<h2 className="modal-titulo">Información de venta</h2>
 						<div className="modal-contenido">
+
+						
+
 
 							<div className="modal-campo">
 								<span className="modal-etiqueta">N de Pedido</span>
@@ -170,24 +162,32 @@ function Header({ fields }) {
     );
 }
 
-function Body({ data }) {
+function Body({ data, registroSeleccionado, handleSeleccionarRegistro }) {
     return (
         <tbody className="cuerpo-tabla">
             {data.map((row, index) => (
-                <tr key={ index } >
+                <tr
+                    key={ index }
+                    className={ registroSeleccionado?.id === index ? "registro-seleccionado" : ""}
+                    onClick={() => handleSeleccionarRegistro(venta)}
+                >
+
                     { row.map((field) => ( <td>{ field }</td> )) }
-                    <td> <ModalVenta datos={data} /> </td>
+
+                    <td>
+                        <ModalVenta datos={data} />
+                    </td>
                 </tr>
             ))}
         </tbody>
     );
 }
 
-function Table({ fields, data }) {
+function Table({ fields, data, registroSeleccionado, handleSeleccionarRegistro }) {
     return(
         <table className="tabla-ventas">
             <Header fields={ fields } />
-            <Body data={ data } />
+            <Body data={ data } registroSeleccionado={ registroSeleccionado } handleSeleccionarRegistro={ handleSeleccionarRegistro } />
 		</table>
     );
 }
@@ -198,6 +198,8 @@ function TablaVentas() {
 	const [ventasFiltradas, setVentasFiltradas] = useState(ventas);
 	const [registroSeleccionado, setRegistroSeleccionado] = useState(null);
 	const [formularioAbierto, setFormularioAbierto] = useState(false);
+	const [mensajeAdvertenciaModificar, setMensajeAdvertenciaModificar] = useState("");
+	const [mensajeAdvertenciaEliminar, setMensajeAdvertenciaEliminar] = useState("");
 	const inputRef = useRef(null);
 
 	const handleBuscar = () => {
@@ -218,6 +220,41 @@ function TablaVentas() {
 			setVentasFiltradas(ventas);
 		}
 	}, [terminoBusqueda, ventas]);
+
+	const handleEliminar = () => {
+		setMensajeAdvertenciaModificar(""); // Limpiar mensaje de modificar
+		if (registroSeleccionado) {
+			const nuevasVentas = ventas.filter((venta) => venta.id !== registroSeleccionado.id);
+			setVentas(nuevasVentas);
+			setVentasFiltradas(nuevasVentas);
+			setRegistroSeleccionado(null);
+			setMensajeAdvertenciaEliminar("");
+		} else {
+			setMensajeAdvertenciaEliminar("Seleccione algún registro");
+			setTimeout(() => {
+				setMensajeAdvertenciaEliminar("");
+			}, 1000);
+		}
+	};
+
+	const handleModificar = () => {
+		setMensajeAdvertenciaEliminar(""); // Limpiar mensaje de eliminar
+		if (registroSeleccionado) {
+			setFormularioAbierto(true);
+			setMensajeAdvertenciaModificar("");
+		} else {
+			setMensajeAdvertenciaModificar("Seleccione algún registro");
+			setTimeout(() => {
+				setMensajeAdvertenciaModificar("");
+			}, 1000);
+		}
+	};
+
+	const handleSeleccionarRegistro = (venta) => {
+		setRegistroSeleccionado(venta);
+		setMensajeAdvertenciaModificar("");
+		setMensajeAdvertenciaEliminar("");
+	};
 
 	const cerrarFormulario = () => {
 		setFormularioAbierto(false);
@@ -263,8 +300,21 @@ function TablaVentas() {
 					</div>
 				</div>
 				
-                <div className="table-container">
-					<Table fields={ campos } data={ data } />
+                <div className="contenedor-tabla">
+					<div className="envoltorio-tabla">
+						<Table fields={ campos } data={ data } registroSeleccionado={ registroSeleccionado } handleSeleccionarRegistro={ handleSeleccionarRegistro } />
+					</div>
+				</div>
+				
+                <div className="contenedor-botones">
+					<div className="contenedor-boton-eliminar">
+						<button onClick={handleEliminar} className="boton-eliminar">Eliminar</button>
+						{mensajeAdvertenciaEliminar && <p className="mensaje-advertencia">{mensajeAdvertenciaEliminar}</p>}
+					</div>
+					<div className="contenedor-boton-modificar">
+						<button onClick={handleModificar} className="boton-modificar">Modificar</button>
+						{mensajeAdvertenciaModificar && <p className="mensaje-advertencia">{mensajeAdvertenciaModificar}</p>}
+					</div>
 				</div>
 				
                 <FormularioModificacion

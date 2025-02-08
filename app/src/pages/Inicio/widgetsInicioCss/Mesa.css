@@ -1,0 +1,92 @@
+
+
+
+.widgetMesa{
+
+
+    width: 200px;
+    height: 200px;
+    border-radius: 5px;
+    border: solid #111 1px;
+    cursor: pointer;
+    text-align: center;
+    pointer-events: auto;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    
+}
+
+.nombreMesa{
+
+    margin-top: 30%;
+    font-size: 30px;
+
+}
+
+
+
+.widgetMesa.desocupada{
+
+    background: var(--red-hue);
+
+}
+
+.widgetMesa.ocupada{
+    background: #009d0d;
+}
+
+.widgetMesa.ordenada{
+    background: #ffd816;
+}
+
+.timer{
+    font-size: 12px;
+    margin-top: 5px;
+
+}
+
+.menuOpciones{
+    position: absolute;
+    top: -10%;
+    left: 30%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px #0001;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    z-index: 10;
+
+}
+
+
+.opcionMesa{
+    padding:10px;
+    font-size: 15px;
+}
+
+
+
+@media (max-width: 768px){
+
+
+    .widgetMesa{
+        width: 150px;
+        height: 150px;
+
+    }
+
+    .menuOpciones{
+
+        top: -20%;
+        left: 50%;
+        
+    }
+}
