@@ -1,7 +1,7 @@
-import react from "react";
-import TablePage from "./reusables/tablePage";
+import TablePage from "../reusables/tablePage";
 
-const fields = [ "Usuario", "Tipo", "Contraseña" ]
+const fields = [ "Usuario", "Tipo", "Contraseña" ];
+
 const data = [ 
     ["David", "Cocinero", "david123"],
     ["MartinezJ", "Cajero", "jesusD4Silva"],

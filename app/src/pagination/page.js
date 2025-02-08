@@ -13,7 +13,8 @@ import Users from "../pages/users";
 import Clients from "../pages/clients";
 import TablaVentas from '../pages/tabla-ventas';
 import FormularioProducto from '../pages/Formularios/formulario_prod';
-import UserControl from "../pages/user-control";
+import UserControl from "../pages/control/user-control";
+import ClientControl from "../pages/control/client-control";
 
 class Page {
     constructor(path, component, title = null, roles = AllRoles) {
@@ -38,7 +39,8 @@ export const PageList = [
     new Page(PagePaths['EditClient'], <Clients title="Modificar Cliente" />, "Modificar Cliente"),
     new Page(PagePaths['TablaVentas'], <TablaVentas title="Tabla de Ventas" />, "Tabla de Ventas"),
     new Page(PagePaths['FormularioProducto'], <FormularioProducto title="Formulario de Producto" />, "Formulario de Producto"),
-    new Page(PagePaths['UserControl'], <UserControl />, "Control de Usuarios")
+    new Page(PagePaths['UserControl'], <UserControl />, "Tabla de Usuarios"),
+    new Page(PagePaths['ClientControl'], <ClientControl />, "Tabla de Clientes")
 ];
 
 export function GetPageFromPath(path) {
