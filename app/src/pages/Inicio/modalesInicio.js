@@ -2,6 +2,7 @@ import react from "react";
 import "./widgetsInicioCss/modalesInicio.css"
 import "./widgetsInicioCss/informacionDeProducto.css"
 import "./widgetsInicioCss/informacionDePedido.css"
+import {TarjetaProductoInformacionVenta} from "../ConfirmacionDeVenta/widgetsConfirmacionVenta.js"
 
 
 export function ModalInicio({contenido, onOpen, onClose}){
@@ -92,6 +93,13 @@ export function InformacionDelPedidoModal({datosPedido}){
             <h3 className="tituloPedidoModal">Pedido:</h3>
             <div className="scrollFramePedidoModal">
 
+                <TarjetaProductoInformacionVenta/>
+                <TarjetaProductoInformacionVenta/>
+                <TarjetaProductoInformacionVenta/>
+                <TarjetaProductoInformacionVenta/>
+                <TarjetaProductoInformacionVenta/>
+                <TarjetaProductoInformacionVenta/>
+                <TarjetaProductoInformacionVenta/>
 
             </div>
 
