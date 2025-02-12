@@ -1,0 +1,53 @@
+.scrollFramePedidoModal{
+
+    width: 100%;
+    height: 300px;
+    overflow-y: auto;
+
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.informacionDelivery, .informacionComerAqui{
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    display: none;
+}
+
+.informacionVisibleModal{
+
+    display: block;
+
+}
+
+
+.nombreCompradorModal{
+
+    margin-top: 20px;
+    font-size: 20px;
+
+}
+
+.labelInformacionPedido{
+
+    color: #555;
+    border-bottom: 1px solid #aaa;
+    margin-top: 10px;
+
+}
+
+.tituloPedidoModal{
+
+    margin-top: 20px;
+
+}
+
+.valorTotalPedidoModal{
+
+    text-align: right;
+    margin-top: 20px;
+    font-size: 18px;
+
+}
