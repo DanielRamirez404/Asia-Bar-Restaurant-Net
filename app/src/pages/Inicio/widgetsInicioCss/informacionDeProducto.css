@@ -1,0 +1,35 @@
+
+.mainInformacionDelProductoModal{
+
+    margin: auto;
+    width: 90%;
+    
+    text-align: center;
+}
+
+.imagenProducto{
+
+    width: 400px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.labelInformacionProducto{
+
+    text-align: left;
+    padding: 5px;
+    border-bottom: 1px solid #aaa;
+    font-size: 17px;
+
+}
+
+
+@media (max-width: 768px){
+
+    .imagenProducto{
+        width: 90%;
+    }
+
+}

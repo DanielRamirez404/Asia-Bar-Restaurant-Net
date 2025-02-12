@@ -69,9 +69,20 @@
 
 .opcionMesa{
     padding:10px;
-    font-size: 15px;
+    font-size: 16px;
+    background: transparent;
+    border-radius: 10px;
+    border: 1px solid #aaa;
+    width: 100%;
+
+    cursor: pointer;
 }
 
+.opcionMesa:hover{
+
+    background: #eee;
+
+}
 
 
 @media (max-width: 768px){

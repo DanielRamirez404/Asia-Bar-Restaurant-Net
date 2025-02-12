@@ -4,12 +4,43 @@ import "./widgetsInicioCss/Mesa.css"
 import "./widgetsInicioCss/RecienAgregado.css"
 import "./widgetsInicioCss/MasVendidos.css"
 import "./widgetsInicioCss/PedidoTicket.css"
+import {InformacionDelProductoModal, InformacionDelPedidoModal} from "./modalesInicio.js"
 
 import { Info } from "lucide-react";
 
 
 
-export function Mesa({nombre}){
+// Estas constantes solo estan para las pruebas
+const DatosPrueba = {
+
+   "nombre" : "Producto nombre",
+   "costo"  : 2,
+   "precioDeVenta" : 10,
+   "descripcion" : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi esse ab laboriosam ducimus ipsam quidem sapiente saepe, tempora nam quo!",
+   "totalDeVentas" : 30,
+   "imagen": "https://cdn.sanity.io/images/jsdrzfkj/recepedia-global-production/f4e2c09fadb6448eeac86dc6b680a46aefb6d54c-1200x800.jpg?w=1200&h=800&auto=format"
+
+}
+
+const DatosPedidoPrueba = {
+
+   "nombreComprador" : "Nombre Comprador",
+   "idComprador" : "V-11222333",
+   "tipoDeCompra": "Comer Aqui",
+
+   "nombreRepartidor":"Nombre Repartidor",
+   "direccionEntrega": "calle falsa 123",
+
+   "nombreMesero": "Nombre Mesero",
+   "mesa": "mesa 9",
+
+   "valorTotalDePedido": 40
+
+
+
+}
+
+export function Mesa({nombre, onOpen}){
 
    const [estado,setEstado] = useState("desocupada");
    const [temporizador,setTemporizador] = useState(0);
@@ -50,8 +81,6 @@ export function Mesa({nombre}){
    };
    
    
-
-
    return (
 
    <div className={`widgetMesa ${estado}`} onClick={clickMesa}>
@@ -76,6 +105,7 @@ export function Mesa({nombre}){
                <>
                   <button className="opcionMesa" onClick={()=> cambiarEstado("ocupada")}>Orden completa</button>
                   <button className="opcionMesa" onClick={()=> cambiarEstado("desocupada")}>Desocupar</button>
+                  <button className="opcionMesa" onClick={()=> onOpen(<InformacionDelPedidoModal datosPedido={DatosPedidoPrueba}/>)}><Info size={20} /></button>
                </>
             )}
 
@@ -91,7 +121,19 @@ export function Mesa({nombre}){
 
 }
 
-export function RecienAgregado({nombre, precio, categoria}){
+
+
+
+
+
+
+
+// Esta funcion recibe "onOpen" como argumento, esta es una funcion que se encarga de abrir el modal cuando se le da click al boton de informacion. La idea seria que al darle al boton se ejecute otra funcion que busque los datos del producto en la base de datos y luego ejecute la funcion onOpen abriendo el modal conteniendo el componente "InformacionDelProductoModal" y a su ves este tendria en "datosPorducto" un diccionario que tiene los datos necesarios para rellenar el modal. 
+export function RecienAgregado({nombre, precio, categoria, onOpen}){
+
+   
+
+ 
 
    return(
 
@@ -102,7 +144,7 @@ export function RecienAgregado({nombre, precio, categoria}){
             <span className="precioRecienAgregado">precio: <span className="precioRecienAgregadoTexto">{precio}$</span></span>
             <span className="categoriaRecienAgregado">{categoria}</span>
          </div>
-         <button className="btnInformacionRecienAgregado"><Info size={30} /></button>
+         <button className="btnInformacionRecienAgregado" onClick = {() => onOpen(<InformacionDelProductoModal datosProducto={DatosPrueba} />)}><Info size={30} /></button> 
 
       </div>
 
@@ -111,7 +153,16 @@ export function RecienAgregado({nombre, precio, categoria}){
 }
 
 
-export function MasVendidos({top, nombre, srcImg, precio, totalVentas}){
+
+
+
+
+
+
+
+
+
+export function MasVendidos({top, nombre, srcImg, precio, totalVentas, onOpen}){
 
       if (!srcImg){
          srcImg = "https://static.vecteezy.com/system/resources/thumbnails/018/128/189/small/schezwan-noodles-or-szechuan-vegetable-png.png" 
@@ -125,7 +176,7 @@ export function MasVendidos({top, nombre, srcImg, precio, totalVentas}){
          <span className="nombreMasVendido">{nombre}</span>
          <span className="precioMasVendido">{precio}$</span>
          <span className="totalDeVentas">total de ventas: {totalVentas}</span>
-         <button className="btnInformacionMasVendidos"><Info size={20} /></button>
+         <button className="btnInformacionMasVendidos" onClick={() => onOpen(<InformacionDelProductoModal datosProducto={DatosPrueba} />)}><Info size={20} /></button>
          
 
 
@@ -137,7 +188,18 @@ export function MasVendidos({top, nombre, srcImg, precio, totalVentas}){
 
 }
 
-export function PedidoTicket({numeroPedido, nombreCompletoComprador, totalProductos, tipoDePedido, totalTicket}){
+
+
+
+
+
+
+
+
+
+
+
+export function PedidoTicket({numeroPedido, nombreCompletoComprador, totalProductos, tipoDePedido, totalTicket, onOpen}){
 
    return (
 
@@ -153,7 +215,7 @@ export function PedidoTicket({numeroPedido, nombreCompletoComprador, totalProduc
          <span className="totalTicket">{totalTicket}$</span>
 
          <div className="contenedorBtnPedidoTicket">
-            <button className="botonInformacionTicket"><Info size={20} /></button>
+            <button className="botonInformacionTicket" onClick={() => onOpen(<InformacionDelPedidoModal datosPedido={DatosPedidoPrueba}/>)}><Info size={20} /></button>
             
          </div>
       </div>
