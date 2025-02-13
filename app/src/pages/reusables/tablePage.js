@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
+import { serverAddress } from "../../variables/variables";
+import { getTablaData } from "../../on-fetch-endpoints/table-fetching";
 
 function ActionButtons() {
 	return (
@@ -78,13 +80,15 @@ function Table({ fields, data }) {
     );
 }
 
-function TablePage({ title, fields, data }) {
+function TablePage({ title, fields, data, getAllEndpointPath }) {
 	let columnNames = fields;
 	
 	if (!columnNames.includes("Acciones"))
 		columnNames.push("Acciones");
 
 	const [tableData, setTableData] = useState(data);
+
+	useEffect(() => { getTablaData(serverAddress.concat(getAllEndpointPath), setTableData); }, []);
 
 	return <DashboardPage content={
 		<>
