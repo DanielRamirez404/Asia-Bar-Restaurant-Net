@@ -6,6 +6,8 @@
 
     background: #ddd;
     border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .informacionDelivery, .informacionComerAqui{
