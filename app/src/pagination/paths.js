@@ -4,15 +4,16 @@ export const PagePaths = {
     'Login': '/login',
     'InformacionVenta': '/informacion_venta',
     'Pedido': '/Pedido',
-    'ConfirmacionVenta':'/confirmacion_venta',
+    'ConfirmacionVenta': '/confirmacion_venta',
     'SignUp': '/solicitud-de-cuenta',
     'PasswordChange': '/cambio-de-contraseña',
     'AddUser': '/agregar-usuario',
     'EditUser': '/modificar-usuario',
     'AddClient': '/agregar-cliente',
     'EditClient': '/modificar-cliente', 
-    'TablaVentas' : '/tabla-ventas',
+    'TablaVentas': '/tabla-ventas',
     'FormularioProducto': 'formulario-producto',
+    'FormularioVenta': '/formulario-venta',  // Nueva ruta para el formulario de venta
     
     'UserControl': '/control-de-usuarios',
     'ClientControl': '/control-de-clientes',
