@@ -1,6 +1,7 @@
 import './informacionDeVenta.css'
 import Dashboard from "../reusables/dashboard-page";
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -8,6 +9,8 @@ import React, { useState } from 'react';
 function ContenidoInformacionVenta(){
     
     const [Seleccion, setSeleccion] = useState("");
+
+    const navegar = useNavigate();
 
     return(
 
@@ -93,12 +96,14 @@ function ContenidoInformacionVenta(){
 
                 </div>
 
+                
+
             
                 <div className="frameBotones">
 
                 
                     <button id="btnCancelar" className="btnPedido">Cancelar</button>
-                    <button id="btnContinuar" className="btnPedido">Continuar</button>
+                    <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/Pedido")}>Continuar</button>
 
 
                 </div>

@@ -4,12 +4,14 @@ import './confirmacionVenta.css'
 
 import { TarjetaProductoInformacionVenta, TarjetaNota, TarjetaDelivery } from './widgetsConfirmacionVenta';
 
+import { useNavigate } from 'react-router-dom';
 
 
 function ContenidoConfirmacionVenta (){
 
     const [tipoVenta, setTipoVenta] = useState('Delivery');
     
+    const navegar = useNavigate()
         
 
     return (
@@ -86,8 +88,8 @@ function ContenidoConfirmacionVenta (){
         <div className="frameBotones">
 
                         
-            <button id="btnCancelar" className="btnPedido">Cancelar</button>
-            <button id="btnContinuar" className="btnPedido">Completar venta</button>
+            <button id="btnCancelar" className="btnPedido" onClick={() => navegar("/Pedido")}>Regresar</button>
+            <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/Inicio")}>Completar venta</button>
 
 
         </div>
