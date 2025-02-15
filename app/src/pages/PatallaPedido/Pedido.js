@@ -7,7 +7,11 @@ import { Pedido as WidgethPedido } from "./Widgets" ;
 import { WidgetNota } from "./Widgets";
 import Dashboard from "../reusables/dashboard-page";
 
+import { useNavigate } from "react-router-dom";
+
 function ContenidoPedido() {
+
+    const navegar = useNavigate()
 
     const [isVisible, setIsVisible] = useState(false);
 
@@ -134,8 +138,8 @@ function ContenidoPedido() {
             <div className="frameBotones">
 
                
-                <button id="btnCancelar" className="btnPedido">Cancelar</button>
-                <button id="btnContinuar" className="btnPedido">Continuar</button>
+                <button id="btnCancelar" className="btnPedido" onClick={() => navegar("/informacion_venta")}>Regresar</button>
+                <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/Confirmacion_Venta")}>Continuar</button>
 
 
             </div>
