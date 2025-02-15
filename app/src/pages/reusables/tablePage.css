@@ -51,6 +51,21 @@
   overflow-x: auto;
 }
 
+.new-button {
+  padding: 0.5rem 0.9rem;
+  margin-left: -10rem;
+  background: #ce2525;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: background 0.3s ease;
+}
+
+.new-button:hover {
+  background: #b30000;
+}
 .control-table {
   width: 100%;
   border-collapse: collapse;
