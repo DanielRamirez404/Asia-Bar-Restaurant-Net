@@ -4,6 +4,7 @@ USE AsiaBarRestaurant;
 
 CREATE TABLE Users (
     Username VARCHAR(25) PRIMARY KEY NOT NULL,
+    Type VARCHAR(25) NOT NULL,
     Password VARCHAR(100) NOT NULL
 );
 
