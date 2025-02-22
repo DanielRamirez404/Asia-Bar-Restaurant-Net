@@ -1,7 +1,7 @@
 import app from './app.js';
 import getDatabasePool from './db.js';
 
-const port = 9090;
+const port = 3000;
 
 try {
     const db = getDatabasePool();
