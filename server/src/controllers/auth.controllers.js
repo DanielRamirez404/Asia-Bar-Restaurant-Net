@@ -1,5 +1,6 @@
 import mysql2 from 'mysql2/promise';
 import handleQueryExecution from './handleQueryExecution.js';
+import getAuthToken from '../libs/jwt.js';
 
 export const signup = async (req, res) => {
     const { username, type, password } = req.body;
@@ -10,7 +11,17 @@ export const signup = async (req, res) => {
             [username, type, password]
         )
 
-        res.status(200).send('Signed up successfully');
+        const payload = { username: username, type: type };
+
+        await getAuthToken(payload)
+            .then((token) => {
+                res.cookie('token', token);
+                res.status(200).json(payload);
+            })
+            .catch((e) => {
+                res.status(500).send('Session token creation went wrong...');
+                console.log(`Exception handling token creation: ${e}`);
+            });
     });
 };
 
