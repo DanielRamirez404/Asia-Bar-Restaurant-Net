@@ -103,9 +103,9 @@ function TablePage({ title, fields, data }) {
         <>
             <TablePageHeader 
                 title={ title } 
-                actionButton={ actionButton }
-                newButtonText={ newButtonText }
-                onNewButtonClick={ onNewButtonClick }
+                actionButton={ () => {} }
+                newButtonText={ "" }
+                onNewButtonClick={ () => {} }
             />
             <div className="table-container">
                 <Table fields={ columnNames } data={ tableData } />

@@ -107,7 +107,7 @@ function ContenidoInformacionVenta(){
 
 
                 </div>
-                </form>
+            </form>
 
         </div>
 
