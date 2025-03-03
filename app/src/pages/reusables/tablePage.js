@@ -41,7 +41,7 @@ function TablePageSearch() {
     );
 }
 
-function TablePageHeader({ title, actionButton, newButtonText, onNewButtonClick }) {
+function TablePageHeader({ title, actionButton = () => {}, newButtonText = "", onNewButtonClick = () => {} }) {
     return (
         <div className="table-page-header">
             <h1>{ title }</h1>
@@ -102,10 +102,7 @@ function TablePage({ title, fields, data }) {
     return <DashboardPage content={
         <>
             <TablePageHeader 
-                title={ title } 
-                actionButton={ () => {} }
-                newButtonText={ "" }
-                onNewButtonClick={ () => {} }
+                title={ title }
             />
             <div className="table-container">
                 <Table fields={ columnNames } data={ tableData } />
