@@ -46,11 +46,23 @@
     padding: 10px;
 
     font-size: 16px;
+
+    transition: border-color .6s ease;
 }
 
 .input-box input::placeholder {
     color: var(--gray-hue);
     font-weight: bold;
+    
+}
+
+.input-box input:focus{
+
+ 
+    border: var(--bright-red-hue) 2px solid;
+  
+    outline: none;
+
 }
 
 .input-box label {

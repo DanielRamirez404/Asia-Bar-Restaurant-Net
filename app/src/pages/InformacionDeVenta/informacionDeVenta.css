@@ -2,8 +2,8 @@
 
 .mainInformacionDeVenta{
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -17,7 +17,7 @@
 
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 540px;
     padding: 25px;
     margin: auto;
 
@@ -25,7 +25,6 @@
 
     background: #fff;
     border: 2px #ddd solid;
-    margin-bottom: 20px;
     
     
 
@@ -83,7 +82,7 @@
 
 
     background: transparent;
-    margin-bottom: 20px;
+    margin: 10px;
 
 }
 
@@ -93,6 +92,20 @@
     display: block;
 
 }
+
+#formularioInformacionDeVenta{
+
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+}
+
+.frameBotones{
+
+    margin-bottom: 20px;
+
+}
+
 
 @media (max-width : 768px){
 

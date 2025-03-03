@@ -2,7 +2,15 @@
 .tituloConfirmacionVenta{
 
     text-align: end;
-    padding: 20px;
+    margin: 10px;
+    width: 97%;
+}
+
+.mainConfirmacionVenta{
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 
 }
 .contenedorResumenVenta{
