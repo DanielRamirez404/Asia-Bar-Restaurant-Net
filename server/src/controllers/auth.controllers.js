@@ -1,6 +1,6 @@
 import mysql2 from 'mysql2/promise';
 import handleQueryExecution from '../libs/handleQueryExecution.js';
-import { handleTokenCreation } from '../libs/jwt.js';
+import { handleTokenCreation, handleEmptyTokenCreation } from '../libs/jwt.js';
 
 export const signup = async (req, res) => {
     const { username, type, password } = req.body;
@@ -31,3 +31,6 @@ export const login = (req, res) => {
     });
 }
 
+export const logout = (req, res) => {
+    handleEmptyTokenCreation(res); 
+}

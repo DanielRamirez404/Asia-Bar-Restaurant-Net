@@ -33,3 +33,9 @@ export async function handleTokenCreation(username, type, res) {
         console.log(`Exception handling token creation: ${e}`);
     });
 }
+
+export async function handleEmptyTokenCreation(res) {
+    res.cookie('token', '', { expires: new Date(0) });
+    res.status(200).send("Logged out");
+}
+
