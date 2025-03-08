@@ -20,4 +20,16 @@ function getAuthToken(payload) {
     });
 }
 
-export default getAuthToken;
+export async function handleTokenCreation(username, type, res) {
+    const payload = { username: username, type: type };
+
+    await getAuthToken(payload)
+    .then((token) => {
+        res.cookie('token', token);
+        res.status(200).json(payload);
+    })
+    .catch((e) => {
+        res.status(500).send('Session token creation went wrong...');
+        console.log(`Exception handling token creation: ${e}`);
+    });
+}
