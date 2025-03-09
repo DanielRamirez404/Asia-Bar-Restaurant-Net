@@ -34,3 +34,7 @@ export const login = (req, res) => {
 export const logout = (req, res) => {
     handleEmptyTokenCreation(res); 
 }
+
+export const test = (req, res) => {
+    res.send("test");    
+}
