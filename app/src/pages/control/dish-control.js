@@ -3,7 +3,7 @@ import TablePage from "../reusables/tablePage";
 import FormularioProducto from "../Formularios/formulario_producto";
 import FormularioMenu from "../Formularios/Formulario_menu";
 import FormularioContorno from "../Formularios/Formulario_contorno";
-
+import "../Formularios/formulario.css"; // Importación del CSS
 
 const mainDishFields = ["Nombre del Plato", "Categoría", "Disponibilidad", "Precio"];
 const mainDishData = [
@@ -33,7 +33,6 @@ export const MainDishControl = () => {
         </>
     );
 };
-
 
 const sideDishFields = ["Nombre", "Categoría", "Disponibilidad", "Precio"];
 const sideDishData = [

@@ -118,24 +118,3 @@
   transform: translateY(1px);
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .formulario-container {
-    width: 90%; /* Ajusta el ancho para dispositivos móviles */
-    padding: 20px;
-  }
-
-  .formulario-container h1 {
-    margin: -20px -20px 20px -20px;
-    width: calc(100% + 40px);
-  }
-
-  .botones {
-    flex-direction: column;
-  }
-
-  .btn-cancelar,
-  .btn-continuar {
-    width: 100%;
-  }
-}

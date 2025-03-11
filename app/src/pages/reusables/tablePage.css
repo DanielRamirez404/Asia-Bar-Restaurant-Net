@@ -110,34 +110,40 @@
   flex-direction: row;
 }
 
-@media (max-width: 768px) {
+
+
+@media (max-width: 480px) {
   .table-page-header {
     flex-direction: column;
-    align-items: flex-start;     
+    align-items: flex-end; /* Alinea el contenido a la derecha */
     padding-left: 1rem;
   }
 
   .table-page-header h1 {
-    margin-bottom: 3rem;
-    margin-right: 1rem;
-    padding-left: 4rem;
+    margin-bottom: 1rem;
+    margin-right: 5rem; /* Ajusta el margen derecho para que coincida con el botón */
+    padding-left: 0;
+    font-size: 1.5rem; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+    text-align: right; /* Alinea el título a la derecha */
   }
 
   .search-container {
-    width: 40%;
-    margin-left: 0px;
-    padding-left: 0rem;
+    width: 90%; /* Ajusta el ancho de la barra de búsqueda */
+    padding: 0.5rem;
+    margin-bottom: 1rem; /* Añade un margen inferior para separar la barra de búsqueda del contenido */
+    margin-right: -80px; /* Añade un margen derecho para evitar que el botón de búsqueda se superponga con el contenido */
+    
   }
 
   .table-container {
     width: 100%;
-    padding: 0.5rem;
+    padding: 1rem;
     overflow-x: auto;
   }
 
   .control-table {
-    width: auto;
-    min-width: 800px;
+    width: 100%;
+    min-width: 100%;
   }
 
   .control-table th,
