@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { serverAddress } from "../../variables/variables";
-import { getTablaData } from "../../on-fetch-endpoints/table-fetching";
 
 function ActionButtons() {
     return (
@@ -41,7 +39,7 @@ function TablePageSearch() {
     );
 }
 
-function TablePageHeader({ title, actionButton = () => {}, newButtonText = "", onNewButtonClick = () => {} }) {
+function TablePageHeader({ title, newButtonText = "", onNewButtonClick = () => {} }) {
     return (
         <div className="table-page-header">
             <h1>{ title }</h1>
@@ -55,7 +53,6 @@ function TablePageHeader({ title, actionButton = () => {}, newButtonText = "", o
                     </button>
                 )}
                 <TablePageSearch />
-                {actionButton && <div style={{ marginLeft: "1rem" }}>{actionButton}</div>}
             </div>
         </div>
     );
@@ -91,18 +88,20 @@ function Table({ fields, data }) {
     );
 }
 
-function TablePage({ title, fields, data }) {
-	let columnNames = fields;
-	
-	if (!columnNames.includes("Acciones"))
-		columnNames.push("Acciones");
+function TablePage({ title, fields, data, newButtonText, onNewButtonClick }) {
+    let columnNames = fields;
+    
+    if (!columnNames.includes("Acciones"))
+        columnNames.push("Acciones");
 
-	const [tableData, setTableData] = useState(data);
-
+    const [tableData, setTableData] = useState(data);
+    
     return <DashboardPage content={
         <>
             <TablePageHeader 
                 title={ title }
+                newButtonText={newButtonText}
+                onNewButtonClick={onNewButtonClick}
             />
             <div className="table-container">
                 <Table fields={ columnNames } data={ tableData } />
