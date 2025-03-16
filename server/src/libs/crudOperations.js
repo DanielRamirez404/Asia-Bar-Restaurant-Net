@@ -6,7 +6,7 @@ export async function sendAllRegistersFrom(res, tableName, isFoodTable = false) 
         let query = `SELECT * FROM ${tableName}`;
 
         if (isFoodTable)
-            query += `, Foods WHERE ${tableName}.FoodName = Foods.Name`
+            query += `, Foods WHERE ${tableName}.FoodName = Foods.Name`;
 
         const [results, fields] = await db.execute(query);
 
@@ -19,10 +19,12 @@ export async function sendFromId(req, res, tableName, idName, isFoodTable) {
         
         let query = (isFoodTable)
             ? `SELECT * FROM ${tableName}, Foods WHERE ${tableName}.FoodName = Foods.name AND Foods.Name = ?`
-            : `SELECT * FROM ${tableName} WHERE ${idName} = ?`
+            : `SELECT * FROM ${tableName} WHERE ${idName} = ?`;
 
         const [results, fields] = await db.execute(query, [req.params.id]);
 
-        res.status(200).json(results[0]);
+        (results.length < 1)
+            ? res.status(404).send("Not found")
+            : res.status(200).json(results[0]);
     });
 }
