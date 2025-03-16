@@ -1,4 +1,3 @@
-import mysql2 from 'mysql2/promise';
 import handleQueryExecution from '../libs/handleQueryExecution.js';
 import { handleTokenCreation, handleEmptyTokenCreation } from '../libs/jwt.js';
 
@@ -33,8 +32,4 @@ export const login = (req, res) => {
 
 export const logout = (req, res) => {
     handleEmptyTokenCreation(res); 
-}
-
-export const test = (req, res) => {
-    res.send("test");    
 }
