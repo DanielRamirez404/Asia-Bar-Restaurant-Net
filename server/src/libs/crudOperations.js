@@ -1,38 +1,27 @@
 import handleQueryExecution from './handleQueryExecution.js';
 
-export async function sendAllRegistersFrom(res, tableName) { 
+export async function sendAllRegistersFrom(res, tableName, isFoodTable = false) {
     handleQueryExecution(res, async (db) => {
-        const [results, fields] = await db.execute(`SELECT * FROM ${tableName}`);
+
+        let query = `SELECT * FROM ${tableName}`;
+
+        if (isFoodTable)
+            query += `, Foods WHERE ${tableName}.FoodName = Foods.Name`
+
+        const [results, fields] = await db.execute(query);
 
         res.status(200).json(results);
     });
 }
 
-export async function sendAllFoodRegistersFrom(res, tableName) {
+export async function sendFromId(req, res, tableName, idName, isFoodTable) {
     handleQueryExecution(res, async (db) => {
-        const [results, fields] = await db.execute(`SELECT * FROM ${tableName}, Foods WHERE ${tableName}.FoodName = Foods.Name`);
+        
+        let query = (isFoodTable)
+            ? `SELECT * FROM ${tableName}, Foods WHERE ${tableName}.FoodName = Foods.name AND Foods.Name = ?`
+            : `SELECT * FROM ${tableName} WHERE ${idName} = ?`
 
-        res.status(200).json(results);
-    });
-}
-
-export async function sendFromId(req, res, tableName, idName) {
-    handleQueryExecution(res, async (db) => {
-        const [results, fields] = await db.execute(
-            `SELECT * FROM ${tableName} WHERE ${idName} = ?`, 
-            [req.params.id]
-        );
-
-        res.status(200).json(results[0]);
-    });
-}
-
-export async function sendFoodFromId(req, res, tableName) {
-    handleQueryExecution(res, async (db) => {
-        const [results, fields] = await db.execute(
-            `SELECT * FROM ${tableName}, Foods WHERE ${tableName}.FoodName = Foods.name AND Foods.Name = ?`,
-            [req.params.id]
-        );
+        const [results, fields] = await db.execute(query, [req.params.id]);
 
         res.status(200).json(results[0]);
     });

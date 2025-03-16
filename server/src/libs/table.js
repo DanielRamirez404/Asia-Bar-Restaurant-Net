@@ -11,12 +11,12 @@ class Table {
         const numberOfCapitalLetters = capitalLetters ? capitalLetters.length : 0;
 
         if (numberOfCapitalLetters < 2)
-            return this.name;
+            return this.name.toLowerCase();
 
         let urlName = this.name.toLowerCase().charAt(0);
 
         for (let i = 1; i < this.name.length; i++) {
-            const character = name.charAt(i); 
+            const character = this.name.charAt(i); 
             urlName += (character == character.toLowerCase()) ? character : "-" + character.toLowerCase();
         }
 
