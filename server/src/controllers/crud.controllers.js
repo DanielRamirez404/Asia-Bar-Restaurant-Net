@@ -1,10 +1,19 @@
 import handleQueryExecution from '../libs/handleQueryExecution.js';
-import { sendAllRegistersFrom, sendAllFoodRegistersFrom } from '../libs/crudOperations.js';
+import { sendAllRegistersFrom, sendAllFoodRegistersFrom, sendFromId, sendFoodFromId } from '../libs/crudOperations.js';
 
 const independentTables = [
-    "Users",
-    "Clients",
-    "Sales"
+    {
+        "name": "Users",
+        "idName": "Username"
+    },
+    {
+        "name": "Clients",
+        "idName": "IdDocument"
+    },
+    {
+        "name": "Sales",
+        "idName": "ID"
+    }
 ];
 
 const foodTables = [
@@ -13,16 +22,25 @@ const foodTables = [
     "Product"
 ];
 
-export const getEndpoints = {};
+export const getAllEndpointFunctions = {};
+export const getEndpointFunctions = {};
 
 independentTables.forEach(table => {
-    getEndpoints[table] = function (req, res) {
-        sendAllRegistersFrom(res, table); 
+    getAllEndpointFunctions[table["name"]] = function(req, res) {
+        sendAllRegistersFrom(res, table["name"]); 
     };
+
+    getEndpointFunctions[table["name"]] = function(req, res) {
+        sendFromId(req, res, table["name"], table["idName"]); 
+    }
 });
 
 foodTables.forEach(table => {
-    getEndpoints[table] = function (req, res) {
+    getAllEndpointFunctions[table] = function(req, res) {
         sendAllFoodRegistersFrom(res, table); 
+    };
+    
+    getEndpointFunctions[table] = function(req, res) {
+        sendFoodFromId(req, res, table);
     };
 });
