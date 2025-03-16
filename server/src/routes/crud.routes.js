@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { test } from '../controllers/crud.controllers.js';
+import { getAllUsers } from '../controllers/crud.controllers.js';
 import { validateToken } from '../middlewares/validateToken.js';
 
 const crudRouter = Router();
 
 crudRouter.use(validateToken);
 
-crudRouter.get('/test', test);
+crudRouter.get('/get-users', getAllUsers);
 
 export default crudRouter;
