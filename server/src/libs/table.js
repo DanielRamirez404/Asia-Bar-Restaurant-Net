@@ -1,8 +1,11 @@
+import { stringArrayToCommaString } from "./utilities.js";
+
 class Table {
-    constructor(name, idName, isFood = false, isAdminOnly = false) {
+    constructor(name, idName, fields, isFood = false, isAdminOnly = false) {
         this.name = name;
         this.idName = idName;
         this.isFood = isFood;
+        this.fields = fields.slice().sort();
         this.isAdminOnly = isAdminOnly;
     }
 
@@ -21,6 +24,10 @@ class Table {
         }
 
         return urlName;
+    }
+
+    getFieldsString() {
+        return stringArrayToCommaString(this.fields);
     }
 }
 
