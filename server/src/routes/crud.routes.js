@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllEndpointFunctions, getEndpointFunctions, postEndpointFunctions, deleteEndpointFucntions } from '../controllers/crud.controllers.js';
+import { getAllEndpointFunctions, getEndpointFunctions, postEndpointFunctions, deleteEndpointFunctions, putEndpointFunctions } from '../controllers/crud.controllers.js';
 import { validateToken } from '../middlewares/validateToken.js';
 
 const crudRouter = Router();
@@ -18,8 +18,12 @@ Object.entries(postEndpointFunctions).forEach( ( [table, endpointFunction ] ) =>
     crudRouter.post(`/${ table }`, endpointFunction);
 });
 
-Object.entries(deleteEndpointFucntions).forEach( ( [table, endpointFunction ] ) => {
+Object.entries(deleteEndpointFunctions).forEach( ( [table, endpointFunction ] ) => {
     crudRouter.delete(`/${ table }/:id`, endpointFunction);
+});
+
+Object.entries(putEndpointFunctions).forEach( ( [table, endpointFunction ] ) => {
+    crudRouter.put(`/${ table }/:id`, endpointFunction);
 });
 
 export default crudRouter;

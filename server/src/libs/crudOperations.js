@@ -56,3 +56,27 @@ export async function deleteById(req, res, tableName, idName, isFoodTable) {
             : res.status(200).send("Deleted Successfully");
     });
 }
+
+export async function updateById(req, res, table) {
+    handleQueryExecution(res, async (db) => {
+        const body = req.body;
+        const orderedBody = getOrderedObject(body);
+        
+        const fields = table.fields;
+
+        let query = `UPDATE ${table.name} SET ${fields[0]} = ?`;
+
+        for (let i = 1; i < fields.length; i++) {
+            query += `, ${fields[i]} = ?`;
+        }
+
+        query += ` WHERE ${table.idName} = ?`;
+
+        let data = Object.values(orderedBody);
+        data.push(req.params.id);
+
+        const [results, queryFields] = await db.execute(query, data);
+
+        res.status(200).send("Updated Successfully!");
+    });
+}
