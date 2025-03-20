@@ -43,3 +43,16 @@ export async function createRegister(req, res, table) {
         res.status(200).send("Created Successfully!");
     });
 }
+
+export async function deleteById(req, res, tableName, idName, isFoodTable) {
+    handleQueryExecution(res, async (db) => {
+        
+        let query = `DELETE FROM ${tableName} WHERE ${idName} = ?`;
+
+        const [results, fields] = await db.execute(query, [req.params.id]);
+
+        (results.affectedRows === 0)
+            ? res.status(404).send("No entry with such id")
+            : res.status(200).send("Deleted Successfully");
+    });
+}

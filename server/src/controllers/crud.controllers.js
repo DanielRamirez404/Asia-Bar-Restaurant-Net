@@ -1,6 +1,6 @@
 import handleQueryExecution from '../libs/handleQueryExecution.js';
 import Table from '../libs/table.js'; 
-import { sendAllRegistersFrom, sendFromId, createRegister } from '../libs/crudOperations.js';
+import { sendAllRegistersFrom, sendFromId, createRegister, deleteById } from '../libs/crudOperations.js';
 
 const tables = [
     new Table("Users", "Username", ["Username", "Type", "Password"]),
@@ -14,10 +14,15 @@ const tables = [
 export const getAllEndpointFunctions = {};
 export const getEndpointFunctions = {};
 export const postEndpointFunctions = {};
+export const deleteEndpointFucntions = {};
 
 tables.forEach(table => {
     const url = table.getUrlName();
 
+    postEndpointFunctions[url] = function(req, res) {
+        createRegister(req, res, table); 
+    };
+    
     getAllEndpointFunctions[url] = function(req, res) {
         sendAllRegistersFrom(res, table.name, table.isFood); 
     };
@@ -26,7 +31,8 @@ tables.forEach(table => {
         sendFromId(req, res, table.name, table.idName, table.isFood); 
     }
 
-    postEndpointFunctions[url] = function(req, res) {
-        createRegister(req, res, table); 
-    };
+
+    deleteEndpointFucntions[url] = function(req, res) {
+        deleteById(req, res, table.name, table.idName, table.isFood); 
+    }
 });
