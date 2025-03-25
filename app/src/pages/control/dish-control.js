@@ -3,6 +3,7 @@ import TablePage from "../reusables/tablePage";
 import FormularioProducto from "../Formularios/formulario_producto";
 import FormularioMenu from "../Formularios/Formulario_menu";
 import FormularioContorno from "../Formularios/Formulario_contorno";
+import FormularioDelivery from "../Formularios/FormularioDelivery"; 
 import "../Formularios/formulario.css"; // Importación del CSS
 
 const mainDishFields = ["Nombre del Plato", "Categoría", "Disponibilidad", "Precio"];
@@ -94,3 +95,33 @@ export const ProductControl = () => {
         </>
     );
 };
+
+const deliveryFields = ["Nombre del Repartidor", "Zona", "Disponibilidad", "Teléfono"];
+const deliveryData = [
+    ["Juan Pérez", "Zona 1", "Disponible", "123-456-7890"],
+    ["María López", "Zona 2", "No Disponible", "098-765-4321"],
+    ["Carlos García", "Zona 3", "Disponible", "456-789-0123"],
+    ["Ana Martínez", "Zona 4", "Disponible", "321-654-0987"]
+];
+
+export const Deliverywork = () => {
+    const [isFormOpen, setIsFormOpen] = useState(false);
+
+    const toggleForm = () => {
+        setIsFormOpen(!isFormOpen);
+    };
+
+    return (
+        <>
+            {isFormOpen && <FormularioDelivery onClose={toggleForm} />}
+            <TablePage 
+                title="Control de Repartidores" 
+                fields={deliveryFields} 
+                data={deliveryData}
+                newButtonText="Nuevo Repartidor"
+                onNewButtonClick={toggleForm}
+            />
+        </>
+    );
+};
+
