@@ -5,6 +5,7 @@ import { GetPageFromPath } from '../../pagination/page';
 import './constants.css';
 import './dashboard-page.css';
 import { Link } from 'react-router-dom';
+import '../../Visual-Resources/Logo.png';  
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -58,11 +59,21 @@ function SideBarMenu({ expandedIndex, setExpandedIndex }) {
     return (
         <nav className="menu">
             <ul className="menu-items">
+                {/* Botón "Inicio" */}
+                <li className="menu-item">
+                    <Link to="/inicio" style={{ textDecoration: 'none' }}>
+                            <button className="menu-button">
+                                    <span>Inicio</span>
+                            </button>
+                    </Link>
+                </li>
+
+                {/* Resto de los elementos del menú */}
                 {DashboardMenuItems.map((menuItem, index) => (
                     <MenuItem
-                        index={ index }
-                        menuItem={ menuItem }
-                        isExpanded={ expandedIndex === index }
+                        index={index}
+                        menuItem={menuItem}
+                        isExpanded={expandedIndex === index}
                         onClick={() => setExpandedIndex((expandedIndex === index) ? null : index)}
                     />
                 ))}
@@ -79,7 +90,7 @@ function Sidebar({ isSidebarOpen, expandedIndex, setExpandedIndex, onSidebarClic
         <aside className={className} onClick={ onSidebarClick }>
             <div className="logo-container">
                 <div className="logo-placeholder">
-                    Espacio para logo
+                <img src={require('../../Visual-Resources/Logo.png')} alt="Logo" className="logo-image" />
                 </div>
             </div>
 
