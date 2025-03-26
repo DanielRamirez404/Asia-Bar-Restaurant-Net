@@ -15,7 +15,9 @@ import TablaVentas from "../pages/tabla-ventas";
 import FormularioProducto from "../pages/Formularios/formulario_producto";
 import UserControl from "../pages/control/user-control";
 import ClientControl from "../pages/control/client-control";
-import { MainDishControl, ProductControl, SideDishControl } from "../pages/control/dish-control";
+import { MainDishControl, ProductControl, SideDishControl,Deliverywork } from "../pages/control/dish-control";
+
+
 
 // Cargamos el formulario de venta de forma lazy después de todas las importaciones estáticas:
 const LazyFormularioVenta = React.lazy(() =>
@@ -32,6 +34,7 @@ class Page {
         this.roles = roles;
     }
 }
+
 
 export const PageList = [
     new Page(PagePaths['Home'], <Home />, "Menú default"),
@@ -59,6 +62,7 @@ export const PageList = [
     new Page(PagePaths['MainDishControl'], <MainDishControl />, "Tabla de Menú"),
     new Page(PagePaths['SideDishControl'], <SideDishControl />, "Tabla de Contornos"),
     new Page(PagePaths['ProductControl'], <ProductControl />, "Tabla de Productos"),
+    new Page(PagePaths['Deliverywork'], <Deliverywork />, "Control de Repartidores"),
 ];
 
 export function GetPageFromPath(path) {

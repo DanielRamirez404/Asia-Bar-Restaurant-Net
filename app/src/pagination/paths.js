@@ -20,6 +20,7 @@ export const PagePaths = {
     'ProductControl': '/control-de-productos',
     'SideDishControl': '/control-de-contornos',
     'MainDishControl': '/control-de-platos',
+    'Deliverywork': '/control-de-repartidores',
 };
 
 export const DashboardMenuItems = [
@@ -29,7 +30,7 @@ export const DashboardMenuItems = [
     },
     {
         title: "Control de Servicios",
-        subItems: [ PagePaths['MainDishControl'], PagePaths['SideDishControl'], PagePaths['ProductControl'] ]
+        subItems: [ PagePaths['MainDishControl'], PagePaths['SideDishControl'], PagePaths['ProductControl'], PagePaths['Deliverywork'] ]
     },
     {
         title: "Control de Clientes",
