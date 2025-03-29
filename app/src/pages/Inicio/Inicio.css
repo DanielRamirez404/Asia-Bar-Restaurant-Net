@@ -183,6 +183,7 @@
 
     }
 
+    
   
 
     .frameResumenes{
@@ -196,6 +197,7 @@
 
         width: 100%;
         margin-top: 40px;
+        height: 320px;
         
 
     }
@@ -203,6 +205,7 @@
     .scrollframeMasVendidos{
         overflow-x: auto;
         gap: 30px;
+       
     }
 
     #productosRecienAgregados{
@@ -219,5 +222,20 @@
     
 
 }
+
+@media (max-width : 1024px){
+
+ .frameResumenes{
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+ }
+
+
+
+}
+
 
 
