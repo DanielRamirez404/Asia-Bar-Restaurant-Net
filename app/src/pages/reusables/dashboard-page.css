@@ -47,6 +47,7 @@
     transition: transform 0.5s ease-in-out;
     z-index: 30;
     overflow-y: scroll;
+    overflow-x: hidden;
     padding-right: 8px;
     direction: rtl;
     box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.277);
@@ -112,32 +113,86 @@
 
 .menu-items {
     margin-inline-end: auto;
-    margin-left: 2; /* Indentar el submenú */
-    margin-top: 2.5rem;
-    text-align: auto; /* Orientar el texto hacia la izquierda */
+  
     display: flex; /* Mostrar los elementos del menú en fila */
     flex-direction: column; /* Orientar los elementos del menú en columna */
     gap: 0.10rem;   /* Espacio entre lineas*/
     list-style: none; /* Quitar los puntos de lista */
-    align-items: center; /* Centrar los botones del menú */
+   
+    
 }
 
+
+.menu-item a{
+    text-decoration: none;
+    
+    
+}
+.menu-item{
+
+    
+    width: 100%;
+    
+}
+
+
+
+
 .menu-button {
-    width: auto; /* Ajustar el ancho del botón */
-    display: flex; /* Mostrar los elementos del menú en fila */
-    align-items: center; /* Centrar los elementos del menú */
-    justify-content: flex-start; /* Alinear el contenido al principio */
+
+    
+    
+    min-width: 100%;
+
     border-radius: 0.5rem; 
     padding: 0.5rem 1rem; 
-    font-size: 0.875rem;
+    font-size: .9rem;
     font-weight: 500; 
-    color: var(--yellow-background-hue);    /* Color del texto del botón del menú */
+    color: var(--yellow-background-hue);    
+    text-decoration: none;
     background: transparent;    /* Fondo transparente del botón del menú */
     border: none; 
     cursor: pointer; 
-    transition: background-color 0.2s;  
-    text-align: left; /* Orientar el texto hacia la izquierda */
+    transition: background-color 0.2s;
+        
+    text-align: end;
+    
 }
+
+.inicio-btn {
+    background: transparent;
+    
+    
+
+    padding: 10px;
+    
+    font-size: 1rem;
+    width: 100%;   
+}
+
+.inicio-btn span{
+
+    font-size: 1.2rem;
+    text-align: center;
+
+    min-width: 100%;
+    
+
+    border-radius: 0.5rem; 
+    padding: 0.5rem 1rem; 
+
+    font-weight: 500; 
+    color: var(--yellow-background-hue);    
+    text-decoration: none;
+    background: transparent;  
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.2s;
+        
+    
+
+}
+
 
 .menu-button:hover {
     background-color: var(--dark-red-hue);      /* Color del botón del menú al pasar el mouse */
@@ -181,73 +236,6 @@
 
 /* Soporte para pantallas pequeñas */
 @media (max-width: 768px) { 
-    .sidebar { 
-        width: 12rem; /* Ancho del sidebar */ 
-    } 
-
-    .menu-title { 
-        font-size: 1rem;    
-        padding: 0.5rem 2rem; 
-    }
-
-    .menu-items {
-        margin-inline-end: auto;
-        margin-left: 1rem; /* Indentar el submenú */
-        margin-top: 1rem;
-        text-align: auto; /* Orientar el texto hacia la izquierda */
-        display: flex; /* Mostrar los elementos del menú en fila */
-        flex-direction: column; /* Orientar los elementos del menú en columna */
-        gap: 0.10rem;   /* Espacio entre lineas*/
-        list-style: none; /* Quitar los puntos de lista */
-        align-items: flex-start; /* Alinear los botones del menú a la izquierda */
-        text-decoration: none; /* Quitar la línea debajo del texto */
-        color: inherit; /* Asegurar que el color del texto sea el mismo que el botón */
-        
-    }
-
-    .menu-button {  
-        padding: 0.5rem 1rem; 
-        font-size: 0.875rem;
-        font-weight: 500; 
-        color: var(--yellow-background-hue);    /* Color del texto del botón del menú */
-        background: transparent;    /* Fondo transparente del botón del menú */
-        border: none; 
-        border-radius: 0.5rem;
-        cursor: pointer; 
-        transition: background-color 0.2s;  
-        text-align: left; /* Orientar el texto hacia la izquierda */
-        width: 100%; /* Ajustar el ancho del botón */
-        display: flex; /* Mostrar los elementos del menú en fila */
-        align-items: center; /* Centrar los elementos del menú */
-        justify-content: flex-start; /* Alinear el contenido al principio */
-    }
-    .menu-button:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-    .submenu {
-        margin-left: 1rem;
-        margin-top: 0.25rem; 
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-        list-style: none; /* Quitar los puntos de lista */
-        padding: 0;
-    }
-    
-    .submenu-button { 
-        padding: 0.25rem 1rem; 
-        font-size: 0.875rem;
-        color: var(--yellow-background-hue); /* Color del texto del botón del submenú */
-        background: transparent; /* Fondo transparente del botón del submenú */
-        border: none; 
-        cursor: pointer; 
-        transition: background-color 0.2s; 
-        text-align: left; /* Orientar el texto hacia la izquierda */
-        width: 100%; /* Ajustar el ancho del botón */
-        display: flex; /* Mostrar los elementos del menú en fila */
-        align-items: center; /* Centrar los elementos del menú */
-        justify-content: flex-start; /* Alinear el contenido al principio */
-    }
-    
+   
     
 }

@@ -42,3 +42,25 @@
     border: none;
     cursor: pointer;
 }
+
+
+@media (max-width:768px){
+
+    .mainRecienAgregado{
+
+        display: grid;
+        grid-template-columns: 1fr auto;
+    
+        height: 130px;
+        background: #fdfdfd;
+        width: 95%;
+        margin: auto;
+        margin-top: 10px;
+       
+        box-sizing: border-box;
+        border: 1px solid #888;
+    
+    }
+    
+    
+}

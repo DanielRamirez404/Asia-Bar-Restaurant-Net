@@ -60,8 +60,8 @@ function SideBarMenu({ expandedIndex, setExpandedIndex }) {
         <nav className="menu">
             <ul className="menu-items">
                 {/* Botón "Inicio" */}
-                <li className="menu-item">
-                    <Link to="/inicio" style={{ textDecoration: 'none' }}>
+                <li className="inicio-btn" >
+                    <Link to="/inicio" >
                             <button className="menu-button">
                                     <span>Inicio</span>
                             </button>
