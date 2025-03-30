@@ -10,7 +10,7 @@ const data = [
 
 const UserControl = () => {
     return(
-        <TablePage title={ "Control de Usuarios" } fields={ fields } data={ data } getAllEndpointPath={"/users/get"} />
+        <TablePage title={ "Control de Usuarios" } fields={ fields } tableName="users" />
     );
 }
 

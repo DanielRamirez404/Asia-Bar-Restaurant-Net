@@ -25,7 +25,12 @@ export async function handleTokenCreation(username, type, res) {
 
     await getAuthToken(payload)
     .then((token) => {
-        res.cookie('token', token);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'Lax',
+            maxAge: 24 * 60 * 60 * 1000
+        });
         res.status(200).json(payload);
     })
     .catch((e) => {
