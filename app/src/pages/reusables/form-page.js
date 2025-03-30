@@ -83,10 +83,10 @@ export function SelectablePhoneInput({title, prefixes}) {
     );
 }
 
-function FormPage({ title, content }) {
+function FormPage({ title, onSubmit = null, content }) {
     return (
         <div className='form-page'>
-            <form id={ title } class='frame-form'>
+            <form onSubmit={ onSubmit } id={ title } class='frame-form'>
   
                 <h1>{ title }</h1>
                 
