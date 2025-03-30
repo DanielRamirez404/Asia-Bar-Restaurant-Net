@@ -9,7 +9,8 @@ export function onLogin(e, username, password, navigate) {
     fetch(`${serverAddress}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
     })
         .then(res => alert("¡Bienvenido de vuelta!"))
         .then(res => navigate(PagePaths['Home']))
