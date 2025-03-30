@@ -10,10 +10,16 @@ function getParsedData(res) {
     return data;
 }
 
-export const getTablaData = async function(url, setter) {
-    const response = fetch(url);
+export const getTableData = async function(url, setter) {
+    const response = fetch(url, { credentials: 'include' });
     
     response
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok)
+                throw new Error(`HTTP error, Status: ${res.status}`);
+
+            return res.json()
+        })
         .then(res => setter(getParsedData(res)))
+        .catch(error => console.error("Error: ", error))
 };

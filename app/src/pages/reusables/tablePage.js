@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
+import { getTableData } from "../../on-fetch-endpoints/table-fetching.js"
+import { serverAddress } from '../../constants/constants.js'; 
 
 function ActionButtons() {
     return (
@@ -88,14 +90,15 @@ function Table({ fields, data }) {
     );
 }
 
-function TablePage({ title, fields, data, newButtonText, onNewButtonClick }) {
+function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, data = []}) {
     let columnNames = fields;
     
     if (!columnNames.includes("Acciones"))
         columnNames.push("Acciones");
 
     const [tableData, setTableData] = useState(data);
-    
+    getTableData(`${serverAddress}/${tableName}`, setTableData);
+
     return <DashboardPage content={
         <>
             <TablePageHeader 
