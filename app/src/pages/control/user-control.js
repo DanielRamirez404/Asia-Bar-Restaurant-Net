@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import TablePage from "../reusables/tablePage";
-import FormularioUsuario from "../Formularios/Formulario_usuario";
-import "../Formularios/formulario.css"; // Importación del CSS
 
-// Definición de los campos y datos para la tabla
-const userFields = ["Usuario", "Tipo", "Contraseña"];
-const userData = [
+const fields = [ "Usuario", "Tipo", "Contraseña" ];
+
+const data = [ 
     ["David", "Cocinero", "david123"],
     ["MartinezJ", "Cajero", "jesusD4Silva"],
     ["Rodrigo", "Admin", "1234567890"]
