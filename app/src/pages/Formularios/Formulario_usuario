@@ -1,0 +1,93 @@
+"use client";
+
+import { useState } from "react";
+import { User, Lock, Tag } from "lucide-react"; // Íconos para los campos
+import "./formulario.css";
+
+function FormularioUsuario({ onClose = () => {} }) {
+  const [formData, setFormData] = useState({
+    usuario: "",
+    tipo: "",
+    contraseña: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Datos del formulario:", formData);
+    // Lógica para enviar los datos
+    onClose();
+  };
+
+  // Cierra el formulario si se hace clic fuera del contenedor
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+  return (
+    <div className="modal-overlay" onClick={handleOverlayClick}>
+      <div className="formulario-container">
+        <form onSubmit={handleSubmit}>
+          <h1>Nuevo Usuario</h1>
+
+          <div className="campo-grupo">
+            <User className="campo-icono" />
+            <input
+              type="text"
+              name="usuario"
+              placeholder="Usuario"
+              value={formData.usuario}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="campo-grupo">
+            <Tag className="campo-icono" />
+            <input
+              type="text"
+              name="tipo"
+              placeholder="Tipo"
+              value={formData.tipo}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="campo-grupo">
+            <Lock className="campo-icono" />
+            <input
+              type="password"
+              name="contraseña"
+              placeholder="Contraseña"
+              value={formData.contraseña}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="botones">
+            <button
+              type="button"
+              className="btn-cancelar"
+              onClick={onClose}
+            >
+              Cancelar
+            </button>
+            <button type="submit" className="btn-continuar">
+              Continuar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default FormularioUsuario;
