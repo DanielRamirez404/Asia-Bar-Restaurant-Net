@@ -4,6 +4,9 @@ import { useState } from "react"
 import { Coffee, Tags, Hash, DollarSign } from 'lucide-react'
 import "./formulario.css"
 
+import FormPage from '../reusables/form-page';
+import { RequiredInputBox, RequiredSelector } from '../reusables/form-page';
+
 function FormularioMenu({ onClose = () => {} }) {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -35,54 +38,37 @@ function FormularioMenu({ onClose = () => {} }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="formulario-container">
-        <form onSubmit={handleSubmit}>
-          <h1>Nuevo Ítem de Menú</h1>
+    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Nuevo Plato"} content={(
+     
 
-          <div className="campo-grupo">
-            <Coffee className="campo-icono" />
-            <input
+      <>
+            <RequiredInputBox
               type="text"
-              name="nombre"
-              placeholder="Nombre"
-              value={formData.nombre}
-              onChange={handleChange}
+              title="Nombre"
+              
             />
-          </div>
 
-          <div className="campo-grupo">
-            <Tags className="campo-icono" />
-            <input
-              type="text"
-              name="categoria"
-              placeholder="Categoría"
-              value={formData.categoria}
-              onChange={handleChange}
+
+            <RequiredSelector
+              
+              mainTitle="categoria"
+              options={["opcion 1","opcion 2","opcion 3"]}
             />
-          </div>
-
-          <div className="campo-grupo">
-            <Hash className="campo-icono" />
-            <input
-              type="text"
-              name="disponibilidad"
-              placeholder="Disponibilidad"
-              value={formData.disponibilidad}
-              onChange={handleChange}
+  
+  <RequiredInputBox
+              type="checkbox"
+              title="Disponibilidad"
+              
             />
-          </div>
 
-          <div className="campo-grupo">
-            <DollarSign className="campo-icono" />
-            <input
+          
+      <RequiredInputBox
               type="number"
-              name="precio"
-              placeholder="Precio"
-              value={formData.precio}
-              onChange={handleChange}
+              title="Precio"
+              
             />
-          </div>
+
+       
 
           <div className="botones">
             <button
@@ -96,9 +82,9 @@ function FormularioMenu({ onClose = () => {} }) {
               Agregar al Menú
             </button>
           </div>
-        </form>
-      </div>
-    </div>
+          </>
+      )}/>
+    
   )
 }
 

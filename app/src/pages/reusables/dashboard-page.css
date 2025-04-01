@@ -69,7 +69,7 @@
     transform: translateX(-100%);
     transition: transform 0.5s ease-in-out;
     z-index: 30;
-    overflow-y: scroll;
+ 
     overflow-x: hidden;
     padding-right: 8px;
     direction: rtl;
@@ -136,7 +136,8 @@
 
 .menu-items {
     margin-inline-end: auto;
-  
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex; /* Mostrar los elementos del menú en fila */
     flex-direction: column; /* Orientar los elementos del menú en columna */
     gap: 0.10rem;   /* Espacio entre lineas*/

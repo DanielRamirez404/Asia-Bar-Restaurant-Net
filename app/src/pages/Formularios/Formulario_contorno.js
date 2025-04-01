@@ -4,6 +4,9 @@ import { useState } from "react"
 import { Utensils, Tags, Info, DollarSign } from 'lucide-react'
 import "./formulario.css"
 
+import FormPage from '../reusables/form-page';
+import { RequiredInputBox, RequiredSelector } from '../reusables/form-page';
+
 function FormularioContorno({ onClose = () => {} }) {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -33,56 +36,39 @@ function FormularioContorno({ onClose = () => {} }) {
       onClose()
     }
   }
-
+  
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="formulario-container">
-        <form onSubmit={handleSubmit}>
-          <h1>Nuevo Contorno</h1>
+    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Nuevo Contorno"} content={(
+      <>
+        <RequiredInputBox type="text" title="Nombre"/>
+        
 
-          <div className="campo-grupo">
-            <Utensils className="campo-icono" />
-            <input
+            <RequiredSelector
               type="text"
-              name="nombre"
-              placeholder="Nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-            />
-          </div>
 
-          <div className="campo-grupo">
-            <Tags className="campo-icono" />
-            <input
-              type="text"
-              name="categoria"
-              placeholder="Categoría"
-              value={formData.categoria}
-              onChange={handleChange}
-            />
-          </div>
+              mainTitle="Categoria"
 
-          <div className="campo-grupo">
-            <Info className="campo-icono" />
-            <input
-              type="text"
-              name="disponibilidad"
-              placeholder="Disponibilidad"
-              value={formData.disponibilidad}
-              onChange={handleChange}
+              options={[1,2,3,4]}
+              
+              id = "comboboxCategorias"
             />
-          </div>
 
-          <div className="campo-grupo">
-            <DollarSign className="campo-icono" />
-            <input
+
+       
+            <RequiredInputBox
+              type="checkbox"
+              title="Disponibilidad"
+         
+           />
+        
+
+          
+            <RequiredInputBox
               type="number"
-              name="precio"
-              placeholder="Precio"
-              value={formData.precio}
-              onChange={handleChange}
+              title="Precio"
+            
             />
-          </div>
+      
 
           <div className="botones">
             <button
@@ -95,11 +81,11 @@ function FormularioContorno({ onClose = () => {} }) {
             <button type="submit" className="btn-continuar">
               Agregar Contorno
             </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  )
+            </div>
+      </>
+  
+    )} />
+  );
 }
 
 export default FormularioContorno

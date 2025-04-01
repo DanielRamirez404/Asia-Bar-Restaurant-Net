@@ -40,6 +40,26 @@ export function SimpleSelector({ mainTitle, options, onChange }) {
     );
 }
 
+export function RequiredSelector({ mainTitle, options, onChange }) {
+    
+    const selectionValues = new Set(options);
+    const title = mainTitle;
+
+    return(
+        <div className="input-box">
+            <label for={ title }>{ title }</label>
+            <select className="input" id={ title } defaultValue={ selectionValues[0] } onChange={ () => {
+                const selector = document.getElementById(title);
+                
+                if (selector)
+                    onChange(selector.value)
+            }}>
+                { [...selectionValues].map( option => <option value={option}>{option}</option> ) }
+            </select>
+        </div>
+    );
+}
+
 export function SelectableInput({title, options, isOptionalInput = false}) {
 
     const [isInputVisible, setInputVisibility] = useState(!isOptionalInput);
