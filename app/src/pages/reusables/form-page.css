@@ -38,6 +38,19 @@
     text-align: left;
 }
 
+.input-box select{
+
+    height: 50px;
+    border-radius: 30px;
+    
+    border:  solid var(--gray-hue) 2px;
+    padding: 10px;
+
+    font-size: 16px;
+
+    transition: border-color .6s ease;
+}
+
 .input-box input {
     height: 30px;
     border-radius: 30px;

@@ -4,6 +4,10 @@ import { useState } from "react"
 import { User, MapPin, Info, Phone } from 'lucide-react'
 import "./formulario.css"
 
+
+import FormPage from '../reusables/form-page';
+import { RequiredInputBox, RequiredSelector } from '../reusables/form-page';
+
 function FormularioDelivery({ onClose = () => {} }) {
   const [formData, setFormData] = useState({
     nombre: "",
@@ -35,54 +39,42 @@ function FormularioDelivery({ onClose = () => {} }) {
   }
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="formulario-container">
-        <form onSubmit={handleSubmit}>
-          <h1>Nuevo Repartidor</h1>
+    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Nuevo Repartidor"} content= {(
 
-          <div className="campo-grupo">
-            <User className="campo-icono" />
-            <input
-              type="text"
-              name="nombre"
-              placeholder="Nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-            />
-          </div>
+      <>
+      
+       
 
-          <div className="campo-grupo">
-            <MapPin className="campo-icono" />
-            <input
+            <RequiredInputBox
               type="text"
-              name="zona"
-              placeholder="Zona"
-              value={formData.zona}
-              onChange={handleChange}
+              title="Nombre"
+         
             />
-          </div>
+          
 
-          <div className="campo-grupo">
-            <Info className="campo-icono" />
-            <input
+          
+            <RequiredInputBox
               type="text"
-              name="disponibilidad"
-              placeholder="Disponibilidad"
-              value={formData.disponibilidad}
-              onChange={handleChange}
+              title="Zona"
+           
             />
-          </div>
+      
 
-          <div className="campo-grupo">
-            <Phone className="campo-icono" />
-            <input
-              type="text"
-              name="telefono"
-              placeholder="Teléfono"
-              value={formData.telefono}
-              onChange={handleChange}
+          
+            <RequiredInputBox
+              type="checkbox"
+              title="Disponibilidad"
+            
             />
-          </div>
+          
+
+         
+            <RequiredInputBox
+              type="text"
+              title="Telefono"
+             
+            />
+        
 
           <div className="botones">
             <button
@@ -96,10 +88,10 @@ function FormularioDelivery({ onClose = () => {} }) {
               Agregar Repartidor
             </button>
           </div>
-        </form>
-      </div>
-    </div>
-  )
+      
+      </>
+    )} />
+  );
 }
 
 export default FormularioDelivery
