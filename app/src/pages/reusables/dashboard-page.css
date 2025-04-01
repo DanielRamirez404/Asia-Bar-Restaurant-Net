@@ -8,8 +8,31 @@
 }
 
 .dashboard-main {
+    margin-top: 2rem;
     width: 100%;
     min-height: 100vh;
+}
+
+/* Ícono de salida */
+.logout-icon {
+    position: fixed; /* Fija el ícono en la ventana */
+    top: 1rem; /* Espaciado desde la parte superior */
+    right: 1rem; /* Espaciado desde la derecha */
+    background-color: #ff4d4d; /* Color de fondo */
+    border: none; /* Sin bordes */
+    border-radius: 50%; /* Forma circular */
+    padding: 0.5rem; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+    z-index: 100; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: background-color 0.3s ease; /* Transición suave */
+    display: flex; /* Centra el ícono */
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-icon:hover {
+    background-color: #e60000; /* Color al pasar el mouse */
 }
 
 .menu-toggle-button {
@@ -136,9 +159,6 @@
     
 }
 
-
-
-
 .menu-button {
 
     
@@ -237,6 +257,7 @@
 
 /* Soporte para pantallas pequeñas */
 @media (max-width: 768px) { 
-   
-    
+    .dashboard-main {
+        margin-top: 0rem; /* Reduce el margen superior */ 
+    }
 }
