@@ -15,7 +15,7 @@ CREATE TABLE Clients (
     Phone VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Foods (
+CREATE TABLE MainDish (
     Name VARCHAR(50) PRIMARY KEY NOT NULL,
     Availability INT DEFAULT TRUE NOT NULL,
     Price FLOAT NOT NULL,
@@ -23,20 +23,20 @@ CREATE TABLE Foods (
     Description VARCHAR(100)
 );
 
-CREATE TABLE MainDish (
-    FoodName VARCHAR(50),
-    FOREIGN KEY (FoodName) REFERENCES Foods(Name) 
-    -- Image BLOB NOT NULL (leaving this here just in case we need it)
-);
-
 CREATE TABLE SideDish (
-    FoodName VARCHAR(50),
-    FOREIGN KEY (FoodName) REFERENCES Foods(Name)
+    Name VARCHAR(50) PRIMARY KEY NOT NULL,
+    Availability INT DEFAULT TRUE NOT NULL,
+    Price FLOAT NOT NULL,
+    Category VARCHAR(50) NOT NULL,
+    Description VARCHAR(100)
 );
 
 CREATE TABLE Product (
-    FoodName VARCHAR(50),
-    FOREIGN KEY (FoodName) REFERENCES Foods(Name), 
+    Name VARCHAR(50) PRIMARY KEY NOT NULL,
+    Availability INT DEFAULT TRUE NOT NULL,
+    Price FLOAT NOT NULL,
+    Category VARCHAR(50) NOT NULL,
+    Description VARCHAR(100),
     Provider VARCHAR(50) NOT NULL,
     Quantity INT NOT NULL
 );
@@ -44,7 +44,7 @@ CREATE TABLE Product (
 CREATE TABLE Sales (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     ClientIdDocument VARCHAR(20),
-    FOREIGN KEY (ClientIdDocoment) REFERENCES Clients(IdDocument),
+    FOREIGN KEY (ClientIdDocument) REFERENCES Clients(IdDocument),
     Type VARCHAR(20) NOT NULL,
     Total FLOAT NOT NULL
 );
