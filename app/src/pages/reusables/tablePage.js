@@ -99,6 +99,14 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
     const [tableData, setTableData] = useState(data);
     getTableData(`${serverAddress}/${tableName}`, setTableData);
 
+    const content = (tableData.length === 0) ? 
+        <h1>No hay entradas</h1> 
+        :(
+            <div className="table-container">
+                <Table fields={ columnNames } data={ tableData } />
+            </div>
+        );
+    
     return <DashboardPage content={
         <>
             <TablePageHeader 
@@ -106,9 +114,8 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
                 newButtonText={newButtonText}
                 onNewButtonClick={onNewButtonClick}
             />
-            <div className="table-container">
-                <Table fields={ columnNames } data={ tableData } />
-            </div>
+
+            { content }
         </>
     } />;
 }
