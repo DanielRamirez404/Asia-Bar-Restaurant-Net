@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Menu, ChevronDown, ChevronRight, LogOut } from 'lucide-react'; // Importa el ícono LogOut
+import { useNavigate } from "react-router-dom";
+import { Menu, ChevronDown, ChevronRight, LogOut } from 'lucide-react'; 
 import { DashboardMenuItems } from '../../pagination/paths';
 import { GetPageFromPath } from '../../pagination/page';
 import './constants.css';
 import './dashboard-page.css';
 import { Link } from 'react-router-dom';
 import '../../Visual-Resources/Logo.png';  
-import Popup from '../reusables/Pop-up.js'; // Asegúrate de importar el componente Popup
-
+import Popup from '../reusables/Pop-up.js'; 
+import { onLogout } from '../../on-fetch-endpoints/session.js';
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -127,19 +128,15 @@ function handleToggleSidebar(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) 
 const DashboardPage = ({ content }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [expandedIndex, setExpandedIndex] = useState(null);
-    const [isPopupOpen, setIsPopupOpen] = useState(false); // Estado para el popup
+    const [isQuitPopupOpen, setQuitPopupState] = useState(false); 
 
-    const handleLogout = () => {
-        console.log("Cerrando sesión...");
-        window.location.href = "/login"; // Redirige al login
-    };
+    const handleOpenPopup = () => setQuitPopupState(true);
+    const handleClosePopup = () => setQuitPopupState(false); 
 
-    const handleOpenPopup = () => setIsPopupOpen(true); // Abre el popup
-    const handleClosePopup = () => setIsPopupOpen(false); // Cierra el popup
-
+    const navigate = useNavigate();
+    
     return (
         <div className="dashboard">
-            {/* Ícono de salida */}
             <button className="logout-icon" onClick={handleOpenPopup}>
                 <LogOut size={24} color="#fff" />
             </button>
@@ -149,8 +146,6 @@ const DashboardPage = ({ content }) => {
                 onClick={ () => handleToggleSidebar(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) }
             />
                 
-                
-                {/* Sidebar */}
             <Sidebar 
                 isSidebarOpen={ isSidebarOpen }
                 expandedIndex={ expandedIndex }
@@ -165,20 +160,19 @@ const DashboardPage = ({ content }) => {
                 {content}
             </main>
             
-            {/* Popup de confirmación */}
             <Popup
                 message="¿Está seguro que desea salir?"
-                isOpen={isPopupOpen}
+                isOpen={isQuitPopupOpen}
                 onClose={handleClosePopup}
             >
-                <div className="popup-buttons">
-                    <button className="popup-confirm-button" onClick={handleLogout}>
+                <form onSubmit={ (e) => onLogout(e, navigate) } className="popup-buttons">
+                    <button type="post" className="popup-confirm-button">
                         Sí
                     </button>
                     <button className="popup-cancel-button" onClick={handleClosePopup}>
                         No
                     </button>
-                </div>
+                </form>
             </Popup>
         </div>
     );
