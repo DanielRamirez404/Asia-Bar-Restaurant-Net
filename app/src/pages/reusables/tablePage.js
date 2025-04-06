@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
@@ -90,14 +90,23 @@ function Table({ fields, data }) {
     );
 }
 
-function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, data = []}) {
+function TablePage({ title, fields, tableName = null, newButtonText, onNewButtonClick, data = []}) {
     let columnNames = fields;
+    let haveDataBeenLoaded = false;
     
     if (!columnNames.includes("Acciones"))
         columnNames.push("Acciones");
 
-    const [tableData, setTableData] = useState(data);
-    getTableData(`${serverAddress}/${tableName}`, setTableData);
+    const [tableData, setTableData] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getTableData(`${serverAddress}/${tableName}`);
+            setTableData(data);
+        };
+        
+        fetchData();
+    }, []);  
 
     const content = (tableData.length === 0) ? 
         <h1>No hay entradas</h1> 
@@ -106,7 +115,7 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
                 <Table fields={ columnNames } data={ tableData } />
             </div>
         );
-    
+
     return <DashboardPage content={
         <>
             <TablePageHeader 
@@ -114,7 +123,6 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
                 newButtonText={newButtonText}
                 onNewButtonClick={onNewButtonClick}
             />
-
             { content }
         </>
     } />;
