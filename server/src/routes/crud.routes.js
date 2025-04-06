@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllEndpointFunctions, getEndpointFunctions, postEndpointFunctions, deleteEndpointFunctions, putEndpointFunctions } from '../controllers/crud.controllers.js';
+import { getAllEndpointFunctions, getEndpointFunctions, postEndpointFunctions, deleteEndpointFunctions, putEndpointFunctions, searchEndpointFunctions } from '../controllers/crud.controllers.js';
 import { validateToken } from '../middlewares/validateToken.js';
 
 const crudRouter = Router();
@@ -25,5 +25,10 @@ Object.entries(deleteEndpointFunctions).forEach( ( [table, endpointFunction ] ) 
 Object.entries(putEndpointFunctions).forEach( ( [table, endpointFunction ] ) => {
     crudRouter.put(`/${ table }/:id`, endpointFunction);
 });
+
+Object.entries(searchEndpointFunctions).forEach( ( [ table, endpointFunction ] ) => {
+    crudRouter.get(`/${ table }/search/:query`, endpointFunction);
+});;
+
 
 export default crudRouter;

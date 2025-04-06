@@ -2,11 +2,17 @@ import React, { useState } from 'react';
 import './constants.css';
 import './form-page.css';
 
-export function RequiredInputBox({ title, type='text' }) {
+export function RequiredInputBox({ title, textSetter, type='text' }) {
     return(
         <div className='input-box'>
             <label for={ title }>{ title }</label>
-            <input type={type} id={ title } placeholder={ title } required></input>
+            <input 
+                type={ type } 
+                id={ title } 
+                placeholder={ title } 
+                onChange={ (e) => textSetter(e.target.value) }
+                required>
+            </input>
         </div>
     );
 } 

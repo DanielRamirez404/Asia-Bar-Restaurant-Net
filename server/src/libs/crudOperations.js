@@ -38,7 +38,7 @@ export async function createRegister(req, res, table) {
     });
 }
 
-export async function deleteById(req, res, tableName, idName, isFoodTable) {
+export async function deleteById(req, res, tableName, idName) {
     handleQueryExecution(res, async (db) => {
         
         let query = `DELETE FROM ${tableName} WHERE ${idName} = ?`;
@@ -72,5 +72,25 @@ export async function updateById(req, res, table) {
         const [results, queryFields] = await db.execute(query, data);
 
         res.status(200).send("Updated Successfully!");
+    });
+}
+
+export async function search(req, res, table) {
+    handleQueryExecution(res, async (db) => {
+        const fields = table.fields;
+        
+        let query = `SELECT * FROM ${table.name} WHERE CONCAT_WS(' '`;
+        
+        for (let i = 0; i < fields.length; i++) {
+            query += `, ${fields[i]}`;
+        }
+
+        query += ") LIKE ?";
+
+        const searchQuery = "%" + req.params.query + "%";
+
+        const [results, queryFields] = await db.execute(query, [ searchQuery ]);
+
+        res.status(200).json(results);
     });
 }
