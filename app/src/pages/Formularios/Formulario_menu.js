@@ -38,7 +38,7 @@ function FormularioMenu({ onClose = () => {} }) {
   }
 
   return (
-    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Nuevo Plato"} content={(
+    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Plato"} content={(
      
 
       <>

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import "./formulario.css";
+import "./formulario.css"; // Asegúrate de que esta importación esté presente
 
 import FormPage from "../reusables/form-page";
 import { RequiredInputBox } from "../reusables/form-page";
 
-function FormularioDelivery({ onClose = () => {} }) {
+function FormularioCliente({ onClose = () => {} }) {
   const [formData, setFormData] = useState({
+    identificacion: "",
     nombre: "",
-    zona: "",
-    disponibilidad: "",
+    direccion: "",
     telefono: "",
   });
 
@@ -22,7 +22,7 @@ function FormularioDelivery({ onClose = () => {} }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos del formulario de repartidor:", formData);
+    console.log("Datos del formulario de cliente:", formData);
     // Lógica para enviar los datos
     onClose();
   };
@@ -37,10 +37,16 @@ function FormularioDelivery({ onClose = () => {} }) {
     <FormPage
       className="modal-overlay"
       onClick={handleOverlayClick}
-      title={"Nuevo Repartidor"}
+      title={"Cliente"}
       onSubmit={handleSubmit}
       content={
         <>
+          <RequiredInputBox
+            type="text"
+            title="Identificación"
+            name="identificacion"
+            onChange={handleChange}
+          />
           <RequiredInputBox
             type="text"
             title="Nombre"
@@ -49,14 +55,8 @@ function FormularioDelivery({ onClose = () => {} }) {
           />
           <RequiredInputBox
             type="text"
-            title="Zona"
-            name="zona"
-            onChange={handleChange}
-          />
-          <RequiredInputBox
-            type="checkbox"
-            title="Disponibilidad"
-            name="disponibilidad"
+            title="Dirección"
+            name="direccion"
             onChange={handleChange}
           />
           <RequiredInputBox
@@ -74,7 +74,7 @@ function FormularioDelivery({ onClose = () => {} }) {
               Cancelar
             </button>
             <button type="submit" className="btn-continuar">
-              Agregar Repartidor
+              Agregar Cliente
             </button>
           </div>
         </>
@@ -83,4 +83,4 @@ function FormularioDelivery({ onClose = () => {} }) {
   );
 }
 
-export default FormularioDelivery;
+export default FormularioCliente;

@@ -17,6 +17,10 @@ import UserControl from "../pages/control/user-control";
 import ClientControl from "../pages/control/client-control";
 import DeliverymenControl from "../pages/control/deliverymen-control.js";
 import { MainDishControl, ProductControl, SideDishControl } from "../pages/control/dish-control";
+import FormularioUsuario from "../pages/Formularios/Formulario_usuario";
+import FormularioContorno from "../pages/Formularios/Formulario_contorno";
+import FormularioMenu from "../pages/Formularios/Formulario_menu";
+import FormularioDelivery from "../pages/Formularios/FormularioDelivery";
 
 // Cargamos el formulario de venta de forma lazy después de todas las importaciones estáticas:
 const LazyFormularioVenta = React.lazy(() =>
@@ -48,7 +52,12 @@ export const PageList = [
     new Page(PagePaths['AddClient'], <Clients title="Añadir Cliente" />, "Añadir Cliente"),
     new Page(PagePaths['EditClient'], <Clients title="Modificar Cliente" />, "Modificar Cliente"),
     new Page(PagePaths['TablaVentas'], <TablaVentas />, "Tabla de Ventas"),
+    new Page(PagePaths['FormularioUsuario'], <FormularioUsuario />, "Formulario de Usuario"),
     new Page(PagePaths['FormularioProducto'], <FormularioProducto title="Formulario de Producto" />, "Formulario de Producto"),
+    new Page(PagePaths['FormularioContorno'], <FormularioContorno />, "Formulario de Contorno"),
+    new Page(PagePaths['FormularioMenu'], <FormularioMenu />, "Formulario de Menú"),
+    new Page(PagePaths['FormularioProducto'], <FormularioProducto />, "Formulario de Producto"),
+    new Page(PagePaths['FormularioDelivery'], <FormularioDelivery />, "Formulario de Repartidor"),
     new Page(
         PagePaths['FormularioVenta'],
         <Suspense fallback={<div>Cargando...</div>}>

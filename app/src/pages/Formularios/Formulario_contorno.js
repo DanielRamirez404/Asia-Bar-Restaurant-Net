@@ -38,7 +38,7 @@ function FormularioContorno({ onClose = () => {} }) {
   }
   
   return (
-    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Nuevo Contorno"} content={(
+    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Contorno"} content={(
       <>
         <RequiredInputBox type="text" title="Nombre"/>
         

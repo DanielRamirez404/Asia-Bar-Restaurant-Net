@@ -11,15 +11,20 @@ export const PagePaths = {
     'EditUser': '/modificar-usuario',
     'AddClient': '/agregar-cliente',
     'EditClient': '/modificar-cliente', 
-    'TablaVentas': '/tabla-ventas',
-    'FormularioProducto': 'formulario-producto',
-    'FormularioVenta': '/formulario-venta',    
+    'TablaVentas': '/tabla-ventas',  
     'UserControl': '/control-de-usuarios',
     'ClientControl': '/control-de-clientes',
     'ProductControl': '/control-de-productos',
     'SideDishControl': '/control-de-contornos',
     'MainDishControl': '/control-de-platos',
     'DeliverymenControl': '/control-de-repartidores',
+    'FormularioProducto': 'formulario-producto',
+    'FormularioVenta': '/formulario-venta',  
+    'FormularioUsuario': '/formulario-usuario',
+    'FormularioContorno': '/formulario-contorno',
+    'FormularioMenu': '/formulario-menu',
+    'FormularioDelivery': '/formulario-delivery',
+
 };
 
 export const DashboardMenuItems = [
