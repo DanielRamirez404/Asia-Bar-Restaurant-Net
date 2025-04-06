@@ -13,14 +13,13 @@ export const PagePaths = {
     'EditClient': '/modificar-cliente', 
     'TablaVentas': '/tabla-ventas',
     'FormularioProducto': 'formulario-producto',
-    'FormularioVenta': '/formulario-venta',  // Nueva ruta para el formulario de venta
-    
+    'FormularioVenta': '/formulario-venta',    
     'UserControl': '/control-de-usuarios',
     'ClientControl': '/control-de-clientes',
     'ProductControl': '/control-de-productos',
     'SideDishControl': '/control-de-contornos',
     'MainDishControl': '/control-de-platos',
-    'Deliverywork': '/control-de-repartidores',
+    'DeliverymenControl': '/control-de-repartidores',
 };
 
 export const DashboardMenuItems = [
@@ -30,7 +29,7 @@ export const DashboardMenuItems = [
     },
     {
         title: "Control de Servicios",
-        subItems: [ PagePaths['MainDishControl'], PagePaths['SideDishControl'], PagePaths['ProductControl'], PagePaths['Deliverywork'] ]
+        subItems: [ PagePaths['MainDishControl'], PagePaths['SideDishControl'], PagePaths['ProductControl'], PagePaths['DeliverymenControl'] ]
     },
     {
         title: "Control de Clientes",

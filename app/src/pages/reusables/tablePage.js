@@ -92,7 +92,6 @@ function Table({ fields, data }) {
 
 function TablePage({ title, fields, tableName = null, newButtonText, onNewButtonClick, data = []}) {
     let columnNames = fields;
-    let haveDataBeenLoaded = false;
     
     if (!columnNames.includes("Acciones"))
         columnNames.push("Acciones");
@@ -100,6 +99,7 @@ function TablePage({ title, fields, tableName = null, newButtonText, onNewButton
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
+
         const fetchData = async () => {
             const data = await getTableData(`${serverAddress}/${tableName}`);
             setTableData(data);
