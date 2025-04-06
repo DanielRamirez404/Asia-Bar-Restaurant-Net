@@ -187,11 +187,11 @@
     margin: auto;
     margin-bottom: 15px;
 
-    border-radius: 30px;
+    border-radius: 5px;
 
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 15px;
     
 
     background: #444;
@@ -213,7 +213,7 @@
     justify-content: space-between;
     align-items: center;
     
-    margin-bottom: 10px;
+    padding: 8px;
     
     
 
@@ -233,9 +233,9 @@
 .notaContenido{
 
    
-    background: #333;
+    background: #222;
     border-radius: 10px;
-    padding: 10px;
+    padding: 15px;
     font-size: 14px;
     line-height: 1.5;
     
@@ -259,6 +259,7 @@
     background: transparent;
     color: #fff;
     cursor: pointer;
+    
 
 
 
@@ -297,6 +298,8 @@
     }
 
 }
+
+
 
 @media (max-width : 768px){
 
@@ -376,6 +379,81 @@
     }
 
 }
+
+@media(min-width:2560px){
+    .frameProducto{
+        height: 410px;
+        min-width: 400px;
+    }
+
+    .imgComida{
+
+       height: 200px;
+       width: 210px;
+
+
+    }
+    #btnAgregarPoducto{
+
+        height: 95px;
+        font-size: 50px;
+       
+    }
+
+    .descripcion #productoNombre{
+        font-size: 35px;
+    }
+
+    .descripcion #productoPrecio{
+        font-size: 28px;
+    }
+    
+    .descripcion p{
+        font-size: 25px;
+    }
+    
+    .framePedidoWidget{
+        height: 150px;
+    }
+    .btnSumarRestar{
+        height: 90px;
+        width: 90px;
+        border-radius: 100px;
+        font-size: 40px;
+    }
+
+    .pedidoNombre{
+        font-size: 22px;
+    }
+    .pedidoCantidad{
+        font-size: 25px;
+        padding: 20px;
+        margin: 0 5px;
+        text-align: center;
+    }
+
+    .pedidoTotal{
+        font-size: 30px;
+        padding: 20px;
+        border-radius: 50px;
+        width: 80px;
+    }
+
+    .mainNotaWidget{
+        height: 200px;
+    }
+
+    .notaContenido{
+        height: 90%;
+        font-size: 23px;
+    }
+
+    .notaTitulo{
+        font-size: 25px;
+    }
+}
+
+
 
 
 
