@@ -21,9 +21,20 @@ function ActionButtons() {
     );
 }
 
-function TablePageSearch() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const inputRef = useRef(null);
+function TablePageSearch({dataSetter, tableName}) {
+    const [searchQuery, setsearchQuery] = useState("");
+
+    const onClick = () => {
+        const searchData = async function(serverAddress, tableName, searchQuery) {
+
+            const query = (searchQuery == "") ? `${serverAddress}/${tableName}` : `${serverAddress}/${tableName}/search/${searchQuery}`; 
+
+            const data = await getTableData(query);
+            dataSetter(data);
+        }
+
+        searchData(serverAddress, tableName, searchQuery);
+    };
 
     return(
         <div className="search-container">
@@ -33,15 +44,14 @@ function TablePageSearch() {
                 className="entrada-busqueda"
                 placeholder="Buscar"
                 value={ searchQuery }
-                onChange={ (e) => setSearchQuery(e.target.value) }
-                ref={ inputRef }
+                onChange={ (e) => setsearchQuery(e.target.value) }
             />
-            <button onClick={ () => alert("Query: " + searchQuery) } className="search-button">Buscar</button>
+            <button onClick={onClick} className="search-button">Buscar</button>
         </div>
     );
 }
 
-function TablePageHeader({ title, newButtonText = "", onNewButtonClick = () => {} }) {
+function TablePageHeader({title, newButtonText = "", onNewButtonClick = () => {}, tableName, dataSetter}) {
     return (
         <div className="table-page-header">
             <h1>{ title }</h1>
@@ -54,7 +64,7 @@ function TablePageHeader({ title, newButtonText = "", onNewButtonClick = () => {
                         {newButtonText}
                     </button>
                 )}
-                <TablePageSearch />
+                <TablePageSearch tableName={tableName} dataSetter={dataSetter}/>
             </div>
         </div>
     );
@@ -119,9 +129,10 @@ function TablePage({ title, fields, tableName = null, newButtonText, onNewButton
     return <DashboardPage content={
         <>
             <TablePageHeader 
-                title={ title }
-                newButtonText={newButtonText}
-                onNewButtonClick={onNewButtonClick}
+                title={ title } dataSetter = { setTableData } tableName = { tableName }
+                
+                newButtonText={ newButtonText }
+                onNewButtonClick={ onNewButtonClick }
             />
             { content }
         </>
