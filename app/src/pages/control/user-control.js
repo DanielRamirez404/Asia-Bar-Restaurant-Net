@@ -4,7 +4,7 @@ const fields = [ "Usuario", "Tipo", "Contraseña" ];
 
 const UserControl = () => {
     return(
-        <TablePage title={ "Control de Usuarios" } fields={ fields } tableName="users" />
+        <TablePage title="Control de Usuarios" fields={ fields } tableName="users" />
     );
 }
 
