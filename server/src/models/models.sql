@@ -48,3 +48,10 @@ CREATE TABLE Sales (
     Type VARCHAR(20) NOT NULL,
     Total FLOAT NOT NULL
 );
+
+CREATE TABLE Deliverymen (
+    Name VARCHAR(50) PRIMARY KEY NOT NULL,
+    Area VARCHAR(25) NOT NULL,
+    Availability INT DEFAULT TRUE NOT NULL,
+    Phone VARCHAR(20) NOT NULL
+);

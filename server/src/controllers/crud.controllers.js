@@ -9,6 +9,7 @@ const tables = [
     new Table("MainDish", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
     new Table("SideDish", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
     new Table("Product", "Name", ["Name", "Availability", "Price", "Category", "Description", "Provider", "Quantity"]),
+    new Table("Deliverymen", "Name", ["Name", "Area", "Availability", "Phone"])
 ];
 
 export const getAllEndpointFunctions = {};
