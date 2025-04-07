@@ -39,7 +39,7 @@ function FormularioProducto({ onClose = () => {} }) {
   }
 
   return (
-    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Nuevo Producto"} content={(
+    <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Producto"} content={(
       <>
        
         
