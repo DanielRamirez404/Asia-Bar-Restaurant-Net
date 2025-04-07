@@ -21,6 +21,7 @@ import FormularioUsuario from "../pages/Formularios/Formulario_usuario";
 import FormularioContorno from "../pages/Formularios/Formulario_contorno";
 import FormularioMenu from "../pages/Formularios/Formulario_menu";
 import FormularioDelivery from "../pages/Formularios/FormularioDelivery";
+import FormularioCliente from "../pages/Formularios/Formulario_cliente"; // Importa el formulario
 
 // Cargamos el formulario de venta de forma lazy después de todas las importaciones estáticas:
 const LazyFormularioVenta = React.lazy(() =>
@@ -58,6 +59,7 @@ export const PageList = [
     new Page(PagePaths['FormularioMenu'], <FormularioMenu />, "Formulario de Menú"),
     new Page(PagePaths['FormularioProducto'], <FormularioProducto />, "Formulario de Producto"),
     new Page(PagePaths['FormularioDelivery'], <FormularioDelivery />, "Formulario de Repartidor"),
+    new Page(PagePaths['FormularioCliente'], <FormularioCliente />, "Formulario de Cliente"), // Añade la página
     new Page(
         PagePaths['FormularioVenta'],
         <Suspense fallback={<div>Cargando...</div>}>

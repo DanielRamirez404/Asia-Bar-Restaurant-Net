@@ -24,6 +24,8 @@ export const PagePaths = {
     'FormularioContorno': '/formulario-contorno',
     'FormularioMenu': '/formulario-menu',
     'FormularioDelivery': '/formulario-delivery',
+    'FormularioCliente': '/formulario-cliente', // Nueva ruta
+
 
 };
 
