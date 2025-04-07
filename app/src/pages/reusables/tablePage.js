@@ -109,13 +109,13 @@ function TablePage({ title, fields, tableName = null, newButtonText, onNewButton
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
-    const fetchData = async () => {
-        const data = await getTableData(`${serverAddress}/${tableName}`);
-        setTableData(data);
-    };
+        const fetchData = async () => {
+            const data = await getTableData(`${serverAddress}/${tableName}`);
+            setTableData(data);
+        };
 
-    fetchData();
-    }, [tableName]); // Agrega tableName como dependencia 
+        fetchData();
+    }, [];
 
     const content = (tableData.length === 0) ? 
         <h1>No hay entradas</h1> 
