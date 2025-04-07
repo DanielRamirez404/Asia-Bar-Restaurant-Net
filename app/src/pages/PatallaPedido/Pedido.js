@@ -25,6 +25,12 @@ function ContenidoPedido() {
 
     };
 
+    const [nota, setNota] = useState(false)
+
+    const toggleNota = () =>{
+        setNota(!nota)
+    }
+
     useEffect(()=>{
 
         const cambioDeTamanno = () => {
@@ -126,7 +132,24 @@ function ContenidoPedido() {
 
                     </div>
 
-                    <button id="nota">+ | Agregar Nota</button>
+                    {!nota && (
+
+                        <button id="nota" onClick={()=> setNota(true)}>+ | Agregar Nota</button>
+
+                    )}
+                    
+                    {nota && (      
+                        
+                        <div className="modalAgregarNota">
+
+                            <button className="cerrarModalAgregarNota" onClick={()=> setNota(false)}>-</button>
+                            <textarea className="inputNota" placeholder="..." ></textarea>
+                            <button className="aceptarModalAgregarNota">Agregar</button>
+                    
+                         </div>
+
+                    )}
+                    
                     
                         
             
