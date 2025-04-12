@@ -53,15 +53,14 @@ export const PageList = [
     new Page(PagePaths['AddClient'], <Clients title="Añadir Cliente" />, "Añadir Cliente"),
     new Page(PagePaths['EditClient'], <Clients title="Modificar Cliente" />, "Modificar Cliente"),
     new Page(PagePaths['TablaVentas'], <TablaVentas />, "Tabla de Ventas"),
-    new Page(PagePaths['FormularioUsuario'], <FormularioUsuario />, "Formulario de Usuario"),
-    new Page(PagePaths['FormularioProducto'], <FormularioProducto title="Formulario de Producto" />, "Formulario de Producto"),
-    new Page(PagePaths['FormularioContorno'], <FormularioContorno />, "Formulario de Contorno"),
-    new Page(PagePaths['FormularioMenu'], <FormularioMenu />, "Formulario de Menú"),
-    new Page(PagePaths['FormularioProducto'], <FormularioProducto />, "Formulario de Producto"),
-    new Page(PagePaths['FormularioDelivery'], <FormularioDelivery />, "Formulario de Repartidor"),
-    new Page(PagePaths['FormularioCliente'], <FormularioCliente />, "Formulario de Cliente"), // Añade la página
+    new Page(PagePaths['users-form'], <FormularioUsuario />, "Formulario de Usuario"),
+    new Page(PagePaths['side-dish-form'], <FormularioContorno />, "Formulario de Contorno"),
+    new Page(PagePaths['main-dish-form'], <FormularioMenu />, "Formulario de Menú"),
+    new Page(PagePaths['product-form'], <FormularioProducto />, "Formulario de Producto"),
+    new Page(PagePaths['deliverymen-form'], <FormularioDelivery />, "Formulario de Repartidor"),
+    new Page(PagePaths['clients-form'], <FormularioCliente />, "Formulario de Cliente"),
     new Page(
-        PagePaths['FormularioVenta'],
+        PagePaths['sales-form'],
         <Suspense fallback={<div>Cargando...</div>}>
             <LazyFormularioVenta isOpen={true} onClose={() => {}} onSubmit={() => {}} />
         </Suspense>,
