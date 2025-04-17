@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './constants.css';
 import './form-page.css';
+import { regExDic } from './regExDic';
+export function RequiredInputBox({ title, textSetter, regExKey, type='text' }) {
 
-export function RequiredInputBox({ title, textSetter, type='text' }) {
+    const regex = regExDic[regExKey] || {};
+
     return(
         <div className='input-box'>
             <label for={ title }>{ title }</label>
@@ -11,7 +14,9 @@ export function RequiredInputBox({ title, textSetter, type='text' }) {
                 id={ title } 
                 placeholder={ title } 
                 onChange={ (e) => textSetter(e.target.value) }
-                required>
+                pattern={regex.pattern}
+                title={regex.title}
+                >
             </input>
         </div>
     );

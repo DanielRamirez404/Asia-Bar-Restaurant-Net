@@ -45,25 +45,35 @@ function FormularioDelivery({ onClose = () => {} }) {
             type="text"
             title="Nombre"
             name="nombre"
-            onChange={handleChange}
+            textSetter= {()=>{}}
+            regExKey={'soloLetras'}
+          />
+
+          <RequiredInputBox
+          type="text"
+          title="Apellido"
+          name = "Apellido"
+          textSetter={()=>{}}
+          regExKey={'soloLetras'}
           />
           <RequiredInputBox
             type="text"
             title="Zona"
             name="zona"
-            onChange={handleChange}
+            textSetter= {()=>{}}
           />
           <RequiredInputBox
             type="checkbox"
             title="Disponibilidad"
             name="disponibilidad"
-            onChange={handleChange}
+            textSetter= {()=>{}}
           />
           <RequiredInputBox
             type="text"
             title="Teléfono"
             name="telefono"
-            onChange={handleChange}
+            textSetter= {()=>{}}
+            regExKey={"telefono"}
           />
           <div className="botones">
             <button

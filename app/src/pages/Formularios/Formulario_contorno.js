@@ -40,7 +40,11 @@ function FormularioContorno({ onClose = () => {} }) {
   return (
     <FormPage className="modal-overlay" onClick={handleOverlayClick} title={"Contorno"} content={(
       <>
-        <RequiredInputBox type="text" title="Nombre"/>
+        <RequiredInputBox 
+        type="text" 
+        title="Nombre"
+        textSetter={()=>{}}
+        />
         
 
             <RequiredSelector
@@ -51,6 +55,7 @@ function FormularioContorno({ onClose = () => {} }) {
               options={[1,2,3,4]}
               
               id = "comboboxCategorias"
+              onChange={()=>{}}
             />
 
 
@@ -58,6 +63,7 @@ function FormularioContorno({ onClose = () => {} }) {
             <RequiredInputBox
               type="checkbox"
               title="Disponibilidad"
+              textSetter= {()=>{}}
          
            />
         
@@ -66,6 +72,7 @@ function FormularioContorno({ onClose = () => {} }) {
             <RequiredInputBox
               type="number"
               title="Precio"
+              textSetter={()=>{}}
             
             />
       

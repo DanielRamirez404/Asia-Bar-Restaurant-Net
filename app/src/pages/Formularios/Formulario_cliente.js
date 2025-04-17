@@ -46,24 +46,37 @@ function FormularioCliente({ onClose = () => {} }) {
             title="Identificación"
             name="identificacion"
             onChange={handleChange}
+            regExKey={'identificacion'}
+            textSetter= {()=>{}}
           />
           <RequiredInputBox
             type="text"
             title="Nombre"
             name="nombre"
-            onChange={handleChange}
+            regExKey={'soloLetras'}
+            textSetter= {()=>{}}
           />
+
+        <RequiredInputBox
+          type="text"
+          title="Apellido"
+          name = "Apellido"
+          textSetter={()=>{}}
+          regExKey={'soloLetras'}
+          />
+
           <RequiredInputBox
             type="text"
             title="Dirección"
             name="direccion"
-            onChange={handleChange}
+            textSetter= {()=>{}}
           />
           <RequiredInputBox
             type="text"
             title="Teléfono"
             name="telefono"
-            onChange={handleChange}
+            regExKey={'telefono'}
+            textSetter= {()=>{}}
           />
           <div className="botones">
             <button

@@ -37,7 +37,9 @@ function FormularioUsuario({ onClose = () => {} }) {
             title={"Usuario"}
             type="text"
             name="usuario"
-            onChange={handleChange}
+            textSetter= {(value) =>
+              setFormData((prevState) => ({ ...prevState, tipo: value }))}
+            
           />
           <RequiredSelector
             mainTitle={"Tipo"}
@@ -50,8 +52,11 @@ function FormularioUsuario({ onClose = () => {} }) {
             title={"Contraseña"}
             type="password"
             name="contraseña"
-            onChange={handleChange}
+            textSetter= {(value) =>
+              setFormData((prevState) => ({ ...prevState, tipo: value }))}
           />
+
+
           <div className="botones">
             <button
               type="button"
