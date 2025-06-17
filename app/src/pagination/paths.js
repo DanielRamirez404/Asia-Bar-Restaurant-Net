@@ -1,4 +1,14 @@
-export const PagePaths = {
+export const FormPages = {
+    'product-form': 'formulario-producto',
+    'sales-form': '/formulario-venta',  
+    'users-form': '/formulario-usuario',
+    'side-dish-form': '/formulario-contorno',
+    'main-dish-form': '/formulario-menu',
+    'deliverymen-form': '/formulario-delivery',
+    'clients-form': '/formulario-cliente', 
+}
+
+export let PagePaths = {
     'Home': '/inicio',
     'Example': '/link-de-ejemplo',
     'Login': '/login',
@@ -18,16 +28,9 @@ export const PagePaths = {
     'SideDishControl': '/control-de-contornos',
     'MainDishControl': '/control-de-platos',
     'DeliverymenControl': '/control-de-repartidores',
-    'FormularioProducto': 'formulario-producto',
-    'FormularioVenta': '/formulario-venta',  
-    'FormularioUsuario': '/formulario-usuario',
-    'FormularioContorno': '/formulario-contorno',
-    'FormularioMenu': '/formulario-menu',
-    'FormularioDelivery': '/formulario-delivery',
-    'FormularioCliente': '/formulario-cliente', // Nueva ruta
-
-
 };
+
+Object.assign(PagePaths, FormPages);
 
 export const DashboardMenuItems = [
     {

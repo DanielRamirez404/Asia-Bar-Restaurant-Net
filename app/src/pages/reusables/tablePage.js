@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { getTableData } from "../../on-fetch-endpoints/table-fetching.js"
+import { getTableData } from "../../endpoint-functions/table-fetching.js"
 import { serverAddress } from '../../constants/constants.js'; 
+import { Link } from 'react-router-dom';
+import { FormPages } from '../../pagination/paths.js';
 
 function ActionButtons() {
     return (
@@ -51,19 +53,16 @@ function TablePageSearch({dataSetter, tableName}) {
     );
 }
 
-function TablePageHeader({title, newButtonText = "", onNewButtonClick = () => {}, tableName, dataSetter}) {
+function TablePageHeader({title, tableName, dataSetter}) {
     return (
         <div className="table-page-header">
             <h1>{ title }</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
-                {newButtonText && onNewButtonClick && (
-                    <button 
-                        onClick={onNewButtonClick} 
-                        className="new-button"
-                    >
-                        {newButtonText}
+                <Link to={ FormPages[`${tableName}-form`] }>
+                    <button onClick={ null } className="new-button">
+                        Añadir
                     </button>
-                )}
+                </Link>
                 <TablePageSearch tableName={tableName} dataSetter={dataSetter}/>
             </div>
         </div>
@@ -100,7 +99,7 @@ function Table({ fields, data }) {
     );
 }
 
-function TablePage({ title, fields, tableName = null, newButtonText, onNewButtonClick, data = []}) {
+function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, data = []}) {
     let columnNames = fields;
     
     if (!columnNames.includes("Acciones"))
@@ -129,9 +128,6 @@ function TablePage({ title, fields, tableName = null, newButtonText, onNewButton
         <>
             <TablePageHeader 
                 title={ title } dataSetter = { setTableData } tableName = { tableName }
-                
-                newButtonText={ newButtonText }
-                onNewButtonClick={ onNewButtonClick }
             />
             { content }
         </>
