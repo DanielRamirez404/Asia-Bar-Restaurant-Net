@@ -2,21 +2,35 @@
 
     display: grid;
     grid-template-columns: 1fr auto;
+    
 
-    height: 100px;
     background: #fdfdfd;
-    width: 90%;
-    margin: auto;
-    margin-top: 10px;
-   
-    box-sizing: border-box;
     border: 1px solid #888;
+    border-radius: 4px;
+    font-size: 13px;
+
+    margin: auto;   
+    margin-top: 10px;
+
+    width: 90%;
+    
+    
+
+    padding: 5px;
+
+    /*box-sizing*/
+    box-sizing: border-box;
+    
+    
+    
+    
 
 }
 
 .categoriaRecienAgregado{
 
     color: #666;
+    font-size: 14px;
 
 }
 .precioRecienAgregadoTexto{
@@ -33,34 +47,163 @@
 
 .btnInformacionRecienAgregado{
 
-    height: 80%;
-    margin: auto;
-    width: 60px;
+   
+    /*tamaño*/
+    width: 80px;
+    max-width: 100px;
+    height: 50px;
 
+    font-size: 16px;
+    border-radius: 5px; 
+
+    /*centrado*/
+    padding: 5px;
+    align-self: center;
+    border: none;
+
+    cursor: pointer;
     background: #3870ff;
     color: #fff;
-    border: none;
-    cursor: pointer;
+    
+    
+    
 }
 
 
-@media (max-width:768px){
 
-    .mainRecienAgregado{
-
-        display: grid;
-        grid-template-columns: 1fr auto;
-    
-        height: 130px;
-        background: #fdfdfd;
+/* --------- RESPONSIVE: TABLET --------- */
+@media (max-width: 1024px) {
+    .mainRecienAgregado {
         width: 95%;
-        margin: auto;
-        margin-top: 10px;
-       
-        box-sizing: border-box;
-        border: 1px solid #888;
-    
+        min-width: 100px;
+        max-width: 98%;
+
+        padding: 2px;
+
+        font-size: 13px;
+        border-radius: 4px;
     }
-    
-    
+    .informacionRecienAgregado {
+        margin: 10px;
+    }
+
+    .precioRecienAgregadoTexto {
+        font-size: 14px;
+    }
+    .btnInformacionRecienAgregado {
+       /*tamaño*/
+       width: 80px;
+       max-width: 100px;
+       height: 50px;
+
+       font-size: 16px;
+       border-radius: 5px; 
+
+       /*centrado*/
+       padding: 5px;
+       align-self: center;
+    }
+}
+
+
+/* --------- RESPONSIVE: MOBILE --------- */
+@media (max-width: 768px) {
+    .mainRecienAgregado {
+        width: 95%;
+        min-width: 100px;
+        max-width: 98%;
+
+        padding: 2px;
+
+        font-size: 13px;
+        border-radius: 4px;
+    }
+    .informacionRecienAgregado {
+        margin: 10px;
+    }
+
+    .precioRecienAgregadoTexto {
+        font-size: 14px;
+    }
+    .btnInformacionRecienAgregado {
+       /*tamaño*/
+       width: 80px;
+       max-width: 100px;
+       height: 50px;
+
+       font-size: 16px;
+       border-radius: 5px; 
+
+       /*centrado*/
+       padding: 5px;
+       align-self: center;
+    }
+}
+
+/* --------- RESPONSIVE: MÓVIL PEQUEÑO --------- */     
+@media (max-width: 600px) {
+    .mainRecienAgregado {
+        width: 90%;
+        min-width: 100px;
+        max-width: 100%;
+
+        padding: 2px;
+
+        font-size: 13px;
+        border-radius: 4px;
+    }
+    .informacionRecienAgregado {
+        margin: 5px;
+        font-size: 13px;
+    }
+    .precioRecienAgregadoTexto {
+        font-size: 14px;
+    }
+    .btnInformacionRecienAgregado {
+         /*tamaño*/
+         width: 80px;
+         max-width: 100px;
+         height: 50px;
+ 
+         font-size: 16px;
+         border-radius: 5px; 
+ 
+         /*centrado*/
+         padding: 5px;
+         align-self: center;
+    }
+}
+
+/* --------- RESPONSIVE: MOBILE L (425px) --------- */
+@media (max-width: 425px) {
+    .mainRecienAgregado {
+        width: 90%;
+        min-width: 100px;
+        max-width: 100%;
+        padding: 2px;
+        font-size: 13px;
+        border-radius: 4px;
+    }
+    .informacionRecienAgregado {
+        margin: 3px;
+        font-size: 12px;
+    }
+    .precioRecienAgregadoTexto {
+        font-size: 13px;
+    }
+    .btnInformacionRecienAgregado {
+        /*tamaño*/
+        width: 80px;
+        max-width: 100px;
+        height: 50px;
+
+        font-size: 16px;
+        border-radius: 5px; 
+
+        /*centrado*/
+        padding: 5px;
+        align-self: center;
+        
+        
+    }
 }
