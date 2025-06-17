@@ -1,3 +1,14 @@
+#tituloInformacionDeVenta{
+
+
+    text-align: end;
+    width: 97%;
+    padding-top: 10px;
+
+    background: transparent;
+    margin: 10px;
+
+}
 
 
 .mainInformacionDeVenta{
@@ -74,17 +85,6 @@
 
 }
 
-#tituloInformacionDeVenta{
-
-
-    text-align: end;
-    width: 97%;
-
-
-    background: transparent;
-    margin: 10px;
-
-}
 
 
 .informacionVisible{

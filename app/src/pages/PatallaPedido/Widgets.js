@@ -13,7 +13,7 @@ export function Producto(){
 
             <div className="productoInformacion">
 
-                <img className="imgComida" src="https://static.vecteezy.com/system/resources/thumbnails/018/128/189/small/schezwan-noodles-or-szechuan-vegetable-png.png"></img>
+                
 
 
                 <div className = "descripcion">

@@ -5,6 +5,7 @@ import "./widgetsInicioCss/RecienAgregado.css"
 import "./widgetsInicioCss/MasVendidos.css"
 import "./widgetsInicioCss/PedidoTicket.css"
 import {InformacionDelProductoModal, InformacionDelPedidoModal} from "./modalesInicio.js"
+import { useNavigate } from "react-router-dom"; 
 
 import { Info } from "lucide-react";
 
@@ -46,6 +47,15 @@ export function Mesa({nombre, onOpen}){
    const [temporizador,setTemporizador] = useState(0);
    const [mostrarOpciones, setMostrarOpciones] = useState(false);
 
+   const navigate = useNavigate();
+
+   const handleOrdenar = (e) => {
+      const session = JSON.parse(localStorage.getItem('session'));
+      console.log("Tipo de cuenta actual:", session?.accountType);
+      console.log("Navegando a /informacion_venta");
+      navigate('/informacion_venta');
+  };
+   
 
    const formatearTimer = (totalSegundos) => {
       const horas = Math.floor(totalSegundos/3600);
@@ -82,43 +92,39 @@ export function Mesa({nombre, onOpen}){
    
    
    return (
+      <div className={`widgetMesa ${estado}`} onClick={clickMesa}>
+         <p className="nombreMesa">{nombre}</p>
+         {estado === "ordenada" && <p className="timer">🕐 {formatearTimer(temporizador)} </p>}
 
-   <div className={`widgetMesa ${estado}`} onClick={clickMesa}>
-      
-      <p className="nombreMesa">{nombre}</p>
-      {estado === "ordenada" && <p className="timer">🕐 {formatearTimer(temporizador)} </p>}
+         {mostrarOpciones && (
+            <div className="menuOpciones">
+               {estado === "desocupada" && (
+                  <button className="opcionMesa" onClick={() => cambiarEstado("ocupada")}>Ocupada</button>
+               )}
+               {estado === "ocupada" && (
+                  <>
+                     <button className="opcionMesa" onClick={() => cambiarEstado("desocupada")}>Desocupar</button>
+                     <button
+                        className="opcionMesa"
+                        type="button"
+                        onClick={handleOrdenar} // <-- Aquí usas la función
+                     >
+                        Ordenar
+                     </button>
+                  </>
+               )}
+               {estado === "ordenada" && (
+                  <>
+                     <button className="opcionMesa" onClick={() => cambiarEstado("ocupada")}>Orden completa</button>
+                     <button className="opcionMesa" onClick={() => cambiarEstado("desocupada")}>Desocupar</button>
+                     <button className="opcionMesa" onClick={() => onOpen(<InformacionDelPedidoModal datosPedido={DatosPedidoPrueba}/>)}><Info size={20} /></button>
+                  </>
+               )}
 
-
-      {mostrarOpciones && (
-
-         <div className="menuOpciones">
-            {estado === "desocupada" && (
-               <button className="opcionMesa" onClick={() => cambiarEstado("ocupada")}>ocupada</button>
-            )}
-            {estado === "ocupada" &&(
-               <>
-                  <button className="opcionMesa" onClick={()=> cambiarEstado("desocupada")}>Desocupar</button>
-                  <button className="opcionMesa" onClick={()=> cambiarEstado("ordenada")}>Ordenar</button>
-               </>
-            )}
-            {estado === "ordenada" && (
-               <>
-                  <button className="opcionMesa" onClick={()=> cambiarEstado("ocupada")}>Orden completa</button>
-                  <button className="opcionMesa" onClick={()=> cambiarEstado("desocupada")}>Desocupar</button>
-                  <button className="opcionMesa" onClick={()=> onOpen(<InformacionDelPedidoModal datosPedido={DatosPedidoPrueba}/>)}><Info size={20} /></button>
-               </>
-            )}
-
-         </div>
-
-
-      )}
-
-
-
-    </div>
-   )
-
+</div>
+         )}
+      </div>
+   );
 }
 
 
@@ -171,8 +177,8 @@ export function MasVendidos({top, nombre, srcImg, precio, totalVentas, onOpen}){
    return(
 
       <div className={`mainMasVendidos ${top}`}>
-         <span className="masVendidoCoronaIcono">👑</span>
-         <img className="imgenMasVendido" src={srcImg}></img>
+         
+         
          <span className="nombreMasVendido">{nombre}</span>
          <span className="precioMasVendido">{precio}$</span>
          <span className="totalDeVentas">total de ventas: {totalVentas}</span>
