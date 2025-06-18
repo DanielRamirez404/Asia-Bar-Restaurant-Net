@@ -44,7 +44,7 @@ export function InformacionDelProductoModal({datosProducto}){
             
             
 
-            <img className="imagenProducto" src={datosProducto.imagen}></img>
+            
             
             <h2>{datosProducto.nombre}</h2>
 

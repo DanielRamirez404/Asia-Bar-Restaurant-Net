@@ -108,7 +108,6 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
     const [tableData, setTableData] = useState([]);
 
     useEffect(() => {
-        
         const fetchData = async () => {
             const data = await getTableData(`${serverAddress}/${tableName}`);
             setTableData(data);

@@ -1,5 +1,17 @@
 /*Nota*/
 
+#tituloPedido{
+    text-align: end;
+    width: 97%;
+    padding-top: 10px; 
+
+    background: transparent;
+    margin-bottom: 20px;
+
+   
+
+}
+
 .mainPedido{
     margin: 0;
     padding: 0;
@@ -25,17 +37,7 @@
 }
 
 
-#tituloPedido{
-    text-align: end;
-    width: 97%;
 
-
-    background: transparent;
-    margin-bottom: 20px;
-
-   
-
-}
 
 #nota , .btnPedido, .btnEsconder {
 

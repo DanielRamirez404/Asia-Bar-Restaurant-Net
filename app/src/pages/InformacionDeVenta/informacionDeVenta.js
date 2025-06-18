@@ -9,8 +9,9 @@ import { useNavigate } from 'react-router-dom';
 function ContenidoInformacionVenta(){
     
     const [Seleccion, setSeleccion] = useState("");
+    const navigate = useNavigate();
 
-    const navegar = useNavigate();
+    
 
     return(
 
@@ -103,7 +104,7 @@ function ContenidoInformacionVenta(){
 
                 
                     <button id="btnCancelar" className="btnPedido">Cancelar</button>
-                    <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/Pedido")}>Continuar</button>
+                    <button id="btnContinuar" className="btnPedido" onClick={() => navigate("/Pedido")}>Continuar</button>
 
 
                 </div>

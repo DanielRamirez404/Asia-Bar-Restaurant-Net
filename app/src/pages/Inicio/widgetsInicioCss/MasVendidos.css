@@ -3,11 +3,12 @@
     display: flex;
     flex-direction: column;
     
-    width: 200px;
+    width: 90%;
     
     padding: 10px;
-    margin: auto;
+    
     margin-top: 10px;
+    border-radius: 5px;
    
     box-sizing: border-box;
     background: #fff;
@@ -30,29 +31,42 @@
 
 .precioMasVendido{
 
+    /*tamaño*/
+    margin-top: 10px;    
     font-weight: bold;
-    font-size: 15px;
+    font-size: 18px;
+    
 }
 
 .totalDeVentas{
-
-    font-size: 13px;
-    margin-top: 5px;
+    /*tamaño y color de letra*/
+    font-size: 18px;
+    font-weight: bold;
+    
+    /*margin*/
+    margin-top: 0px;
     margin-bottom: 10px;
 
+    
+    
 }
 
 .btnInformacionMasVendidos{
 
+    /*color*/
     color: #fff;
     background: #3870ff;
+    
+    /*bordes*/
     border: none;
     border-radius: 10px;
-    padding: 5px;
+    /*Tamaño del boton*/
+    height: 29%; 
+    width: 60%;
+    /*centrado*/
     margin: auto;
-    
-    width: 70%;
-
+    padding: 10px;
+    /*cursor*/    
     cursor: pointer;
 
 }
@@ -67,31 +81,115 @@
 
 }
 
-.mainMasVendidos.top1{
-
-    margin-top: 0;
-
-    .masVendidoCoronaIcono{
-        display: flex;
-    }
-
-}
 
 
-@media (max-width:768px){
 
-    .masVendidoCoronaIcono{
 
-        top: -5%;
-
-    }
-
-    .mainMasVendidos.top1{
-
+/* --------- Laptop (≤1200px) --------- */
+@media (max-width: 1200px) {
+    .mainMasVendidos {
+        width: 290px;         /* igual al original */
+        max-width: 320px;
+        min-width: 200px;
+        padding: 10px;
         margin-top: 10px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background: #fff;
+        border: 1px solid #888;
+        text-align: left;     /* igual que el original */
+        position: relative;
+        box-shadow: none;     /* igual que el original, si no usas sombra */
     }
-
-
+    .precioMasVendido,
+    .totalDeVentas {
+        font-size: 18px;     /* igual que el original */
+    }
+    .btnInformacionMasVendidos {
+        width: 60%;
+        min-width: 70px;
+        max-width: 200px;
+        height: 29%;
+        font-size: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        margin: auto;
+    }
 }
 
+/* --------- Tablet (≤900px) --------- */
+@media (max-width: 900px) {
+    .mainMasVendidos {
+    display: flex;
+    flex-direction: column;
+    
+    width: 90%;
+    
+    padding: 10px;
+    
+    margin-top: 13px;
+    border-radius: 5px;
+   
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0  8px 10px 2px #0003;
+    text-align: center;
+    position: relative;
 
+    }
+    .precioMasVendido,
+    .totalDeVentas {
+        font-size: 15px;
+    }
+    .btnInformacionMasVendidos {
+        width: 90%;
+        font-size: 13px;
+        padding: 8px;
+    }
+}
+
+/* --------- Mobile L (≤425px) --------- */
+@media (max-width: 425px) {
+    .mainMasVendidos {
+        width: 99vw;
+        max-width: 99vw;
+        min-width: 100px;
+        padding: 4px;
+        font-size: 14px;
+    }
+    .precioMasVendido,
+    .totalDeVentas {
+        font-size: 13px;
+    }
+    .btnInformacionMasVendidos {
+        width: 100%;
+        min-width: 40px;
+        height: 32px;
+        font-size: 12px;
+        padding: 6px;
+        border-radius: 8px;
+    }
+}
+
+/* --------- Mobile S (≤375px) --------- */
+@media (max-width: 375px) {
+    .mainMasVendidos {
+        width: 100vw;
+        max-width: 100vw;
+        min-width: 80px;
+        padding: 2px;
+        font-size: 12px;
+    }
+    .precioMasVendido,
+    .totalDeVentas {
+        font-size: 11px;
+    }
+    .btnInformacionMasVendidos {
+        width: 100%;
+        min-width: 30px;
+        height: 28px;
+        font-size: 10px;
+        padding: 4px;
+        border-radius: 6px;
+    }
+}

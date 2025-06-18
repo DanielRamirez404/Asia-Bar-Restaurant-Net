@@ -8,7 +8,7 @@
     max-width: 230px;
     margin: auto;
     margin-bottom: 10px;
-    
+
 
     border-radius: 20px;
    
@@ -37,6 +37,7 @@
     margin: auto;
     background: #111;
 
+
     object-fit:contain;
 
 }
@@ -46,7 +47,7 @@
     height: 90%;
     width: 100%;
     text-align: center;
-    margin: auto;
+    padding-top: 50px;
     
     display: flex;
     flex-direction: column;
