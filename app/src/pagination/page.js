@@ -43,7 +43,7 @@ class Page {
 export const PageList = [
     new Page(PagePaths['Home'], <Home />, "Menú default"),
     new Page(PagePaths['Login'], <Login />, "Login"),
-    new Page(PagePaths['InformacionVenta'], <InformacionVenta />, "informacion venta", AllRoles),
+    new Page(PagePaths['InformacionVenta'], <InformacionVenta />, "informacion venta"),
     new Page(PagePaths['Pedido'], <Pedido />, "ventanaPedido"),
     new Page(PagePaths['ConfirmacionVenta'], <ConfirmacionVenta />, "Confirmacion Venta"),
     new Page(PagePaths['SignUp'], <Request title="Nuevo Ingreso" />, "Nuevo Ingreso"),
