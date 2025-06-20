@@ -23,9 +23,6 @@
 .frameResumenes{
 
     width: 90%;
-   
-    
-
     margin: auto;
     margin-top: 20px;
 
@@ -178,41 +175,32 @@
 @media (max-width : 768px){
 
 
-    .mainInicio{
+.mainInicio{
         
-       display: flex;
-       flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    
+}
+ 
 
+.frameResumenes{
+    display:inline-flex;
+    flex-direction:row;
+    width: 63%;
+    
+    padding: 5px;        /* Padding original */
+    margin-top: 60px
+    
     }
 
     
-  
-
-    .frameResumenes{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 50px;
-    }
-
-    #productosMasVendidos{
-
-        width: 100%;
-        margin-top: 40px;
-        height: 320px;
-        
-
-    }
 
     .scrollframeMasVendidos{
         overflow-x: auto;
-        gap: 30px;
+        display: flex;
+        flex-direction: row;
+        border: none;
        
-    }
-
-    #productosRecienAgregados{
-
-        width: 100%;
     }
 
     .scrollFrameMesas{
@@ -221,23 +209,37 @@
 
     }
 
+   .scrollFrameRecienAgregado{
+
     
+    width: 100%;
+    background: #eee;
+    padding:5px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    
+   } 
 
 }
 
 @media (max-width : 1024px){
-
- .frameResumenes{
-
+.scrollframeMasVendidos{
+    overflow-x: auto;
     display: flex;
-    flex-direction: column;
-    align-items: end;
+    flex-direction: row;
+    border: none;
+    
+    
+}
+.frameResumenes{
+    display:inline-flex;
+    flex-direction:row;
+    
+    
+    padding: 5px;        /* Padding original */
+    margin-left: 4%;
+    
 
  }
 
-
-
 }
-
-
-
