@@ -117,6 +117,32 @@
     }
 }
 
+
+
+/* --------- Laptop (1024px) --------- */
+@media (max-width: 1024px) {
+    .mainMasVendidos {
+        width: 50%;         /* Ancho fijo como en desktop */
+        
+        padding: 10px;        /* Padding original */
+        margin: 10px;         /* Margen consistente */
+        font-size: 16px;
+        border: 1px solid #888;
+        border-radius: 5px;
+        text-align: left;
+    }
+    .precioMasVendido,
+    .totalDeVentas {
+        font-size: 17px;
+    }
+    .btnInformacionMasVendidos {
+        width: 50%;
+        height: 30%;
+        font-size: 15px;
+        padding: 10px;
+    }
+}
+
 /* --------- Tablet (≤900px) --------- */
 @media (max-width: 900px) {
     .mainMasVendidos {
