@@ -5,7 +5,7 @@ import DashboardPage from "./dashboard-page";
 import { getTableData } from "../../endpoint-functions/table-fetching.js"
 import { serverAddress } from '../../constants/constants.js'; 
 import { Link } from 'react-router-dom';
-import { FormPages } from '../../pagination/paths.js';
+import { routes } from '../../config/routes.js';
 
 function ActionButtons() {
     return (
@@ -58,7 +58,7 @@ function TablePageHeader({title, tableName, dataSetter}) {
         <div className="table-page-header">
             <h1>{ title }</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <Link to={ FormPages[`${tableName}-form`] }>
+                <Link to={ routes[`${tableName}-form`] }>
                     <button onClick={ null } className="new-button">
                         Añadir
                     </button>

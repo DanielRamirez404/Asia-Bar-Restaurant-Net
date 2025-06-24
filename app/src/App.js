@@ -3,18 +3,18 @@ import {
     Routes,
     Route,
     Navigate,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import { ContextWrapper } from './session/session';
-import { PageList } from './pagination/page';
-import { PagePaths } from './pagination/paths';
+import { pages } from './config/pages.js';
+import { routes } from './config/routes.js';
 
 function Content() {
     return (
         <Router>
             <Routes>
-                <Route exact path = "/*" element = { <Navigate to={ PagePaths['Login'] } /> } />
-                { PageList.map((page) => ( <Route path={page.path} element={page.component} /> ))}
+                <Route exact path = "/*" element = { <Navigate to={ routes['Inicio de Sesion'] } /> } />
+                { pages.map((page) => ( <Route path={page.path} element={page.component} /> ))}
             </Routes>
         </Router>
     );

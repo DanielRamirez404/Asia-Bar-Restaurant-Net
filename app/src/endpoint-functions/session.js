@@ -1,5 +1,5 @@
 import { serverAddress } from '../constants/constants.js'; 
-import { PagePaths } from '../pagination/paths.js';
+import { routes } from '../config/routes.js';
 
 export function onLogin(e, username, password, navigate) {
     e.preventDefault(); 
@@ -15,7 +15,7 @@ export function onLogin(e, username, password, navigate) {
         .then(res => {
             if (res.ok) { 
                 alert("¡Bienvenido de vuelta!");
-                navigate(PagePaths['Home']);
+                navigate(routes['Inicio']);
             } else {
                 throw new Error(`Credenciales invalidas`);
             }
@@ -33,7 +33,7 @@ export function onLogout(e, navigate) {
     })
         .then(res => {
             if (res.ok) { 
-                navigate(PagePaths['Login']);
+                navigate(routes['Inicio de Sesion']);
             } else {
                 throw new Error(`Error al cerrar sesión`);
             }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Menu, ChevronDown, ChevronRight, LogOut } from 'lucide-react'; 
-import { DashboardMenuItems } from '../../pagination/paths';
-import { GetPageFromPath } from '../../pagination/page';
+import { dashboardItems } from '../../config/dashboard-items.js';
+import { getPageFromPath } from '../../config/pages.js';
 import './constants.css';
 import './dashboard-page.css';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ function MenuToggleButton({ isSidebarOpen, onClick }) {
 }
 
 function MenuSubItemButton({ path }) {
-    const title = GetPageFromPath(path).title;
+    const title = getPageFromPath(path).name;
 
     return (
         <Link to={ path }>
@@ -72,7 +72,7 @@ function SideBarMenu({ expandedIndex, setExpandedIndex }) {
                 </li>
 
                 {/* Resto de los elementos del menú */}
-                {DashboardMenuItems.map((menuItem, index) => (
+                {dashboardItems.map((menuItem, index) => (
                     <MenuItem
                         index={index}
                         menuItem={menuItem}
