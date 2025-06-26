@@ -7,7 +7,7 @@ import './dashboard-page.css';
 import { Link } from 'react-router-dom';
 import '../../Visual-Resources/Logo.png';  
 import Popup from '../reusables/Pop-up.js'; 
-import { onLogout } from '../../endpoint-functions/session.js';
+import { onLogout } from '../../utils/api.js';
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;

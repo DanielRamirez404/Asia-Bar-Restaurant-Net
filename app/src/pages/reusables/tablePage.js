@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { getTableData } from "../../endpoint-functions/table-fetching.js"
+import { getTableData } from "../../utils/api.js"
 import { apiAddress } from '../../config/api.js'; 
 import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';

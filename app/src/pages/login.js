@@ -2,7 +2,7 @@ import FormPage from './reusables/form-page';
 import { RequiredInputBox } from './reusables/form-page';
 import './reusables/styles.css'
 import { Link } from 'react-router-dom';
-import { onLogin } from '../endpoint-functions/session.js';
+import { onLogin } from '../utils/api.js';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
