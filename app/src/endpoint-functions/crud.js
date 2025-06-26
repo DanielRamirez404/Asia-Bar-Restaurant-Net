@@ -1,11 +1,11 @@
-import { serverAddress } from '../constants/constants.js'; 
+import { apiAddress } from '../config/api.js'; 
 
 export onCreate = function(e, tableName, getData, onDone) {
     e.preventDefault(); 
 
     let data = getData();
     
-    fetch(`${serverAddress}/${tableName}`, {
+    fetch(`${apiAddress}/${tableName}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -26,7 +26,7 @@ export onDelete = function(e, tableName, getID, onDone) {
 
     let id = getID();
     
-    fetch(`${serverAddress}/${tableName}:${id}`, {
+    fetch(`${apiAddress}/${tableName}:${id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -47,7 +47,7 @@ export onUpdate = function(e, tableName, getData, getID, onDone) {
     let id = getID();
     let data = getData();
     
-    fetch(`${serverAddress}/${tableName}:${id}`, {
+    fetch(`${apiAddress}/${tableName}:${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),

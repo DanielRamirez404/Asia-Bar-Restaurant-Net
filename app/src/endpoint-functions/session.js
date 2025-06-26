@@ -1,4 +1,4 @@
-import { serverAddress } from '../constants/constants.js'; 
+import { apiAddress } from '../config/api.js'; 
 import { routes } from '../config/routes.js';
 
 export function onLogin(e, username, password, navigate) {
@@ -6,7 +6,7 @@ export function onLogin(e, username, password, navigate) {
 
     const data = { username: username, password: password }; 
     
-    fetch(`${serverAddress}/login`, {
+    fetch(`${apiAddress}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -26,7 +26,7 @@ export function onLogin(e, username, password, navigate) {
 export function onLogout(e, navigate) {
     e.preventDefault(); 
     
-    fetch(`${serverAddress}/logout`, {
+    fetch(`${apiAddress}/logout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
