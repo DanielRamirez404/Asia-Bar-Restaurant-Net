@@ -13,19 +13,35 @@ function getParsedData(res) {
     return data;
 }
 
-export const getTableData = async function(url) {
-    const response = fetch(url, { credentials: 'include' });
-    let data = [];
-
-    await response
+function api_fetch(fetch_settings) {
+    return fetch(`${apiAddress}/${fetch_settings.endpoint}`, {
+        method: fetch_settings.method ?? "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: ('body' in fetch_settings) ? JSON.stringify(fetch_settings.body) : undefined,
+        credentials: 'include'
+    })
         .then(res => {
             if (!res.ok)
                 throw new Error(`HTTP error, Status: ${res.status}`);
 
-            return res.json()
+            fetch_settings.onOk?.(res);
+            
+            return res.json();
         })
-        .then(res => { data = getParsedData(res); })
-        .catch(error => console.error("Error: ", error))
+        .catch(error => {
+            const defaultOnError = () => alert(error);
+            const onError = fetch_settings.onError ?? defaultOnError;
+            onError();
+        })
+}
+
+export const getTableData = async function(tableName, searchQuery = null) {
+    let data = [];
+
+    await api_fetch({
+        endpoint: (!searchQuery) ? tableName : `${tableName}/search/${searchQuery}`,
+        method: 'GET',
+    }).then(res => { data = getParsedData(res); })
 
     return data;
 }
@@ -33,103 +49,55 @@ export const getTableData = async function(url) {
 export const onCreate = function(e, tableName, getData, onDone) {
     e.preventDefault(); 
 
-    let data = getData();
-    
-    fetch(`${apiAddress}/${tableName}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        credentials: 'include'
-    })
-        .then(res => {
-            if (res.ok) { 
-                    onDone();
-                } else {
-                    throw new Error(`HTTP error, Status: ${res.status}`);
-                }
-            })
-        .catch(error => alert(error));
+    api_fetch({
+        endpoint: tableName,
+        body: getData(),
+        onOk: (res) => { onDone(); }
+    });
 };
 
 export const onDelete = function(e, tableName, getID, onDone) {
     e.preventDefault(); 
 
-    let id = getID();
-    
-    fetch(`${apiAddress}/${tableName}:${id}`, {
+    api_fetch({
+        endpoint: `${tableName}:${getID()}`,
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-    })
-        .then(res => {
-            if (res.ok) { 
-                    onDone();
-                } else {
-                    throw new Error(`HTTP error, Status: ${res.status}`);
-                }
-            })
-        .catch(error => alert(error));
+        onOk: (res) => { onDone(); }
+    });
 };
 
 export const onUpdate = function(e, tableName, getData, getID, onDone) {
     e.preventDefault(); 
-
-    let id = getID();
-    let data = getData();
     
-    fetch(`${apiAddress}/${tableName}:${id}`, {
+    api_fetch({
+        endpoint: `${tableName}:${getID()}`,
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        credentials: 'include'
-    })
-        .then(res => {
-            if (res.ok) { 
-                    onDone();
-                } else {
-                    throw new Error(`HTTP error, Status: ${res.status}`);
-                }
-            })
-        .catch(error => alert(error));
+        body: getData(),
+        onOk: (res) => { onDone(); }
+    });
 };
 
 export function onLogin(e, username, password, navigate) {
     e.preventDefault(); 
 
-    const data = { username: username, password: password }; 
-    
-    fetch(`${apiAddress}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        credentials: 'include'
-    })
-        .then(res => {
-            if (res.ok) { 
-                alert("¡Bienvenido de vuelta!");
-                navigate(routes['Inicio']);
-            } else {
-                throw new Error(`Credenciales invalidas`);
-            }
-        })
-        .catch(error => alert(error));
+    api_fetch({
+        endpoint: "login",
+        body: { username: username, password: password },
+        onError: () => { alert("Credenciales invalidas") },
+        onOk: (res) => {
+            alert("¡Bienvenido de vuelta!");
+            navigate(routes['Inicio']);
+        }
+    });
 }
 
 export function onLogout(e, navigate) {
     e.preventDefault(); 
     
-    fetch(`${apiAddress}/logout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-    })
-        .then(res => {
-            if (res.ok) { 
-                navigate(routes['Inicio de Sesion']);
-            } else {
-                throw new Error(`Error al cerrar sesión`);
-            }
-        })
-        .catch(error => alert(error));
+    api_fetch({
+        endpoint: "logout",
+        onOk: (res) => { navigate(routes['Inicio de Sesion']); },
+        onError: () => {  }
+    });
 }
 

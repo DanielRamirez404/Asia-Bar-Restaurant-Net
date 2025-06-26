@@ -31,7 +31,7 @@ function TablePageSearch({dataSetter, tableName}) {
 
             const query = (searchQuery == "") ? `${apiAddress}/${tableName}` : `${apiAddress}/${tableName}/search/${searchQuery}`; 
 
-            const data = await getTableData(query);
+            const data = await getTableData(tableName, searchQuery);
             dataSetter(data);
         }
 
@@ -109,7 +109,7 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getTableData(`${apiAddress}/${tableName}`);
+            const data = await getTableData(tableName);
             setTableData(data);
         };
 
