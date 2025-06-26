@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { getTableData } from "../../endpoint-functions/table-fetching.js"
-import { serverAddress } from '../../constants/constants.js'; 
+import { getTableData } from "../../utils/api.js"
+import { apiAddress } from '../../config/api.js'; 
 import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';
 
@@ -27,15 +27,15 @@ function TablePageSearch({dataSetter, tableName}) {
     const [searchQuery, setsearchQuery] = useState("");
 
     const onClick = () => {
-        const searchData = async function(serverAddress, tableName, searchQuery) {
+        const searchData = async function(apiAddress, tableName, searchQuery) {
 
-            const query = (searchQuery == "") ? `${serverAddress}/${tableName}` : `${serverAddress}/${tableName}/search/${searchQuery}`; 
+            const query = (searchQuery == "") ? `${apiAddress}/${tableName}` : `${apiAddress}/${tableName}/search/${searchQuery}`; 
 
-            const data = await getTableData(query);
+            const data = await getTableData(tableName, searchQuery);
             dataSetter(data);
         }
 
-        searchData(serverAddress, tableName, searchQuery);
+        searchData(apiAddress, tableName, searchQuery);
     };
 
     return(
@@ -109,7 +109,7 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getTableData(`${serverAddress}/${tableName}`);
+            const data = await getTableData(tableName);
             setTableData(data);
         };
 

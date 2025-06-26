@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './constants.css';
 import './form-page.css';
 import { regExDic } from './regExDic';
 export function RequiredInputBox({ title, textSetter, regExKey, type='text' }) {
