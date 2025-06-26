@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { Menu, ChevronDown, ChevronRight, LogOut } from 'lucide-react'; 
 import { dashboardItems } from '../../config/dashboard-items.js';
 import { getPageFromPath } from '../../config/pages.js';
-import './constants.css';
 import './dashboard-page.css';
 import { Link } from 'react-router-dom';
 import '../../Visual-Resources/Logo.png';  

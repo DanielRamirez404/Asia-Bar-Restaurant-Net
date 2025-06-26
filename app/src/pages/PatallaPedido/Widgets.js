@@ -1,5 +1,4 @@
 import React from "react";
-import "../reusables/constants.css"
 import "./Widgets.css"
 
 
