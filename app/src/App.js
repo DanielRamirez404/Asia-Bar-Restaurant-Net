@@ -5,7 +5,7 @@ import {
     Navigate,
 } from "react-router-dom";
 
-import { ContextWrapper } from './session/session';
+import { ContextWrapper } from './context/session';
 import { pages } from './config/pages.js';
 import { routes } from './config/routes.js';
 

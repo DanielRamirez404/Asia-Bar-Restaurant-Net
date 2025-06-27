@@ -1,5 +1,5 @@
-import { AllRoles } from "../session/roles.js";
-import { RestrictedPage } from "../session/permissions";
+import { AllRoles } from "../config/roles.js";
+import { RestrictedPage } from "./permissions.js";
 
 export function toPath(name) {
     return '/' + name.toLowerCase().replace(/\s+/g, '-');
