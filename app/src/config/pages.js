@@ -9,13 +9,9 @@ import InformacionVenta from "../pages/InformacionDeVenta/informacionDeVenta";
 import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 import TablaVentas from "../pages/tabla-ventas";
 
+import { ControlPages } from "../pages/control.js";
+
 import FormularioProducto from "../pages/Formularios/formulario_producto";
-
-import UserControl from "../pages/control/user-control";
-import ClientControl from "../pages/control/client-control";
-import DeliverymenControl from "../pages/control/deliverymen-control.js";
-import { MainDishControl, ProductControl, SideDishControl } from "../pages/control/dish-control";
-
 import FormularioUsuario from "../pages/Formularios/Formulario_usuario";
 import FormularioContorno from "../pages/Formularios/Formulario_contorno";
 import FormularioMenu from "../pages/Formularios/Formulario_menu";
@@ -39,12 +35,12 @@ const components = [
     FormularioDelivery,
     FormularioCliente,
     FormularioVenta,
-    UserControl,
-    ClientControl,
-    MainDishControl,
-    SideDishControl,
-    ProductControl,
-    DeliverymenControl,
+    ControlPages[6],
+    ControlPages[1],
+    ControlPages[2],
+    ControlPages[3],
+    ControlPages[4],
+    ControlPages[5],
 ]
 
 export const pages = components.map((Component, index) => 
