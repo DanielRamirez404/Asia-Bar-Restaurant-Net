@@ -9,6 +9,7 @@ import InformacionVenta from "../pages/InformacionDeVenta/informacionDeVenta";
 import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 import TablaVentas from "../pages/tabla-ventas";
 
+import ControlPage from "../pages/control.js";
 import { ControlPages } from "../pages/control.js";
 
 import FormularioProducto from "../pages/Formularios/formulario_producto";
@@ -25,7 +26,7 @@ const components = [
     Home,
     Login,
     Pedido,
-    TablaVentas,
+    ControlPage,
     InformacionVenta,
     ConfirmacionVenta,
     FormularioUsuario,
