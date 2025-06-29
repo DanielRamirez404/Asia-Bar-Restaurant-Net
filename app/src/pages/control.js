@@ -9,10 +9,10 @@ function ControlPage() {
     const [ table, setTable ] = useState(tables[0]);
 
     useEffect( () => {
-        setTable(tables.find((found) => found.name == session.table));
-    });
+        setTable(tables.find((found) => found.name === session.table));
+    }, [session.table]);
 
-    return (<TablePage title={`Control de ${table.name}`} fields={table.fields} tableName={table.dbname} />);
+    return (<TablePage key={table.dbname} title={`Control de ${table.name}`} fields={table.fields} tableName={table.dbname} />);
 };
 
 export default ControlPage;
