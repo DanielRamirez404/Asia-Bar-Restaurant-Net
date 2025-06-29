@@ -11,7 +11,7 @@ function ControlPage() {
 
     const { session, setSession } = useContext(SessionContext);
 
-    const table = tables.find((table) => table.name == session.table); 
+    const table = tables.find((found) => found.name == session.table); 
 
     return (<TablePage title={`Control de ${table.name}`} fields={table.fields} tableName={table.dbname} />);
 };

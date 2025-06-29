@@ -4,7 +4,7 @@ export const names = [
     'Inicio',
     'Inicio de Sesion',
     'Pedido',
-    'Tabla de Ventas',
+    'Control de Ventas',
     'Informacion de Venta',
     'Confirmacion Venta',
     'users-form',
