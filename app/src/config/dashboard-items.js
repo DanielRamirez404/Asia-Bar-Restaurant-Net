@@ -1,20 +1,26 @@
-import { routes } from "./routes.js"
+import { DashboardSubItem } from "../utils/dashboard.js";
 
 export const dashboardItems = [
     {
         title: "Control de Ventas",
-        subItems: [ routes['Informacion de Venta'], routes['Tabla de Ventas'] ],
+        subItems: [ new DashboardSubItem('Informacion de Venta', 'clients') ], 
+        subItems: [ new DashboardSubItem('Control de Ventas', 'clients') ] 
     },
     {
         title: "Control de Servicios",
-        subItems: [ routes['Control de Menu'], routes['Control de Contornos'], routes['Control de Productos'], routes['Control de Repartidores'] ]
+        subItems: [ 
+            new DashboardSubItem('Control de Menu', 'main-dish'), 
+            new DashboardSubItem('Control de Contornos', 'side-dish'),
+            new DashboardSubItem('Control de Productos', 'product'),
+            new DashboardSubItem('Control de Repartidores', 'deliverymen'),
+        ] 
     },
     {
         title: "Control de Clientes",
-        subItems: [ routes['Control de Clientes'] ]
+        subItems: [ new DashboardSubItem('Control de Clientes', 'clients') ] 
     },
     {
         title: "Control de Usuarios",
-        subItems: [ routes['Control de Usuarios'] ]
+        subItems: [ new DashboardSubItem('Control de Usuarios', 'users') ] 
     },
 ];

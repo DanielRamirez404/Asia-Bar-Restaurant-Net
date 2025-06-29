@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Menu, ChevronDown, ChevronRight, LogOut } from 'lucide-react'; 
 import { dashboardItems } from '../../config/dashboard-items.js';
@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import '../../Visual-Resources/Logo.png';  
 import Popup from '../reusables/Pop-up.js'; 
 import { onLogout } from '../../utils/api.js';
+import SessionContext from '../../context/session.js';
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -19,15 +20,21 @@ function MenuToggleButton({ isSidebarOpen, onClick }) {
     );
 }
 
-function MenuSubItemButton({ path }) {
-    const title = getPageFromPath(path).name;
-
+function MenuSubItemButton({ subItem }) {
+    const title = getPageFromPath(subItem.route).name;
+    const navigate = useNavigate();
+    
+    const { session, setSession } = useContext(SessionContext);
+    
+    const onClick = () => {
+        session.setDifferentTable(setSession, subItem.table);
+        navigate(subItem.route);
+    };
+    
     return (
-        <Link to={ path }>
-            <button className="submenu-button">
-                { title }
-            </button>
-        </Link>
+        <button onClick = { onClick } className="submenu-button">
+            { title }
+        </button>
     )
 }
 
@@ -48,7 +55,7 @@ function MenuItem({ menuItem, index, isExpanded, onClick }) {
                 <ul className="submenu">
                     {menuItem.subItems.map((subItem, subIndex) => (
                         <li key={subIndex}>
-                            <MenuSubItemButton path={ subItem } />
+                            <MenuSubItemButton subItem={ subItem } />
                         </li>
                     ))}
                 </ul>
