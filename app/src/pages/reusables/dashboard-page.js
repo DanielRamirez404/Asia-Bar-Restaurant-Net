@@ -21,7 +21,6 @@ function MenuToggleButton({ isSidebarOpen, onClick }) {
 }
 
 function MenuSubItemButton({ subItem }) {
-    const title = getPageFromPath(subItem.route).name;
     const navigate = useNavigate();
     
     const { session, setSession } = useContext(SessionContext);
@@ -33,7 +32,7 @@ function MenuSubItemButton({ subItem }) {
     
     return (
         <button onClick = { onClick } className="submenu-button">
-            { title }
+            { subItem.name }
         </button>
     )
 }
@@ -68,7 +67,6 @@ function SideBarMenu({ expandedIndex, setExpandedIndex }) {
     return (
         <nav className="menu">
             <ul className="menu-items">
-                {/* Botón "Inicio" */}
                 <li className="inicio-btn" >
                     <Link to="/inicio" >
                             <button className="menu-button">
@@ -77,7 +75,6 @@ function SideBarMenu({ expandedIndex, setExpandedIndex }) {
                     </Link>
                 </li>
 
-                {/* Resto de los elementos del menú */}
                 {dashboardItems.map((menuItem, index) => (
                     <MenuItem
                         index={index}

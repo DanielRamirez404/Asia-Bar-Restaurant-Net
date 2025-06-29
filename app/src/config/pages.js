@@ -10,7 +10,6 @@ import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 import TablaVentas from "../pages/tabla-ventas";
 
 import ControlPage from "../pages/control.js";
-import { ControlPages } from "../pages/control.js";
 
 import FormularioProducto from "../pages/Formularios/formulario_producto";
 import FormularioUsuario from "../pages/Formularios/Formulario_usuario";
@@ -36,12 +35,6 @@ const components = [
     FormularioDelivery,
     FormularioCliente,
     FormularioVenta,
-    ControlPages[6],
-    ControlPages[1],
-    ControlPages[2],
-    ControlPages[3],
-    ControlPages[4],
-    ControlPages[5],
 ]
 
 export const pages = components.map((Component, index) => 

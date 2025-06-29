@@ -114,7 +114,7 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
         };
 
         fetchData();
-    }, []);
+    }, [tableName]);
 
     const content = (tableData.length === 0) ? 
         <h1>No hay entradas</h1> 
