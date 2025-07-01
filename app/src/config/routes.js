@@ -4,7 +4,7 @@ export const names = [
     'Inicio',
     'Inicio de Sesion',
     'Pedido',
-    'Tabla de Ventas',
+    'Control',
     'Informacion de Venta',
     'Confirmacion Venta',
     'users-form',
@@ -14,12 +14,6 @@ export const names = [
     'deliverymen-form',
     'clients-form',
     'sales-form',
-    'Control de Usuarios',
-    'Control de Clientes',
-    'Control de Menu',
-    'Control de Contornos',
-    'Control de Productos',
-    'Control de Repartidores'
 ];
 
 export const routes = Object.fromEntries(
