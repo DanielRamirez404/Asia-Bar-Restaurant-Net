@@ -177,9 +177,8 @@
 /* --------- Mobile L (≤425px) --------- */
 @media (max-width: 425px) {
     .mainMasVendidos {
-        width: 99vw;
-        max-width: 99vw;
-        min-width: 100px;
+        width: 100%;
+       
         padding: 4px;
         font-size: 14px;
     }
