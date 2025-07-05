@@ -1,10 +1,11 @@
-import FormPage from '../../pages/reusables/form-page.js';
+import Form from './form.js';
 import { SubmitButton, GoBackButton } from '../ui/buttons.js';
+
 import './controlForm.css';
 
 function ControlForm({onSubmit, title, content, goBackPath}) {
     return (
-        <FormPage onSubmit={ onSubmit } title={ title } 
+        <Form onSubmit={ onSubmit } title={ title } 
             content= {(
                 <>
                     {content}
