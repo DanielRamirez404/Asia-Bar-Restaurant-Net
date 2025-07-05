@@ -1,3 +1,17 @@
+:root {
+    --red-hue: #B22222;
+    --bright-red-hue: #ff2929;
+    --dark-red-hue: #a72121;
+    --yellow-background-hue: #f9f7dc;
+    --gray-hue: #aaaaaa;
+    --platinum-hue: #cccccc;
+    --scrollbar-background-hue: #8884;
+    --shadow-hue: #9992;
+    --white-hue: #fefefe;
+    --black-hue: #000000;
+    --blue-hyperlink-hue: #13407c;
+}
+
 html, body, #root {
     min-height: 100% !important;
     height: 100%;
@@ -25,19 +39,6 @@ code {
     monospace;
 }
 
-:root {
-    --red-hue: #B22222;
-    --bright-red-hue: #ff2929;
-    --dark-red-hue: #a72121;
-    --yellow-background-hue: #f9f7dc;
-    --gray-hue: #aaaaaa;
-    --platinum-hue: #cccccc;
-    --scrollbar-background-hue: #8884;
-    --shadow-hue: #9992;
-    --white-hue: #fefefe;
-    --black-hue: #000000;
-    --blue-hyperlink-hue: #13407c;
-}
 
 
 ::-webkit-scrollbar{

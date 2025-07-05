@@ -3,6 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: var(--yellow-background-hue);
 }
 
 .frame-form {
@@ -29,4 +31,14 @@
 
 .frame-form hr {
     margin: 0% 15%;
+}
+
+@media (max-width : 768px){
+    .frame-form {
+        width: 90%;
+    }
+
+    .frame-form h1{
+        font-size: 30px;
+    }
 }

@@ -1,4 +1,3 @@
-
 .input-box {
     margin: 30px 0px;
     display: flex;
@@ -93,12 +92,3 @@
     font-size: 16px;
 }
 
-@media (max-width : 768px){
-    .frame-form {
-        width: 90%;
-    }
-
-    .frame-form h1{
-        font-size: 30px;
-    }
-}
