@@ -208,7 +208,7 @@
 .frameResumenes{
     display:inline-flex;
     flex-direction:row;
-    width: 63%;
+    width: 60%;
     
     padding: 5px;        
     margin-top: 60px
@@ -265,4 +265,21 @@
 
  }
 
+}
+
+@media (max-width : 768px){
+    .frameMesas{
+        width: 90%;
+    }
+    .frameResumenes{
+        width: 61.5%;
+    }
+    .scrollframeMasVendidos{
+        overflow-x: auto;
+        display: flex;
+        flex-direction: row;
+        border: none;
+    
+    }
+    
 }

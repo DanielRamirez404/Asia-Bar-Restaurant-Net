@@ -143,6 +143,29 @@
     }
 }
 
+/* --------- Tablet (768px) --------- */
+@media (max-width: 768px) {
+    .mainMasVendidos {
+        width: 100%;         /* Ancho fijo como en 1024px */
+        padding: 10px;        /* Padding original */
+        margin: 10px;         /* Margen consistente */
+        font-size: 16px;
+        border: 1px solid #888;
+        border-radius: 5px;
+        text-align: left;
+    }
+    .precioMasVendido,
+    .totalDeVentas {
+        font-size: 17px;
+    }
+    .btnInformacionMasVendidos {
+        width: 50%;
+        height: 30%;
+        font-size: 15px;
+        padding: 10px;
+    }
+}
+
 /* --------- Tablet (≤900px) --------- */
 @media (max-width: 900px) {
     .mainMasVendidos {
@@ -151,7 +174,7 @@
     
     width: 90%;
     
-    padding: 10px;
+    padding: 8px;
     
     margin-top: 13px;
     border-radius: 5px;

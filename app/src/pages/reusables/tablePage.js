@@ -117,7 +117,7 @@ function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, 
     }, [tableName]);
 
     const content = (tableData.length === 0) ? 
-        <h1>No hay entradas</h1> 
+        <h1 className="no-entries-message">No hay entradas</h1> 
         :(
             <div className="table-container">
                 <Table fields={ columnNames } data={ tableData } />

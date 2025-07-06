@@ -10,8 +10,9 @@
 .dashboard-main {
     margin-top: 2rem;
     width: 100%;
-    min-height: 100vh;
+    min-height: 100px;
 }
+
 
 /* Ícono de salida */
 .logout-icon {
