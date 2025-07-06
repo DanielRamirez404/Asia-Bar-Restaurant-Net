@@ -1,10 +1,9 @@
-import FormPage from './reusables/form-page';
-import { RequiredInputBox } from './reusables/form-page';
-import './reusables/styles.css'
-import { Link } from 'react-router-dom';
-import { onLogin } from '../utils/api.js';
-import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+import Form from '../components/layout/form.js';
+import { RequiredInputBox } from './reusables/form-page';
+import { onLogin } from '../utils/api.js';
 
 function Login() {
     
@@ -14,7 +13,7 @@ function Login() {
     const navigate = useNavigate();
 
     return (
-    <FormPage onSubmit={ (e) => onLogin(e, username, password, navigate) } title={ "Inicio de Sesión" } content= {(
+    <Form onSubmit={ (e) => onLogin(e, username, password, navigate) } title={ "Inicio de Sesión" } content= {(
         <>
             <RequiredInputBox title={ "Nombre de Usuario" } textSetter={ setUsername } />
             <RequiredInputBox type='password' title={ "Contraseña" } textSetter={ setPassword } />

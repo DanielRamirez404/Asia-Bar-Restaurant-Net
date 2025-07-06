@@ -7,7 +7,6 @@ import Pedido from "../pages/PatallaPedido/Pedido";
 
 import InformacionVenta from "../pages/InformacionDeVenta/informacionDeVenta";
 import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
-import TablaVentas from "../pages/tabla-ventas";
 
 import ControlPage from "../pages/control.js";
 

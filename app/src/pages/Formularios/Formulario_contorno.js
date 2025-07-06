@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Utensils, Tags, Info, DollarSign } from 'lucide-react'
 import "./formulario.css"
 
-import FormPage from '../reusables/form-page';
+import FormPage from "../../components/layout/form.js";
 import { RequiredInputBox, RequiredSelector } from '../reusables/form-page';
 
 function FormularioContorno({ onClose = () => {} }) {
