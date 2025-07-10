@@ -14,6 +14,7 @@ export const names = [
     'deliverymen-form',
     'clients-form',
     'sales-form',
+    'Formulario de Control',
 ];
 
 export const routes = Object.fromEntries(

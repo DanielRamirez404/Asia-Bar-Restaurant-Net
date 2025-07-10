@@ -18,6 +18,8 @@ import FormularioDelivery from "../pages/Formularios/FormularioDelivery";
 import FormularioCliente from "../pages/Formularios/Formulario_cliente";
 import FormularioVenta from "../pages/Formularios/Formulario_venta";
 
+import ControlFormPage from '../pages/control-form.js';
+
 import { names } from "./routes.js"
 
 const components = [
@@ -34,6 +36,7 @@ const components = [
     FormularioDelivery,
     FormularioCliente,
     FormularioVenta,
+    ControlFormPage,
 ]
 
 export const pages = components.map((Component, index) => 

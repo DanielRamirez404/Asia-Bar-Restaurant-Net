@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ControlForm from "../../components/layout/controlForm.js";
+import ControlForm from "../../components/layout/control-form.js";
 import { RequiredInputBox, RequiredSelector } from "../reusables/form-page";
 
 function FormularioUsuario() {
