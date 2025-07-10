@@ -44,7 +44,6 @@ CREATE TABLE Product (
 CREATE TABLE Sales (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     ClientIdDocument VARCHAR(20),
-    FOREIGN KEY (ClientIdDocument) REFERENCES Clients(IdDocument),
     Type VARCHAR(20) NOT NULL,
     Total FLOAT NOT NULL
 );
