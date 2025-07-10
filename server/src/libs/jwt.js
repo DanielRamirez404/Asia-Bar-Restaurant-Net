@@ -34,13 +34,13 @@ export async function handleTokenCreation(username, type, res) {
         res.status(200).json(payload);
     })
     .catch((e) => {
-        res.status(500).send('Session token creation went wrong...');
+        res.status(503).json({message: "Session token creation went wrong..."});
         console.log(`Exception handling token creation: ${e}`);
     });
 }
 
 export async function handleEmptyTokenCreation(res) {
     res.cookie('token', '', { expires: new Date(0) });
-    res.status(200).send("Logged out");
+    res.status(200).json({message: "Logged out..."});
 }
 

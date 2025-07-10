@@ -19,7 +19,7 @@ export async function sendFromId(req, res, tableName, idName, isFoodTable) {
         const [results, fields] = await db.execute(query, [req.params.id]);
 
         (results.length < 1)
-            ? res.status(404).send("Not found")
+            ? res.status(404).json({message: "No entry with such id"})
             : res.status(200).json(results[0]);
     });
 }
@@ -34,7 +34,7 @@ export async function createRegister(req, res, table) {
 
         const [results, fields] = await db.execute(query, Object.values(orderedBody));
 
-        res.status(200).send("Created Successfully!");
+        res.status(200).json({message: "Created Successfully!"});
     });
 }
 
@@ -46,8 +46,8 @@ export async function deleteById(req, res, tableName, idName) {
         const [results, fields] = await db.execute(query, [req.params.id]);
 
         (results.affectedRows === 0)
-            ? res.status(404).send("No entry with such id")
-            : res.status(200).send("Deleted Successfully");
+            ? res.status(404).json({message: "No entry with such id"})
+            : res.status(200).json({message: "Deleted Successfully!"});
     });
 }
 
@@ -71,7 +71,7 @@ export async function updateById(req, res, table) {
 
         const [results, queryFields] = await db.execute(query, data);
 
-        res.status(200).send("Updated Successfully!");
+        res.status(200).json({message: "Updated Successfully!"});
     });
 }
 

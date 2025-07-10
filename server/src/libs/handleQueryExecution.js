@@ -6,14 +6,14 @@ async function handleQueryExecution(res, queryFunction) {
     try {
         db = await getDatabasePool();
     } catch (e) {
-        res.status(500).send("Can\'t connect to database");
+        res.status(503).json({message: "Can\'t connect to database"});
         return;
     }
 
     try {
         await queryFunction(db); //must be a function that takes the database pool as its only argument
     } catch (e) {
-        res.status(500).send("Something went wrong executing the database's query..."); 
+        res.status(500).json({message: "Something went wrong executing the database's query..."});
     }
 }
 
