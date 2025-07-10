@@ -11,7 +11,7 @@ function ControlForm({onSubmit, title, content, goBackPath}) {
                     {content}
 
                     <div className="buttons">
-                        <GoBackButton text="Cancelar" to={goBackPath} />
+                        <GoBackButton text="Volver" to={goBackPath} />
                         <SubmitButton text="Continuar" />
                     </div>
                 </>

@@ -4,16 +4,9 @@ export const names = [
     'Inicio',
     'Inicio de Sesion',
     'Pedido',
-    'Control',
     'Informacion de Venta',
     'Confirmacion Venta',
-    'users-form',
-    'side-dish-form',
-    'main-dish-form',
-    'product-form',
-    'deliverymen-form',
-    'clients-form',
-    'sales-form',
+    'Control',
     'Formulario de Control',
 ];
 
