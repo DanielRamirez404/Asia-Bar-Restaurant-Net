@@ -12,8 +12,7 @@ function ControlFormPage() {
     const table = useTable();
     const [fields, setters] = useFormFields(7);
 
-    const foundTitles = tables.find((found) => found.name === table.name).fields;
-    const titles = foundTitles.slice(0, -1);
+    const titles = tables.find((found) => found.name === table.name).fields;
 
     return (
         <ControlForm onSubmit={ (e) => alert(fields[0]) } title={ table.name } goBackPath={ routes['Control'] } 

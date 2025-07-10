@@ -99,8 +99,8 @@ function Table({ fields, data }) {
     );
 }
 
-function TablePage({ title, fields, tableName, newButtonText, onNewButtonClick, data = []}) {
-    let columnNames = fields;
+function TablePage({ title, fields, tableName, data = []}) {
+    let columnNames = [...fields];
     
     if (!columnNames.includes("Acciones"))
         columnNames.push("Acciones");
