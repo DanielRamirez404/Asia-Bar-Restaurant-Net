@@ -160,8 +160,8 @@ function ContenidoPedido() {
             <div className="frameBotones">
 
                
-                <button id="btnCancelar" className="btnPedido" onClick={() => navegar("/informacion_venta")}>Regresar</button>
-                <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/Confirmacion_Venta")}>Continuar</button>
+                <button id="btnCancelar" className="btnPedido" onClick={() => navegar("/informacion-de-venta")}>Regresar</button>
+                <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/confirmacion-venta")}>Continuar</button>
 
 
             </div>

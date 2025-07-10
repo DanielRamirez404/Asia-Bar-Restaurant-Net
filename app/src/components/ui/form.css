@@ -1,0 +1,35 @@
+.input-box {
+    margin: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.input-box input {
+    height: 30px;
+    border-radius: 30px;
+    
+    border:  solid var(--gray-hue) 2px;
+    padding: 10px;
+
+    font-size: 16px;
+
+    transition: border-color .6s ease;
+}
+
+.input-box input::placeholder {
+    color: var(--gray-hue);
+    font-weight: bold;
+}
+
+.input-box input:focus{
+    border: var(--bright-red-hue) 2px solid;
+    outline: none;
+}
+
+.input-box label {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}

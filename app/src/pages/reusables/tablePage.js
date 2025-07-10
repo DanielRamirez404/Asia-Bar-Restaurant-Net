@@ -58,7 +58,7 @@ function TablePageHeader({title, tableName, dataSetter}) {
         <div className="table-page-header">
             <h1>{ title }</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <Link to={ routes[`${tableName}-form`] }>
+                <Link to={ routes['Formulario de Control'] }>
                     <button onClick={ null } className="new-button">
                         Añadir
                     </button>

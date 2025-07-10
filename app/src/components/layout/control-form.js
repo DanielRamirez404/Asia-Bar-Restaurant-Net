@@ -1,7 +1,7 @@
 import Form from './form.js';
 import { SubmitButton, GoBackButton } from '../ui/buttons.js';
 
-import './controlForm.css';
+import './control-form.css';
 
 function ControlForm({onSubmit, title, content, goBackPath}) {
     return (
@@ -11,7 +11,7 @@ function ControlForm({onSubmit, title, content, goBackPath}) {
                     {content}
 
                     <div className="buttons">
-                        <GoBackButton text="Cancelar" to={goBackPath} />
+                        <GoBackButton text="Volver" to={goBackPath} />
                         <SubmitButton text="Continuar" />
                     </div>
                 </>
