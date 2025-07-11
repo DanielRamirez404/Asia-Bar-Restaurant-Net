@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import Form from '../components/layout/form.js';
-import { RequiredInputBox } from './reusables/form-page';
+import { RequiredInputBox } from '../components/ui/form.js';
 import { onLogin } from '../utils/api.js';
 
 function Login() {

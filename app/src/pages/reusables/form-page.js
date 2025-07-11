@@ -1,25 +1,6 @@
 import React, { useState } from 'react';
 import './form-page.css';
 import { regExDic } from './regExDic';
-export function RequiredInputBox({ title, textSetter, regExKey, type='text' }) {
-
-    const regex = regExDic[regExKey] || {};
-
-    return(
-        <div className='input-box'>
-            <label for={ title }>{ title }</label>
-            <input 
-                type={ type } 
-                id={ title } 
-                placeholder={ title } 
-                onChange={ (e) => textSetter(e.target.value) }
-                pattern={regex.pattern}
-                title={regex.title}
-                >
-            </input>
-        </div>
-    );
-} 
 
 export function RequiredPhoneInput({ title }) {
     return(
