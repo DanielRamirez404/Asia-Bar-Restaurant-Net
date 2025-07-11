@@ -1,5 +1,6 @@
 import Table from "../utils/table.js";
 
+const salesFields = ["ID", "Documento del Cliente", "Tipo", "Total"];
 const clientsFields = ["Identificación", "Nombre", "Dirección", "Teléfono" ];
 const deliverymenFields = ["Nombre del Repartidor", "Zona", "Disponibilidad", "Teléfono"];
 const dishFields = ["Nombre", "Disponibilidad", "Precio", "Categoría", "Descripción"];
@@ -8,6 +9,7 @@ productsFields.push("Proveedor");
 productsFields.push("Cantidad");
 const usersFields = [ "Usuario", "Tipo", "Contraseña" ];
 
+const salesDbFields = ["id","iddocument", "type", "total"]
 const clientsDbFields = ["iddocument", "name", "address", "phone" ];
 const deliverymenDbFields = ["name", "area", "availability", "phone"];
 const dishDbFields = ["name", "availability", "price", "category", "description"];
@@ -17,7 +19,7 @@ productsDbFields.push("quality");
 const usersDbFields = [ "users", "type", "password" ];
 
 export const tables = [
-    new Table("Ventas", "clients", clientsFields, clientsDbFields),
+    new Table("Ventas", "sales", salesFields, salesDbFields),
     new Table("Clientes", "clients", clientsFields, clientsDbFields),
     new Table("Menú", "main-dish", dishFields, dishDbFields),
     new Table("Contornos", "side-dish", dishFields, dishDbFields),
