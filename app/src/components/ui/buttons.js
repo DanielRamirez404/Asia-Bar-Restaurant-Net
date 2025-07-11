@@ -13,3 +13,6 @@ export function GoBackButton({text = "Volver", to = "/"}) {
     );    
 }
 
+export function PrimaryButton({ text, onClick = null}) {
+    return (<button className="primary-button" onClick={onClick}>{text}</button>);  
+};

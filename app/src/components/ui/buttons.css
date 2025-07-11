@@ -32,3 +32,17 @@
 
     cursor: pointer;
 }
+
+.primary-button {
+    padding: 0.7rem 0.9rem;
+
+    background: var(--red-hue);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+    
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 500;
+}
