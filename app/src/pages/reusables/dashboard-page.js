@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import '../../Visual-Resources/Logo.png';  
 import Popup from '../reusables/Pop-up.js'; 
 import { onLogout } from '../../utils/api.js';
-import SessionContext from '../../context/session.js';
+import { useTableChanger } from "../../hooks/session.js";
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -22,11 +22,10 @@ function MenuToggleButton({ isSidebarOpen, onClick }) {
 
 function MenuSubItemButton({ subItem }) {
     const navigate = useNavigate();
-    
-    const { session, setSession } = useContext(SessionContext);
+    const tableChanger = useTableChanger(subItem.table);
     
     const onClick = () => {
-        session.setDifferentTable(setSession, subItem.table);
+        tableChanger(); 
         navigate(subItem.route);
     };
     

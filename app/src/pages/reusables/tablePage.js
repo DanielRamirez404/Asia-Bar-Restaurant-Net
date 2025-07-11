@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
@@ -6,6 +7,8 @@ import { getTableData } from "../../utils/api.js"
 import { apiAddress } from '../../config/api.js'; 
 import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';
+import { useControlActionChanger } from "../../hooks/session.js";
+import { PrimaryButton } from "../../components/ui/buttons.js";
 
 function ActionButtons() {
     return (
@@ -48,21 +51,25 @@ function TablePageSearch({dataSetter, tableName}) {
                 value={ searchQuery }
                 onChange={ (e) => setsearchQuery(e.target.value) }
             />
-            <button onClick={onClick} className="search-button">Buscar</button>
+            <PrimaryButton text="Buscar" onClick={onClick} />
         </div>
     );
 }
 
 function TablePageHeader({title, tableName, dataSetter}) {
+    const navigate = useNavigate();
+    const actionChanger = useControlActionChanger("POST");
+    
+    const onClick = () => {
+        actionChanger(); 
+        navigate(routes['Formulario de Control']);
+    };
+
     return (
         <div className="table-page-header">
             <h1>{ title }</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <Link to={ routes['Formulario de Control'] }>
-                    <button onClick={ null } className="new-button">
-                        Añadir
-                    </button>
-                </Link>
+                <PrimaryButton text="Añadir" onClick={ onClick } />
                 <TablePageSearch tableName={tableName} dataSetter={dataSetter}/>
             </div>
         </div>

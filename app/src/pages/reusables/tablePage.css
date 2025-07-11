@@ -66,24 +66,6 @@
   box-shadow: 0 0 0 2px rgba(206, 37, 37, 0.2);
 }
 
-/* Botón de búsqueda */
-.search-button {
-  padding: 0.8rem 1.5rem;
-  margin-left: 0.5rem;
-  border: none;
-  background-color: #b22222;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s;
-  white-space: nowrap; /* Evitar que el texto del botón se desborde */
-}
-
-.search-button:hover {
-  background-color: #a72121;
-}
-
 /* Contenedor de la tabla */
 .table-container {
   background-color: white;
@@ -93,23 +75,6 @@
   margin: 1rem auto;
   width: 80%;
   overflow-x: auto;
-}
-
-/* Botón nuevo */
-.new-button {
-  padding: 0.7rem 0.9rem;
-  background: #ce2525;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-right: 1rem;
-  transition: background 0.3s ease;
-  font-weight: 500;
-}
-
-.new-button:hover {
-  background: #b30000;
 }
 
 /* Tabla de control */
