@@ -172,6 +172,8 @@
 
 }
 
+
+
 @media (max-width : 768px){
 
 
@@ -186,19 +188,32 @@
 .frameResumenes{
     display:inline-flex;
     flex-direction:row;
-    width: 63%;
-    
-    padding: 5px;        /* Padding original */
-    margin-top: 60px
-    
+    width: 67%;              /* ocupar casi todo y centrado */
+    margin: 20px auto;       /* centrado horizontal con margen superior */
+    padding: 5px;
+    justify-content: center; /* centrar tarjetas hijas */
     }
 
-    
+    /* --- Ajustar ancho de cada tarjeta resumen (Mas Vendidos, Pedidos, Recien Agregados) --- */
+  .frameResumen {
+      width: 60%;          /* que coincida con el ancho del frame de Mesas */
+      max-width: 100%;
+  }
+
+  /* Carrusel/scroll interior centrado y ocupando todo el ancho */
+  .scrollframeMasVendidos,
+  .scrollFrameRecienAgregado{
+      max-width: 100%;
+  }
+
+  /* Contenedor de productos recién agregados: quitar ancho fijo */
+  #productosRecienAgregados{ width: 100%; }
 
     .scrollframeMasVendidos{
         overflow-x: auto;
         display: flex;
         flex-direction: row;
+        justify-content: center; /* centrar tarjetas dentro del scroll */
         border: none;
        
     }
@@ -234,12 +249,10 @@
 .frameResumenes{
     display:inline-flex;
     flex-direction:row;
-    
-    
-    padding: 5px;        /* Padding original */
-    margin-left: 4%;
-    
-
- }
+    width: 67%;              /* ocupar casi todo y centrado */
+    margin: 20px auto;       /* centrado horizontal con margen superior */
+    padding: 5px;
+    justify-content: center; /* centrar tarjetas hijas */
+    }
 
 }

@@ -34,7 +34,7 @@
 }
 
 .primary-button {
-    padding: 0.7rem 0.9rem;
+    padding: 0.75rem 1rem;
 
     background: var(--red-hue);
     color: white;
@@ -45,4 +45,16 @@
     cursor: pointer;
     transition: background 0.3s ease;
     font-weight: 500;
+
+    transition: all 0.3s ease;
 }
+
+.primary-button:hover {
+    background-color: var(--red-hue);
+    color: var(--white-hue);
+  }
+  
+  .primary-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
