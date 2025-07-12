@@ -1,9 +1,12 @@
+/*Linea 85*/
+
+
 .table-container {
   background-color: white;
-  padding: 1rem;
+  
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
+  padding: 1%;
   width: 80%; /* Ancho fijo para la tabla */
   max-width: 100%; /* Evitar que se desborde */
   overflow-x: auto;
@@ -16,36 +19,52 @@
   display: flex;
   align-items: center; /* Alinear verticalmente los elementos */
   justify-content: space-between; /* Espaciado entre el título y la barra de búsqueda */
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  width: 100%; /* Asegurar que no exceda el ancho de la tabla */
-  box-sizing: border-box; /* Incluir padding y bordes en el ancho total */
+  
+  width: 80%;            /* mismo ancho que la tabla */
+  margin: 3% auto;     /* centrar y conservar separación vertical */
+  padding: 0;            /* sin relleno lateral extra */
 }
-.table-page-header h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0;
-  text-align: left; /* Alinear el texto a la izquierda */
-  max-width: 50%; /* Evitar que ocupe demasiado espacio */
-  overflow: hidden; /* Evitar desbordamientos */
-  text-overflow: ellipsis; /* Mostrar puntos suspensivos si el texto es muy largo */
-  white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
-}
+
+
+  .table-page-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+ 
+    margin: 0;
+    text-align: left; /* Alinear el texto a la izquierda */
+    max-width: 50%; /* Evitar que ocupe demasiado espacio */
+    overflow: hidden; /* Evitar desbordamientos */
+    text-overflow: ellipsis; /* Mostrar puntos suspensivos si el texto es muy largo */
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    flex: 1;              /* que ocupe el espacio disponible dentro del header */
+  }
 
 
 /* Contenedor de búsqueda */
 .search-container {
   display: flex;
   align-items: center;
-  width: auto; /* Ajustar al contenido */
+  position: relative; /* Referencia para la lupa */
+
+  gap: 1rem;
+  width: 100%;
   max-width: 100%; /* Limitar el ancho al 50% del contenedor */
+  padding-left: 1rem;
+  margin-left: 1%;
+  
+  padding: 1rem;
+
+
   overflow: hidden; /* Evitar desbordamientos */
   box-sizing: border-box; /* Incluir padding y bordes en el ancho total */
 }
 
+/* Ajustes de la lupa */
 .search-icon {
   position: absolute;
-  left: 0.75rem;
+  left: 1.5rem; /* Separación desde el borde izquierdo */
+  top: 50%;
+  transform: translateY(-50%); /* Centrar verticalmente */
   pointer-events: none; /* Permite hacer clic a través del icono */
 }
 
@@ -66,13 +85,18 @@
   box-shadow: 0 0 0 2px rgba(206, 37, 37, 0.2);
 }
 
-/* Contenedor de la tabla */
+/* Contenedor blanco de la tabla */
 .table-container {
   background-color: white;
-  padding: 1rem;
+  gap: 1rem;
+  margin-left: auto; /* Centrar horizontalmente */
+  margin-right: auto;
+  margin-top: 0rem; /* Permitir ajustar según necesidad */
+  margin-bottom: 1rem; /* Espacio inferior consistente */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 1rem auto;
+  
+  
   width: 80%;
   overflow-x: auto;
 }
@@ -104,7 +128,7 @@
   background-color: #ffffff;
 }
 
-/* Botones de acción */
+/* Botones de acción dentro de la tabla */
 .action-button {
   color: #9ca3af;
   transition: color 0.2s;
@@ -115,10 +139,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.7s ease;
 }
 
 .action-button:hover {
   color: #4b5563;
+  transition: all 0.7s ease;
+}
+
+.action-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.7s ease;
 }
 
 .action-buttons-container {
@@ -216,4 +248,3 @@
     font-size: 0.875rem;
   }
 }
-

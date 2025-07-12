@@ -72,7 +72,7 @@
 @media (max-width: 1024px) {
     .mainRecienAgregado {
         width: 100%;         /* Ancho fijo para mantener la apariencia */
-        max-width: 95%;       /* Evita desbordes en pantallas más chicas */
+          
         margin: 10px auto;    /* Centrado y con margen */
         padding: 8px;         /* Padding consistente */
         font-size: 14px;

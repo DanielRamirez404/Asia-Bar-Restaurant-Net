@@ -10,17 +10,17 @@ import { routes } from '../../config/routes.js';
 import { useControlActionChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
 
-function ActionButtons() {
+function ActionButtons() {/*FUNCIONES DE LOS BOTONES DE LA TABLA */ 
     return (
         <div className="action-buttons-container">
+            {/*<button className="action-button">
+                <Info size={20} onClick={() => alert("Info")} />
+            </button>*/}
             <button className="action-button">
-                <Info size={20} />
+                <Pencil size={20} onClick={() => alert("Editar")} />
             </button>
             <button className="action-button">
-                <Pencil size={20} />
-            </button>
-            <button className="action-button">
-                <Trash size={20} />
+                <Trash size={20} onClick={() => alert("Eliminar")} />
             </button>
         </div>
     );
