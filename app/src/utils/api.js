@@ -35,6 +35,17 @@ function api_fetch(fetch_settings) {
         })
 }
 
+export const getRegisterData = async function(tableName, id) {
+    let data = [];
+
+    await api_fetch({
+        endpoint: `${tableName}/${id}`,
+        method: 'GET',
+    }).then(res => { data = Object.values(res); })
+
+    return data;
+}
+
 export const getTableData = async function(tableName, searchQuery = null) {
     let data = [];
 
