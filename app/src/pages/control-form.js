@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import useTable from "../hooks/useTable.js";
 import useFormFields from "../hooks/useFormFields.js";
+import useFormValues from '../hooks/useFormValues.js';
+import { useModifyID } from "../hooks/session.js";
 
 import { tables } from "../config/tables.js";
 
@@ -14,8 +16,12 @@ function ControlFormPage() {
 
     const table = useTable();
     const [fields, setters] = useFormFields(7);
+    const modifyID = useModifyID();
 
-    const titles = tables.find((found) => found.name === table.name).fields;
+    const found = tables.find((found) => found.name === table.name);
+    const titles = found.fields;
+    
+    useFormValues(found.dbname, modifyID, setters);
     
     const navigate = useNavigate();
 
@@ -23,7 +29,7 @@ function ControlFormPage() {
         <ControlForm onSubmit={ (e) => onControlForm(e, table, fields, navigate) } title={ table.name } goBackPath={ routes['Control'] } 
             content = {(
                 <>
-                    { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } />) ) } 
+                    { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } value={ fields[i] } />) ) } 
                 </>
             )} 
         />

@@ -7,20 +7,30 @@ import { getTableData } from "../../utils/api.js"
 import { apiAddress } from '../../config/api.js'; 
 import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';
-import { useControlActionChanger } from "../../hooks/session.js";
+import { useModifyIDChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
 
-function ActionButtons() {/*FUNCIONES DE LOS BOTONES DE LA TABLA */ 
+function ActionButtons({ id }) { 
+     
+    const actionChanger = useModifyIDChanger(id);
+    const navigate = useNavigate();
+
+    const onEdit = () => {
+        actionChanger();
+        navigate(routes['Formulario de Control']);
+    };
+
+    const onDelete = () => {
+
+    }
+
     return (
         <div className="action-buttons-container">
-            {/*<button className="action-button">
-                <Info size={20} onClick={() => alert("Info")} />
-            </button>*/}
             <button className="action-button">
-                <Pencil size={20} onClick={() => alert("Editar")} />
+                <Pencil size={20} onClick={onEdit} />
             </button>
             <button className="action-button">
-                <Trash size={20} onClick={() => alert("Eliminar")} />
+                <Trash size={20} onClick={onDelete} />
             </button>
         </div>
     );
@@ -58,7 +68,7 @@ function TablePageSearch({dataSetter, tableName}) {
 
 function TablePageHeader({title, tableName, dataSetter}) {
     const navigate = useNavigate();
-    const actionChanger = useControlActionChanger("POST");
+    const actionChanger = useModifyIDChanger(null);
     
     const onClick = () => {
         actionChanger(); 
@@ -90,7 +100,9 @@ function Body({ data }) {
             {data.map((row, index) => (
                 <tr key={ index } >
                     { row.map((field, i) => ( <td key={i}>{ field }</td> )) }
-                    <td> <ActionButtons /> </td>
+                    <td> 
+                        <ActionButtons id = { row[0] } /> 
+                    </td>
                 </tr>
             ))}
         </tbody>
