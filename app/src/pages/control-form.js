@@ -26,7 +26,7 @@ function ControlFormPage() {
     const navigate = useNavigate();
 
     return (
-        <ControlForm onSubmit={ (e) => onControlForm(e, table, fields, navigate) } title={ table.name } goBackPath={ routes['Control'] } 
+        <ControlForm onSubmit={ (e) => onControlForm(e, table, fields, navigate, modifyID) } title={ table.name } goBackPath={ routes['Control'] } 
             content = {(
                 <>
                     { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } value={ fields[i] } />) ) } 

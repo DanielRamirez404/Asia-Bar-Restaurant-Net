@@ -113,21 +113,17 @@ export function onLogout(e, navigate) {
 }
 
 
-export function onControlForm(e, table, values, navigate, action = "POST") {
+export function onControlForm(e, table, values, navigate, modifyId = null) {
     const getData = () => Object.fromEntries(
         table.dbfields.map((field, i) => [field, values[i]])
     );
 
     e.preventDefault();
 
-    switch (action) {
-        case "POST":
-            onCreate(e, table.dbname, getData, () => alert("¡Entrada creada exitiosamente!"));            
-            break;    
-        default:
-            return;
-            break;
-    }
+    if (modifyId)
+        onUpdate(e, table.dbname, getData, () => modifyId, () => alert("¡Entrada actualizada exitiosamente!"));            
+    else
+        onCreate(e, table.dbname, getData, () => alert("¡Entrada creada exitiosamente!"));            
 
 
     navigate(routes['Control']);
