@@ -15,13 +15,12 @@ import { onControlForm } from '../utils/api.js';
 function ControlFormPage() {
 
     const table = useTable();
-    const [fields, setters] = useFormFields(7);
     const modifyID = useModifyID();
-
-    const found = tables.find((found) => found.name === table.name);
-    const titles = found.fields;
+    const titles = table.fields;
     
-    useFormValues(found.dbname, modifyID, setters);
+    const [fields, setters] = useFormFields(7);
+    
+    useFormValues(table.dbname, modifyID, setters);
     
     const navigate = useNavigate();
 
