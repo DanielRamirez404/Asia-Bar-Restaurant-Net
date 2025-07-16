@@ -3,36 +3,39 @@ import { useNavigate } from "react-router-dom";
 import { Info, Pencil, Search, Trash } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { getTableData } from "../../utils/api.js"
+import { getTableData, onDelete } from "../../utils/api.js"
 import { apiAddress } from '../../config/api.js'; 
 import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';
 import { useModifyIDChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
 
-function ActionButtons({ id }) { 
+function ActionButtons({ id, tableName, onDeleteRegister }) { 
      
     const actionChanger = useModifyIDChanger(id);
     const navigate = useNavigate();
 
-    const onEdit = () => {
+    const onEditClick = () => {
         actionChanger();
         navigate(routes['Formulario de Control']);
     };
 
-    const onDelete = () => {
-
+    const onDeleteSubmit = (e) => {
+        onDelete(e, tableName, () => id, () => { 
+            alert("registro exitosamente eliminado")
+            onDeleteRegister();
+        });
     }
 
     return (
-        <div className="action-buttons-container">
+        <form onSubmit={onDeleteSubmit} className="action-buttons-container">
             <button className="action-button">
-                <Pencil size={20} onClick={onEdit} />
+                <Pencil size={20} onClick={onEditClick} />
             </button>
-            <button className="action-button">
-                <Trash size={20} onClick={onDelete} />
+            <button className="action-button" type="submit">
+                <Trash size={20} />
             </button>
-        </div>
+        </form>
     );
 }
 
@@ -94,14 +97,19 @@ function Header({ fields }) {
     );
 }
 
-function Body({ data }) {
+function Body({ data, tableName }) {
+
+    const hideRegister = (id) => {
+       document.getElementById(id).style.display = "none"; 
+    };
+
     return (
         <tbody>
             {data.map((row, index) => (
-                <tr key={ index } >
+                <tr id={`register-${index}`}  key={ index } >
                     { row.map((field, i) => ( <td key={i}>{ field }</td> )) }
                     <td> 
-                        <ActionButtons id = { row[0] } /> 
+                        <ActionButtons id = { row[0] } tableName={ tableName } onDeleteRegister={ () => hideRegister(`register-${index}`) } /> 
                     </td>
                 </tr>
             ))}
@@ -109,11 +117,11 @@ function Body({ data }) {
     );
 }
 
-function Table({ fields, data }) {
+function Table({ fields, data, tableName, fetchData }) {
     return(
         <table className="control-table">
             <Header fields={ fields } />
-            <Body data={ data } />
+            <Body data={ data } tableName={ tableName } fetchData={ fetchData } />
         </table>
     );
 }
@@ -125,13 +133,13 @@ function TablePage({ title, fields, tableName, data = []}) {
         columnNames.push("Acciones");
 
     const [tableData, setTableData] = useState([]);
+    
+    const fetchData = async () => {
+        const data = await getTableData(tableName);
+        setTableData(data);
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await getTableData(tableName);
-            setTableData(data);
-        };
-
         fetchData();
     }, [tableName]);
 
@@ -139,7 +147,7 @@ function TablePage({ title, fields, tableName, data = []}) {
         <h1>No hay entradas</h1> 
         :(
             <div className="table-container">
-                <Table fields={ columnNames } data={ tableData } />
+                <Table fields={ columnNames } data={ tableData } tableName={ tableName } />
             </div>
         );
 
