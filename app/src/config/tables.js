@@ -9,7 +9,7 @@ productsFields.push("Proveedor");
 productsFields.push("Cantidad");
 const usersFields = [ "Usuario", "Tipo", "Contraseña" ];
 
-const salesDbFields = ["id","iddocument", "type", "total"]
+const salesDbFields = ["id","clientdocument", "type", "total"]
 const clientsDbFields = ["iddocument", "name", "address", "phone" ];
 const deliverymenDbFields = ["name", "area", "availability", "phone"];
 const dishDbFields = ["name", "availability", "price", "category", "description"];
