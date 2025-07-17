@@ -71,7 +71,7 @@ export const onDelete = function(e, tableName, getID, onDone) {
     e.preventDefault(); 
 
     api_fetch({
-        endpoint: `${tableName}:${getID()}`,
+        endpoint: `${tableName}/${getID()}`,
         method: 'DELETE',
         onOk: (res) => { onDone(); }
     });
@@ -81,7 +81,7 @@ export const onUpdate = function(e, tableName, getData, getID, onDone) {
     e.preventDefault(); 
     
     api_fetch({
-        endpoint: `${tableName}:${getID()}`,
+        endpoint: `${tableName}/${getID()}`,
         method: 'PUT',
         body: getData(),
         onOk: (res) => { onDone(); }

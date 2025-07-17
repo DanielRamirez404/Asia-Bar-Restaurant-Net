@@ -1,14 +1,13 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useMemo } from 'react';
 import { tables } from "../config/tables.js";
 import SessionContext from "../context/session.js"
 
+function getTable(name) {
+    return tables.find( (table) => table.name === name ); 
+}
+
 export default function useTable() {
-    const { session, setSession } = useContext(SessionContext);
-    const [ table, setTable ] = useState(tables[0]);
-
-    useEffect( () => {
-        setTable(tables.find((found) => found.name === session.table));
-    }, [session.table]);
-
-    return table;
+    const { session } = useContext(SessionContext);
+    
+    return useMemo(() => getTable(session.table), [session.table]);
 }
