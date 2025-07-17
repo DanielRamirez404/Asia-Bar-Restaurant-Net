@@ -80,10 +80,25 @@ export default function TablePage({ title, table }) {
         fetchData();
     }, [table.dbname]);
 
+    const changeModifyId = useModifyIDChanger();
+    const navigate = useNavigate();
+    
+    const onEditClick = (id) => {
+        changeModifyId(id);
+        navigate(routes['Formulario de Control']);
+    };
+
+    const onDeleteClick = (id, hideRow) => {
+        onDelete(table.dbname, () => id, () => {
+            alert("registro exitosamente eliminado");
+            hideRow();
+        });
+    };
+
     const content = (data.length === 0) ? 
         <h1>No hay entradas</h1> 
         :(
-            <Table fields={ getAllColumnNames(table) } data={ data } tableName={ table.dbname } />
+            <Table fields={ getAllColumnNames(table) } data={ data } onEdit={onEditClick} onDelete={onDeleteClick} />
         );
 
     return( 

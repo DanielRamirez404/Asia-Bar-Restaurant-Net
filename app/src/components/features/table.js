@@ -1,35 +1,30 @@
-import { useNavigate } from "react-router-dom";
-import { useModifyIDChanger } from "../../hooks/session.js";
-
-import { onDelete } from "../../utils/api.js"
-
-import { routes } from '../../config/routes.js';
-
 import { Pencil, Trash } from "lucide-react";
 import './table.css';
 
-function ActionButtons({ id, tableName, onDeleteRegister }) { 
-     
-    const actionChanger = useModifyIDChanger(id);
-    const navigate = useNavigate();
+function ButtonsBox({ id, onEdit, onDelete }) { 
+    return (
+        <td>
+            <div className="action-buttons-container">
+                <Pencil className="action-button" size={20} onClick={ () => onEdit(id) } />
+                <Trash className="action-button" size={20} onClick={ () => onDelete(id) } />
+            </div>
+        </td>
+    );
+}
 
-    const onEditClick = () => {
-        actionChanger();
-        navigate(routes['Formulario de Control']);
-    };
+function BodyRow({ row, index, onEdit, onDelete }) {
 
-    const onDeleteClick = () => {
-        onDelete(tableName, () => id, () => {
-            alert("registro exitosamente eliminado")
-            onDeleteRegister();
-        });
-    }
+    const rowId = `row-${index}`;
+
+    const onDeleteClick = (id) => onDelete(id, () => 
+        document.getElementById(rowId).style.display = "none"
+    );
 
     return (
-        <div className="action-buttons-container">
-            <Pencil className="action-button" size={20} onClick={onEditClick} />
-            <Trash className="action-button" size={20} onClick={onDeleteClick} />
-        </div>
+        <tr id={`row-${index}`}  key={ index } >
+            { row.map((field, i) => ( <td key={i}>{ field }</td> )) }
+            <ButtonsBox id = { row[0] }  onEdit={ onEdit} onDelete={ onDeleteClick } /> 
+        </tr>
     );
 }
 
@@ -41,32 +36,20 @@ function Header({ fields }) {
     );
 }
 
-function Body({ data, tableName }) {
-
-    const hideRegister = (id) => {
-       document.getElementById(id).style.display = "none"; 
-    };
-
+function Body({ data, onEdit, onDelete }) {
     return (
         <tbody>
-            {data.map((row, index) => (
-                <tr id={`register-${index}`}  key={ index } >
-                    { row.map((field, i) => ( <td key={i}>{ field }</td> )) }
-                    <td> 
-                        <ActionButtons id = { row[0] } tableName={ tableName } onDeleteRegister={ () => hideRegister(`register-${index}`) } /> 
-                    </td>
-                </tr>
-            ))}
+            {data.map((row, index) => <BodyRow row={row} index={index} onEdit={onEdit} onDelete={onDelete} /> )}
         </tbody>
     );
 }
 
-export default function Table({ fields, data, tableName, fetchData }) {
+export default function Table({ fields, data, onEdit, onDelete }) {
     return(
         <div className="table-container">
             <table className="control-table">
                 <Header fields={ fields } />
-                <Body data={ data } tableName={ tableName } fetchData={ fetchData } />
+                <Body data={ data } onEdit={onEdit} onDelete={onDelete} />
             </table>
         </div>
     );

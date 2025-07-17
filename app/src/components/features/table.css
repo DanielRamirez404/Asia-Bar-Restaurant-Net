@@ -2,7 +2,7 @@
     position: relative;
     width: 80%; 
     max-width: 100%; 
-    margin: 0 auto; 
+    margin: 0 auto 2rem; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-x: auto;
 }
