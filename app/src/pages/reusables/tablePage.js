@@ -20,22 +20,18 @@ function ActionButtons({ id, tableName, onDeleteRegister }) {
         navigate(routes['Formulario de Control']);
     };
 
-    const onDeleteSubmit = (e) => {
-        onDelete(e, tableName, () => id, () => { 
+    const onDeleteClick = () => {
+        onDelete(tableName, () => id, () => {
             alert("registro exitosamente eliminado")
             onDeleteRegister();
         });
     }
 
     return (
-        <form onSubmit={onDeleteSubmit} className="action-buttons-container">
-            <button className="action-button">
-                <Pencil size={20} onClick={onEditClick} />
-            </button>
-            <button className="action-button" type="submit">
-                <Trash size={20} />
-            </button>
-        </form>
+        <div className="action-buttons-container">
+            <Pencil className="action-button" size={20} onClick={onEditClick} />
+            <Trash className="action-button" size={20} onClick={onDeleteClick} />
+        </div>
     );
 }
 

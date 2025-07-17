@@ -67,9 +67,7 @@ export const onCreate = function(e, tableName, getData, onDone) {
     });
 };
 
-export const onDelete = function(e, tableName, getID, onDone) {
-    e.preventDefault(); 
-
+export const onDelete = function(tableName, getID, onDone) {
     api_fetch({
         endpoint: `${tableName}/${getID()}`,
         method: 'DELETE',
