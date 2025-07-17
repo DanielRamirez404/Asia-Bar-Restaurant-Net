@@ -1,5 +1,5 @@
+/* === Sección Pedido (Main) === */
 .scrollFramePedidoModal{
-
     width: 100%;
     height: 300px;
     overflow-y: auto;
@@ -10,46 +10,36 @@
     box-sizing: border-box;
 }
 
-.informacionDelivery, .informacionComerAqui{
-
+/* === Frames de Pedido === */
+.informacionDelivery,
+.informacionComerAqui{
     margin-top: 10px;
     margin-bottom: 20px;
-
     display: none;
 }
 
 .informacionVisibleModal{
-
     display: block;
-
 }
 
+/* === Elementos de Pedido === */
+.tituloPedidoModal{
+    margin-top: 50px;
+}
 
 .nombreCompradorModal{
-
     margin-top: 20px;
     font-size: 20px;
-
 }
 
 .labelInformacionPedido{
-
     color: #555;
     border-bottom: 1px solid #aaa;
     margin-top: 10px;
-
-}
-
-.tituloPedidoModal{
-
-    margin-top: 20px;
-
 }
 
 .valorTotalPedidoModal{
-
     text-align: right;
     margin-top: 20px;
     font-size: 18px;
-
 }

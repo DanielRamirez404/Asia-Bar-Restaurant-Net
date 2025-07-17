@@ -85,25 +85,15 @@ function ContenidoPedido() {
                         <Producto/>
 
                         <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        
-                        
-
+                       
                     </div>
 
                     <div className="frameSegmentedButtonsPedidos">
 
-                        <button className="segmentedButtonPedidos">Combos</button>
-                        <button className="segmentedButtonPedidos">Bebidas</button>
-                        <button className="segmentedButtonPedidos">Platillos</button>
-                        <button className="segmentedButtonPedidos">Postres</button>
-                        <button className="segmentedButtonPedidos">Extras</button>
-
+                        <button className="segmentedButtonPedidos">Contornos</button>
+                        <button className="segmentedButtonPedidos">Productos</button>
+                        <button className="segmentedButtonPedidos">Menu</button>
+                        
                     </div>
 
                         
@@ -123,7 +113,7 @@ function ContenidoPedido() {
 
                         <WidgethPedido/>
                         <WidgethPedido/>
-                        <WidgetNota/>
+                        
                         <WidgethPedido/>
                         <WidgethPedido/>
                         <WidgethPedido/>
