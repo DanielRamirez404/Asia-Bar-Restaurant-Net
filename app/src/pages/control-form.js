@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import useTable from "../hooks/useTable.js";
-import useFormFields from "../hooks/useFormFields.js";
-import useFormValues from '../hooks/useFormValues.js';
+import { useFormFields, useFormValues } from "../hooks/form.js";
 import { useModifyID } from "../hooks/session.js";
-
-import { tables } from "../config/tables.js";
 
 import ControlForm from '../components/layout/control-form.js';
 import { RequiredInputBox } from '../components/ui/form.js';
-import { routes } from '../config/routes.js';
 
 import { onControlForm } from '../utils/api.js';
 
@@ -25,8 +21,10 @@ function ControlFormPage() {
     const navigate = useNavigate();
 
     return (
-        <ControlForm onSubmit={ (e) => onControlForm(e, table, fields, navigate, modifyID) } title={ table.name } goBackPath={ routes['Control'] } 
-            content = {(
+        <ControlForm 
+            title={ table.name }
+            onSubmit={ (e) => onControlForm(e, table, fields, navigate, modifyID) }   
+            content={(
                 <>
                     { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } value={ fields[i] } />) ) } 
                 </>
