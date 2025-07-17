@@ -8,8 +8,7 @@ function ControlPage() {
         <TablePage 
             key={table.dbname} 
             title={`Control de ${table.name}`}
-            fields={table.fields}
-            tableName={table.dbname} 
+            table={table} 
         />
     );
 };

@@ -9,31 +9,7 @@ import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';
 import { useModifyIDChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
-
-function ActionButtons({ id, tableName, onDeleteRegister }) { 
-     
-    const actionChanger = useModifyIDChanger(id);
-    const navigate = useNavigate();
-
-    const onEditClick = () => {
-        actionChanger();
-        navigate(routes['Formulario de Control']);
-    };
-
-    const onDeleteClick = () => {
-        onDelete(tableName, () => id, () => {
-            alert("registro exitosamente eliminado")
-            onDeleteRegister();
-        });
-    }
-
-    return (
-        <div className="action-buttons-container">
-            <Pencil className="action-button" size={20} onClick={onEditClick} />
-            <Trash className="action-button" size={20} onClick={onDeleteClick} />
-        </div>
-    );
-}
+import Table from '../../components/features/table.js';
 
 function TablePageSearch({dataSetter, tableName}) {
     const [searchQuery, setsearchQuery] = useState("");
@@ -85,76 +61,39 @@ function TablePageHeader({title, tableName, dataSetter}) {
     );
 }
 
-function Header({ fields }) {
-    return(
-        <thead>
-            <tr>{ fields.map((field, index) => (<th key={index}>{field}</th>)) }</tr>
-        </thead>
-    );
+function getAllColumnNames(table) {
+    const names = [...table.fields];
+    names.push("Acciones");
+    return names;
 }
 
-function Body({ data, tableName }) {
-
-    const hideRegister = (id) => {
-       document.getElementById(id).style.display = "none"; 
-    };
-
-    return (
-        <tbody>
-            {data.map((row, index) => (
-                <tr id={`register-${index}`}  key={ index } >
-                    { row.map((field, i) => ( <td key={i}>{ field }</td> )) }
-                    <td> 
-                        <ActionButtons id = { row[0] } tableName={ tableName } onDeleteRegister={ () => hideRegister(`register-${index}`) } /> 
-                    </td>
-                </tr>
-            ))}
-        </tbody>
-    );
-}
-
-function Table({ fields, data, tableName, fetchData }) {
-    return(
-        <table className="control-table">
-            <Header fields={ fields } />
-            <Body data={ data } tableName={ tableName } fetchData={ fetchData } />
-        </table>
-    );
-}
-
-function TablePage({ title, fields, tableName, data = []}) {
-    let columnNames = [...fields];
+export default function TablePage({ title, table }) {
     
-    if (!columnNames.includes("Acciones"))
-        columnNames.push("Acciones");
-
-    const [tableData, setTableData] = useState([]);
+    const [data, setData] = useState([]);
     
     const fetchData = async () => {
-        const data = await getTableData(tableName);
-        setTableData(data);
+        const fetched = await getTableData(table.dbname);
+        setData(fetched);
     };
 
     useEffect(() => {
         fetchData();
-    }, [tableName]);
+    }, [table.dbname]);
 
-    const content = (tableData.length === 0) ? 
+    const content = (data.length === 0) ? 
         <h1>No hay entradas</h1> 
         :(
-            <div className="table-container">
-                <Table fields={ columnNames } data={ tableData } tableName={ tableName } />
-            </div>
+            <Table fields={ getAllColumnNames(table) } data={ data } tableName={ table.dbname } />
         );
 
-    return <DashboardPage content={
-        <>
-            <TablePageHeader 
-                title={ title } dataSetter = { setTableData } tableName = { tableName }
-            />
-            { content }
-        </>
-    } />;
+    return( 
+        <DashboardPage 
+            content={
+                <>
+                    <TablePageHeader title={ title } dataSetter={setData} tableName={ table.name } />
+                    { content }
+                </>
+            } 
+        />
+    );
 }
-
-export default TablePage;

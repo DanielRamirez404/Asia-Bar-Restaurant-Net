@@ -15,7 +15,6 @@ function ControlFormPage() {
     const titles = table.fields;
     
     const [fields, setters] = useFormFields(7);
-    
     useFormValues(table.dbname, modifyID, setters);
     
     const navigate = useNavigate();
