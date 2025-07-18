@@ -40,33 +40,6 @@
   box-sizing: border-box; /* Incluir padding y bordes en el ancho total */
 }
 
-/* Ajustes de la lupa */
-.search-icon {
-  position: absolute;
-  left: 1.5rem; /* Separación desde el borde izquierdo */
-  top: 50%;
-  transform: translateY(-50%); /* Centrar verticalmente */
-  pointer-events: none; /* Permite hacer clic a través del icono */
-}
-
-/* Control de entrada de texto */
-.entrada-busqueda {
-  width: 100%;
-  padding: 0.6rem 0.6rem 0.6rem 2.5rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 1rem;
-  line-height: 1.5;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.entrada-busqueda:focus {
-  border-color: #ce2525;
-  box-shadow: 0 0 0 2px rgba(206, 37, 37, 0.2);
-}
-
-
 /* Small mobile phones (320px - 480px) */
 @media (max-width: 480px) {
   .table-page-header {
@@ -88,26 +61,11 @@
     flex-direction: column;
   }
 
-  .new-button {
-    width: 90%;
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-    margin-top: 0rem;
-    padding-bottom:1rem ;
-    text-align: center;
-  }
-
   .search-container {
     width: 90%;
     margin-bottom: 1rem;;
     margin-top: 1rem;
     padding: 10;
-  }
-
-  .search-button {
-    width: 80%;
-    margin-right: 0;
-    padding: 0.76rem 0rem;
   }
 
 }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
 import { apiAddress } from '../../config/api.js'; 
@@ -9,6 +8,7 @@ import { useModifyIDChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
 import Table from '../../components/features/table.js';
 import { getTableData } from '../../utils/api.js';
+import { SearchInputBox } from '../../components/ui/form.js'
 
 function TablePageSearch({dataSetter, tableName}) {
     const [searchQuery, setsearchQuery] = useState("");
@@ -27,14 +27,7 @@ function TablePageSearch({dataSetter, tableName}) {
 
     return(
         <div className="search-container">
-            <Search className="search-icon" />
-            <input
-                type="text"
-                className="entrada-busqueda"
-                placeholder="Buscar"
-                value={ searchQuery }
-                onChange={ (e) => setsearchQuery(e.target.value) }
-            />
+            <SearchInputBox value={searchQuery} textSetter={setsearchQuery} />
             <PrimaryButton text="Buscar" onClick={onClick} />
         </div>
     );
@@ -67,6 +60,7 @@ function getAllColumnNames(table) {
 }
 
 export default function TablePage({ title, table, data, setData, onEdit, onDelete }) {
+
     const content = (data.length === 0) 
         ? <h1>No hay entradas</h1>
         : <Table fields={ getAllColumnNames(table) } data={ data } onEdit={onEdit} onDelete={onDelete} />;

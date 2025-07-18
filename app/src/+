@@ -21,14 +21,14 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
     );
 }
 
-export function SearchInputBox({ textSetter, value = null }) {
+export function SearchInputBox({ textSetter, value = null }}) {
     return (
        <>
             <Search className="search-icon" />
 
             <input
                 type="text"
-                className="search-input-box"
+                className="searh-input-box"
                 placeholder="Buscar"
                 value={ value }
                 onChange={ (e) => textSetter(e.target.value) }

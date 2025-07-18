@@ -39,3 +39,7 @@ export function useActionButtons(table) {
 
     return [onEditClick, onDeleteClick];
 }
+
+export function useHeaderButtons(table) {
+
+}

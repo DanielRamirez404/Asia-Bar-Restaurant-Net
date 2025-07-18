@@ -33,3 +33,28 @@
     font-size: 18px;
     font-weight: bold;
 }
+
+.search-icon {
+    color: var(--gray-hue);
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%); 
+    pointer-events: none;
+}
+
+.search-input-box {
+    width: 100%;
+    padding: 0.6rem 0.6rem 0.6rem 2.5rem;
+    border: 1px solid var(--gray-hue);
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input-box:focus {
+    border-color: var(--red-hue);
+    box-shadow: 0 0 0 2px rgba(206, 37, 37, 0.2);
+}
