@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Info, Pencil, Search, Trash } from "lucide-react";
+import { Search } from "lucide-react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { getTableData, onDelete } from "../../utils/api.js"
 import { apiAddress } from '../../config/api.js'; 
-import { Link } from 'react-router-dom';
 import { routes } from '../../config/routes.js';
 import { useModifyIDChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
 import Table from '../../components/features/table.js';
+import { getTableData } from '../../utils/api.js';
 
 function TablePageSearch({dataSetter, tableName}) {
     const [searchQuery, setsearchQuery] = useState("");
@@ -41,12 +40,12 @@ function TablePageSearch({dataSetter, tableName}) {
     );
 }
 
-function TablePageHeader({title, tableName, dataSetter}) {
+function Header({title, tableName, dataSetter}) {
     const navigate = useNavigate();
-    const actionChanger = useModifyIDChanger(null);
+    const actionChanger = useModifyIDChanger();
     
     const onClick = () => {
-        actionChanger(); 
+        actionChanger(null); 
         navigate(routes['Formulario de Control']);
     };
 
@@ -67,45 +66,16 @@ function getAllColumnNames(table) {
     return names;
 }
 
-export default function TablePage({ title, table }) {
-    
-    const [data, setData] = useState([]);
-    
-    const fetchData = async () => {
-        const fetched = await getTableData(table.dbname);
-        setData(fetched);
-    };
-
-    useEffect(() => {
-        fetchData();
-    }, [table.dbname]);
-
-    const changeModifyId = useModifyIDChanger();
-    const navigate = useNavigate();
-    
-    const onEditClick = (id) => {
-        changeModifyId(id);
-        navigate(routes['Formulario de Control']);
-    };
-
-    const onDeleteClick = (id, hideRow) => {
-        onDelete(table.dbname, () => id, () => {
-            alert("registro exitosamente eliminado");
-            hideRow();
-        });
-    };
-
-    const content = (data.length === 0) ? 
-        <h1>No hay entradas</h1> 
-        :(
-            <Table fields={ getAllColumnNames(table) } data={ data } onEdit={onEditClick} onDelete={onDeleteClick} />
-        );
+export default function TablePage({ title, table, data, setData, onEdit, onDelete }) {
+    const content = (data.length === 0) 
+        ? <h1>No hay entradas</h1>
+        : <Table fields={ getAllColumnNames(table) } data={ data } onEdit={onEdit} onDelete={onDelete} />;
 
     return( 
         <DashboardPage 
             content={
                 <>
-                    <TablePageHeader title={ title } dataSetter={setData} tableName={ table.name } />
+                    <Header title={ title } dataSetter={setData} tableName={ table.dbname } />
                     { content }
                 </>
             } 
