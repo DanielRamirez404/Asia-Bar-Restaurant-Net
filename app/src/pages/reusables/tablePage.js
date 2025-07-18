@@ -1,75 +1,50 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./tablePage.css";
 import DashboardPage from "./dashboard-page";
-import { apiAddress } from '../../config/api.js'; 
-import { routes } from '../../config/routes.js';
-import { useModifyIDChanger } from "../../hooks/session.js";
 import { PrimaryButton } from "../../components/ui/buttons.js";
 import Table from '../../components/features/table.js';
-import { getTableData } from '../../utils/api.js';
 import { SearchInputBox } from '../../components/ui/form.js'
 
-function TablePageSearch({dataSetter, tableName}) {
-    const [searchQuery, setsearchQuery] = useState("");
-
-    const onClick = () => {
-        const searchData = async function(apiAddress, tableName, searchQuery) {
-
-            const query = (searchQuery == "") ? `${apiAddress}/${tableName}` : `${apiAddress}/${tableName}/search/${searchQuery}`; 
-
-            const data = await getTableData(tableName, searchQuery);
-            dataSetter(data);
-        }
-
-        searchData(apiAddress, tableName, searchQuery);
-    };
+function SearchBox({ onSearch }) {
+    const [query, setQuery] = useState("");
 
     return(
         <div className="search-container">
-            <SearchInputBox value={searchQuery} textSetter={setsearchQuery} />
-            <PrimaryButton text="Buscar" onClick={onClick} />
+            <SearchInputBox value={ query } textSetter={ setQuery } />
+            <PrimaryButton text="Buscar" onClick={ () => onSearch(query) } />
         </div>
     );
 }
 
-function Header({title, tableName, dataSetter}) {
-    const navigate = useNavigate();
-    const actionChanger = useModifyIDChanger();
-    
-    const onClick = () => {
-        actionChanger(null); 
-        navigate(routes['Formulario de Control']);
-    };
-
+function Header({ title, onNew, onSearch }) {
     return (
         <div className="table-page-header">
             <h1>{ title }</h1>
             <div style={{ display: "flex", alignItems: "center" }}>
-                <PrimaryButton text="Añadir" onClick={ onClick } />
-                <TablePageSearch tableName={tableName} dataSetter={dataSetter}/>
+                <PrimaryButton text="Añadir" onClick={ onNew } />
+                <SearchBox onSearch={ onSearch } />
             </div>
         </div>
     );
 }
 
-function getAllColumnNames(table) {
-    const names = [...table.fields];
+function getAllColumnNames(fields) {
+    const names = [...fields];
     names.push("Acciones");
     return names;
 }
 
-export default function TablePage({ title, table, data, setData, onEdit, onDelete }) {
+export default function TablePage({ title, fields, data, setData, onEdit, onDelete, onNew, onSearch }) {
 
     const content = (data.length === 0) 
         ? <h1>No hay entradas</h1>
-        : <Table fields={ getAllColumnNames(table) } data={ data } onEdit={onEdit} onDelete={onDelete} />;
+        : <Table fields={ getAllColumnNames(fields) } data={ data } onEdit={onEdit} onDelete={onDelete} />;
 
     return( 
         <DashboardPage 
             content={
                 <>
-                    <Header title={ title } dataSetter={setData} tableName={ table.dbname } />
+                    <Header title={ title } onNew={ onNew } onSearch={ onSearch } />
                     { content }
                 </>
             } 

@@ -1,21 +1,24 @@
 import TablePage from "./reusables/tablePage.js";
 import useTable from "../hooks/useTable.js";
-import { useTableData, useActionButtons } from "../hooks/control.js";
+import { useTableData, useActionButtons, useHeaderButtons } from "../hooks/control.js";
 
 function ControlPage() {
     const table = useTable();
     const [data, setData] = useTableData(table);
     const [onEdit, onDelete] = useActionButtons(table);
+    const [onNew, onSearch] = useHeaderButtons(table, setData)
 
     return (
         <TablePage 
             key={table.dbname} 
             title={`Control de ${table.name}`}
-            table={table} 
+            fields={table.fields} 
             data={data}
             setData={setData}
             onEdit={onEdit}
             onDelete={onDelete}
+            onNew={onNew}
+            onSearch={onSearch}
         />
     );
 };
