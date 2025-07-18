@@ -3,8 +3,7 @@
 
     text-align: center;
     width: 100%;
-    padding-top: 100px;
-   
+    padding-top: 10px;
 
     background: transparent;
     margin: 10px;
@@ -13,17 +12,14 @@
 
 
 .mainInformacionDeVenta{
-
     display: grid;
     grid-template-rows: auto 1fr;
-    margin: 0;
-    padding: 0;
     width: 100%;
-    height: 100%;
-    
-   
+    height: 100vh;
+    overflow: hidden;
 
 }
+
 
 .frameInputInformacionVenta{
 
@@ -31,13 +27,17 @@
     flex-direction: column;
     width: 540px;
     padding: 25px;
-    margin: auto;
+    margin: 0 auto;
 
     border-radius: 30px;
 
     background: #fff;
     border: 2px #ddd solid;
-    
+    max-height: 90vh;
+    overflow-y: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
     
 
 }
@@ -96,17 +96,27 @@
 
 #formularioInformacionDeVenta{
 
-    display: grid;
-    grid-template-rows: 1fr auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
 }
 
 .frameBotones{
+    margin: 20px -2%;
+    padding: 15px 0;
 
-    margin-bottom: 20px;
+    position: sticky;
+    bottom: 20px;
 
+    
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+
+    margin-top: 10px;
 }
-
 
 @media (max-width : 768px){
 

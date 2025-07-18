@@ -21,16 +21,56 @@
 /* === Frames de Pedido === */
 /*frames*/
 .contenedorFramesPedido{
-
   display: flex;
   flex-direction: row;
-
   width: 100%;
-  /* Mantener el contenedor dentro de la ventana */
-  max-height: 70vh;            /* 70% de la altura de la ventana: deja más espacio para los botones inferiores */
-  height: calc(100vh - 180px); /* fallback: espacio para título y márgenes */
-  overflow-y: auto;            /* si sobrepasa, permitir scroll interno */
-  
+  max-width: 1900px;
+  margin: 0 auto;
+  max-height: 70vh;
+  height: calc(100vh - 150px);
+  overflow-y: auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Frame de Productos */
+#framePlatos {
+    flex: 2;  
+    margin-right: 0;
+   
+    padding: 0 5px;
+    box-sizing: border-box;
+    width: 50%;
+    overflow-y: auto;  
+
+}
+
+/* Contenedor de la cuadrícula de productos */
+#scrollFrameProductos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 15px;
+    padding: 10px 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Frame de Pedido */
+#frameOrden {
+    flex: 1;
+    max-width: 500px;
+    overflow-y: auto;
+    margin-left: 0;
+}
+
+/* Ajuste para las tarjetas de producto */
+.frameProducto {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .framePedido{
@@ -41,7 +81,6 @@
     flex: 1 1 auto;
     height: 100%;
     max-height: 100%;
-    margin: 0 10px;
     border-radius: 20px;
    
 
@@ -99,36 +138,64 @@
 
     overflow-y: auto;
     overflow-x: hidden;
-    
-}
-
-#scrollFrameProductos{
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill,230px);
-    gap: 7px;
-    max-height: 50vh; /* deja espacio debajo para filtros y botones */
-
-    justify-content: center;
-    width: 99%;
-    padding: 20px 0;
-    box-sizing: border-box;
-
 }
 
 /*segmented buttons*/
-.frameSegmentedButtonsPedidos{
+.frameSegmentedButtonsPedidos {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: transparent;
+    z-index: 10;
+  
+    border-radius: 8px;
+    padding: 5px 0;  
+    width: 100%;
+    min-height: 30px;  
+    height: auto;
+    margin-bottom: 5px;  
+}
 
-    display:flex;
-    justify-content: space-around;  /* Distribuye el espacio uniformemente */
-   
+.segmentedButtonsContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
 
-    gap: 10px;  /* Espacio entre botones */
+.segmentedButtonsContainer {
+    overflow-x: visible;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
 
-    
-    background: #f0f0f0;  /* Fondo sutil */
-    border-radius: 8px;  /* Bordes redondeados */
- 
+.segmentedButtonsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.segmentedButtonPedidos {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    flex: 1;
+    max-width: 150px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.segmentedButtonPedidos:hover {
+    background-color: #e9e9e9;
+}
+
+.segmentedButtonPedidos.active {
+    background-color: #ff4d4f;
+    color: white;
+    border-color: #ff4d4f;
 }
 
 .segmentedButtonPedidos {
