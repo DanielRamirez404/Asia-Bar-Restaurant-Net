@@ -11,10 +11,75 @@ import { useNavigate } from "react-router-dom";
 function ContenidoPedido() {
 
     const navegar = useNavigate()
+    const [pedido, setPedido] = useState([]);
+    const [categoriaActiva, setCategoriaActiva] = useState('todos');
+    const [nota, setNota] = useState(false)
 
-    const [isVisible, setIsVisible] = useState(false);
+    // Arreglo de productos por categoría
+    const productosPorCategoria = {
+        contornos: [
+            { id: 4, nombre: 'Wontón Frito', precio: 15, categoria: 'contornos' },
+            { id: 5, nombre: 'Rollo de Primavera', precio: 18, categoria: 'contornos' },
+            { id: 9, nombre: 'Pollo Kung Pao', precio: 28, categoria: 'contornos' },
+            { id: 10, nombre: 'Cerdo Agridulce', precio: 26, categoria: 'contornos' }
+        ],
+        productos: [
+            { id: 1, nombre: 'Arroz Frito', precio: 20, categoria: 'productos' },
+            { id: 2, nombre: 'Tallarín Saltado', precio: 25, categoria: 'productos' },
+            { id: 3, nombre: 'Pollo Agridulce', precio: 30, categoria: 'productos' },
+            { id: 6, nombre: 'Té Verde', precio: 8, categoria: 'productos' },
+            { id: 7, nombre: 'Coca Cola', precio: 10, categoria: 'productos' },
+            { id: 11, nombre: 'Sopa Wantán', precio: 22, categoria: 'productos' },
+            { id: 12, nombre: 'Chaufa Especial', precio: 28, categoria: 'productos' },
+            { id: 16, nombre: 'Jugo de Maracuyá', precio: 12, categoria: 'productos' },
+            { id: 17, nombre: 'Agua Mineral', precio: 6, categoria: 'productos' }
+        ],
+        menu: [
+            { id: 13, nombre: 'Menú Ejecutivo 1', precio: 35, categoria: 'menu' },
+            { id: 14, nombre: 'Menú Familiar', precio: 65, categoria: 'menu' },
+            { id: 15, nombre: 'Menú Vegetariano', precio: 30, categoria: 'menu' },
+            { id: 18, nombre: 'Menú Especial', precio: 40, categoria: 'menu' }
+        ]
+    };
 
-    const  toggleMostrarProductor = () =>{
+    // Combinar todos los productos para la categoría 'todos'
+    const todosLosProductos = [
+        ...productosPorCategoria.contornos,
+        ...productosPorCategoria.productos,
+        ...productosPorCategoria.menu
+    ];
+
+    const productos = {
+        todos: todosLosProductos,
+        ...productosPorCategoria
+    };
+
+    const agregarProducto = (producto) => {
+        setPedido([...pedido, { ...producto, id: Date.now() }]);
+    };
+
+    const filtrarProductos = (categoria) => {
+        setCategoriaActiva(categoria);
+    };
+
+    // Obtener productos según la categoría activa
+    const productosFiltrados = categoriaActiva === 'todos' 
+        ? productos.todos 
+        : productos[categoriaActiva] || [];
+
+    const actualizarCantidadProducto = (id, nuevaCantidad) => {
+        setPedido(pedido.map(producto =>
+            producto.id === id
+                ? { ...producto, cantidad: nuevaCantidad }
+                : producto
+        ));
+    };
+
+    const eliminarProducto = (id) => {
+        setPedido(pedido.filter(producto => producto.id !== id));
+    };
+
+    const toggleMostrarProductor = () =>{
         setIsVisible(!isVisible);
     };
 
@@ -23,12 +88,6 @@ function ContenidoPedido() {
         setIsVisible(false);
 
     };
-
-    const [nota, setNota] = useState(false)
-
-    const toggleNota = () =>{
-        setNota(!nota)
-    }
 
     useEffect(()=>{
 
@@ -49,7 +108,11 @@ function ContenidoPedido() {
 
     }, []);
 
+    const [isVisible, setIsVisible] = useState(false);
 
+    const toggleNota = () =>{
+        setNota(!nota)
+    }
 
     return (
             
@@ -76,24 +139,43 @@ function ContenidoPedido() {
 
                     <div className="scrollFrame" id="scrollFrameProductos">
 
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-                        <Producto/>
-
-                        <Producto/>
-                       
+                        {productosFiltrados.map((producto) => (
+                            <Producto 
+                                key={producto.id}
+                                onAgregar={() => agregarProducto(producto)}
+                                nombre={producto.nombre}
+                                precio={producto.precio}
+                            />
+                        ))}
                     </div>
 
                     <div className="frameSegmentedButtonsPedidos">
-
-                        <button className="segmentedButtonPedidos">Contornos</button>
-                        <button className="segmentedButtonPedidos">Productos</button>
-                        <button className="segmentedButtonPedidos">Menu</button>
-                        
+                        <div className="segmentedButtonsContainer">
+                            <button 
+                                className={`segmentedButtonPedidos ${categoriaActiva === 'todos' ? 'active' : ''}`}
+                                onClick={() => filtrarProductos('todos')}
+                            >
+                                Todos
+                            </button>
+                            <button 
+                                className={`segmentedButtonPedidos ${categoriaActiva === 'contornos' ? 'active' : ''}`}
+                                onClick={() => filtrarProductos('contornos')}
+                            >
+                                Contornos
+                            </button>
+                            <button 
+                                className={`segmentedButtonPedidos ${categoriaActiva === 'productos' ? 'active' : ''}`}
+                                onClick={() => filtrarProductos('productos')}
+                            >
+                                Productos
+                            </button>
+                            <button 
+                                className={`segmentedButtonPedidos ${categoriaActiva === 'menu' ? 'active' : ''}`}
+                                onClick={() => filtrarProductos('menu')}
+                            >
+                                Menú
+                            </button>
+                        </div>
                     </div>
 
                         
@@ -111,14 +193,17 @@ function ContenidoPedido() {
 
                     <div className="scrollFrame" id="scrollFramePedido">
 
-                        <WidgethPedido/>
-                        <WidgethPedido/>
-                        
-                        <WidgethPedido/>
-                        <WidgethPedido/>
-                        <WidgethPedido/>
-                        <WidgethPedido/>
-
+                        {pedido.map((producto) => (
+                            <WidgethPedido 
+                                key={producto.id}
+                                id={producto.id}
+                                nombre={producto.nombre}
+                                precio={producto.precio}
+                                cantidad={1}
+                                onCantidadChange={(nuevaCantidad) => actualizarCantidadProducto(producto.id, nuevaCantidad)}
+                                onEliminar={() => eliminarProducto(producto.id)}
+                            />
+                        ))}
                     </div>
 
                     {!nota && (
