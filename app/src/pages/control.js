@@ -1,4 +1,4 @@
-import TablePage from "./reusables/tablePage.js";
+import TablePage from "../components/features/table-page.js";
 import useTable from "../hooks/useTable.js";
 import { useTableData, useActionButtons, useHeaderButtons } from "../hooks/control.js";
 
@@ -14,7 +14,6 @@ function ControlPage() {
             title={`Control de ${table.name}`}
             fields={table.fields} 
             data={data}
-            setData={setData}
             onEdit={onEdit}
             onDelete={onDelete}
             onNew={onNew}
