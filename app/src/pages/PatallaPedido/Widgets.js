@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Widgets.css"
 
 export function Producto({ nombre = "Nombre del producto", precio = 20, onAgregar }){
@@ -25,55 +25,15 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
 }
 
 export function Pedido({ id, nombre, precio, cantidad = 1, onCantidadChange, onEliminar }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [displayValue, setDisplayValue] = useState(`${cantidad}x`);
-
     const handleSumar = () => {
-        const newCantidad = cantidad + 1;
-        onCantidadChange && onCantidadChange(id, newCantidad);
-        setDisplayValue(`${newCantidad}x`);
+        onCantidadChange && onCantidadChange(cantidad + 1, id);
     };
 
     const handleRestar = () => {
         if (cantidad > 1) {
-            const newCantidad = cantidad - 1;
-            onCantidadChange && onCantidadChange(id, newCantidad);
-            setDisplayValue(`${newCantidad}x`);
+            onCantidadChange && onCantidadChange(cantidad - 1, id);
         } else {
             onEliminar && onEliminar(id);
-        }
-    };
-
-    const handleFocus = () => {
-        setIsEditing(true);
-        setDisplayValue(cantidad.toString());
-    };
-
-    const handleBlur = () => {
-        setIsEditing(false);
-        let newCantidad = cantidad;
-        
-        if (displayValue === '') {
-            newCantidad = 1;
-        } else {
-            const num = parseInt(displayValue, 10);
-            newCantidad = isNaN(num) || num < 1 ? 1 : num;
-        }
-        
-        onCantidadChange && onCantidadChange(id, newCantidad);
-        setDisplayValue(`${newCantidad}x`);
-    };
-
-    const handleChange = (e) => {
-        const value = e.target.value;
-        if (value === '' || /^[1-9]\d*$/.test(value)) {
-            setDisplayValue(value);
-        }
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            e.target.blur();
         }
     };
 
@@ -89,36 +49,8 @@ export function Pedido({ id, nombre, precio, cantidad = 1, onCantidadChange, onE
 
             <p className="pedidoNombre">{nombre}</p>
             
-            <div className="pedidoCantidad" 
-                 onClick={() => document.getElementById(`cantidadInput-${id}`)?.focus()}
-                 style={{cursor: 'text', userSelect: 'none'}}>
-                {isEditing ? (
-                    <input
-                        id={`cantidadInput-${id}`}
-                        type="text"
-                        value={displayValue}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleKeyDown}
-                        autoFocus
-                        style={{
-                            width: '20px',
-                            border: 'none',
-                            background: 'transparent',
-                            outline: 'none',
-                            textAlign: 'center',
-                            padding: 0,
-                            margin: 0
-                        }}
-                    />
-                ) : (
-                    <span onClick={(e) => {
-                        e.stopPropagation();
-                        handleFocus();
-                    }}>
-                        {displayValue}
-                    </span>
-                )}
+            <div className="pedidoCantidad">
+                {cantidad}x
             </div>
 
             <div className="pedidoTotal">
