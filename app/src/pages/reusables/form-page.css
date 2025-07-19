@@ -28,17 +28,3 @@
     width: 100%;
 }
 
-.simple-selector {
-    min-width: 15%;
-    height: 30px;
-    border-radius: 30px;
-    
-    border:  solid var(--gray-hue) 2px;
-    background-color: var(--white-hue);
-
-    color: var(--gray-hue);
-    font-weight: bold;
-
-    font-size: 16px;
-}
-

@@ -5,7 +5,7 @@ import Login from "../pages/login";
 
 import Pedido from "../pages/PatallaPedido/Pedido";
 
-import InformacionVenta from "../pages/InformacionDeVenta/informacionDeVenta";
+import InformacionVenta from "../pages/informacion-venta.js";
 import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 
 import ControlPage from "../pages/control.js";

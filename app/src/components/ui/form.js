@@ -36,3 +36,19 @@ export function SearchInputBox({ textSetter, value = null }) {
         </>
     );
 }
+
+export function RequiredSelector({ title, options, textSetter }) {
+    return(
+        <div className="input-box">
+            <label for={ title }>{ title }</label>
+            <select className="selector" id={ title } defaultValue={ options[0] } onChange={ () => {
+                const selector = document.getElementById(title);
+                
+                if (selector)
+                    textSetter(selector.value)
+            }}>
+                { options.map( option => <option value={option}>{option}</option> ) }
+            </select>
+        </div>
+    );
+}

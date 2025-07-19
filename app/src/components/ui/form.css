@@ -58,3 +58,16 @@
     border-color: var(--red-hue);
     box-shadow: 0 0 0 2px rgba(206, 37, 37, 0.2);
 }
+
+
+.selector {
+    min-width: 15%;
+    height: 45px;
+    padding: 10px;
+    border-radius: 30px;
+    
+    border:  solid var(--gray-hue) 2px;
+    background-color: var(--white-hue);
+
+    font-size: 16px;
+}
