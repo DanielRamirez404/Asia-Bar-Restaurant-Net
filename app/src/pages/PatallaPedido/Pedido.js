@@ -55,7 +55,20 @@ function ContenidoPedido() {
     };
 
     const agregarProducto = (producto) => {
-        setPedido([...pedido, { ...producto, id: Date.now() }]);
+        // Verificar si el producto ya está en el pedido
+        const productoExistente = pedido.find(p => p.id === producto.id);
+        
+        if (productoExistente) {
+            // Si existe, incrementar la cantidad
+            setPedido(pedido.map(p => 
+                p.id === producto.id 
+                    ? { ...p, cantidad: (p.cantidad || 1) + 1 }
+                    : p
+            ));
+        } else {
+            // Si no existe, agregar con cantidad 1
+            setPedido([...pedido, { ...producto, cantidad: 1 }]);
+        }
     };
 
     const filtrarProductos = (categoria) => {
@@ -67,7 +80,11 @@ function ContenidoPedido() {
         ? productos.todos 
         : productos[categoriaActiva] || [];
 
-    const actualizarCantidadProducto = (id, nuevaCantidad) => {
+    const actualizarCantidadProducto = (nuevaCantidad, id) => {
+        if (nuevaCantidad < 1) {
+            eliminarProducto(id);
+            return;
+        }
         setPedido(pedido.map(producto =>
             producto.id === id
                 ? { ...producto, cantidad: nuevaCantidad }
@@ -199,8 +216,8 @@ function ContenidoPedido() {
                                 id={producto.id}
                                 nombre={producto.nombre}
                                 precio={producto.precio}
-                                cantidad={1}
-                                onCantidadChange={(nuevaCantidad) => actualizarCantidadProducto(producto.id, nuevaCantidad)}
+                                cantidad={producto.cantidad || 1}
+                                onCantidadChange={(nuevaCantidad) => actualizarCantidadProducto(nuevaCantidad, producto.id)}
                                 onEliminar={() => eliminarProducto(producto.id)}
                             />
                         ))}
