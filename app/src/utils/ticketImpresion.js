@@ -15,7 +15,7 @@
  * @param {number} datos.subtotal - Subtotal de la compra
  * @param {number} datos.iva - Impuesto (si aplica)
  * @param {number} datos.total - Total a pagar
- * @param {string} [datos.mensaje] - Mensaje adicional (opcional)
+
  * @returns {string} - Texto formateado para impresión
  */
 
@@ -84,7 +84,19 @@ export const generarTicket = (datos) => {
   // Información del ticket
   ticket.push(lineaDivisoria('-'));
   ticket.push(alinearLados(`Ticket #${datos.numeroTicket || '0000'}`, datos.fecha || ''));
-  ticket.push(alinearLados(`Hora: ${datos.hora || ''}`, datos.tipoVenta || ''));
+  
+  // Mostrar número de mesa solo si el tipo de venta es "Para comer aquí"
+  const esParaComerAqui = datos.tipoVenta && 
+    datos.tipoVenta.toLowerCase().includes('comer') || 
+    datos.tipoVenta.toLowerCase().includes('aquí');
+    
+  if (esParaComerAqui && datos.mesa) {
+    ticket.push(alinearLados(`Hora: ${datos.hora || ''}`, `Mesa: ${datos.mesa || ''}`));
+  } else {
+    ticket.push(`Hora: ${datos.hora || ''}`);
+  }
+  
+  ticket.push(`TIPO DE VENTA: ${datos.tipoVenta || 'No especificado'}`);
   ticket.push(lineaDivisoria('-'));
   
   // Línea en blanco antes de los productos
@@ -144,8 +156,7 @@ export const generarTicket = (datos) => {
   }
   
   // Pie de página
-  ticket.push(centrarTexto('¡GRACIAS POR SU COMPRA!'));
-  ticket.push(centrarTexto('Vuelva pronto'));
+
   ticket.push('\n\n\n'); // Espacio para cortar el ticket
   
   // Agregar comandos de corte (si se usa con impresora térmica real)
@@ -169,7 +180,7 @@ const datosEjemplo = {
   ],
 
   total: 31.90,
-  mensaje: 'Gracias por su preferencia. Horario de atención: Lunes a Domingo de 11:00 a 22:00 hrs.'
+
 };
 
 const ticket = generarTicket(datosEjemplo);
