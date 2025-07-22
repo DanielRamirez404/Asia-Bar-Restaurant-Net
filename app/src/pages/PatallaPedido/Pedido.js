@@ -14,6 +14,7 @@ function ContenidoPedido() {
     const [pedido, setPedido] = useState([]);
     const [categoriaActiva, setCategoriaActiva] = useState('todos');
     const [nota, setNota] = useState(false)
+    const [textoNota, setTextoNota] = useState('');
 
     // Arreglo de productos por categoría
     const productosPorCategoria = {
@@ -127,9 +128,27 @@ function ContenidoPedido() {
 
     const [isVisible, setIsVisible] = useState(false);
 
-    const toggleNota = () =>{
+    const toggleNota = () => {
         setNota(!nota)
     }
+
+    const calcularTotal = () => {
+        return pedido.reduce((total, producto) => {
+            return total + (producto.precio * (producto.cantidad || 1));
+        }, 0);
+    };
+
+    const navegarAConfirmacion = () => {
+        if (pedido.length === 0) return;
+        
+        navegar('/confirmacion-venta', { 
+            state: { 
+                pedido: pedido,
+                total: calcularTotal(),
+                nota: textoNota
+            } 
+        });
+    };
 
     return (
             
@@ -234,8 +253,18 @@ function ContenidoPedido() {
                         <div className="modalAgregarNota">
 
                             <button className="cerrarModalAgregarNota" onClick={()=> setNota(false)}>-</button>
-                            <textarea className="inputNota" placeholder="..." ></textarea>
-                            <button className="aceptarModalAgregarNota">Agregar</button>
+                            <textarea 
+                                className="inputNota" 
+                                placeholder="..."
+                                value={textoNota}
+                                onChange={(e) => setTextoNota(e.target.value)}
+                            ></textarea>
+                            <button 
+                                className="aceptarModalAgregarNota"
+                                onClick={()=> setNota(false)}
+                            >
+                                Agregar
+                            </button>
                     
                          </div>
 
@@ -253,7 +282,14 @@ function ContenidoPedido() {
 
                
                 <button id="btnCancelar" className="btnPedido" onClick={() => navegar("/informacion-de-venta")}>Regresar</button>
-                <button id="btnContinuar" className="btnPedido" onClick={() => navegar("/confirmacion-venta")}>Continuar</button>
+                <button 
+                    id="btnContinuar" 
+                    className="btnPedido" 
+                    onClick={navegarAConfirmacion}
+                    disabled={pedido.length === 0}
+                >
+                    Continuar
+                </button>
 
 
             </div>

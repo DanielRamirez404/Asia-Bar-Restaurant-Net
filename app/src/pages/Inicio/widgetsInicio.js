@@ -209,7 +209,7 @@ export function PedidoTicket({numeroPedido, nombreCompletoComprador, totalProduc
 
    return (
 
-      <div className="mainPedidoTicket">
+      <div className="mainPedidoTicket"> {/* ticket visual en computadora, no la impresion*/}
 
          <div className="informacionPedidoTicket">
             <h3 className="numeroDePedido">Pedido Nro: {numeroPedido}</h3>

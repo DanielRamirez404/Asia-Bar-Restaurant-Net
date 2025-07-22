@@ -46,12 +46,15 @@
 
 }
 
-.contenidoTarjetaNota{
-
+.contenidoTarjetaNota {
     color: #333;
-    text-align: justify;
-
-   
-
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    margin: 8px 0;
+    padding: 4px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
