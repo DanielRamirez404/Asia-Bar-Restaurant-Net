@@ -4,20 +4,24 @@ import React from "react";
 import './widgetsConfirmacionVenta.css'
 
 
-export function TarjetaProductoInformacionVenta (){
+export function TarjetaProductoInformacionVenta({ nombre, cantidad, precio }){
 
 
     return(
 
         <div className="mainTarjetaInformacion">
 
-            <span className="tituloTarjeta">Nombre Producto</span>
-            <span className="cantidadProductoTarjeta">Cantidad: <span className="cantidadProductoTarjeta" id="numeroTotalProducto">4</span> </span>
+            <span className="tituloTarjeta">{nombre}</span>
+            <span className="cantidadProductoTarjeta">
+                Cantidad: <span className="cantidadProductoTarjeta" id="numeroTotalProducto">{cantidad}</span>
+            </span>
 
             <div className="precioTotalProducto">
 
                 <span className="precioTotalLabel">Total: </span>
-                <span className="precioTotalProductoTexto">20$</span>
+                <span className="precioTotalProductoTexto">
+                    ${(precio * cantidad).toFixed(2)}
+                </span>
 
 
             </div>
@@ -30,23 +34,15 @@ export function TarjetaProductoInformacionVenta (){
 
 };
 
-export function TarjetaNota (){
-
+export function TarjetaNota({ nota }){
     return (
-    
-    <div className="mainTarjetaInformacion">
-
-        <span className="tituloTarjeta">Nota</span>
-        
-        <span className="contenidoTarjetaNota">Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias rem consequatur modi iste officia! Officia consequatur explicabo iusto saepe ex.</span>
-
-
-
-
-    </div>
-
-    )
-
+        <div className="mainTarjetaInformacion">
+            <span className="tituloTarjeta">Nota</span>
+            <div className="contenidoTarjetaNota">
+                {nota}
+            </div>
+        </div>
+    );
 };
 
 
