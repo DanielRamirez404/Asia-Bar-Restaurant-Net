@@ -12,7 +12,11 @@ import { routes } from '../config/routes.js';
 export default function InformacionVenta({}) {
     const saleTypes = ["Comer aquí", "Para llevar", "Delivery"];
     
-    const [idCliente, setIdCliente] = useState("");
+    const [documentInfo, setDocumentInfo] = useState({
+        docType: '',
+        docPrefix: '',
+        docNumber: ''
+    });
     const [type, setType] = useState(saleTypes[0]);
 
     const navigate = useNavigate();
@@ -23,8 +27,17 @@ export default function InformacionVenta({}) {
                 <Form onSubmit={ () => navigate(routes['Pedido']) } title={ "Información de Venta" } 
                     content= {(
                         <>
-                            <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setIdCliente } />
-                            <RequiredSelector title={ "Tipo de Venta" } options={ saleTypes } textSetter={ setType } />  
+                            <RequiredInputBox 
+                                title="Documento de Identidad" 
+                                textSetter={setDocumentInfo}
+                                value={documentInfo}
+                                showDocumentSelector={true}
+                            />
+                            <RequiredSelector 
+                                title={ "Tipo de Venta" } 
+                                options={ saleTypes } 
+                                textSetter={ setType } 
+                            />  
                             
                             <SubmitButton text="Continuar" />
                         </>
