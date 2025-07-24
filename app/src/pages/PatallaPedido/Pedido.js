@@ -7,7 +7,7 @@ import { WidgetNota } from "./Widgets";
 import Dashboard from "../reusables/dashboard-page";
 
 import { useNavigate } from "react-router-dom";
-import { categories, useCategory, useDishes } from "../../hooks/order.js";
+import { categories, useCategory, useDishes, useProducts } from "../../hooks/order.js";
 
 const CategoryTitles = ["Menú", "Contornos", "Productos", "Todos"];
 
@@ -16,27 +16,12 @@ function ContenidoPedido() {
     const [category, changeCategory] = useCategory();
     const dishes = useDishes(category);
 
+    const [products, addFirst] = useProducts();
+
     const navegar = useNavigate()
     const [pedido, setPedido] = useState([]);
-    const [nota, setNota] = useState(false)
+    const [nota, setNota] = useState(false);
     const [textoNota, setTextoNota] = useState('');
-
-    const agregarProducto = (producto) => {
-        // Verificar si el producto ya está en el pedido
-        const productoExistente = pedido.find(p => p.id === producto.id);
-        
-        if (productoExistente) {
-            // Si existe, incrementar la cantidad
-            setPedido(pedido.map(p => 
-                p.id === producto.id 
-                    ? { ...p, cantidad: (p.cantidad || 1) + 1 }
-                    : p
-            ));
-        } else {
-            // Si no existe, agregar con cantidad 1
-            setPedido([...pedido, { ...producto, cantidad: 1 }]);
-        }
-    };
 
     const actualizarCantidadProducto = (nuevaCantidad, id) => {
         if (nuevaCantidad < 1) {
@@ -131,15 +116,11 @@ function ContenidoPedido() {
                     <h3 className="tituloPedido"></h3>
 
                     <div className="scrollFrame" id="scrollFrame">
-
-                        { console.log(dishes) } {
+                        {
                             dishes.map((dish) => (
                             <Producto 
                                 key={ dish[0] }
-                                onAgregar={
-                                    () => null
-                                    //() => agregarProducto(producto)
-                                }
+                                onAgregar={ () => addFirst(dish) }
                                 nombre={dish[0]}
                                 precio={dish[1]}
                             />
@@ -174,15 +155,17 @@ function ContenidoPedido() {
 
                     <div className="scrollFrame" id="scrollFramePedido">
 
-                        {pedido.map((producto) => (
+                        {products.map((product) => (
                             <WidgethPedido 
-                                key={producto.id}
-                                id={producto.id}
-                                nombre={producto.nombre}
-                                precio={producto.precio}
-                                cantidad={producto.cantidad || 1}
-                                onCantidadChange={(nuevaCantidad) => actualizarCantidadProducto(nuevaCantidad, producto.id)}
-                                onEliminar={() => eliminarProducto(producto.id)}
+                                key={product[0]}
+                                nombre={product[0]}
+                                precio={product[1]}
+                                cantidad={product[3]}
+                                onCantidadChange={
+                                    null
+                                    //(nuevaCantidad) => actualizarCantidadProducto(nuevaCantidad, producto.id)
+                                }
+                                //onEliminar={() => eliminarProducto(producto.id)}
                             />
                         ))}
                     </div>

@@ -27,8 +27,6 @@ export const pages = components.map((Component, index) =>
   new Page(names[index], <Component />)
 );
 
-console.log(pages);
-
 export function getPageFromPath(path) {
     return pages.find((page) => page.path == path);
 }

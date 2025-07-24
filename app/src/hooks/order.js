@@ -60,3 +60,17 @@ export function useDishes(category) {
     return dishes;
 }
 
+export function useProducts() {
+    const [products, setProducts] = useState([]);
+
+    const addFirst = (product) => {
+        const oldProductList = products;
+
+        if (oldProductList.find( (found) => found[0] === product[0] ) )
+            return;
+
+        setProducts([...oldProductList, [...product, 1] ]);
+    };
+
+    return [products, addFirst];
+}
