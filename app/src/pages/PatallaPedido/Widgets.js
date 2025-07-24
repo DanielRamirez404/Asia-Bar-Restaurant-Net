@@ -24,25 +24,13 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
     )
 }
 
-export function Pedido({ id, nombre, precio, cantidad = 1, onCantidadChange, onEliminar }) {
-    const handleSumar = () => {
-        onCantidadChange && onCantidadChange(cantidad + 1, id);
-    };
-
-    const handleRestar = () => {
-        if (cantidad > 1) {
-            onCantidadChange && onCantidadChange(cantidad - 1, id);
-        } else {
-            onEliminar && onEliminar(id);
-        }
-    };
-
+export function Pedido({ id, nombre, precio, cantidad = 1, onIncrease, onDecrease }) {
     return (
         <div className="framePedidoWidget">
             <button 
                 className="btnSumarRestar" 
                 id="btnRestarProducto"
-                onClick={handleRestar}
+                onClick={onDecrease}
             >
                 -
             </button>
@@ -60,7 +48,7 @@ export function Pedido({ id, nombre, precio, cantidad = 1, onCantidadChange, onE
             <button 
                 className="btnSumarRestar" 
                 id="btnSumarProducto"
-                onClick={handleSumar}
+                onClick={onIncrease}
             >
                 +
             </button>

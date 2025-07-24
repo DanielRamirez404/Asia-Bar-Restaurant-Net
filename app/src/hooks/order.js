@@ -64,7 +64,7 @@ export function useProducts() {
     const [products, setProducts] = useState([]);
 
     const addFirst = (product) => {
-        const oldProductList = products;
+        const oldProductList = [...products];
 
         if (oldProductList.find( (found) => found[0] === product[0] ) )
             return;
@@ -72,5 +72,29 @@ export function useProducts() {
         setProducts([...oldProductList, [...product, 1] ]);
     };
 
-    return [products, addFirst];
+    const increase = (productName) => {
+        const oldProductList = [...products];
+
+        oldProductList.map( (product) => {
+            if (product[0] === productName)
+                product[3] += 1;
+        });
+
+        setProducts([...oldProductList]);
+    };
+
+    const decrease = (productName) => {
+        const oldProductList = [...products];
+
+        oldProductList.map( (product) => {
+            if (product[0] === productName)
+                product[3] -= 1;
+        });
+
+        const filteredProductList = oldProductList.filter( (product) => product[3] > 0 );
+
+        setProducts([...filteredProductList]);
+    }
+
+    return [products, addFirst, increase, decrease];
 }

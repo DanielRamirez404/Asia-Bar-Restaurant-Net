@@ -16,28 +16,12 @@ function ContenidoPedido() {
     const [category, changeCategory] = useCategory();
     const dishes = useDishes(category);
 
-    const [products, addFirst] = useProducts();
+    const [products, addFirst, increase, decrease] = useProducts();
 
     const navegar = useNavigate()
     const [pedido, setPedido] = useState([]);
     const [nota, setNota] = useState(false);
     const [textoNota, setTextoNota] = useState('');
-
-    const actualizarCantidadProducto = (nuevaCantidad, id) => {
-        if (nuevaCantidad < 1) {
-            eliminarProducto(id);
-            return;
-        }
-        setPedido(pedido.map(producto =>
-            producto.id === id
-                ? { ...producto, cantidad: nuevaCantidad }
-                : producto
-        ));
-    };
-
-    const eliminarProducto = (id) => {
-        setPedido(pedido.filter(producto => producto.id !== id));
-    };
 
     const toggleMostrarProductor = () =>{
         setIsVisible(!isVisible);
@@ -161,11 +145,8 @@ function ContenidoPedido() {
                                 nombre={product[0]}
                                 precio={product[1]}
                                 cantidad={product[3]}
-                                onCantidadChange={
-                                    null
-                                    //(nuevaCantidad) => actualizarCantidadProducto(nuevaCantidad, producto.id)
-                                }
-                                //onEliminar={() => eliminarProducto(producto.id)}
+                                onIncrease={ () => increase(product[0]) }
+                                onDecrease={ () => decrease(product[0]) }
                             />
                         ))}
                     </div>
