@@ -1,10 +1,24 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useContext } from 'react';
 
 import { getDishData } from '../utils/api.js';
-   
+
+import OrderContext from '../context/order.js';
+import Order from '../utils/order.js';
+
 const dbCategories = ["main-dish", "side-dish", "product"]
 export const categories = [...dbCategories];
 categories.push("all");
+
+export function useOrderInfoChanger(clientID, type) {
+    const { order, setOrder } = useContext(OrderContext);
+
+    const setNewInfo = async () => {
+        const newOrder = await new Order(clientID, type, order.products); 
+        await setOrder(newOrder);
+    };
+    
+    return () => setNewInfo();
+}
 
 export function useCategory() {
     const [category, setCategory] = useState(categories[dbCategories.length]);
@@ -44,4 +58,5 @@ export function useDishes(category) {
     }, [category]);
 
     return dishes;
-} 
+}
+
