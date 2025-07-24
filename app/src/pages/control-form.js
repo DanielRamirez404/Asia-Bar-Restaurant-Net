@@ -20,15 +20,9 @@ function ControlFormPage() {
     const navigate = useNavigate();
 
     return (
-        <ControlForm 
-            title={ table.name }
-            onSubmit={ (e) => onControlForm(e, table, fields, navigate, modifyID) }   
-            content={(
-                <>
-                    { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } value={ fields[i] } />) ) } 
-                </>
-            )} 
-        />
+        <ControlForm title={ table.name } onSubmit={ (e) => onControlForm(e, table, fields, navigate, modifyID) } > 
+            { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } value={ fields[i] } />) ) } 
+        </ControlForm>
     );
 };
 

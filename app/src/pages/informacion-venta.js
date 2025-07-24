@@ -30,16 +30,14 @@ export default function InformacionVenta({}) {
     return (
         <DashboardPage 
             content={
-                <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger) } title={ "Información de Venta" } 
-                    content= {(
-                        <>
-                            <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setClientID } />
-                            <RequiredSelector title={ "Tipo de Venta" } options={ saleTypes } textSetter={ setType } />  
-                            
-                            <SubmitButton text="Continuar" />
-                        </>
-                    )} 
-                />
+                <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger) } title={ "Información de Venta" } >
+                    <>
+                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setClientID } />
+                        <RequiredSelector title={ "Tipo de Venta" } options={ saleTypes } textSetter={ setType } />  
+                        
+                        <SubmitButton text="Continuar" />
+                    </>
+                </Form>
             } 
         />
     );

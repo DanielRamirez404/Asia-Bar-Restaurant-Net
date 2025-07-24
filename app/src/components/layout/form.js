@@ -1,6 +1,6 @@
 import './form.css';
 
-function Form({ title, content, onSubmit = () => {}}) {
+function Form({ title, children, onSubmit = () => {}}) {
     return (
         <div className='form-page'>
             <form onSubmit={ onSubmit } id={ title } class='frame-form'> 
@@ -8,7 +8,7 @@ function Form({ title, content, onSubmit = () => {}}) {
                 
                 <hr></hr>
 
-                { content }
+                { children }
             </form>
         </div>
     );
