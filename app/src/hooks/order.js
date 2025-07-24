@@ -21,7 +21,7 @@ export function useOrderInfoChanger(clientID, type) {
 }
 
 export function useCategory() {
-    const [category, setCategory] = useState(categories[dbCategories.length]);
+    const [category, setCategory] = useState(categories[0]);
 
     const changeCategory = (index) => {
         setCategory(categories[index]);
