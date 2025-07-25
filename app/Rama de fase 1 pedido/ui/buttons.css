@@ -1,0 +1,60 @@
+.submit-button {
+    width: 50%;
+    height: 50px;
+
+    cursor: pointer;
+
+    border-radius: 30px;
+
+    border: none;
+    background: var(--red-hue);
+
+    color: var(--white-hue);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.go-back-button {
+    display: inline-block;
+    width: 50%;
+    height: 50px;
+    line-height: 50px; 
+
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none; 
+    color: inherit;
+
+    border-radius: 30px;
+    border: 1px solid var(--black-hue); 
+    background: none;
+
+    cursor: pointer;
+}
+
+.primary-button {
+    padding: 0.75rem 1rem;
+
+    background: var(--red-hue);
+    color: white;
+
+    border: none;
+    border-radius: 8px;
+    
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: 500;
+
+    transition: all 0.3s ease;
+}
+
+.primary-button:hover {
+    background-color: var(--red-hue);
+    color: var(--white-hue);
+  }
+  
+  .primary-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }

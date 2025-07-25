@@ -145,3 +145,22 @@ export const getDishData = async function(tableName) {
 
     return data;
 }
+
+export const getDishData = async function(tableName) {
+    let data = [];
+
+    await api_fetch({
+        endpoint: tableName,
+        method: 'GET',
+    }).then(res => { 
+        if (res.length <= 0)
+            return;
+
+        for (const object of res) {
+            const { Name, Price, Availability } = object;
+            data.push([ Name, Price, Availability ]);
+        }
+    });
+
+    return data;
+}

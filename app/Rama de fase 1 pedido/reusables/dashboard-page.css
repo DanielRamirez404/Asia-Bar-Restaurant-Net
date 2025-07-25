@@ -1,0 +1,264 @@
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;  
+    flex-direction: row;
+    background-color: var(--yellow-background-hue);
+    transition: transform 0.3s ease;
+}
+
+.dashboard-main {
+    margin-top: 2rem;
+
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Ícono de salida */
+.logout-icon {
+    position: fixed; /* Fija el ícono en la ventana */
+    top: 1rem; /* Espaciado desde la parte superior */
+    right: 1rem; /* Espaciado desde la derecha */
+    background-color: #ff4d4d; /* Color de fondo */
+    border: none; /* Sin bordes */
+    border-radius: 50%; /* Forma circular */
+    padding: 0.5rem; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el ícono */
+    z-index: 100; /* Asegura que esté por encima de otros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: background-color 0.3s ease; /* Transición suave */
+    display: flex; /* Centra el ícono */
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-icon:hover {
+    background-color: #e60000; /* Color al pasar el mouse */
+}
+
+.menu-toggle-button {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 50;
+    background-color: transparent; 
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.menu-toggle-button:hover {
+    background-color: var(--red-hue);
+}
+
+.menu-toggle-button.sidebar-open:hover {
+    background-color: var(--yellow-background-hue);
+}
+
+.sidebar {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 16rem;
+    background-color: var(--red-hue);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 30;
+ 
+    overflow-x: hidden;
+    padding-right: 8px;
+    direction: rtl;
+    box-shadow: inset -4px 0 10px rgba(0, 0, 0, 0.277);
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 8px; /* Ancho del scrollbar */
+    margin: 10px 2px; /* Márgenes del scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgb(201, 72, 72); /* Color del fondo del scrollbar */
+    border-radius: 10px;
+    margin: 10px 0; /* Espacio superior e inferior */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 0, 0.7); /* Color del scrollbar */
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.9); /* Color del scrollbar al pasar el mouse */
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.logo-container {   
+    height: 10rem;
+    width: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.logo-placeholder {
+    width: 8rem;
+    height: 8rem;
+    background-color: transparent; /* Fondo transparente */
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+}
+
+.logo-placeholder img.logo-image {
+    width: 100%; /* La imagen ocupa todo el contenedor */
+    height: 100%; /* Ajusta la altura al contenedor */
+    object-fit: cover; /* Asegura que la imagen se ajuste correctamente */
+}
+
+.menu-title {
+    padding: 0.5rem 3rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--yellow-background-hue);    /* Color del título del menú */
+    text-align: left;   /* Orientar el texto hacia la izquierda */
+}
+
+.menu-items {
+    margin-inline-end: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex; /* Mostrar los elementos del menú en fila */
+    flex-direction: column; /* Orientar los elementos del menú en columna */
+    gap: 0.10rem;   /* Espacio entre lineas*/
+    list-style: none; /* Quitar los puntos de lista */
+   
+    
+}
+
+
+.menu-item a{
+    text-decoration: none;
+    
+    
+}
+.menu-item{
+
+    
+    width: 100%;
+    
+}
+
+.menu-button {
+
+    
+    
+    min-width: 100%;
+
+    border-radius: 0.5rem; 
+    padding: 0.5rem 1rem; 
+    font-size: .9rem;
+    font-weight: 500; 
+    color: var(--yellow-background-hue);    
+    text-decoration: none;
+    background: transparent;    /* Fondo transparente del botón del menú */
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.2s;
+        
+    text-align: end;
+    
+}
+
+.inicio-btn {
+    background: transparent;
+    
+    
+
+    padding: 10px;
+    
+    font-size: 1rem;
+    width: 100%;   
+}
+
+.inicio-btn span{
+
+    font-size: 1.2rem;
+    text-align: center;
+
+    min-width: 100%;
+    
+
+    border-radius: 0.5rem; 
+    padding: 0.5rem 1rem; 
+
+    font-weight: 500; 
+    color: var(--yellow-background-hue);    
+    text-decoration: none;
+    background: transparent;  
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.2s;
+        
+    
+
+}
+
+
+.menu-button:hover {
+    background-color: var(--dark-red-hue);      /* Color del botón del menú al pasar el mouse */
+}
+
+.submenu {
+    margin-left: 2rem; /* Indentar el submenú */
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    list-style: none; /* Quitar los puntos de lista */
+    padding: 0;
+}
+
+.submenu-button {
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 0.25rem 1rem;
+    text-align: left; /* Orientar el texto hacia la izquierda */
+    font-size: 0.875rem;
+    cursor: pointer; 
+    transition: background-color 0.2s; 
+    color: var(--yellow-background-hue); /* Color del texto del botón del submenú */
+    background: transparent; /* Fondo transparente del botón del submenú */
+    border: none; 
+}
+
+.submenu-button:hover {     /* Color del botón del submenú al pasar el mouse */
+    background-color: var(--dark-red-hue);
+}
+
+.main {
+    flex: 1;
+    padding: 0;
+    height: 100%;
+    
+    background-color: var(--yellow-background-hue);
+    /* Color de fondo del contenido principal */
+}
+
+/* Soporte para pantallas pequeñas */
+@media (max-width: 768px) { 
+    .dashboard-main {
+        margin-top: 0rem; /* Reduce el margen superior */ 
+    }
+}
