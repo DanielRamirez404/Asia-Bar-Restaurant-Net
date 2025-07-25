@@ -5,7 +5,9 @@ import {
     Navigate,
 } from "react-router-dom";
 
-import { ContextWrapper } from './context/session';
+import { ContextWrapper } from './context/session.js';
+import { OrderWrapper } from './context/order.js';
+
 import { pages } from './config/pages.js';
 import { routes } from './config/routes.js';
 
@@ -22,7 +24,11 @@ function Content() {
 
 function App() {
     return (
-        <ContextWrapper content = { <Content /> } />
+        <ContextWrapper>
+            <OrderWrapper>
+                <Content /> 
+            </OrderWrapper>
+        </ContextWrapper>
     );
 }
 

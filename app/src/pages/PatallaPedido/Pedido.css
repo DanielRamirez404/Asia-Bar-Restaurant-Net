@@ -48,13 +48,15 @@
 }
 
 /* Contenedor de la cuadrícula de productos */
-#scrollFrameProductos {
+#scrollFrame {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
     padding: 10px 5px;
     width: 100%;
     box-sizing: border-box;
+    height: 100%;
+    overflow-y: auto;
 }
 
 /* Frame de Pedido */

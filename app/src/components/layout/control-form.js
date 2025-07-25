@@ -5,20 +5,18 @@ import { routes } from '../../config/routes.js';
 
 import './control-form.css';
 
-function ControlForm({onSubmit, title, content}) {
+function ControlForm({onSubmit, title, children}) {
     return (
-        <Form onSubmit={ onSubmit } title={ title } 
-            content= {(
-                <>
-                    {content}
+        <Form onSubmit={ onSubmit } title={ title } >
+            <>
+                {children}
 
-                    <div className="buttons">
-                        <GoBackButton text="Volver" to={ routes['Control'] } />
-                        <SubmitButton text="Continuar" />
-                    </div>
-                </>
-            )} 
-        />
+                <div className="buttons">
+                    <GoBackButton text="Volver" to={ routes['Control'] } />
+                    <SubmitButton text="Continuar" />
+                </div>
+            </>
+        </Form>
     );
 }
 

@@ -1,93 +1,82 @@
 import { Search, FileText } from "lucide-react";
 import './form.css';
-import { getDocumentRules } from '../../config/documentRules';
 
 export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, showDocumentSelector = false }) {
     const venezuelanDocuments = [
-        { value: 'ci_venezolano', label: 'V-' },
-        { value: 'ci_extranjero', label: 'E-' },    
-        { value: 'rif_personal', label: 'RIF V-' },
-        { value: 'rif_juridico', label: 'RIF J-' },
-        { value: 'rif_gobierno', label: 'RIF G-' }
+        { value: 'rif_personal', label: 'RIF Personal (V-XXXXXXXX)' },
+        { value: 'rif_juridico', label: 'RIF Jurídico (J-XXXXXXXXX)' },
+        { value: 'rif_gobierno', label: 'RIF Gobierno (G-XXXXXXXXX)' },
+        { value: 'ci_venezolano', label: 'C.I. Venezolano (V-XXXXXXXX)' },
+        { value: 'ci_extranjero', label: 'C.I. Extranjero (E-XXXXXXXX)' },
+        { value: 'pasaporte', label: 'Pasaporte' },
+        { value: 'otro', label: 'Otro Documento' }
     ];
-
-    const handleDocumentNumberChange = (e, docType) => {
-        const inputValue = e.target.value;
-        const rules = getDocumentRules(docType);
-        
-        // Aplicar formato según el tipo de documento
-        let formattedValue = rules.format(inputValue);
-        
-        // Limitar la longitud máxima
-        if (formattedValue.length > rules.maxLength) {
-            formattedValue = formattedValue.slice(0, rules.maxLength);
-        }
-        
-        textSetter(prevValue => ({
-            ...prevValue,
-            docNumber: formattedValue
-        }));
-    };
-
-    const handleDocumentTypeChange = (e) => {
-        const selectedDoc = e.target.value;
-        const docType = selectedDoc.split('_')[0];
-        const rules = getDocumentRules(selectedDoc);
-        
-        textSetter(prevValue => ({
-            ...prevValue,
-            docType: selectedDoc,
-            docPrefix: rules.prefix,
-            docNumber: '' // Resetear el número al cambiar el tipo
-        }));
-    };
-
-    const getCurrentDocumentRules = () => {
-        return value?.docType ? getDocumentRules(value.docType) : null;
-    };
-
-    const currentRules = getCurrentDocumentRules();
-    const placeholder = currentRules?.placeholder || title;
 
     if (showDocumentSelector) {
         return (
             <div className='input-box'>
                 <label>{title}</label>
-                <div className="document-fields-container">
-                    <div className="document-type-container">
-                        <div className="document-icon">
-                            <FileText size={16} />
-                        </div>
-                        <select 
-                            className="document-type-selector"
-                            onChange={handleDocumentTypeChange}
-                            value={value?.docType || ''}
-                        >
-                            <option value="" disabled>Doc.</option>
-                            {venezuelanDocuments.map((doc) => (
-                                <option key={doc.value} value={doc.value}>
-                                    {doc.label}
-                                </option>
-                            ))}
-                        </select>
+                <div className="document-input-container">
+                    <div className="document-icon">
+                        <FileText size={20} />
                     </div>
-                    
-                    <div className="document-input-container">
-                        <input
-                            type="text"
-                            className="document-number-input"
-                            placeholder={placeholder}
-                            value={value?.docNumber || ''}
-                            onChange={(e) => handleDocumentNumberChange(e, value?.docType)}
-                            maxLength={currentRules?.maxLength || 20}
-                        />
-                    </div>
+                    <select 
+                        className="document-type-selector"
+                        onChange={(e) => {
+                            // Extraer solo el valor del documento sin el prefijo
+                            const selectedDoc = e.target.value;
+                            const docType = selectedDoc.split('_')[0];
+                            textSetter(prevValue => ({
+                                ...prevValue,
+                                docType: docType,
+                                docPrefix: docType === 'ci' ? 'V' : docType === 'rif' ? 'J' : ''
+                            }));
+                        }}
+                        defaultValue=""
+                    >
+                        <option value="" disabled>Seleccione un documento</option>
+                        {venezuelanDocuments.map((doc) => (
+                            <option key={doc.value} value={doc.value}>
+                                {doc.label}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="document-separator"></div>
+                    <input
+                        type="text"
+                        className="document-number-input"
+                        placeholder={title}
+                        value={value?.docNumber || ''}
+                        onChange={(e) => {
+                            const inputValue = e.target.value;
+                            // Validar según el tipo de documento seleccionado
+                            let formattedValue = inputValue;
+                            const docType = value?.docType;
+                            
+                            if (docType === 'rif' || docType === 'ci') {
+                                // Permitir solo números después del prefijo
+                                formattedValue = inputValue.replace(/[^0-9-]/g, '');
+                                // Formatear según el tipo de documento
+                                if (docType === 'rif') {
+                                    // Formato: J-123456789
+                                    if (formattedValue.length > 0 && !formattedValue.includes('-')) {
+                                        formattedValue = value?.docPrefix + '-' + formattedValue;
+                                    }
+                                } else if (docType === 'ci') {
+                                    // Formato: V-12345678 o E-12345678
+                                    if (formattedValue.length > 0 && !formattedValue.includes('-')) {
+                                        formattedValue = value?.docPrefix + '-' + formattedValue;
+                                    }
+                                }
+                            }
+                            
+                            textSetter(prevValue => ({
+                                ...prevValue,
+                                docNumber: formattedValue
+                            }));
+                        }}
+                    />
                 </div>
-                {currentRules && (
-                    <div className="document-hint">
-                        <small>{currentRules.description}</small>
-                    </div>
-                )}
             </div>
         );
     }
@@ -101,7 +90,7 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
             
             <input 
                 type={type} 
-                id={title}
+                id={title} 
                 placeholder={title} 
                 pattern={regex} 
                 onChange={(e) => textSetter(e.target.value)} 

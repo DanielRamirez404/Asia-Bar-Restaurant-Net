@@ -15,7 +15,7 @@ const deliverymenDbFields = ["name", "area", "availability", "phone"];
 const dishDbFields = ["name", "availability", "price", "category", "description"];
 const productsDbFields = [...dishDbFields];
 productsDbFields.push("provider");
-productsDbFields.push("quality");
+productsDbFields.push("quantity");
 const usersDbFields = [ "users", "type", "password" ];
 
 export const tables = [
@@ -27,4 +27,3 @@ export const tables = [
     new Table("Repartidores","deliverymen", deliverymenFields, deliverymenDbFields),
     new Table("Usuarios","users", usersFields, usersDbFields),
 ];
-
