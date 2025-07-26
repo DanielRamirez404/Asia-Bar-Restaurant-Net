@@ -9,12 +9,19 @@ const dbCategories = ["main-dish", "side-dish", "product"]
 export const categories = [...dbCategories];
 categories.push("all");
 
+export function useOrder() {
+    const { order, setOrder } = useContext(OrderContext);
+    
+    return useMemo(() => order, [order]);
+}
+
 export function useOrderInfoChanger(clientID, type) {
     const { order, setOrder } = useContext(OrderContext);
 
     const setNewInfo = async () => {
-        const newOrder = await new Order(clientID, type, order.products); 
+        const newOrder = await new Order(clientID, type, order.products, order.note); 
         await setOrder(newOrder);
+        console.log(newOrder);
     };
     
     return () => setNewInfo();
@@ -28,7 +35,6 @@ export function useCategory() {
     };
 
     return [category, changeCategory];
-
 }
 
 export function useDishes(category) {
@@ -97,4 +103,16 @@ export function useProducts() {
     }
 
     return [products, addFirst, increase, decrease];
+}
+
+export function useOrderChanger(products, note) {
+    const { order, setOrder } = useContext(OrderContext);
+
+    const setNewInfo = async () => {
+        const newOrder = await new Order(order.clientID, order.type, products, note); 
+        await setOrder(newOrder);
+        console.log(newOrder);
+    };
+    
+    return () => setNewInfo();
 }

@@ -7,7 +7,7 @@ import { WidgetNota } from "./Widgets";
 import Dashboard from "../reusables/dashboard-page";
 
 import { useNavigate } from "react-router-dom";
-import { categories, useCategory, useDishes, useProducts } from "../../hooks/order.js";
+import { categories, useCategory, useDishes, useProducts, useOrderChanger } from "../../hooks/order.js";
 
 const CategoryTitles = ["Menú", "Contornos", "Productos", "Todos"];
 
@@ -18,19 +18,19 @@ function ContenidoPedido() {
 
     const [products, addFirst, increase, decrease] = useProducts();
 
-    const navegar = useNavigate()
-    const [pedido, setPedido] = useState([]);
     const [nota, setNota] = useState(false);
     const [textoNota, setTextoNota] = useState('');
+
+    const orderChanger = useOrderChanger(products, textoNota);
+
+    const navigate = useNavigate()
 
     const toggleMostrarProductor = () =>{
         setIsVisible(!isVisible);
     };
 
     const cerrar = () => {
-
         setIsVisible(false);
-
     };
 
     useEffect(()=>{
@@ -58,24 +58,6 @@ function ContenidoPedido() {
         setNota(!nota)
     }
 
-    const calcularTotal = () => {
-        return pedido.reduce((total, producto) => {
-            return total + (producto.precio * (producto.cantidad || 1));
-        }, 0);
-    };
-
-    const navegarAConfirmacion = () => {
-        if (pedido.length === 0) return;
-        
-        navegar('/confirmacion-venta', { 
-            state: { 
-                pedido: pedido,
-                total: calcularTotal(),
-                nota: textoNota
-            } 
-        });
-    };
-
     return (
             
         <div className="mainPedido">
@@ -99,7 +81,7 @@ function ContenidoPedido() {
 
                     <h3 className="tituloPedido"></h3>
 
-                    <div className="scrollFrame" id="scrollFrame">
+                    <div className="scrollFrame" id="scrollFrameProductos">
                         {
                             dishes.map((dish) => (
                             <Producto 
@@ -190,12 +172,14 @@ function ContenidoPedido() {
             <div className="frameBotones">
 
                
-                <button id="btnCancelar" className="btnPedido" onClick={() => navegar("/informacion-de-venta")}>Regresar</button>
+                <button id="btnCancelar" className="btnPedido" onClick={() => navigate("/informacion-de-venta")}>Regresar</button>
                 <button 
                     id="btnContinuar" 
                     className="btnPedido" 
-                    onClick={navegarAConfirmacion}
-                    disabled={pedido.length === 0}
+                    onClick={ () => {
+                        orderChanger();
+                        navigate('/confirmacion-venta');
+                    }}
                 >
                     Continuar
                 </button>

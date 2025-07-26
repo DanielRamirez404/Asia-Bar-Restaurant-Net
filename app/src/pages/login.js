@@ -15,18 +15,14 @@ function Login() {
     const navigate = useNavigate();
 
     return (
-        <Form 
-            title={ "Inicio de Sesión" }
-            onSubmit={ (e) => onLogin(e, username, password, navigate) } 
-            content= {(
-                <>
-                    <RequiredInputBox title={ "Nombre de Usuario" } textSetter={ setUsername } />
-                    <RequiredInputBox type='password' title={ "Contraseña" } textSetter={ setPassword } />
+        <Form title={ "Inicio de Sesión" } onSubmit={ (e) => onLogin(e, username, password, navigate) } >
+            <>
+                <RequiredInputBox title={ "Nombre de Usuario" } textSetter={ setUsername } />
+                <RequiredInputBox type='password' title={ "Contraseña" } textSetter={ setPassword } />
 
-                    <SubmitButton text="Acceder" />
-                </>
-            )}
-        />
+                <SubmitButton text="Acceder" />
+            </>
+        </Form>
   );
 }
 

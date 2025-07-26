@@ -5,20 +5,26 @@ import { TarjetaProductoInformacionVenta, TarjetaNota, TarjetaDelivery } from '.
 import { useNavigate, useLocation } from 'react-router-dom';
 import { generarTicket } from '../../utils/ticketImpresion';
 
+import { useOrder } from "../../hooks/order.js";
 
 function ContenidoConfirmacionVenta() {
-    // Función para imprimir el ticket
+
+
+    const order = useOrder();
+
+    const products = order.products;
+
+        
+    const subtotal = products.reduce((sum, product) => sum + product[3] * product[1], 0);
+    const iva = subtotal * 0.16; // 16% de IVA
+    const total = subtotal + iva; 
+   
+
     const imprimirTicket = () => {
-        // Obtener la fecha y hora actual
         const ahora = new Date();
         const fecha = ahora.toLocaleDateString('es-MX');
         const hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
         
-        // Calcular subtotal e IVA
-        const subtotal = pedido.reduce((sum, item) => sum + (item.precio * (item.cantidad || 1)), 0);
-        const iva = subtotal * 0.16; // 16% de IVA
-        
-        // Crear datos para el ticket
         const datosTicket = {
             empresa: 'RESTAURANTE ASIA',
             direccion: 'Av. Principal #123',
@@ -26,17 +32,17 @@ function ContenidoConfirmacionVenta() {
             fecha: fecha,
             hora: hora,
             numeroTicket: Math.floor(1000 + Math.random() * 9000).toString(), // Número aleatorio para el ticket
-            tipoVenta: tipoVenta,
-            items: pedido.map(item => ({
-                nombre: item.nombre,
-                cantidad: item.cantidad || 1,
-                precio: item.precio,
-                precioUnitario: item.precio / (item.cantidad || 1)
+            tipoVenta: order.type,
+            items: products.map(product => ({
+                nombre: product[0], 
+                cantidad: product[3],
+                precio: product[1] * product[3],
+                precioUnitario: product[1] 
             })),
             subtotal: subtotal,
             iva: iva,
-            total: total,
-            mensaje: nota || '¡Gracias por su preferencia!'
+            total: subtotal + iva,
+            mensaje: order.note || '¡Gracias por su preferencia!'
         };
 
         // Generar el ticket
@@ -71,10 +77,6 @@ function ContenidoConfirmacionVenta() {
     const navegar = useNavigate()
     const location = useLocation();
     
-    // Obtener los datos del pedido de la ubicación
-    const { pedido = [], total = 0, nota = '', tipoVenta: tipoVentaParam = 'Para llevar' } = location.state || {};
-    const [tipoVenta, setTipoVenta] = useState(tipoVentaParam);
-
     return (
     
     <div className='mainConfirmacionVenta'>
@@ -89,20 +91,20 @@ function ContenidoConfirmacionVenta() {
                     <span className='nombreApeliido'>Nombre Apellido</span>
                     <span className='datoCliente' id='ci'>CI: 23949235 </span>
 
-                    {tipoVenta === 'Delivery' && (
+                    {order.type === 'Delivery' && (
                         <span className='datoCliente' id='informacionDireccion'>direccion: Calle XXXX casa nro XX</span>
                     )}
 
-                    {tipoVenta === 'Para comer aqui' && (
+                    {order.type === 'Para comer aqui' && (
                     <span className='datoCliente' id='informacionMesa'>Mesa: 7</span>
                     )}
 
                     
-                        <span className='datoCliente' id='tipoDeVenta'>Tipo de venta: <span id='tipoTexto'>{tipoVenta}</span></span>
+                        <span className='datoCliente' id='tipoDeVenta'>Tipo de venta: <span id='tipoTexto'>{order.type}</span></span>
                    
                 </div>
 
-                {tipoVenta === 'Delivery' && (
+                {order.type === 'Delivery' && (
 
                 <div className='informacionRepartidor'>
                     <span className='repartidor'>Repartidor</span>
@@ -118,19 +120,21 @@ function ContenidoConfirmacionVenta() {
 
             <div className='scrollResumenProductos'>
 
-                {pedido.map((producto, index) => (
+                
+                { console.log(order) }
+                { products.map((product, index) => (
                     <TarjetaProductoInformacionVenta 
-                        key={`${producto.id}-${index}`}
-                        nombre={producto.nombre}
-                        cantidad={producto.cantidad || 1}
-                        precio={producto.precio}
+                        key={`producto-${index}`}
+                        nombre={product[0]}
+                        cantidad={product[3]}
+                        precio={product[1]}
                     />
                 ))}
                 
-                {tipoVenta === 'Delivery' && <TarjetaDelivery />}
+                {order.type === 'Delivery' && <TarjetaDelivery />}
                 
-                {nota && (
-                    <TarjetaNota nota={nota} />
+                {order.note && (
+                    <TarjetaNota nota={ order.note } />
                 )}
 
 
