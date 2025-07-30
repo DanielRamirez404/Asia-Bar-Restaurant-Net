@@ -85,36 +85,20 @@ function ContenidoConfirmacionVenta() {
         
         <div className='contenedorResumenVenta'>
 
-        <div className='frameResumenCliente' id='resumenCliente'>
+        { 
+            (order.type !== "Delivery") ? null :
+                (<div className='frameResumenCliente' id='resumenCliente'>
 
-            <div className='infromacionCliente'>
-                    <span className='nombreApeliido'>Nombre Apellido</span>
-                    <span className='datoCliente' id='ci'>CI: 23949235 </span>
+                    <div className='infromacionCliente'>
+                            <span className='nombreApeliido'>{ order.clientName }</span>
+                            <span className='datoCliente' id='ci'>{ order.clientID }</span>
 
-                    {order.type === 'Delivery' && (
-                        <span className='datoCliente' id='informacionDireccion'>direccion: Calle XXXX casa nro XX</span>
-                    )}
+                            <span className='datoCliente' id='informacionDireccion'>{ order.address }</span>
+                           
+                    </div>
 
-                    {order.type === 'Para comer aqui' && (
-                    <span className='datoCliente' id='informacionMesa'>Mesa: 7</span>
-                    )}
-
-                    
-                        <span className='datoCliente' id='tipoDeVenta'>Tipo de venta: <span id='tipoTexto'>{order.type}</span></span>
-                   
-                </div>
-
-                {order.type === 'Delivery' && (
-
-                <div className='informacionRepartidor'>
-                    <span className='repartidor'>Repartidor</span>
-                    <span className='nombreRepartidor'>Nombre Apellido</span>
-                </div>
-                )}
-
-        </div>
-
-
+                </div>)
+        }
 
         <div className='frameResumenVenta' id='resumenVenta'>
 
@@ -131,8 +115,6 @@ function ContenidoConfirmacionVenta() {
                     />
                 ))}
                 
-                {order.type === 'Delivery' && <TarjetaDelivery />}
-                
                 {order.note && (
                     <TarjetaNota nota={ order.note } />
                 )}
@@ -146,10 +128,7 @@ function ContenidoConfirmacionVenta() {
 
             </div>
 
-
-
         </div>
-
 
 
         </div>
@@ -186,6 +165,5 @@ function ConfirmacionVenta(){
     return (<Dashboard content={ <ContenidoConfirmacionVenta/> } />)
 
 }
-
 
 export default ConfirmacionVenta

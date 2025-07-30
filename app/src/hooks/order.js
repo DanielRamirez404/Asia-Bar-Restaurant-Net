@@ -15,11 +15,11 @@ export function useOrder() {
     return useMemo(() => order, [order]);
 }
 
-export function useOrderInfoChanger(clientID, type) {
+export function useOrderInfoChanger(clientID, clientName, type, address) {
     const { order, setOrder } = useContext(OrderContext);
 
     const setNewInfo = async () => {
-        const newOrder = await new Order(clientID, type, order.products, order.note); 
+        const newOrder = await new Order(clientID, clientName, type, address, order.products, order.note); 
         await setOrder(newOrder);
         console.log(newOrder);
     };
@@ -109,7 +109,7 @@ export function useOrderChanger(products, note) {
     const { order, setOrder } = useContext(OrderContext);
 
     const setNewInfo = async () => {
-        const newOrder = await new Order(order.clientID, order.type, products, note); 
+        const newOrder = await new Order(order.clientID, order.clientName, order.type, order.address, products, note); 
         await setOrder(newOrder);
         console.log(newOrder);
     };

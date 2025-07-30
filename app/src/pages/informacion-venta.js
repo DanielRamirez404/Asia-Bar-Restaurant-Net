@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useOrderInfoChanger } from "../hooks/order.js";
+import { useFormFields } from "../hooks/form.js";
 
 import DashboardPage from "./reusables/dashboard-page.js";
 import Form from "../components/layout/form.js";
@@ -20,11 +21,11 @@ function onSubmitInfo(e, navigate, infoChanger) {
 
 export default function InformacionVenta({}) {
     const saleTypes = ["Comer aquí", "Para llevar", "Delivery"];
-    
-    const [clientID, setClientID] = useState("");
     const [type, setType] = useState(saleTypes[0]);
 
-    const infoChanger = useOrderInfoChanger(clientID, type);
+    const [values, setters] = useFormFields(3);
+
+    const infoChanger = useOrderInfoChanger(values[0], values[1], type, values[2]);
     const navigate = useNavigate();
     
     return (
@@ -32,9 +33,16 @@ export default function InformacionVenta({}) {
             content={
                 <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger) } title={ "Información de Venta" } >
                     <>
-                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setClientID } />
+                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setters[0] } />
+                        <RequiredInputBox title={ "Nombre del Cliente" } textSetter={ setters[1] } />
                         <RequiredSelector title={ "Tipo de Venta" } options={ saleTypes } textSetter={ setType } />  
                         
+                        {   
+                            (type === saleTypes[2]) 
+                                ? <RequiredInputBox title={ "Dirección" } textSetter={ setters[2]  } />
+                                : null
+                        } 
+
                         <SubmitButton text="Continuar" />
                     </>
                 </Form>
