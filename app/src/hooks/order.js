@@ -67,7 +67,12 @@ export function useDishes(category) {
 }
 
 export function useProducts() {
-    const [products, setProducts] = useState([]);
+    const { order } = useContext(OrderContext);
+    const [products, setProducts] = useState(order.products || []);
+
+    useEffect(() => {
+        setProducts(order.products || []);
+    }, [order.products]);
 
     const addFirst = (product) => {
         const oldProductList = [...products];

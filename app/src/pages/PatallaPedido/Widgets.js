@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Widgets.css"
 
+const formatearPrecio = (valor) => {
+    return parseFloat(Number(valor).toFixed(2));
+};
+
 export function Producto({ nombre = "Nombre del producto", precio = 20, onAgregar }){
     const handleAgregar = () => {
         if (onAgregar) {
@@ -13,7 +17,7 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
             <div className="productoInformacion">
                 <div className = "descripcion">
                     <p id="productoNombre">{nombre}</p>
-                    <p id="productoPrecio">{precio}$</p>
+                    <p id="productoPrecio">{formatearPrecio(precio).toLocaleString('es-ES')}$</p>
                     <p id="prductoDisponiblidad">Disponible</p>
                 </div>
             </div>
@@ -25,6 +29,8 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
 }
 
 export function Pedido({ id, nombre, precio, cantidad = 1, onIncrease, onDecrease }) {
+    
+
     return (
         <div className="framePedidoWidget">
             <button 
@@ -42,7 +48,7 @@ export function Pedido({ id, nombre, precio, cantidad = 1, onIncrease, onDecreas
             </div>
 
             <div className="pedidoTotal">
-                <p className="pedidoTotalTexto">{cantidad * precio}$</p>
+                <p className="pedidoTotalTexto">{formatearPrecio(cantidad * precio).toLocaleString('es-ES')}$</p>
             </div>
 
             <button 

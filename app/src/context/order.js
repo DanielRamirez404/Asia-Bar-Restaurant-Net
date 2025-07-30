@@ -1,18 +1,41 @@
-import { useState } from "react";
-import { createContext } from "react";
+import React, { createContext, useState, useMemo } from 'react';
+import Order from '../utils/order.js';
 
-import Order from "../utils/order.js";
+const OrderContext = createContext();
 
-const OrderContext = createContext(new Order());
+const defaultOrder = {
+    products: [],
+    note: '',
+    client: null,
+    payment: null
+};
 
-export const OrderWrapper = ({ children }) => {
-    const [order, setOrder] = useState(new Order());
+export function OrderWrapper({ children }) {
+    const [order, setOrder] = useState(defaultOrder);
+
+    const updateNote = (newNote) => {
+        setOrder(prevOrder => ({
+            ...prevOrder,
+            note: newNote
+        }));
+    };
+
+    const clearOrder = () => {
+        setOrder(defaultOrder);
+    };
+
+    const value = useMemo(() => ({
+        order,
+        setOrder,
+        clearOrder,
+        updateNote
+    }), [order]);
 
     return (
-        <OrderContext.Provider value={{ order, setOrder }}>
+        <OrderContext.Provider value={value}>
             {children}
         </OrderContext.Provider>
     );
-};
+}
 
 export default OrderContext;
