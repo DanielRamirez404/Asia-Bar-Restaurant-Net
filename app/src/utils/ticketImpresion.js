@@ -2,8 +2,6 @@
  * Función para generar un ticket de impresión térmica de 58mm
  * @param {Object} datos - Objeto con los datos del ticket
  * @param {string} datos.empresa - Nombre de la empresa
-
-
  * @param {string} datos.fecha - Fecha de la transacción
  * @param {string} datos.hora - Hora de la transacción
  * @param {string} datos.numeroTicket - Número de ticket/orden
@@ -15,7 +13,6 @@
  * @param {number} datos.subtotal - Subtotal de la compra
  * @param {number} datos.iva - Impuesto (si aplica)
  * @param {number} datos.total - Total a pagar
-
  * @returns {string} - Texto formateado para impresión
  */
 
@@ -52,6 +49,12 @@ export const generarTicket = (datos) => {
   // Caracteres máximos por línea (para impresora de 58mm)
   const MAX_CHARS = 32;
   
+  // Configuración de columnas para productos
+  const COL_CANT = 4;     // Ancho columna cantidad
+  const COL_DESC = 18;    // Ancho columna descripción
+  const COL_TOTAL = 8;    // Ancho columna total
+  const SEPARADOR = 2;    // Espacios entre columnas
+  
   // Función para centrar texto
   const centrarTexto = (texto) => {
     const lineas = dividirEnLineas(texto, MAX_CHARS);
@@ -72,77 +75,101 @@ export const generarTicket = (datos) => {
     }
   };
 
+  // Función para formatear línea de producto con columnas fijas
+  const formatearLineaProducto = (cantidad, descripcion, total) => {
+    // Formatear cantidad (alineada a la izquierda, máximo COL_CANT caracteres)
+    const cantStr = cantidad.toString().padEnd(COL_CANT, ' ').substring(0, COL_CANT);
+    
+    // Formatear total (alineado a la derecha, máximo COL_TOTAL caracteres)
+    const totalStr = total.padStart(COL_TOTAL, ' ').substring(0, COL_TOTAL);
+    
+    // Dividir descripción en líneas que quepan en COL_DESC
+    const lineasDesc = dividirEnLineas(descripcion, COL_DESC);
+    
+    const resultado = [];
+    
+    lineasDesc.forEach((lineaDesc, index) => {
+      // Ajustar descripción al ancho de columna
+      const descStr = lineaDesc.padEnd(COL_DESC, ' ').substring(0, COL_DESC);
+      
+      if (index === 0) {
+        // Primera línea: cantidad + descripción + total
+        resultado.push(cantStr + descStr + totalStr);
+      } else {
+        // Líneas adicionales: solo descripción (con espacios para cantidad)
+        const espaciosCant = ' '.repeat(COL_CANT);
+        const espaciosTotal = ' '.repeat(COL_TOTAL);
+        resultado.push(espaciosCant + descStr + espaciosTotal);
+      }
+    });
+    
+    return resultado;
+  };
+
   // Función para crear una línea divisoria
   const lineaDivisoria = (caracter = '-') => caracter.repeat(MAX_CHARS);
 
   // Iniciar el ticket
   let ticket = [];
 
-  // Encabezado
+  // Encabezado de la empresa
+  ticket.push(centrarTexto('RESTAURANTE ASIA'));
   ticket.push(''); // Línea en blanco
   
+  // Línea divisoria superior
+  ticket.push(lineaDivisoria('*'));
+  
   // Información del ticket
-  ticket.push(lineaDivisoria('-'));
   ticket.push(alinearLados(`Ticket #${datos.numeroTicket || '0000'}`, datos.fecha || ''));
+  ticket.push(alinearLados(`${datos.hora || ''}`, ''));
   
   // Mostrar número de mesa solo si el tipo de venta es "Para comer aquí"
   const esParaComerAqui = datos.tipoVenta && 
-    datos.tipoVenta.toLowerCase().includes('comer') || 
-    datos.tipoVenta.toLowerCase().includes('aquí');
-    
+    (datos.tipoVenta.toLowerCase().includes('comer') || 
+     datos.tipoVenta.toLowerCase().includes('aquí'));
+     
   if (esParaComerAqui && datos.mesa) {
-    ticket.push(alinearLados(`Hora: ${datos.hora || ''}`, `Mesa: ${datos.mesa || ''}`));
-  } else {
-    ticket.push(`Hora: ${datos.hora || ''}`);
+    ticket.push(`Mesa: ${datos.mesa || ''}`);
   }
   
-  ticket.push(`TIPO DE VENTA: ${datos.tipoVenta || 'No especificado'}`);
-  ticket.push(lineaDivisoria('-'));
+  ticket.push(`TIPO: ${datos.tipoVenta || 'Para llevar'}`);
+  ticket.push(lineaDivisoria('*'));
   
   // Línea en blanco antes de los productos
   ticket.push('');
   
-  // Encabezado de productos
-  ticket.push('CANT  DESCRIPCION       TOTAL');
-  ticket.push(lineaDivisoria('-'));
+  // Encabezado de productos con espaciado exacto
+  const header = `${'CANT'.padEnd(5)}${'DESCRIPCION'.padEnd(19)}${'TOTAL'.padStart(6)}`;
+  ticket.push(header);
+  ticket.push('-'.repeat(32));
+  
+  ticket.push(''); // Línea en blanco después del encabezado
   
   // Procesar cada ítem del pedido
   datos.items.forEach(item => {
     const nombre = item.nombre || 'Producto';
     const cantidad = item.cantidad || 1;
-    const precioUnitario = item.precioUnitario || item.precio / (cantidad || 1);
-    const totalItem = item.precio;
+    const totalItem = item.precio || 0;
     
-    // Si el nombre es muy largo, lo dividimos en líneas
-    const nombreLines = dividirEnLineas(nombre, MAX_CHARS - 10); // Dejamos espacio para cantidad y precio
+    // Formatear el precio con símbolo de moneda
+    const precioFormateado = `$ ${totalItem.toFixed(2)}`;
     
-    nombreLines.forEach((line, index) => {
-      if (index === 0) {
-        // Primera línea con cantidad, nombre y precio
-        const nombreConCantidad = `${cantidad}x ${line}`;
-        const precioStr = `$${totalItem.toFixed(2)}`;
-        ticket.push(alinearLados(nombreConCantidad, precioStr));
-      } else {
-        // Líneas adicionales del nombre (sangradas)
-        ticket.push(`    ${line}`);
-      }
-    });
-    
-    // Si hay un precio unitario diferente, lo mostramos en una línea aparte
-    if (precioUnitario && precioUnitario * cantidad !== totalItem) {
-      ticket.push(`  (${cantidad} x $${precioUnitario.toFixed(2)})`);
-    }
+    // Generar las líneas del producto
+    const lineasProducto = formatearLineaProducto(cantidad, nombre, precioFormateado);
+    lineasProducto.forEach(linea => ticket.push(linea));
   });
   
   // Línea en blanco antes de los totales
   ticket.push('');
   
- 
-
+  // Línea divisoria antes del total
+  ticket.push(lineaDivisoria('-'));
   
-  // Línea del total
-  ticket.push(lineaDivisoria('='));
-  ticket.push(alinearLados('TOTAL:', `$${datos.total.toFixed(2)}`));
+  // Total
+  const totalFormateado = `$ ${datos.total.toFixed(2)}`;
+  ticket.push(alinearLados('TOTAL:', totalFormateado));
+  
+  // Línea divisoria después del total
   ticket.push(lineaDivisoria('='));
   
   // Mensaje final (opcional)
@@ -151,59 +178,17 @@ export const generarTicket = (datos) => {
     // Dividir el mensaje en líneas si es muy largo
     const lineasMensaje = dividirEnLineas(datos.mensaje, MAX_CHARS);
     lineasMensaje.forEach(linea => ticket.push(centrarTexto(linea)));
-    
     ticket.push(''); // Línea en blanco después del mensaje
   }
   
-  // Pie de página
-
-  ticket.push('\n\n\n'); // Espacio para cortar el ticket
+  // Mensaje de agradecimiento
+  ticket.push('');
+ 
   
-  // Agregar comandos de corte (si se usa con impresora térmica real)
-  // ticket.push('\x1B@'); // Inicializar impresora
-  // ticket.push('\x1DVA\x00'); // Cortar papel
+  // Espacio para cortar el ticket
+  ticket.push('');
+  ticket.push('');
+  ticket.push('');
   
   return ticket.join('\n');
 };
-
-// Ejemplo de uso:
-/*
-const datosEjemplo = {
-  empresa: 'ASIA BAR RESTAURANT',
-  fecha: '22/07/2025',
-  hora: '14:30:45',
-  numeroTicket: '0001',
-  tipoVenta: 'Para llevar',
-  items: [
-    { nombre: 'Arroz Frito Especial', cantidad: 2, precio: 12.50 },
-    { nombre: 'Té Helado', cantidad: 1, precio: 2.50 },
-  ],
-
-  total: 31.90,
-
-};
-
-const ticket = generarTicket(datosEjemplo);
-console.log(ticket);
-*/
-
-// Para usar en React:
-/*
-import { generarTicket } from './utils/ticketImpresion';
-
-// Al momento de imprimir:
-const handleImprimir = () => {
-  const ticket = generarTicket(datosDelTicket);
-  
-  // Opción 1: Imprimir en una ventana emergente
-  const ventana = window.open('', '_blank');
-  ventana.document.write(`<pre>${ticket}</pre>`);
-  ventana.document.close();
-  ventana.print();
-  
-  // Opción 2: Usar con impresora térmica directa (requiere configuración adicional)
-  // const printWindow = window.open('', '_blank');
-  // printWindow.document.write(`<html><body><pre>${ticket}</pre><script>window.print();window.close();</script></body></html>`);
-  // printWindow.document.close();
-};
-*/

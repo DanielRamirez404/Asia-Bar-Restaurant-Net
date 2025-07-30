@@ -15,12 +15,18 @@
 /* Contenedor del contenido del popup */
 .popup-content {    
     background-color: #fff;
-    padding: 2rem;  /* Espaciado interno */
-    border-radius: 8px; /* Bordes redondeados */
+    padding: 2rem;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     max-width: 400px;
     width: 90%;
+}
+
+.popup-content p {
+    margin: 0 0 1rem 0;
+    font-size: 18px;
+    color: #333;
 }
 
 /* Botones del popup */
@@ -28,9 +34,11 @@
     display: flex;  /* Flexbox para alinear los botones */
     justify-content: space-around;  /* Espacio entre los botones */
     margin-top: 1rem;   /* Espacio superior */
+    
+
 }
 
-.popup-confirm-button,
+
 .popup-cancel-button {
     padding: 0.5rem 1rem;   /* Espaciado interno */
     border: none;
@@ -43,6 +51,12 @@
 .popup-confirm-button {
     background-color: #4caf50; /* Verde */
     color: #fff;
+    padding: 0.5rem 1rem;   /* Espaciado interno */
+    border: none;
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer;    /* Cambia el cursor al pasar por encima */
+    font-size: 1rem;    /* Tamaño de fuente */
+    transition: background-color 0.3s ease;
 }
 
 .popup-confirm-button:hover {

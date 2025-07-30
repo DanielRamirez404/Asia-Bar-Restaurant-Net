@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import './Pedido.css'
 
 import { Producto } from "./Widgets";
@@ -6,12 +6,26 @@ import { Pedido as WidgethPedido } from "./Widgets" ;
 import { WidgetNota } from "./Widgets";
 import Dashboard from "../reusables/dashboard-page";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { categories, useCategory, useDishes, useProducts, useOrderChanger } from "../../hooks/order.js";
+import OrderContext from '../../context/order';
 
 const CategoryTitles = ["Menú", "Contornos", "Productos", "Todos"];
 
 function ContenidoPedido() {
+
+    const { order, clearOrder, updateNote } = useContext(OrderContext);
+    const location = useLocation();
+
+    // Lógica para no borrar el pedido al regresar para editar
+    useEffect(() => {
+        console.log('Fase 2: Estado de navegación recibido:', location.state);
+        const isEditing = location.state?.edit;
+        if (!isEditing) {
+            console.log('Fase 2: No es modo edición, limpiando el pedido.');
+            clearOrder();
+        }
+    }, []);
 
     const [category, changeCategory] = useCategory();
     const dishes = useDishes(category);
@@ -19,11 +33,16 @@ function ContenidoPedido() {
     const [products, addFirst, increase, decrease] = useProducts();
 
     const [nota, setNota] = useState(false);
-    const [textoNota, setTextoNota] = useState('');
 
-    const orderChanger = useOrderChanger(products, textoNota);
+    const orderChanger = useOrderChanger(products, order.note);
 
     const navigate = useNavigate()
+
+    const navegarAConfirmacion = () => {
+        if (products.length === 0) return; // Evita continuar si no hay productos
+        orderChanger();
+        navigate('/confirmacion-venta');
+    };
 
     const toggleMostrarProductor = () =>{
         setIsVisible(!isVisible);
@@ -57,6 +76,15 @@ function ContenidoPedido() {
     const toggleNota = () => {
         setNota(!nota)
     }
+
+    const calcularTotal = () => {
+        return products.reduce((total, producto) => {
+            return total + (producto[1] * (producto[3] || 1));
+        }, 0);
+    };
+    
+    
+    
 
     return (
             
@@ -147,8 +175,8 @@ function ContenidoPedido() {
                             <textarea 
                                 className="inputNota" 
                                 placeholder="..."
-                                value={textoNota}
-                                onChange={(e) => setTextoNota(e.target.value)}
+                                value={order.note}
+                                onChange={(e) => updateNote(e.target.value)}
                             ></textarea>
                             <button 
                                 className="aceptarModalAgregarNota"
@@ -176,10 +204,7 @@ function ContenidoPedido() {
                 <button 
                     id="btnContinuar" 
                     className="btnPedido" 
-                    onClick={ () => {
-                        orderChanger();
-                        navigate('/confirmacion-venta');
-                    }}
+                    onClick={navegarAConfirmacion} 
                 >
                     Continuar
                 </button>
@@ -214,6 +239,3 @@ const Pedido = () => {
 }
 
 export default Pedido;
-
-
-//Nota
