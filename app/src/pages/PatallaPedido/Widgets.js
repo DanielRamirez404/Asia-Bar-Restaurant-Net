@@ -13,7 +13,7 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
             <div className="productoInformacion">
                 <div className = "descripcion">
                     <p id="productoNombre">{nombre}</p>
-                    <p id="productoPrecio">{precio}$</p>
+                    <p id="productoPrecio">{precio.toFixed(2)}$</p>
                     <p id="prductoDisponiblidad">Disponible</p>
                 </div>
             </div>
@@ -25,6 +25,8 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
 }
 
 export function Pedido({ id, nombre, precio, cantidad = 1, onIncrease, onDecrease }) {
+    const total = cantidad * precio; 
+    
     return (
         <div className="framePedidoWidget">
             <button 
@@ -42,7 +44,7 @@ export function Pedido({ id, nombre, precio, cantidad = 1, onIncrease, onDecreas
             </div>
 
             <div className="pedidoTotal">
-                <p className="pedidoTotalTexto">{cantidad * precio}$</p>
+                <p className="pedidoTotalTexto">{ total.toFixed(2) }$</p>
             </div>
 
             <button 
