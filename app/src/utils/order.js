@@ -1,5 +1,5 @@
 export default class Order{
-    constructor(clientID = "", clientName = "", type = "", address = null, products = "", note = "") {
+    constructor(clientID = "", clientName = "", type = "", address = null, products = [], note = "") {
         this.clientID = clientID;
         this.clientName = clientName;
         this.type = type;

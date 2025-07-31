@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useContext } from 'react';
+import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 
 import { getDishData } from '../utils/api.js';
 
@@ -15,13 +15,23 @@ export function useOrder() {
     return useMemo(() => order, [order]);
 }
 
+export function useOrderClearer() {
+    const { order, setOrder } = useContext(OrderContext);
+
+    const setNewInfo = async () => {
+        const newOrder = await new Order(); 
+        await setOrder(newOrder);
+    };
+    
+    return () => setNewInfo();
+};
+
 export function useOrderInfoChanger(clientID, clientName, type, address) {
     const { order, setOrder } = useContext(OrderContext);
 
     const setNewInfo = async () => {
         const newOrder = await new Order(clientID, clientName, type, address, order.products, order.note); 
         await setOrder(newOrder);
-        console.log(newOrder);
     };
     
     return () => setNewInfo();
@@ -67,7 +77,9 @@ export function useDishes(category) {
 }
 
 export function useProducts() {
-    const [products, setProducts] = useState([]);
+    const order = useOrder();
+
+    const [products, setProducts] = useState(order.products);
 
     const addFirst = (product) => {
         const oldProductList = [...products];
@@ -111,8 +123,13 @@ export function useOrderChanger(products, note) {
     const setNewInfo = async () => {
         const newOrder = await new Order(order.clientID, order.clientName, order.type, order.address, products, note); 
         await setOrder(newOrder);
-        console.log(newOrder);
     };
     
     return () => setNewInfo();
 }
+
+export function useOrderInfo() {
+    const order = useOrder();
+
+    return () => [order.clientID, order.clientName, order.type, order.address];
+};

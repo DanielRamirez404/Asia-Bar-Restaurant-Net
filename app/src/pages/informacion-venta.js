@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { useOrderInfoChanger } from "../hooks/order.js";
-import { useFormFields } from "../hooks/form.js";
+import { useOrderInfo, useOrderInfoChanger } from "../hooks/order.js";
+import { useFilledFormFields } from "../hooks/form.js";
 
 import DashboardPage from "./reusables/dashboard-page.js";
 import Form from "../components/layout/form.js";
@@ -20,12 +20,12 @@ function onSubmitInfo(e, navigate, infoChanger) {
 }
 
 export default function InformacionVenta({}) {
+    const getInfo = useOrderInfo(); 
+    const [values, setters] = useFilledFormFields(4, getInfo);
+
     const saleTypes = ["Comer aquí", "Para llevar", "Delivery"];
-    const [type, setType] = useState(saleTypes[0]);
 
-    const [values, setters] = useFormFields(3);
-
-    const infoChanger = useOrderInfoChanger(values[0], values[1], type, values[2]);
+    const infoChanger = useOrderInfoChanger(values[0], values[1], values[2], values[3]);
     const navigate = useNavigate();
     
     return (
@@ -33,13 +33,13 @@ export default function InformacionVenta({}) {
             content={
                 <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger) } title={ "Información de Venta" } >
                     <>
-                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setters[0] } />
-                        <RequiredInputBox title={ "Nombre del Cliente" } textSetter={ setters[1] } />
-                        <RequiredSelector title={ "Tipo de Venta" } options={ saleTypes } textSetter={ setType } />  
+                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setters[0] } value={ values[0] } />
+                        <RequiredInputBox title={ "Nombre del Cliente" } textSetter={ setters[1] } value={ values[1] } />
+                        <RequiredSelector title={ "Tipo de Venta" } options={ saleTypes } textSetter={ setters[2] } value={ values[2] } />  
                         
                         {   
-                            (type === saleTypes[2]) 
-                                ? <RequiredInputBox title={ "Dirección" } textSetter={ setters[2]  } />
+                            (values[2] === saleTypes[2]) 
+                                ? <RequiredInputBox title={ "Dirección" } textSetter={ setters[3] } value={ values[3] } />
                                 : null
                         } 
 

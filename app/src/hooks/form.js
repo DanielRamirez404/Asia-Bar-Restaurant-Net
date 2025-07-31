@@ -33,3 +33,16 @@ export function useFormValues(dbtable, id, setters) {
             setData(); 
     }, []);
 }
+
+export function useFilledFormFields(length, getData) {
+    const [values, setters] = useFormFields(length);
+
+    useEffect( () => {
+        const data = getData(); 
+
+        for (const i of Array(data.length).fill(0).map((_, i) => i))
+            setters[i](data[i]);
+    }, []);
+
+    return [values, setters];
+}

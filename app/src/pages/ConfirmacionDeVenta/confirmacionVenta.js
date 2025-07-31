@@ -5,12 +5,13 @@ import { TarjetaProductoInformacionVenta, TarjetaNota, TarjetaDelivery } from '.
 import { useNavigate, useLocation } from 'react-router-dom';
 import { generarTicket } from '../../utils/ticketImpresion';
 
-import { useOrder } from "../../hooks/order.js";
+import { useOrder, useOrderClearer } from "../../hooks/order.js";
 
 function ContenidoConfirmacionVenta() {
 
 
     const order = useOrder();
+    const orderClearer = useOrderClearer();
 
     const products = order.products;
 
@@ -142,6 +143,7 @@ function ContenidoConfirmacionVenta() {
                 id="btnContinuar" 
                 className="btnPedido" 
                 onClick={() => {
+                    orderClearer();
                     imprimirTicket();
                     navegar("/Inicio");
                 }}
@@ -161,9 +163,7 @@ function ContenidoConfirmacionVenta() {
 
 
 function ConfirmacionVenta(){
-
     return (<Dashboard content={ <ContenidoConfirmacionVenta/> } />)
-
 }
 
 export default ConfirmacionVenta
