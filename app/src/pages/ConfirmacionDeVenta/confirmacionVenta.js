@@ -1,11 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from "../reusables/dashboard-page";
-import './confirmacionVenta.css'
+import Swal from 'sweetalert2'; 
+import './confirmacionVenta.css';
+import './ticket.css';
 import { TarjetaProductoInformacionVenta, TarjetaNota, TarjetaDelivery } from './widgetsConfirmacionVenta';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { generarTicket } from '../../utils/ticketImpresion';
 
 import { useOrder, useOrderClearer } from "../../hooks/order.js";
+
+function printTicket(ticket, afterPrintDialog) {
+    const printContent = `
+        <div id="ticket-print-content">
+            <div class="ticket-container">
+                <pre>${ticket}</pre>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', printContent);
+    
+    let reallyPrinted = false;
+    const printMediaQuery = window.matchMedia('print');
+    
+    const cleanup = () => {
+        const printElement = document.getElementById('ticket-print-content');
+        if (printElement) printElement.remove();
+        window.removeEventListener('afterprint', afterPrint);
+        printMediaQuery.removeEventListener('change', handlePrintChange);
+    };
+
+    const handlePrintChange = (mql) => {
+        if (mql.matches) {
+            reallyPrinted = true;
+        } else if (reallyPrinted) {
+            cleanup();
+        }
+    };
+
+    const afterPrint = () => {
+        afterPrintDialog();
+        cleanup();
+    };
+
+    printMediaQuery.addEventListener('change', handlePrintChange);
+    window.addEventListener('afterprint', afterPrint);
+    
+    const timeoutId = setTimeout(() => {
+        if (!reallyPrinted) cleanup();
+    }, 30000);
+    
+    try {
+        window.print();
+    } catch (error) {
+        console.error('Print error:', error);
+        cleanup();
+        clearTimeout(timeoutId);
+    }
+}
 
 function ContenidoConfirmacionVenta() {
 
@@ -19,6 +71,23 @@ function ContenidoConfirmacionVenta() {
     const subtotal = products.reduce((sum, product) => sum + product[3] * product[1], 0);
     const iva = subtotal * 0.16; // 16% de IVA
     const total = subtotal + iva; 
+
+
+    const afterPrintDialog = () => {
+        Swal.fire({
+                title: "Confirmación",
+                text: "¿Se ha completado la venta e impreso el ticket correctamente?",
+                showDenyButton: true,
+                icon: "question",
+                confirmButtonText: "Sí",
+                denyButtonText: "No"
+            }).then( (result) => {
+                if (result.isConfirmed) {
+                    orderClearer();
+                    navegar('/Inicio');
+                }                       
+            });
+    };
    
 
     const imprimirTicket = () => {
@@ -46,33 +115,9 @@ function ContenidoConfirmacionVenta() {
             mensaje: order.note || '¡Gracias por su preferencia!'
         };
 
-        // Generar el ticket
         const ticket = generarTicket(datosTicket);
         
-        // Imprimir en una nueva ventana
-        const ventana = window.open('', '_blank');
-        ventana.document.write(`
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Ticket de Venta</title>
-                <style>
-                    @media print {
-                        body { font-family: monospace; font-size: 12px; }
-                        @page { margin: 0; size: 58mm 297mm; }
-                        button { display: none; }
-                    }
-                    pre { white-space: pre-wrap; word-wrap: break-word; }
-                </style>
-            </head>
-            <body>
-                <pre>${ticket}</pre>
-                <button onclick="window.print()">Imprimir</button>
-                <button onclick="window.close()">Cerrar</button>
-            </body>
-            </html>
-        `);
-        ventana.document.close();
+        printTicket(ticket, afterPrintDialog); 
     };
 
     const navegar = useNavigate()
@@ -142,15 +187,10 @@ function ContenidoConfirmacionVenta() {
             <button 
                 id="btnContinuar" 
                 className="btnPedido" 
-                onClick={() => {
-                    orderClearer();
-                    imprimirTicket();
-                    navegar("/Inicio");
-                }}
+                onClick={ () => imprimirTicket() }
             >
                 Completar venta
             </button>
-
 
         </div>
 
