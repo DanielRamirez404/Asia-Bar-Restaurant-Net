@@ -1,9 +1,11 @@
 import Table from "../utils/table.js";
 
-const salesFields = ["ID", "Documento del Cliente", "Tipo", "Total"];
+export const fieldTypes = ["number", "combo"];
+
+const salesFields = ["ID", "Documento del Cliente", "Tipo", { number: "Total" }];
 const clientsFields = ["Identificación", "Nombre", "Dirección", "Teléfono" ];
 const deliverymenFields = ["Nombre del Repartidor", "Zona", "Disponibilidad", "Teléfono"];
-const dishFields = ["Nombre", "Disponibilidad", "Precio", "Categoría", "Descripción"];
+const dishFields = ["Nombre", "Disponibilidad", { number: "Precio" }, "Categoría", "Descripción"];
 const productsFields = [...dishFields];
 productsFields.push("Proveedor");
 productsFields.push("Cantidad");

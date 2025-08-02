@@ -8,6 +8,8 @@ import { RequiredInputBox } from '../components/ui/form.js';
 
 import { onControlForm } from '../utils/api.js';
 
+import { fieldTypes } from '../config/tables.js';
+
 function ControlFormPage() {
 
     const table = useTable();
@@ -21,7 +23,16 @@ function ControlFormPage() {
 
     return (
         <ControlForm title={ table.name } onSubmit={ (e) => onControlForm(e, table, fields, navigate, modifyID) } > 
-            { titles.map( (title, i) => (<RequiredInputBox title={title} textSetter={ setters[i] } value={ fields[i] } />) ) } 
+            { titles.map( (title, i) => {
+        
+                const value = fields[i];
+                
+                const type = fieldTypes.find((type) => Object.hasOwn(title, type)) ?? "text";
+
+                const inputTitle = (type === "text") ? title : (type == "number") ? title.number : "";
+
+                return <RequiredInputBox key={title} type={ type } title={ inputTitle } textSetter={ setters[i] } value={ value } /> 
+            })}
         </ControlForm>
     );
 };

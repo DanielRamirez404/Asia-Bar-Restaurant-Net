@@ -2,6 +2,10 @@ import { Search } from "lucide-react";
 import './form.css';
 
 export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null }) {
+
+    const isNumber = /^\d*\.?\d+$/.test(value);
+    const isDecimal = type === "number" && isNumber && String(value).includes(".");
+
     return(
         <div className='input-box'>
             <label for={ title }>
@@ -14,7 +18,9 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
                 placeholder={ title } 
                 pattern={ regex } 
                 onChange={ (e) => textSetter(e.target.value) } 
-                value={ value }
+                value={ isDecimal ? parseFloat(value).toFixed(2) : value }
+                min={ type === "number" ? 0 : null }
+                step={ type === "number" ? 0.01 : null }
             >
             </input>
         </div>

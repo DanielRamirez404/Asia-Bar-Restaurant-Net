@@ -9,6 +9,8 @@ import { SearchInputBox } from '../ui/form.js';
 
 import "./table-page.css";
 
+import { fieldTypes } from "../../config/tables.js";
+
 function SearchBox({ onSearch }) {
     const [query, setQuery] = useState("");
 
@@ -41,7 +43,16 @@ function Header({ title, onNew, onSearch }) {
 function getAllColumnNames(fields) {
     const names = [...fields];
     names.push("Acciones");
-    return names;
+
+    const allColumnNames = names.map((field) => {
+        for (const property of fieldTypes)
+            if (Object.hasOwn(field, property))
+                return field[property];
+
+        return field;
+    });
+
+    return allColumnNames;
 }
 
 function TableContent({ fields, data, onEdit, onDelete }) {

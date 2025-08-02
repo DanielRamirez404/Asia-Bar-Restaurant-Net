@@ -22,7 +22,14 @@ function BodyRow({ row, index, onEdit, onDelete }) {
 
     return (
         <tr id={`row-${index}`}  key={ index } >
-            { row.map((field, i) => ( <td key={i}>{ field }</td> )) }
+            { row.map((value, i) => {
+                
+                const isNumber = /^\d*\.?\d+$/.test(value);
+
+                const isDecimal = isNumber && String(value).includes(".");
+
+                return <td key={i}>{ isDecimal ? parseFloat(value).toFixed(2) : value }</td>  
+            })}
             <ButtonsBox id = { row[0] }  onEdit={ onEdit} onDelete={ onDeleteClick } /> 
         </tr>
     );
