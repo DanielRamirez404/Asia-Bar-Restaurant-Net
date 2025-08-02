@@ -94,3 +94,15 @@ export async function search(req, res, table) {
         res.status(200).json(results);
     });
 }
+
+export function getLastSaleID(req, res) {
+    handleQueryExecution(res, async (db) => {
+        const [results, queryFields] = await db.execute("SELECT MAX(ID) FROM Sales");
+
+        const result = [];
+
+        result.push(results[0]["MAX(ID)"]);
+
+        res.status(200).json(result);
+    });
+}
