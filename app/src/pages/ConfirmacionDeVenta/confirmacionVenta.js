@@ -9,9 +9,9 @@ import { generarTicket } from '../../utils/ticketImpresion';
 
 import { useOrder, useOrderClearer } from "../../hooks/order.js";
 
-import { getLastSaleID } from "../../utils/api.js";
+import { getLastSaleID, onNewSale } from "../../utils/api.js";
 
-function printTicket(ticket, afterPrintDialog) {
+function printTicket(ticket, afterPrintDialog, id) {
     const printContent = `
         <div id="ticket-print-content">
             <div class="ticket-container">
@@ -41,7 +41,7 @@ function printTicket(ticket, afterPrintDialog) {
     };
 
     const afterPrint = () => {
-        afterPrintDialog();
+        afterPrintDialog(id);
         cleanup();
     };
 
@@ -68,14 +68,13 @@ function ContenidoConfirmacionVenta() {
     const orderClearer = useOrderClearer();
 
     const products = order.products;
-
         
     const subtotal = products.reduce((sum, product) => sum + product[3] * product[1], 0);
     const iva = subtotal * 0.16; // 16% de IVA
     const total = subtotal + iva; 
 
 
-    const afterPrintDialog = () => {
+    const afterPrintDialog = (id) => {
         Swal.fire({
                 title: "Confirmación",
                 text: "¿Se ha completado la venta e impreso el ticket correctamente?",
@@ -85,6 +84,12 @@ function ContenidoConfirmacionVenta() {
                 denyButtonText: "No"
             }).then( (result) => {
                 if (result.isConfirmed) {
+                    onNewSale({
+                        id: id,
+                        clientID: order.clientID,
+                        type: order.type,
+                        total: total
+                    }, () => {} ); 
                     orderClearer();
                     navegar('/Inicio');
                 }                       
@@ -94,6 +99,7 @@ function ContenidoConfirmacionVenta() {
 
     const imprimirTicket = async () => {
         const ultimaVenta = await getLastSaleID();
+        const id = ultimaVenta + 1;
 
         const ahora = new Date();
         const fecha = ahora.toLocaleDateString('es-MX');
@@ -105,7 +111,7 @@ function ContenidoConfirmacionVenta() {
             telefono: '555-123-4567',
             fecha: fecha,
             hora: hora,
-            numeroTicket: ultimaVenta + 1,
+            numeroTicket: id,
             tipoVenta: order.type,
             items: products.map(product => ({
                 nombre: product[0], 
@@ -121,7 +127,7 @@ function ContenidoConfirmacionVenta() {
 
         const ticket = generarTicket(datosTicket);
         
-        printTicket(ticket, afterPrintDialog); 
+        printTicket(ticket, afterPrintDialog, id); 
     };
 
     const navegar = useNavigate()

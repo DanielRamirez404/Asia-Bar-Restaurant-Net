@@ -156,3 +156,11 @@ export const getLastSaleID = async function() {
 
     return data;
 }
+
+export const onNewSale = function(data, onDone) {
+    api_fetch({
+        endpoint: "sales",
+        body: data,
+        onOk: (res) => { onDone(); }
+    });
+};
