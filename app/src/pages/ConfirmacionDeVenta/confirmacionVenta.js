@@ -9,6 +9,8 @@ import { generarTicket } from '../../utils/ticketImpresion';
 
 import { useOrder, useOrderClearer } from "../../hooks/order.js";
 
+import { getLastSaleID } from "../../utils/api.js";
+
 function printTicket(ticket, afterPrintDialog) {
     const printContent = `
         <div id="ticket-print-content">
@@ -90,7 +92,9 @@ function ContenidoConfirmacionVenta() {
     };
    
 
-    const imprimirTicket = () => {
+    const imprimirTicket = async () => {
+        const ultimaVenta = await getLastSaleID();
+
         const ahora = new Date();
         const fecha = ahora.toLocaleDateString('es-MX');
         const hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
@@ -101,7 +105,7 @@ function ContenidoConfirmacionVenta() {
             telefono: '555-123-4567',
             fecha: fecha,
             hora: hora,
-            numeroTicket: Math.floor(1000 + Math.random() * 9000).toString(), // Número aleatorio para el ticket
+            numeroTicket: ultimaVenta + 1,
             tipoVenta: order.type,
             items: products.map(product => ({
                 nombre: product[0], 
@@ -111,7 +115,7 @@ function ContenidoConfirmacionVenta() {
             })),
             subtotal: subtotal,
             iva: iva,
-            total: subtotal + iva,
+            total: total,
             mensaje: order.note || '¡Gracias por su preferencia!'
         };
 

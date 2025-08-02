@@ -145,3 +145,14 @@ export const getDishData = async function(tableName) {
 
     return data;
 }
+
+export const getLastSaleID = async function() {
+    let data = [];
+
+    await api_fetch({
+        endpoint: "sales-id/last",
+        method: 'GET',
+    }).then(res => { data = res[0]; });
+
+    return data;
+}
