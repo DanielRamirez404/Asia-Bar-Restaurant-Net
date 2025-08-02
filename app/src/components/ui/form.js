@@ -21,6 +21,7 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
                 value={ isDecimal ? parseFloat(value).toFixed(2) : value }
                 min={ type === "number" ? 0 : null }
                 step={ type === "number" ? 0.01 : null }
+                required
             >
             </input>
         </div>
