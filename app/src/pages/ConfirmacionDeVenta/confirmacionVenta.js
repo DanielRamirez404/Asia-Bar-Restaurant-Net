@@ -160,8 +160,6 @@ function ContenidoConfirmacionVenta() {
 
             <div className='scrollResumenProductos'>
 
-                
-                { console.log(order) }
                 { products.map((product, index) => (
                     <TarjetaProductoInformacionVenta 
                         key={`producto-${index}`}

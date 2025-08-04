@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import './Pedido.css'
 
+import Swal from 'sweetalert2'; 
+
 import { Producto } from "./Widgets";
 import { Pedido as WidgethPedido } from "./Widgets" ;
 import { WidgetNota } from "./Widgets";
@@ -172,7 +174,22 @@ function ContenidoPedido() {
             <div className="frameBotones">
 
                
-                <button id="btnCancelar" className="btnPedido" onClick={() => navigate("/informacion-de-venta")}>Regresar</button>
+                <button id="btnCancelar" 
+                    className="btnPedido" 
+                    onClick={ () => {
+                        Swal.fire({
+                                title: "¿Esta seguro?",
+                                text: "Al cancelar, se perderán todos los datos de la venta actual",
+                                showDenyButton: true,
+                                icon: "question",
+                                confirmButtonText: "Sí",
+                                denyButtonText: "No"
+                            }).then( (result) => {
+                                if (result.isConfirmed) {
+                                    navigate('/informacion-de-venta');
+                                }                       
+                            });
+                    }}>Cancelar</button>
                 <button 
                     id="btnContinuar" 
                     className="btnPedido" 

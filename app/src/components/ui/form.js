@@ -1,14 +1,12 @@
+import { useState, useEffect } from "react";
+
 import { Search } from "lucide-react";
 import './form.css';
 
-export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null }) {
-
-    const isNumber = /^\d*\.?\d+$/.test(value);
-    const isDecimal = type === "number" && isNumber && String(value).includes(".");
-
+export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, options = {} }) {
     return(
         <div className='input-box'>
-            <label for={ title }>
+            <label htmlFor={ title }>
                 { title }
             </label>
             
@@ -18,13 +16,30 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
                 placeholder={ title } 
                 pattern={ regex } 
                 onChange={ (e) => textSetter(e.target.value) } 
-                value={ isDecimal ? parseFloat(value).toFixed(2) : value }
-                min={ type === "number" ? 0 : null }
-                step={ type === "number" ? 0.01 : null }
+                value={ value }
+                { ...options }
                 required
             >
             </input>
         </div>
+    );
+}
+
+export function RequiredNumberBox({ title, textSetter, isDecimal = false, value = null }) {
+    const inputValue = isDecimal ? parseFloat(value).toFixed(2) : value;  
+    const minValue = isDecimal ? 0.01 : 1;
+        
+    return (
+        <RequiredInputBox 
+            title={ title }
+            type={ "number" }
+            textSetter={ textSetter }
+            value={ inputValue }
+            options = {{
+                min: minValue,
+                step: minValue
+            }}
+        />
     );
 }
 
@@ -44,17 +59,25 @@ export function SearchInputBox({ textSetter, value = null }) {
     );
 }
 
-export function RequiredSelector({ title, options, textSetter, value = null }) {
+export function RequiredSelector({ title, options, textSetter, value = null}) {
+    const defaultValue = value || options[0];
+
+    useEffect(() => {
+        textSetter(defaultValue);
+    }, []);
+
     return(
         <div className="input-box">
             <label for={ title }>{ title }</label>
-            <select className="selector" id={ title } defaultValue={ value ?? options[0] } onChange={ () => {
-                const selector = document.getElementById(title);
-                
-                if (selector)
-                    textSetter(selector.value)
-            }}>
-                { options.map( option => <option value={option}>{option}</option> ) }
+            <select 
+                className="selector" 
+                id={ title } 
+                value={ defaultValue }
+                onChange={ (e) => textSetter(e.target.value) }
+            >
+                { 
+                    options.map( (option, i) => <option key={`${option}-${i}`} value={option}>{option}</option> ) 
+                }
             </select>
         </div>
     );

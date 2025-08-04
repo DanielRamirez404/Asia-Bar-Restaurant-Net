@@ -4,7 +4,7 @@ import { useFormFields, useFormValues } from "../hooks/form.js";
 import { useModifyID } from "../hooks/session.js";
 
 import ControlForm from '../components/layout/control-form.js';
-import { RequiredInputBox } from '../components/ui/form.js';
+import { RequiredInputBox, RequiredNumberBox, RequiredSelector } from '../components/ui/form.js';
 
 import { onControlForm } from '../utils/api.js';
 
@@ -28,10 +28,24 @@ function ControlFormPage() {
                 const value = fields[i];
                 
                 const type = fieldTypes.find((type) => Object.hasOwn(title, type)) ?? "text";
+                const inputTitle = type === "text" ? title : title[type];
 
-                const inputTitle = (type === "text") ? title : (type == "number") ? title.number : "";
+                const mandatory = {
+                    title: inputTitle,
+                    textSetter: setters[i],
+                    value: value
+                };
 
-                return <RequiredInputBox key={title} type={ type } title={ inputTitle } textSetter={ setters[i] } value={ value } /> 
+                return( 
+                    type === "text" ?
+                        <RequiredInputBox key={ title } {...mandatory} /> :
+                    type === "number" ? 
+                        <RequiredNumberBox key={ title[type] } isDecimal={ true } {...mandatory} /> :
+                    type === "int" ? 
+                        <RequiredNumberBox key={ title[type] } {...mandatory} /> :
+                    type === "combo" ?
+                        <RequiredSelector key={ title[type] } options={ title.options } value={ value } {...mandatory} /> : null
+                );
             })}
         </ControlForm>
     );
