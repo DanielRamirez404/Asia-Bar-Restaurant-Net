@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useOrderInfoChanger, useOrderClearer } from "../hooks/order.js";
 import { useFormFields } from "../hooks/form.js";
@@ -12,10 +12,9 @@ import { RequiredInputBox, RequiredSelector } from '../components/ui/form.js';
 import { routes } from '../config/routes.js';
 import { saleOptions } from '../config/tables.js';
 
-function onSubmitInfo(e, navigate, infoChanger, clearer) {
+function onSubmitInfo(e, navigate, infoChanger) {
     e.preventDefault();
 
-    clearer();
     infoChanger();
 
     navigate(routes['Pedido']);
@@ -23,7 +22,11 @@ function onSubmitInfo(e, navigate, infoChanger, clearer) {
 
 export default function InformacionVenta() {
     
-    const clearer = useOrderClearer();    
+    const clearer = useOrderClearer();
+    
+    useEffect(() => {
+        clearer();
+    }, []);
 
     const [values, setters] = useFormFields(4);
 
@@ -37,11 +40,11 @@ export default function InformacionVenta() {
                     <>
                         <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setters[0] } />
                         <RequiredInputBox title={ "Nombre del Cliente" } textSetter={ setters[1] } />
-                        <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } textSetter={ setters[2] } />  
+                        <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } textSetter={ setters[2] } value={ values[2] } />  
                         
                         {   
                             (values[2] === saleOptions[2]) 
-                                ? <RequiredInputBox title={ "Dirección" } textSetter={ setters[3] } value={ values[3] } />
+                                ? <RequiredInputBox title={ "Dirección" } textSetter={ setters[3] } />
                                 : null
                         } 
 
