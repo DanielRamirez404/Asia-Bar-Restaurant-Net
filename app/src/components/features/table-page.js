@@ -58,7 +58,7 @@ function getAllColumnNames(fields) {
 function TableContent({ fields, data, onEdit, onDelete }) {
     return (data.length === 0)
         ? <h1>No hay entradas</h1> 
-        : <Table fields={ getAllColumnNames(fields) } data={ data } onEdit={ onEdit } onDelete={ onDelete } />;
+        : <Table fields={ getAllColumnNames(fields) } data={ data } onEdit={ onEdit } onDelete={ onDelete } bodyFields={ fields }/>;
 }
 
 export default function TablePage({ title, fields, data, onEdit, onDelete, onNew, onSearch }) {
