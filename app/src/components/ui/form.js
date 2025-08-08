@@ -59,6 +59,23 @@ export function SearchInputBox({ textSetter, value = null }) {
     );
 }
 
+function Selector({ title, options, onChange, value = null }) {
+    return(
+        <div className="input-box">
+            <label htmlFor={ title }>{ title }</label>
+            <select 
+                className="selector" 
+                id={ title } 
+                value={ value }
+                onChange={ onChange }
+                required
+            >
+                { options.map( (option, i) => <option key={`${option}-${i}`} value={option}>{option}</option> ) }
+            </select>
+        </div>
+    );
+}
+
 export function RequiredSelector({ title, options, textSetter, value = null}) {
     const defaultValue = value || options[0];
 
@@ -66,19 +83,35 @@ export function RequiredSelector({ title, options, textSetter, value = null}) {
         textSetter(defaultValue);
     }, []);
 
-    return(
-        <div className="input-box">
-            <label for={ title }>{ title }</label>
-            <select 
-                className="selector" 
-                id={ title } 
-                value={ defaultValue }
-                onChange={ (e) => textSetter(e.target.value) }
-            >
-                { 
-                    options.map( (option, i) => <option key={`${option}-${i}`} value={option}>{option}</option> ) 
-                }
-            </select>
-        </div>
+    return( 
+        <Selector
+            title={title}
+            options={options}
+            onChange={ (e) => textSetter(e.target.value) }
+            value={defaultValue}
+        />
     );
 }
+
+export function RequiredBoolean({ title, textSetter, value = null}) {
+    const defaultValue = value || 0;
+
+    useEffect(() => {
+        textSetter(defaultValue);
+    }, []);
+
+    const options = ["No", "Sí"];
+
+    return ( 
+        <Selector
+            title={title}
+            options={options}
+            onChange={ (e) => {
+                const eventValue = e.target.value;
+                console.log(eventValue);
+                textSetter(eventValue === "Sí" ? 1 : 0); 
+            }}
+            value={ options[defaultValue] }
+        />
+    );
+};
