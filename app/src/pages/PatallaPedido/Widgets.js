@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Widgets.css"
 
-export function Producto({ nombre = "Nombre del producto", precio = 20, onAgregar }){
+export function Producto({ nombre, precio, onAgregar, isAvailable }){
     const handleAgregar = () => {
         if (onAgregar) {
             onAgregar({ nombre, precio });
@@ -14,12 +14,17 @@ export function Producto({ nombre = "Nombre del producto", precio = 20, onAgrega
                 <div className = "descripcion">
                     <p id="productoNombre">{nombre}</p>
                     <p id="productoPrecio">{precio.toFixed(2)}$</p>
-                    <p id="prductoDisponiblidad">Disponible</p>
+                    <p id="prductoDisponiblidad">{ isAvailable ? "Disponible" : "No disponible" }</p>
                 </div>
             </div>
-            <button id="btnAgregarPoducto" onClick={handleAgregar}>
-                +
-            </button>
+                
+            {
+                (isAvailable) ? 
+                    <button id="btnAgregarPoducto" onClick={handleAgregar}>
+                        +
+                    </button> : null
+            } 
+
         </div>
     )
 }

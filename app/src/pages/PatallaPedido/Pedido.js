@@ -91,6 +91,7 @@ function ContenidoPedido() {
                                 onAgregar={ () => addFirst(dish) }
                                 nombre={dish[0]}
                                 precio={dish[1]}
+                                isAvailable={dish[2]}
                             />
                         ))}
                     </div>
