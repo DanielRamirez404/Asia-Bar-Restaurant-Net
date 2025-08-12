@@ -31,27 +31,27 @@ echo.
 call :check_directories
 if "%ERROR_OCCURRED%"=="1" goto :error_occurred
 
-:: Verificar Node.js
-call :check_nodejs
-if "%ERROR_OCCURRED%"=="1" goto :error_occurred
-
-:: Verificar XAMPP
-call :check_xampp
-
-:: Instalar dependencias del frontend
-call :check_frontend
-if "%ERROR_OCCURRED%"=="1" goto :error_occurred
-
-:: Instalar dependencias del servidor
+:: 1. Instalar dependencias del servidor (backend)
 call :check_server
 if "%ERROR_OCCURRED%"=="1" goto :error_occurred
 
-:: Configurar base de datos
-call :setup_database
+:: 2. Instalar dependencias del frontend
+call :check_frontend
 if "%ERROR_OCCURRED%"=="1" goto :error_occurred
 
-:: Configurar archivos de entorno
-call :setup_environment
+:: 3. Verificar Node.js
+call :check_nodejs
+if "%ERROR_OCCURRED%"=="1" goto :error_occurred
+
+:: 4. Verificar XAMPP
+call :check_xampp
+
+:: 5. Ejecutar setting-variables.py
+call :run_setting_variables
+if "%ERROR_OCCURRED%"=="1" goto :error_occurred
+
+:: 6. Configurar base de datos con models.sql
+call :setup_database
 if "%ERROR_OCCURRED%"=="1" goto :error_occurred
 
 goto :installation_complete
@@ -103,9 +103,65 @@ if not exist "%SERVER_PATH%" (
 echo [OK] Estructura de directorios verificada.
 exit /b
 
+:: Verificar dependencias del servidor (backend)
+:check_server
+echo [1/6] Verificando dependencias del servidor (backend)...
+if exist "%SERVER_PATH%\node_modules" (
+    call :show_msg "Las dependencias del servidor ya están instaladas." "Dependencias Servidor"
+    echo [OK] Dependencias del servidor ya instaladas.
+    exit /b
+)
+
+call :confirm_install "Las dependencias del servidor no están instaladas.`n`n¿Desea instalarlas ahora?" "Instalar Dependencias Servidor"
+if !CONFIRM_RESULT! NEQ 6 (
+    call :show_msg "Se omitirá la instalación de las dependencias del servidor." "Instalación Cancelada"
+    exit /b
+)
+
+echo [1.1/6] Instalando dependencias del servidor...
+cd /d "%SERVER_PATH%"
+call npm install
+if %ERRORLEVEL% NEQ 0 (
+    call :handle_error "Error al instalar las dependencias del servidor.`n`nPor favor, verifique su conexión a internet e intente nuevamente." "Error en Instalación"
+    exit /b
+)
+
+call :show_msg "Las dependencias del servidor se instalaron correctamente." "Instalación Exitosa"
+echo [OK] Dependencias del servidor instaladas correctamente.
+cd /d "%PROJECT_PATH%"
+exit /b
+
+:: Verificar dependencias del frontend
+:check_frontend
+echo [2/6] Verificando dependencias del frontend...
+if exist "%APP_PATH%\node_modules" (
+    call :show_msg "Las dependencias del frontend ya están instaladas." "Dependencias Frontend"
+    echo [OK] Dependencias del frontend ya instaladas.
+    exit /b
+)
+
+call :confirm_install "Las dependencias del frontend no están instaladas.`n`n¿Desea instalarlas ahora?" "Instalar Dependencias Frontend"
+if !CONFIRM_RESULT! NEQ 6 (
+    call :show_msg "Se omitirá la instalación de las dependencias del frontend." "Instalación Cancelada"
+    exit /b
+)
+
+echo [2.1/6] Instalando dependencias del frontend...
+cd /d "%APP_PATH%"
+call npm install
+if %ERRORLEVEL% NEQ 0 (
+    call :handle_error "Error al instalar las dependencias del frontend.`n`nPor favor, verifique su conexión a internet e intente nuevamente." "Error en Instalación"
+    exit /b
+)
+
+call :show_msg "Las dependencias del frontend se instalaron correctamente." "Instalación Exitosa"
+echo [OK] Dependencias del frontend instaladas correctamente.
+cd /d "%PROJECT_PATH%"
+exit /b
+
 :: Verificar Node.js
 :check_nodejs
-echo [1/6] Verificando Node.js...
+echo [3/6] Verificando Node.js...
 where node >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     call :handle_error "Node.js no está instalado en este sistema.`n`nPor favor, instale Node.js desde https://nodejs.org antes de continuar." "Node.js Requerido"
@@ -121,7 +177,7 @@ exit /b
 
 :: Verificar XAMPP
 :check_xampp
-echo [2/6] Verificando XAMPP...
+echo [4/6] Verificando XAMPP...
 if not exist "%XAMPP_PATH%" (
     call :show_msg "XAMPP no se encontró en la ruta predeterminada.`n`nPor favor, asegúrese de tener XAMPP instalado para el servidor de base de datos." "XAMPP No Encontrado" "Warning"
     echo [WARNING] XAMPP no encontrado en la ruta predeterminada.
@@ -130,86 +186,76 @@ if not exist "%XAMPP_PATH%" (
 )
 exit /b
 
-:check_frontend
-echo [3/6] Verificando dependencias del frontend...
-if exist "%APP_PATH%\node_modules" (
-    call :show_msg "Las dependencias del frontend ya están instaladas." "Dependencias Frontend"
-    echo [OK] Dependencias del frontend ya instaladas.
-    exit /b
-)
+:: Ejecutar configuración de variables de entorno
+:run_setting_variables
+echo [5/6] Ejecutando configuración de variables de entorno...
 
-call :confirm_install "Las dependencias del frontend no están instaladas.`n`n¿Desea instalarlas ahora?" "Instalar Dependencias Frontend"
-if !CONFIRM_RESULT! NEQ 6 (
-    call :show_msg "Se omitirá la instalación de las dependencias del frontend." "Instalación Cancelada"
-    exit /b
-)
-
-echo [3.1/6] Instalando dependencias del frontend...
-cd /d "%APP_PATH%"
-call npm install
+:: Verificar si Python está disponible
+where python >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
-    call :handle_error "Error al instalar las dependencias del frontend.`n`nPor favor, verifique su conexión a internet e intente nuevamente." "Error en Instalación"
+    call :show_msg "Python no está instalado.`n`nSe omitirá la configuración automática de variables.`n`nPuede configurar manualmente el archivo .env en la carpeta server." "Python No Encontrado" "Warning"
+    echo [WARNING] Python no encontrado, omitiendo configuración automática.
     exit /b
 )
 
-call :show_msg "Las dependencias del frontend se instalaron correctamente." "Instalación Exitosa"
-echo [OK] Dependencias del frontend instaladas correctamente.
+:: Verificar si existe el script setting-variables.py
+if not exist "%SERVER_PATH%\env\setting-variables.py" (
+    echo [WARNING] No se encontró el archivo setting-variables.py
+    call :show_msg "No se encontró el archivo setting-variables.py en server\env\.`n`nSe omitirá la configuración automática." "Script No Encontrado" "Warning"
+    exit /b
+)
+
+call :confirm_install "¿Desea ejecutar la configuración automática de variables de entorno?`n`nEsto le permitirá configurar las credenciales de MySQL." "Configurar Variables"
+if !CONFIRM_RESULT! NEQ 6 (
+    call :show_msg "Se omitirá la configuración automática de variables." "Configuración Cancelada"
+    exit /b
+)
+
+echo [5.1/6] Ejecutando setting-variables.py...
+cd /d "%SERVER_PATH%\env"
+python setting-variables.py
+if %ERRORLEVEL% NEQ 0 (
+    echo [WARNING] Error al ejecutar setting-variables.py
+    call :show_msg "Error al ejecutar la configuración automática.`n`nPuede configurar manualmente el archivo .env." "Error en Configuración" "Warning"
+) else (
+    echo [OK] Configuración de variables completada.
+    call :show_msg "Las variables de entorno se configuraron correctamente." "Configuración Exitosa"
+)
+
 cd /d "%PROJECT_PATH%"
 exit /b
 
-:check_server
-echo [4/6] Verificando dependencias del servidor...
-if exist "%SERVER_PATH%\node_modules" (
-    call :show_msg "Las dependencias del servidor ya están instaladas." "Dependencias Servidor"
-    echo [OK] Dependencias del servidor ya instaladas.
-    exit /b
-)
-
-call :confirm_install "Las dependencias del servidor no están instaladas.`n`n¿Desea instalarlas ahora?" "Instalar Dependencias Servidor"
-if !CONFIRM_RESULT! NEQ 6 (
-    call :show_msg "Se omitirá la instalación de las dependencias del servidor." "Instalación Cancelada"
-    exit /b
-)
-
-echo [4.1/6] Instalando dependencias del servidor...
-cd /d "%SERVER_PATH%"
-call npm install
-if %ERRORLEVEL% NEQ 0 (
-    call :handle_error "Error al instalar las dependencias del servidor.`n`nPor favor, verifique su conexión a internet e intente nuevamente." "Error en Instalación"
-    exit /b
-)
-
-call :show_msg "Las dependencias del servidor se instalaron correctamente." "Instalación Exitosa"
-echo [OK] Dependencias del servidor instaladas correctamente.
-cd /d "%PROJECT_PATH%"
-exit /b
-
+:: Configurar base de datos
 :setup_database
-echo [5/6] Configurando base de datos...
-if exist "%SERVER_PATH%\database\asia_bar.sql" (
-    call :confirm_install "Se encontró un archivo de base de datos.`n`n¿Desea importar la base de datos ahora?`n`n(Asegúrese de que XAMPP esté ejecutándose)" "Configurar Base de Datos"
+echo [6/6] Configurando base de datos...
+
+:: Buscar models.sql en la nueva ubicación
+if exist "%SERVER_PATH%\src\models\models.sql" (
+    call :confirm_install "Se encontró el archivo de estructura de base de datos.`n`n¿Desea importar la base de datos ahora?`n`n(Asegúrese de que XAMPP esté ejecutándose)" "Configurar Base de Datos"
     if !CONFIRM_RESULT! EQU 6 (
-        echo [5.1/6] Importando base de datos...
+        echo [6.1/6] Importando estructura de base de datos...
         if exist "%XAMPP_PATH%\mysql\bin\mysql.exe" (
-            "%XAMPP_PATH%\mysql\bin\mysql.exe" -u root -e "CREATE DATABASE IF NOT EXISTS asia_bar;"
-            "%XAMPP_PATH%\mysql\bin\mysql.exe" -u root asia_bar < "%SERVER_PATH%\database\asia_bar.sql"
+            "%XAMPP_PATH%\mysql\bin\mysql.exe" -u root -e "CREATE DATABASE IF NOT EXISTS AsiaBarRestaurant;"
+            "%XAMPP_PATH%\mysql\bin\mysql.exe" -u root AsiaBarRestaurant < "%SERVER_PATH%\src\models\models.sql"
             if %ERRORLEVEL% EQU 0 (
                 echo [OK] Base de datos importada correctamente.
-                call :show_msg "La base de datos se importó correctamente." "Base de Datos"
+                call :show_msg "La estructura de base de datos se importó correctamente." "Base de Datos"
             ) else (
                 echo [WARNING] Error al importar la base de datos.
-                call :show_msg "Error al importar la base de datos.`n`nPuede importarla manualmente más tarde." "Base de Datos" "Warning"
+                call :show_msg "Error al importar la base de datos.`n`nPuede importarla manualmente más tarde desde phpMyAdmin." "Base de Datos" "Warning"
             )
         ) else (
             echo [WARNING] No se pudo encontrar MySQL en XAMPP.
-            call :show_msg "No se pudo encontrar MySQL.`n`nImporte la base de datos manualmente desde phpMyAdmin." "Base de Datos" "Warning"
+            call :show_msg "No se pudo encontrar MySQL.`n`nImporte la base de datos manualmente desde phpMyAdmin usando el archivo models.sql." "Base de Datos" "Warning"
         )
     )
 ) else (
-    echo [INFO] No se encontró archivo de base de datos.
+    echo [INFO] No se encontró archivo models.sql en server\src\models\.
+    call :show_msg "No se encontró el archivo models.sql.`n`nAsegúrese de tener la estructura de base de datos disponible." "Base de Datos" "Information"
 )
 exit /b
 
+:: Configurar archivos de entorno
 :setup_environment
 echo [6/6] Configurando archivos de entorno...
 
@@ -220,7 +266,7 @@ if not exist "%SERVER_PATH%\.env" (
         echo DB_HOST=localhost
         echo DB_USER=root
         echo DB_PASSWORD=
-        echo DB_NAME=asia_bar
+        echo DB_NAME=AsiaBarRestaurant
         echo PORT=3001
         echo JWT_SECRET=your_jwt_secret_here
     ) > "%SERVER_PATH%\.env"
@@ -260,6 +306,9 @@ echo Para iniciar la aplicación:
 echo 1. Inicie XAMPP (Apache y MySQL)
 echo 2. Abra una terminal en la carpeta 'server' y ejecute: npm start
 echo 3. Abra otra terminal en la carpeta 'app' y ejecute: npm start
+echo.
+echo NOTA: Si no ejecutó setting-variables.py, configure manualmente
+echo el archivo .env en la carpeta server con sus credenciales de MySQL.
 echo.
 call :show_msg "¡La instalación se ha completado exitosamente!`n`nRecuerde iniciar los servicios de XAMPP antes de usar la aplicación.`n`nConsulte las instrucciones en la consola para iniciar la aplicación." "Instalación Completada"
 echo.

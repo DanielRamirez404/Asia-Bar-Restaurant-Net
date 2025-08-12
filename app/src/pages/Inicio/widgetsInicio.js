@@ -32,7 +32,7 @@ const DatosPedidoPrueba = {
    "nombreRepartidor":"Nombre Repartidor",
    "direccionEntrega": "calle falsa 123",
 
-   "nombreMesero": "Nombre Mesero",
+    /* "nombreMesero": "Nombre Mesero"*/ /*aun no se habilitará esta funcion*/
    "mesa": "mesa 9",
 
    "valorTotalDePedido": 40

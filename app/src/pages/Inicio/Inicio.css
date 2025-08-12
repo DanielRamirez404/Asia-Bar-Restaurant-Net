@@ -52,8 +52,11 @@
 
 .FramePedidos h2{
 
-    padding: 7px;
-    width: 100%;
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 
 }
 
@@ -71,6 +74,13 @@
     box-sizing: border-box;
 
 
+}
+.tituloResumen{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .tituloMesas{

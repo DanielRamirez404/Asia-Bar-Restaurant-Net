@@ -48,10 +48,10 @@ export function InformacionDelProductoModal({datosProducto}){
             
             <h2>{datosProducto.nombre}</h2>
 
-            <div className="labelInformacionProducto">Costo: {datosProducto.costo}$</div>
+            {/* <div className="labelInformacionProducto">Costo: {datosProducto.costo}$</div> */} {/*Actualmente no tiene uso*/}
             <div className="labelInformacionProducto">Precio de venta: {datosProducto.precioDeVenta}$</div>
             <div className="labelInformacionProducto Descripcion">Descripcion: {datosProducto.descripcion}</div>
-            <div className="labelInformacionProducto">Total de ventas: {datosProducto.totalDeVentas}</div>
+            {/*<div className="labelInformacionProducto">Total de ventas: {datosProducto.totalDeVentas}</div>*/}{/*Actualmente no tiene uso*/}
 
 
 

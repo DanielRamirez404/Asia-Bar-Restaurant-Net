@@ -36,7 +36,7 @@ function Inicio(){
                 <div className="frameResumenes">
 
                     <div className="frameResumen" id="productosMasVendidos">
-                        <h3>Mas Vendidos</h3>
+                        <h3 className="tituloResumen">Mas Vendidos</h3>
                         <div className="scrollframeMasVendidos">
 
                             <MasVendidos nombre={"Nombre Producto 2"} precio={20} totalVentas={200} onOpen={onOpen}/>
@@ -49,7 +49,7 @@ function Inicio(){
 
 
                     <div className="frameResumen" id="productosRecienAgregados">
-                        <h3>Recien Agregados</h3>
+                        <h3 className="tituloResumen">Recien Agregados</h3>
                         <div className="scrollFrameRecienAgregado">
                             <RecienAgregado nombre={"Nombre Producto"} precio={3.50} categoria="refresco" onOpen={onOpen}/>
                             <RecienAgregado nombre={"Nombre Producto"} precio={3.50} categoria="refresco" onOpen={onOpen}/> 
