@@ -109,7 +109,7 @@
 
 }
 
-.infromacionCliente{
+.informacionCliente{
 
     display: flex;
     flex-direction: column;
@@ -129,7 +129,7 @@
 
 }
 
-.nombreApeliido{
+.nombreApellido{
 
     font-size: 30px;
    

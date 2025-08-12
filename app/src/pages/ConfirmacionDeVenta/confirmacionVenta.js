@@ -113,6 +113,8 @@ function ContenidoConfirmacionVenta() {
             hora: hora,
             numeroTicket: id,
             tipoVenta: order.type,
+            clienteNombre: order.clientName,
+            clienteId: order.clientID,
             items: products.map(product => ({
                 nombre: product[0], 
                 cantidad: product[3],
@@ -120,7 +122,6 @@ function ContenidoConfirmacionVenta() {
                 precioUnitario: product[1] 
             })),
             subtotal: subtotal,
-            iva: iva,
             total: total,
             mensaje: order.note || '¡Gracias por su preferencia!'
         };
@@ -145,8 +146,8 @@ function ContenidoConfirmacionVenta() {
             (order.type !== "Delivery") ? null :
                 (<div className='frameResumenCliente' id='resumenCliente'>
 
-                    <div className='infromacionCliente'>
-                            <span className='nombreApeliido'>{ order.clientName }</span>
+                    <div className='informacionCliente'>
+                            <span className='nombreApellido'>{ order.clientName }</span>
                             <span className='datoCliente' id='ci'>{ order.clientID }</span>
 
                             <span className='datoCliente' id='informacionDireccion'>{ order.address }</span>
