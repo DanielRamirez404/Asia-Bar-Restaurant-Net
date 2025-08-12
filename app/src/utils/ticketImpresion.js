@@ -6,6 +6,8 @@
  * @param {string} datos.hora - Hora de la transacción
  * @param {string} datos.numeroTicket - Número de ticket/orden
  * @param {string} datos.tipoVenta - Tipo de venta (ej: "Para llevar", "Mesa X")
+ * @param {string} datos.clienteNombre - Nombre del cliente
+ * @param {string} datos.clienteId - Identificación del cliente
  * @param {Array} datos.items - Array de objetos con los productos
  * @param {string} datos.items[].nombre - Nombre del producto
  * @param {number} datos.items[].cantidad - Cantidad del producto
@@ -53,10 +55,11 @@ export const generarTicket = (datos) => {
   const COL_CANT = 4;     // Ancho columna cantidad
   const COL_DESC = 18;    // Ancho columna descripción
   const COL_TOTAL = 8;    // Ancho columna total
-  const SEPARADOR = 2;    // Espacios entre columnas
+  const SEPARADOR = 2;    // Espacios entre columnos
   
   // Función para centrar texto
   const centrarTexto = (texto) => {
+    if (!texto) return '';
     const lineas = dividirEnLineas(texto, MAX_CHARS);
     return lineas.map(linea => {
       const espacios = Math.max(0, Math.floor((MAX_CHARS - linea.length) / 2));
@@ -108,10 +111,10 @@ export const generarTicket = (datos) => {
 
   // Función para crear una línea divisoria
   const lineaDivisoria = (caracter = '-') => caracter.repeat(MAX_CHARS);
-
+  
   // Iniciar el ticket
   let ticket = [];
-
+  
   // Encabezado de la empresa
   ticket.push(centrarTexto('RESTAURANTE ASIA'));
   ticket.push(''); // Línea en blanco
@@ -131,8 +134,19 @@ export const generarTicket = (datos) => {
   if (esParaComerAqui && datos.mesa) {
     ticket.push(`Mesa: ${datos.mesa || ''}`);
   }
-  
   ticket.push(`TIPO: ${datos.tipoVenta || 'Para llevar'}`);
+
+  // Mostrar información del cliente si está disponible
+  if (datos.clienteNombre || datos.clienteId) {
+    
+    if (datos.clienteNombre) {
+      ticket.push(`Cliente: ${datos.clienteNombre}`);
+    }
+    if (datos.clienteId) {
+      ticket.push(`Identificación: ${datos.clienteId}`);
+    }
+  }
+  
   ticket.push(lineaDivisoria('*'));
   
   // Línea en blanco antes de los productos
