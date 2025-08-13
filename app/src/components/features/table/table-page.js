@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-import DashboardPage from "../../pages/reusables/dashboard-page.js";
+import DashboardPage from "../../../pages/reusables/dashboard-page.js";
 
 import Table from './table.js';
 
-import { PrimaryButton } from '../ui/buttons.js';
-import { SearchInputBox } from '../ui/form.js';
+import { PrimaryButton } from '../../ui/buttons.js';
+import { SearchInputBox } from '../../ui/form.js';
 
 import "./table-page.css";
 
-import { fieldTypes } from "../../config/tables.js";
+import { fieldTypes } from "../../../config/tables.js";
 
 function SearchBox({ onSearch }) {
     const [query, setQuery] = useState("");
