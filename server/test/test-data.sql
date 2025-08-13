@@ -48,17 +48,17 @@ INSERT INTO SideDish (Name, Availability, Price, Category, Description) VALUES
 ('Arroz Blanco', 1, 2.25, 'Arroces', 'Arroz blanco tradicional'),
 ('Verduras Salteadas', 1, 3.99, 'Vegetales', 'Mezcla de vegetales frescos al wok');
 
-INSERT INTO Product (Name, Availability, Price, Category, Description, Provider, Quantity) VALUES
-('Cerveza Polar', 1, 2.50, 'Bebidas', 'Cerveza lager venezolana', 'Distribuidora Cervercera', 120),
-('Ron Santa Teresa', 1, 7.99, 'Licores', 'Ron añejo venezolano', 'Licores Oriente', 45),
-('Jugo de Tamarindo', 1, 3.25, 'Jugos', 'Refrescante jugo natural', 'Frutas del Caribe', 80),
-('Queso Telita', 1, 6.75, 'Lácteos', 'Queso fresco típico', 'Lácteos Anzoategui', 30),
-('Flan de Coco', 1, 4.50, 'Postres', 'Postre tradicional oriental', 'Dulces Maribel', 25),
-('Café Guayanés', 1, 2.25, 'Bebidas Calientes', 'Café de la región oriental', 'Café de Anzoátegui', 65),
-('Salsa Picante', 1, 1.99, 'Condimentos', 'Salsa de ají margariteño', 'Salsas Caribeñas', 100),
-('Pan de Jamón', 1, 8.50, 'Panadería', 'Especialidad navideña', 'Panadería Barcelona', 15),
-('Agua Mineral', 1, 1.50, 'Agua', 'Agua embotellada 500ml', 'Agua Cristal', 200),
-('Tequila Líder', 1, 12.75, 'Licores', 'Tequila reposado mexicano', 'Licores Internacionales', 35);
+INSERT INTO Product (Name, Availability, Price, Category, Description) VALUES
+('Cerveza Polar', 1, 2.50, 'Bebidas', 'Cerveza lager venezolana'),
+('Ron Santa Teresa', 1, 7.99, 'Licores', 'Ron añejo venezolano'),
+('Jugo de Tamarindo', 1, 3.25, 'Jugos', 'Refrescante jugo natural'),
+('Queso Telita', 1, 6.75, 'Lácteos', 'Queso fresco típico'),
+('Flan de Coco', 1, 4.50, 'Postres', 'Postre tradicional oriental'),
+('Café Guayanés', 1, 2.25, 'Bebidas Calientes', 'Café de la región oriental'),
+('Salsa Picante', 1, 1.99, 'Condimentos', 'Salsa de ají margariteño'),
+('Pan de Jamón', 1, 8.50, 'Panadería', 'Especialidad navideña'),
+('Agua Mineral', 1, 1.50, 'Agua', 'Agua embotellada 500ml'),
+('Tequila Líder', 1, 12.75, 'Licores', 'Tequila reposado mexicano');
 
 INSERT INTO Deliverymen (Name, Area, Availability, Phone) VALUES
 ('Luis Martínez', 'Zona 1', 1, '+58 412-5551001'),

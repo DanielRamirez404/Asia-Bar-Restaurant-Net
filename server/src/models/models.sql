@@ -36,9 +36,7 @@ CREATE TABLE Product (
     Availability INT DEFAULT TRUE NOT NULL,
     Price FLOAT NOT NULL,
     Category VARCHAR(50) NOT NULL,
-    Description VARCHAR(100),
-    Provider VARCHAR(50) NOT NULL,
-    Quantity INT NOT NULL
+    Description VARCHAR(100)
 );
 
 CREATE TABLE Sales (

@@ -8,7 +8,7 @@ const tables = [
     new Table("Sales", "ID", ["ID", "ClientIdDocument", "Type", "Total" ]),
     new Table("MainDish", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
     new Table("SideDish", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
-    new Table("Product", "Name", ["Name", "Availability", "Price", "Category", "Description", "Provider", "Quantity"]),
+    new Table("Product", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
     new Table("Deliverymen", "Name", ["Name", "Area", "Availability", "Phone"])
 ];
 
@@ -27,11 +27,11 @@ tables.forEach(table => {
     };
     
     getAllEndpointFunctions[url] = function(req, res) {
-        sendAllRegistersFrom(res, table.name, table.isFood); 
+        sendAllRegistersFrom(res, table.name); 
     };
 
     getEndpointFunctions[url] = function(req, res) {
-        sendFromId(req, res, table.name, table.idName, table.isFood); 
+        sendFromId(req, res, table.name, table.idName); 
     }
 
     putEndpointFunctions[url] = function(req, res) {
@@ -39,7 +39,7 @@ tables.forEach(table => {
     }
 
     deleteEndpointFunctions[url] = function(req, res) {
-        deleteById(req, res, table.name, table.idName, table.isFood); 
+        deleteById(req, res, table.name, table.idName); 
     }
 
     searchEndpointFunctions[url] = function(req, res) {

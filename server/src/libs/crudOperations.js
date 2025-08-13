@@ -11,7 +11,7 @@ export async function sendAllRegistersFrom(res, tableName) {
     });
 }
 
-export async function sendFromId(req, res, tableName, idName, isFoodTable) {
+export async function sendFromId(req, res, tableName, idName) {
     handleQueryExecution(res, async (db) => {
         
         const query = `SELECT * FROM ${tableName} WHERE ${idName} = ?`;
