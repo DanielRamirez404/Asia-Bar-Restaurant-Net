@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 import '../../Visual-Resources/Logo.png';  
 import Popup from '../reusables/Pop-up.js'; 
 import { onLogout } from '../../utils/api.js';
-import { useTableChanger } from "../../hooks/session.js";
+import { useTableChanger, useLateTableChanger } from "../../hooks/session.js";
+
+import MenuItem from "../../components/features/dashboard/menu-item.js";
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -20,49 +22,15 @@ function MenuToggleButton({ isSidebarOpen, onClick }) {
     );
 }
 
-function MenuSubItemButton({ subItem }) {
-    const navigate = useNavigate();
-    const tableChanger = useTableChanger(subItem.table);
-    
-    const onClick = () => {
-        tableChanger(); 
-        navigate(subItem.route);
-    };
-    
-    return (
-        <button onClick = { onClick } className="submenu-button">
-            { subItem.name }
-        </button>
-    )
-}
-
-function MenuItem({ menuItem, index, isExpanded, onClick }) {
-    const arrowIcon = isExpanded ? <ChevronDown size={30} /> : <ChevronRight size={30} />;
-
-    return (
-        <li key={index} className="menu-item">
-            <button className="menu-button" onClick={ onClick }>
-                <span>
-                    { menuItem.title }
-                </span>
-                { menuItem.subItems && arrowIcon }
-            </button>
-
-            {
-                menuItem.subItems && isExpanded && (
-                <ul className="submenu">
-                    {menuItem.subItems.map((subItem, subIndex) => (
-                        <li key={subIndex}>
-                            <MenuSubItemButton subItem={ subItem } />
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </li>
-    );
-}
-
 function SideBarMenu({ expandedIndex, setExpandedIndex }) {
+    const navigate = useNavigate();
+    const tableChanger = useLateTableChanger();
+    
+    const onSubClick = (subitem) => {
+        tableChanger(subitem.table); 
+        navigate(subitem.route);
+    };
+
     return (
         <nav className="menu">
             <ul className="menu-items">
@@ -76,10 +44,12 @@ function SideBarMenu({ expandedIndex, setExpandedIndex }) {
 
                 {dashboardItems.map((menuItem, index) => (
                     <MenuItem
-                        index={index}
-                        menuItem={menuItem}
+                        key={ menuItem.title }
+                        title={ menuItem.title }
                         isExpanded={expandedIndex === index}
                         onClick={() => setExpandedIndex((expandedIndex === index) ? null : index)}
+                        subitems={ menuItem.subItems } 
+                        onSubClick={ onSubClick }
                     />
                 ))}
             </ul>
