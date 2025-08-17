@@ -4,7 +4,14 @@ import { useFormFields, useFormValues } from "../hooks/form.js";
 import { useModifyID } from "../hooks/session.js";
 
 import ControlForm from '../components/layout/control-form.js';
-import { RequiredInputBox, RequiredNumberBox, RequiredSelector, RequiredBoolean } from '../components/ui/form.js';
+
+import { 
+    RequiredInputBox, 
+    RequiredNumberBox, 
+    RequiredSelector, 
+    RequiredBoolean,
+    RequiredOptionalSelector
+} from '../components/ui/form.js';
 
 import { onControlForm } from '../utils/api.js';
 
@@ -46,7 +53,9 @@ function ControlFormPage() {
                     type === "combo" ?
                         <RequiredSelector key={ title[type] } options={ title.options } value={ value } {...mandatory} /> :
                     type === "bool" ?
-                        <RequiredBoolean key={ title } {...mandatory} /> : null
+                        <RequiredBoolean key={ title } {...mandatory} /> :
+                    type === "pseudocombo" ? 
+                        <RequiredOptionalSelector key={ title } options={ title.options } {...mandatory} /> : null
                 );
             })}
         </ControlForm>

@@ -6,9 +6,14 @@ import './form.css';
 export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, options = {} }) {
     return(
         <div className='input-box'>
-            <label htmlFor={ title }>
-                { title }
-            </label>
+            
+            {   
+                !title ? null : (
+                    <label htmlFor={ title }>
+                        { title }
+                    </label>
+                )
+            }
             
             <input 
                 type={ type } 
@@ -115,3 +120,41 @@ export function RequiredBoolean({ title, textSetter, value = null}) {
         />
     );
 };
+
+function getAllOptions(options) {
+    const all = [...options];
+    all.push("N/A");
+    return all; 
+}
+
+export function RequiredOptionalSelector({ title, options, textSetter, value }) {
+    const allOptions = getAllOptions(options);
+    const isValueInOptions = options.find((option) => option === value);
+    
+    const [selected, setSelected] = useState(isValueInOptions ?? "N/A");
+    const [text, setText] = useState(isValueInOptions ? "" : value);
+
+    const isSelecting = selected !== "N/A";
+
+    useEffect(() => {
+        textSetter(isSelecting ? selected : text);
+    }, [isSelecting, selected, text]);
+
+    return (
+        <>
+            <RequiredSelector
+                title={title}
+                options={allOptions}
+                textSetter={setSelected}
+                value={selected}
+            />
+
+            {isSelecting ? null : 
+                <RequiredInputBox
+                    textSetter={setText}
+                    value={text}
+                />
+            }
+        </>
+    );
+}

@@ -1,12 +1,25 @@
 import Table from "../utils/table.js";
 
-export const fieldTypes = ["number", "int", "combo", "bool"];
+export const fieldTypes = ["number", "int", "combo", "pseudocombo", "bool"];
 
 export const saleOptions = ["Comer Aquí", "Para llevar", "Delivery"];
+export const addressOptions = ["Barcelona", "Lechería", "Puerto la Cruz", "Guanta"];
 
-const salesFields = [{ int: "ID" }, "Documento del Cliente", { combo: "Tipo", options: saleOptions }, { number: "Total" }];
-const clientsFields = ["Identificación", "Nombre", "Dirección", "Teléfono" ];
-const deliverymenFields = ["Nombre del Repartidor", "Zona", "Disponibilidad", "Teléfono"];
+const salesFields = [
+    { int: "ID" }, 
+    "Documento del Cliente", 
+    { combo: "Tipo", options: saleOptions }, 
+    { number: "Total" }
+];
+
+const clientsFields = [
+    "Identificación", 
+    "Nombre", 
+    { pseudocombo: "Dirección", options: addressOptions }, 
+    "Teléfono"
+];
+
+const deliverymenFields = ["Nombre del Repartidor", "Zona", { bool: "Disponibilidad" }, "Teléfono"];
 const dishFields = ["Nombre", { bool: "Disponibilidad" }, { number: "Precio" }, "Categoría", "Descripción"];
 const usersFields = [ "Usuario", "Tipo", "Contraseña" ];
 

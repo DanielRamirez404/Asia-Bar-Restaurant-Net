@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Menu, ChevronDown, ChevronRight, LogOut } from 'lucide-react'; 
+import { Menu, LogOut } from 'lucide-react'; 
 import { dashboardItems } from '../../config/dashboard-items.js';
 import { getPageFromPath } from '../../config/pages.js';
 import './dashboard-page.css';
