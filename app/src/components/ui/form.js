@@ -129,13 +129,18 @@ function getAllOptions(options) {
 
 export function RequiredOptionalSelector({ title, options, textSetter, value }) {
     const allOptions = getAllOptions(options);
-    const isValueInOptions = options.find((option) => option === value);
-    
-    const [selected, setSelected] = useState(isValueInOptions ?? "N/A");
-    const [text, setText] = useState(isValueInOptions ? "" : value);
+
+    const [selected, setSelected] = useState("");
+    const [text, setText] = useState("");
 
     const isSelecting = selected !== "N/A";
 
+    useEffect(() => {
+        const found = options.find( (option) => option === value);
+        setSelected(found ?? "N/A");
+        setText(found ? "" : value);
+    }, [value]);
+    
     useEffect(() => {
         textSetter(isSelecting ? selected : text);
     }, [isSelecting, selected, text]);

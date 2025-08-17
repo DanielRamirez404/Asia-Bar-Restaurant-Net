@@ -55,7 +55,7 @@ function ControlFormPage() {
                     type === "bool" ?
                         <RequiredBoolean key={ title } {...mandatory} /> :
                     type === "pseudocombo" ? 
-                        <RequiredOptionalSelector key={ title } options={ title.options } {...mandatory} /> : null
+                        <RequiredOptionalSelector key={ title } options={ title.options } value={ value } {...mandatory} /> : null
                 );
             })}
         </ControlForm>
