@@ -11,7 +11,8 @@ import {
     RequiredSelector, 
     RequiredBoolean,
     RequiredOptionalSelector,
-    RequiredPhoneInput
+    RequiredPhoneInput,
+    RequiredIdInput
 } from '../components/ui/form.js';
 
 import { onControlForm } from '../utils/api.js';
@@ -58,7 +59,9 @@ function ControlFormPage() {
                     type === "pseudocombo" ? 
                         <RequiredOptionalSelector key={ title } options={ title.options } value={ value } {...mandatory} /> : 
                     type === "phone" ?
-                        <RequiredPhoneInput key={ title } {...mandatory } /> : null
+                        <RequiredPhoneInput key={ title } {...mandatory } /> :
+                    type === "id" ?
+                        <RequiredIdInput key={ title }  {...mandatory} /> : null
                 );
             })}
         </ControlForm>

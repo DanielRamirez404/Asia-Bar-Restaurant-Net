@@ -3,12 +3,11 @@ import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import './form.css';
 
-import { phonePrefixes } from "../../config/tables.js";
+import { idTypes, phonePrefixes } from "../../config/tables.js";
 
-export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, options = {} }) {
+function InputBoxWrapper({ title, children }) {
     return(
-        <div className='input-box'>
-            
+        <div className="input-box">
             {   
                 !title ? null : (
                     <label htmlFor={ title }>
@@ -16,7 +15,14 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
                     </label>
                 )
             }
-            
+            { children }
+        </div>
+    );
+}
+
+export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, options = {} }) {
+    return(
+        <InputBoxWrapper title={title}>
             <input 
                 type={ type } 
                 id={ title } 
@@ -28,7 +34,7 @@ export function RequiredInputBox({ title, textSetter, type = 'text', regex = nul
                 required
             >
             </input>
-        </div>
+        </InputBoxWrapper>
     );
 }
 
@@ -200,11 +206,7 @@ export function RequiredPhoneInput({ title, value, textSetter }) {
     }
 
     return (
-        <div className="input-box"> 
-            <label htmlFor={ title }>
-                { title }
-            </label>
-
+        <InputBoxWrapper title={title}> 
             <div className="phone-input-container">
                 <div className="prefix-container">
                     <RequiredSelector
@@ -221,6 +223,62 @@ export function RequiredPhoneInput({ title, value, textSetter }) {
                     />
                 </div>
             </div>
-        </div>
+        </InputBoxWrapper>
+    );
+}
+
+
+function getIDType(string, size) {
+    const reversed = string.split('').reverse().join('');
+    const numbers = reversed.slice(-size);
+    const prefix = numbers.split('').reverse().join('');
+    return prefix;
+}
+
+function getID(type, code) {
+    if (type === "N/A")
+        return code;
+
+    return type + code; 
+}
+
+export function RequiredIdInput({ title, value, textSetter }) {
+    const allOptions = getAllOptions(idTypes); 
+    const typeLength = 2;
+    
+    const possibleType = getIDType(value, typeLength);
+    const foundType = idTypes.find( (option) => option === possibleType);
+
+    const selected = foundType || "N/A";
+    const usesType = selected !== "N/A";
+    const displayValue = usesType ? value.slice(typeLength) : value;
+
+    const onChangeSelection = (type) => {
+        textSetter( getID(type, displayValue) );
+    };
+
+    const onTextInput = (input) => {
+        textSetter( getID(selected, input) );
+    }
+
+    return (
+        <InputBoxWrapper title={title}> 
+            <div className="phone-input-container">
+                <div className="prefix-container">
+                    <RequiredSelector
+                        options={allOptions}
+                        textSetter={onChangeSelection}
+                        value={selected}
+                    />
+                </div>
+
+                <div className="phone-text-container">
+                    <RequiredInputBox
+                        textSetter={onTextInput}
+                        value={displayValue}
+                    />
+                </div>
+            </div>
+        </InputBoxWrapper>
     );
 }

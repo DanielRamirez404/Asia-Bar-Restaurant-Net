@@ -1,22 +1,23 @@
 import Table from "../utils/table.js";
 
-export const fieldTypes = ["number", "int", "combo", "pseudocombo", "bool", "phone"];
+export const fieldTypes = ["number", "int", "combo", "pseudocombo", "bool", "phone", "id"];
 
 export const saleOptions = ["Comer Aquí", "Para llevar", "Delivery"];
 export const addressOptions = ["Barcelona", "Lechería", "Puerto la Cruz", "Guanta"];
 export const userRoles = ["Administrador", "Usuario"];
 
 export const phonePrefixes = ["0414", "0424", "0416", "0426", "0412", "0422"];
+export const idTypes = ["V-", "J-", "E-"];
 
 const salesFields = [
     { int: "ID" }, 
-    "Documento del Cliente", 
+    { id: "Documento del Cliente" }, 
     { combo: "Tipo", options: saleOptions }, 
     { number: "Total" }
 ];
 
 const clientsFields = [
-    "Identificación", 
+    { type: "Identificación" }, 
     "Nombre", 
     { pseudocombo: "Dirección", options: addressOptions }, 
     { phone: "Teléfono" }
