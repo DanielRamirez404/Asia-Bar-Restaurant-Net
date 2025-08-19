@@ -23,7 +23,6 @@ function BodyRow({ row, index, onEdit, onDelete, fields }) {
     const isBool = (value) => typeof value === "object" && Object.hasOwn(value, "bool");
 
     const toBool = (value) => {
-        console.log(value);
         return (value === 1) ? "Sí" : "No";
     }   
                 

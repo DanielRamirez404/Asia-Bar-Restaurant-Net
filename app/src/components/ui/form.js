@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import './form.css';
 
+import { phonePrefixes } from "../../config/tables.js";
+
 export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, options = {} }) {
     return(
         <div className='input-box'>
@@ -64,10 +66,10 @@ export function SearchInputBox({ textSetter, value = null }) {
     );
 }
 
-function Selector({ title, options, onChange, value = null }) {
+function Selector({ title = null, options, onChange, value = null }) {
     return(
         <div className="input-box">
-            <label htmlFor={ title }>{ title }</label>
+            { title ? <label htmlFor={ title }>{ title }</label> : null}
             <select 
                 className="selector" 
                 id={ title } 
@@ -81,7 +83,7 @@ function Selector({ title, options, onChange, value = null }) {
     );
 }
 
-export function RequiredSelector({ title, options, textSetter, value = null}) {
+export function RequiredSelector({ title = null, options, textSetter, value = null}) {
     const defaultValue = value || options[0];
 
     useEffect(() => {
@@ -161,5 +163,64 @@ export function RequiredOptionalSelector({ title, options, textSetter, value }) 
                 />
             }
         </>
+    );
+}
+
+function getPhone(prefix, text) {
+    if (prefix === "N/A")
+        return text;
+
+    return prefix + text; 
+}
+
+function getPrefix(string, size) {
+    const reversed = string.split('').reverse().join('');
+    const numbers = reversed.slice(-size);
+    const prefix = numbers.split('').reverse().join('');
+    return prefix;
+}
+
+export function RequiredPhoneInput({ title, value, textSetter }) {
+    const allOptions = getAllOptions(phonePrefixes); 
+    const prefixLength = 4;
+    
+    const possiblePrefix = getPrefix(value, prefixLength);
+    const foundPrefix = phonePrefixes.find( (option) => option === possiblePrefix);
+
+    const selected = foundPrefix || "N/A";
+    const usesPrefix = selected !== "N/A";
+    const displayValue = usesPrefix ? value.slice(prefixLength) : value;
+
+    const onChangeSelection = (prefix) => {
+        textSetter( getPhone(prefix, displayValue) );
+    };
+
+    const onTextInput = (input) => {
+        textSetter( getPhone(selected, input) );
+    }
+
+    return (
+        <div className="input-box"> 
+            <label htmlFor={ title }>
+                { title }
+            </label>
+
+            <div className="phone-input-container">
+                <div className="prefix-container">
+                    <RequiredSelector
+                        options={allOptions}
+                        textSetter={onChangeSelection}
+                        value={selected}
+                    />
+                </div>
+
+                <div className="phone-text-container">
+                    <RequiredInputBox
+                        textSetter={onTextInput}
+                        value={displayValue}
+                    />
+                </div>
+            </div>
+        </div>
     );
 }

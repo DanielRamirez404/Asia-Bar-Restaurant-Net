@@ -1,9 +1,12 @@
 import Table from "../utils/table.js";
 
-export const fieldTypes = ["number", "int", "combo", "pseudocombo", "bool"];
+export const fieldTypes = ["number", "int", "combo", "pseudocombo", "bool", "phone"];
 
 export const saleOptions = ["Comer Aquí", "Para llevar", "Delivery"];
 export const addressOptions = ["Barcelona", "Lechería", "Puerto la Cruz", "Guanta"];
+export const userRoles = ["Administrador", "Usuario"];
+
+export const phonePrefixes = ["0414", "0424", "0416", "0426", "0412", "0422"];
 
 const salesFields = [
     { int: "ID" }, 
@@ -16,12 +19,29 @@ const clientsFields = [
     "Identificación", 
     "Nombre", 
     { pseudocombo: "Dirección", options: addressOptions }, 
-    "Teléfono"
+    { phone: "Teléfono" }
 ];
 
-const deliverymenFields = ["Nombre del Repartidor", "Zona", { bool: "Disponibilidad" }, "Teléfono"];
-const dishFields = ["Nombre", { bool: "Disponibilidad" }, { number: "Precio" }, "Categoría", "Descripción"];
-const usersFields = [ "Usuario", "Tipo", "Contraseña" ];
+const deliverymenFields = [
+    "Nombre del Repartidor", 
+    "Zona", 
+    { bool: "Disponibilidad" }, 
+    { phone: "Teléfono" }
+];
+
+const dishFields = [
+    "Nombre", 
+    { bool: "Disponibilidad" }, 
+    { number: "Precio" }, 
+    "Categoría", 
+    "Descripción"
+];
+
+const usersFields = [ 
+    "Usuario", 
+    "Tipo", 
+    "Contraseña"
+];
 
 const salesDbFields = ["id","clientdocument", "type", "total"]
 const clientsDbFields = ["iddocument", "name", "address", "phone" ];

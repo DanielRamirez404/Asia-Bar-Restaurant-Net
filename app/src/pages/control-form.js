@@ -10,7 +10,8 @@ import {
     RequiredNumberBox, 
     RequiredSelector, 
     RequiredBoolean,
-    RequiredOptionalSelector
+    RequiredOptionalSelector,
+    RequiredPhoneInput
 } from '../components/ui/form.js';
 
 import { onControlForm } from '../utils/api.js';
@@ -55,7 +56,9 @@ function ControlFormPage() {
                     type === "bool" ?
                         <RequiredBoolean key={ title } {...mandatory} /> :
                     type === "pseudocombo" ? 
-                        <RequiredOptionalSelector key={ title } options={ title.options } value={ value } {...mandatory} /> : null
+                        <RequiredOptionalSelector key={ title } options={ title.options } value={ value } {...mandatory} /> : 
+                    type === "phone" ?
+                        <RequiredPhoneInput key={ title } {...mandatory } /> : null
                 );
             })}
         </ControlForm>
