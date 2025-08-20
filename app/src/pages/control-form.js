@@ -37,7 +37,7 @@ function ControlFormPage() {
                         key={ `input-${title}` } 
                         type={ type } 
                         title={ title } 
-                        onClick={ setter } 
+                        onChange={ setter } 
                         value={ value } 
                         options={ tableField.options } 
                     /> 

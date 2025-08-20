@@ -16,7 +16,7 @@ function SearchBox({ onSearch }) {
 
     return(
         <div className="search-container">
-            <SearchInputBox value={ query } textSetter={ setQuery } />
+            <SearchInputBox value={ query } onChange={ setQuery } />
             <PrimaryButton text="Buscar" onClick={ () => onSearch(query) } />
         </div>
     );

@@ -38,13 +38,13 @@ export default function InformacionVenta() {
             content={
                 <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger, clearer) } title={ "Información de Venta" } >
                     <>
-                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } textSetter={ setters[0] } />
-                        <RequiredInputBox title={ "Nombre del Cliente" } textSetter={ setters[1] } />
-                        <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } textSetter={ setters[2] } value={ values[2] } />  
+                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } onChange={ setters[0] } />
+                        <RequiredInputBox title={ "Nombre del Cliente" } onChange={ setters[1] } />
+                        <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } onChange={ setters[2] } value={ values[2] } />  
                         
                         {   
                             (values[2] === saleOptions[2]) 
-                                ? <RequiredInputBox title={ "Dirección" } textSetter={ setters[3] } />
+                                ? <RequiredInputBox title={ "Dirección" } onChange={ setters[3] } />
                                 : null
                         } 
 

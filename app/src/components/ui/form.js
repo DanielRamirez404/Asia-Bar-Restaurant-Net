@@ -10,7 +10,7 @@ function InputBoxWrapper({ title, children }) {
         <div className="input-box">
             {   
                 !title ? null : (
-                    <label htmlFor={ title }>
+                    <label className="input-title" htmlFor={ title }>
                         { title }
                     </label>
                 )
@@ -20,25 +20,40 @@ function InputBoxWrapper({ title, children }) {
     );
 }
 
-export function RequiredInputBox({ title, textSetter, type = 'text', regex = null, value = null, options = {} }) {
+function SimpleRequiredInput({ type = 'text', title, placeholder, onChange, regex, value, options }) {
+    return (
+        <input 
+            className="simple-input"
+            type={ type } 
+            id={ title } 
+            placeholder={ placeholder } 
+            pattern={ regex } 
+            onChange={ (e) => onChange(e.target.value) } 
+            value={ value }
+            { ...options }
+            required
+        >
+        </input>
+    );
+}
+
+export function RequiredInputBox({ title, onChange, type = 'text', regex, value, placeholder, options = {} }) {
     return(
         <InputBoxWrapper title={title}>
-            <input 
+            <SimpleRequiredInput
                 type={ type } 
-                id={ title } 
-                placeholder={ title } 
-                pattern={ regex } 
-                onChange={ (e) => textSetter(e.target.value) } 
+                title={ title }
+                placeholder={ placeholder ?? title } 
+                regex={ regex } 
+                onChange={ onChange } 
                 value={ value }
-                { ...options }
-                required
-            >
-            </input>
+                options={ options }
+            />
         </InputBoxWrapper>
     );
 }
 
-export function RequiredNumberBox({ title, textSetter, isDecimal = false, value = null }) {
+export function RequiredNumberBox({ title, onChange, isDecimal = false, value }) {
     const inputValue = isDecimal ? parseFloat(value).toFixed(2) : value;  
     const minValue = isDecimal ? 0.01 : 1;
         
@@ -46,7 +61,7 @@ export function RequiredNumberBox({ title, textSetter, isDecimal = false, value 
         <RequiredInputBox 
             title={ title }
             type={ "number" }
-            textSetter={ textSetter }
+            onChange={ onChange }
             value={ inputValue }
             options = {{
                 min: minValue,
@@ -56,7 +71,7 @@ export function RequiredNumberBox({ title, textSetter, isDecimal = false, value 
     );
 }
 
-export function SearchInputBox({ textSetter, value = null }) {
+export function SearchInputBox({ onChange, value }) {
     return (
        <>
             <Search className="search-icon" />
@@ -66,65 +81,70 @@ export function SearchInputBox({ textSetter, value = null }) {
                 className="search-input-box"
                 placeholder="Buscar"
                 value={ value }
-                onChange={ (e) => textSetter(e.target.value) }
+                onChange={ (e) => onChange(e.target.value) }
             />
         </>
     );
 }
 
-function Selector({ title = null, options, onChange, value = null }) {
+function Selector({ title, options, onChange, value }) {
     return(
-        <div className="input-box">
-            { title ? <label htmlFor={ title }>{ title }</label> : null}
+        <InputBoxWrapper title={title}>
             <select 
                 className="selector" 
                 id={ title } 
                 value={ value }
-                onChange={ onChange }
+                onChange={ (e) => onChange(e.target.value) }
                 required
             >
                 { options.map( (option, i) => <option key={`${option}-${i}`} value={option}>{option}</option> ) }
             </select>
-        </div>
+        </InputBoxWrapper>
     );
 }
 
-export function RequiredSelector({ title = null, options, textSetter, value = null}) {
-    const defaultValue = value || options[0];
-
+function RequiredCombo({ title, options, onChange, value, defaultValue, onSetDefault }) {
     useEffect(() => {
-        textSetter(defaultValue);
+        onSetDefault(defaultValue);
     }, []);
 
-    return( 
+    return(
         <Selector
             title={title}
             options={options}
-            onChange={ (e) => textSetter(e.target.value) }
+            onChange={onChange}
+            value={value}
+        />
+    );
+}
+
+export function RequiredSelector({ title, options, onChange, value }) {
+    const defaultValue = value || options[0];
+
+    return( 
+        <RequiredCombo
+            title={title}
+            options={options}
+            onChange={onChange}
+            onSetDefault={onChange}
+            defaultValue={defaultValue}
             value={defaultValue}
         />
     );
 }
 
-export function RequiredBoolean({ title, textSetter, value = null}) {
+export function RequiredBoolean({ title, onChange, value }) {
     const defaultValue = value || 0;
-
-    useEffect(() => {
-        textSetter(defaultValue);
-    }, []);
-
     const options = ["No", "Sí"];
 
-    return ( 
-        <Selector
+    return( 
+        <RequiredCombo
             title={title}
             options={options}
-            onChange={ (e) => {
-                const eventValue = e.target.value;
-                console.log(eventValue);
-                textSetter(eventValue === "Sí" ? 1 : 0); 
-            }}
-            value={ options[defaultValue] }
+            onChange={(eventValue) => onChange(eventValue === "Sí" ? 1 : 0)}
+            onSetDefault={onChange}
+            defaultValue={defaultValue}
+            value={options[defaultValue]}
         />
     );
 };
@@ -135,7 +155,7 @@ function getAllOptions(options) {
     return all; 
 }
 
-export function RequiredOptionalSelector({ title, options, textSetter, value }) {
+export function RequiredOptionalSelector({ title, options, onChange, value }) {
     const allOptions = getAllOptions(options);
 
     const [selected, setSelected] = useState("");
@@ -150,7 +170,7 @@ export function RequiredOptionalSelector({ title, options, textSetter, value }) 
     }, [value]);
     
     useEffect(() => {
-        textSetter(isSelecting ? selected : text);
+        onChange(isSelecting ? selected : text);
     }, [isSelecting, selected, text]);
 
     return (
@@ -158,52 +178,52 @@ export function RequiredOptionalSelector({ title, options, textSetter, value }) 
             <RequiredSelector
                 title={title}
                 options={allOptions}
-                textSetter={setSelected}
+                onChange={setSelected}
                 value={selected}
             />
 
             {isSelecting ? null : 
                 <RequiredInputBox
-                    textSetter={setText}
+                    onChange={setText}
                     value={text}
+                    placeholder={title}
                 />
             }
         </>
     );
 }
 
-function getPhone(prefix, text) {
-    if (prefix === "N/A")
-        return text;
+function getCombinedText(selectorText, inputText) {
+    if (selectorText === "N/A")
+        return inputText;
 
-    return prefix + text; 
+    return selectorText + inputText;
 }
 
-function getPrefix(string, size) {
+function parsePossibleOption(string, size) {
     const reversed = string.split('').reverse().join('');
     const numbers = reversed.slice(-size);
-    const prefix = numbers.split('').reverse().join('');
-    return prefix;
+    const option = numbers.split('').reverse().join('');
+    return option;
 }
 
-export function RequiredPhoneInput({ title, value, textSetter }) {
-    const allOptions = getAllOptions(phonePrefixes); 
-    const prefixLength = 4;
+function RequiredInputSelector({ title, value, onChange, options, optionSize }) {
+    const allOptions = getAllOptions(options);
     
-    const possiblePrefix = getPrefix(value, prefixLength);
-    const foundPrefix = phonePrefixes.find( (option) => option === possiblePrefix);
+    const possibleOption = parsePossibleOption(value, optionSize);
+    const foundOption = options.find( (option) => option === possibleOption );
+    
+    const selected = foundOption || "N/A";
+    const usesOption = selected !== "N/A";
+    const displayValue = usesOption ? value.slice(optionSize) : value;
 
-    const selected = foundPrefix || "N/A";
-    const usesPrefix = selected !== "N/A";
-    const displayValue = usesPrefix ? value.slice(prefixLength) : value;
-
-    const onChangeSelection = (prefix) => {
-        textSetter( getPhone(prefix, displayValue) );
+    const onChangeSelection = (option) => {
+        onChange(getCombinedText(option, displayValue));
     };
 
     const onTextInput = (input) => {
-        textSetter( getPhone(selected, input) );
-    }
+        onChange(getCombinedText(selected, input));
+    };
 
     return (
         <InputBoxWrapper title={title}> 
@@ -211,14 +231,14 @@ export function RequiredPhoneInput({ title, value, textSetter }) {
                 <div className="prefix-container">
                     <RequiredSelector
                         options={allOptions}
-                        textSetter={onChangeSelection}
+                        onChange={onChangeSelection}
                         value={selected}
                     />
                 </div>
 
                 <div className="phone-text-container">
                     <RequiredInputBox
-                        textSetter={onTextInput}
+                        onChange={onTextInput}
                         value={displayValue}
                     />
                 </div>
@@ -227,66 +247,34 @@ export function RequiredPhoneInput({ title, value, textSetter }) {
     );
 }
 
-
-function getIDType(string, size) {
-    const reversed = string.split('').reverse().join('');
-    const numbers = reversed.slice(-size);
-    const prefix = numbers.split('').reverse().join('');
-    return prefix;
-}
-
-function getID(type, code) {
-    if (type === "N/A")
-        return code;
-
-    return type + code; 
-}
-
-export function RequiredIdInput({ title, value, textSetter }) {
-    const allOptions = getAllOptions(idTypes); 
-    const typeLength = 2;
-    
-    const possibleType = getIDType(value, typeLength);
-    const foundType = idTypes.find( (option) => option === possibleType);
-
-    const selected = foundType || "N/A";
-    const usesType = selected !== "N/A";
-    const displayValue = usesType ? value.slice(typeLength) : value;
-
-    const onChangeSelection = (type) => {
-        textSetter( getID(type, displayValue) );
-    };
-
-    const onTextInput = (input) => {
-        textSetter( getID(selected, input) );
-    }
-
+export function RequiredPhoneInput({ title, value, onChange }) {
     return (
-        <InputBoxWrapper title={title}> 
-            <div className="phone-input-container">
-                <div className="prefix-container">
-                    <RequiredSelector
-                        options={allOptions}
-                        textSetter={onChangeSelection}
-                        value={selected}
-                    />
-                </div>
-
-                <div className="phone-text-container">
-                    <RequiredInputBox
-                        textSetter={onTextInput}
-                        value={displayValue}
-                    />
-                </div>
-            </div>
-        </InputBoxWrapper>
+        <RequiredInputSelector
+            title={title}
+            onChange={onChange}
+            value={value}
+            options={phonePrefixes}
+            optionSize={4}
+        />
     );
 }
 
-export function RequiredInput({ type, title, onClick, value, options }) {
+export function RequiredIdInput({ title, value, onChange }) {
+    return (
+        <RequiredInputSelector
+            title={title}
+            onChange={onChange}
+            value={value}
+            options={idTypes}
+            optionSize={2}
+        />
+    );
+}
+
+export function RequiredInput({ type, title, onChange, value, options }) {
     const data = {
         title: title,
-        textSetter: onClick,
+        onChange: onChange,
         value: value,
         options: options
     };
