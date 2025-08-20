@@ -1,17 +1,16 @@
 import { Link } from 'react-router-dom';
 import MenuItem from './menu-item.js';
 
-import Logo from '../../../assets/logo.png';
-
 import { routes } from '../../../config/routes.js';
+
+import Logo from '../../../assets/logo.png';
+import './sidebar.css';
 
 function HomeButton() {
     return (
-        <li className="inicio-btn" >
-            <Link to={routes['Inicio']} >
-                <button className="menu-button">
-                        <span>Inicio</span>
-                </button>
+        <li className="home-button" >
+            <Link className="home-button-link" to={routes['Inicio'] } >
+                Inicio
             </Link>
         </li>
     ); 
@@ -41,9 +40,7 @@ function SideBarMenu({ dashboardItems, expandedIndex, onItemClick, onSubItemClic
 function LogoContainer() {
     return (
         <div className="logo-container">
-            <div className="logo-placeholder">
-                <img src={Logo} alt="Logo" className="logo-image" />
-            </div>
+            <img src={Logo} alt="Logo" className="logo-image" />
         </div>
     );
 }
