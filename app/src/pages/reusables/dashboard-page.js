@@ -5,12 +5,12 @@ import { dashboardItems } from '../../config/dashboard-items.js';
 import { getPageFromPath } from '../../config/pages.js';
 import './dashboard-page.css';
 import { Link } from 'react-router-dom';
-import '../../Visual-Resources/Logo.png';  
 import Popup from '../reusables/Pop-up.js'; 
 import { onLogout } from '../../utils/api.js';
 import { useTableChanger, useLateTableChanger } from "../../hooks/session.js";
 
 import MenuItem from "../../components/features/dashboard/menu-item.js";
+import Sidebar from "../../components/features/dashboard/sidebar.js";
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -19,62 +19,6 @@ function MenuToggleButton({ isSidebarOpen, onClick }) {
         <button className={ className } onClick={ onClick }>
             <Menu size={30} color="#000" />
         </button>
-    );
-}
-
-function SideBarMenu({ expandedIndex, setExpandedIndex }) {
-    const navigate = useNavigate();
-    const tableChanger = useLateTableChanger();
-    
-    const onSubClick = (subitem) => {
-        tableChanger(subitem.table); 
-        navigate(subitem.route);
-    };
-
-    return (
-        <nav className="menu">
-            <ul className="menu-items">
-                <li className="inicio-btn" >
-                    <Link to="/inicio" >
-                            <button className="menu-button">
-                                    <span>Inicio</span>
-                            </button>
-                    </Link>
-                </li>
-
-                {dashboardItems.map((menuItem, index) => (
-                    <MenuItem
-                        key={ menuItem.title }
-                        title={ menuItem.title }
-                        isExpanded={expandedIndex === index}
-                        onClick={() => setExpandedIndex((expandedIndex === index) ? null : index)}
-                        subitems={ menuItem.subItems } 
-                        onSubClick={ onSubClick }
-                    />
-                ))}
-            </ul>
-        </nav>
-    );
-}
-
-function Sidebar({ isSidebarOpen, expandedIndex, setExpandedIndex, onSidebarClick }) {
-    const statusString = (isSidebarOpen) ? "open" : "";
-    const className = "sidebar " + statusString;
-
-    return (
-        <aside className={className} onClick={ onSidebarClick }>
-            <div className="logo-container">
-                <div className="logo-placeholder">
-                <img src={require('../../Visual-Resources/Logo.png')} alt="Logo" className="logo-image" />
-                </div>
-            </div>
-
-            <div className="menu-title">
-                Asia Menú
-            </div>
-
-            <SideBarMenu expandedIndex={ expandedIndex } setExpandedIndex={setExpandedIndex} />
-        </aside>
     );
 }
 
@@ -107,6 +51,13 @@ const DashboardPage = ({ content }) => {
 
     const navigate = useNavigate();
     
+    const lateTableChanger = useLateTableChanger();
+    
+    const onMenuItemSubClick = (subitem) => {
+        lateTableChanger(subitem.table); 
+        navigate(subitem.route);
+    };
+    
     return (
         <div className="dashboard">
             <button className="logout-icon" onClick={handleOpenPopup}>
@@ -119,10 +70,12 @@ const DashboardPage = ({ content }) => {
             />
                 
             <Sidebar 
+                dashboardItems={ dashboardItems }
                 isSidebarOpen={ isSidebarOpen }
-                expandedIndex={ expandedIndex }
-                setExpandedIndex={ setExpandedIndex } 
                 onSidebarClick={ (event) => handleSidebarClick(event, setExpandedIndex) }
+                expandedMenuItemIndex={ expandedIndex }
+                onMenuItemClick={ (index) => setExpandedIndex(expandedIndex === index ? null : index) }
+                onMenuItemSubClick={ onMenuItemSubClick }
             />
 
             <main
