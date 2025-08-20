@@ -282,3 +282,31 @@ export function RequiredIdInput({ title, value, textSetter }) {
         </InputBoxWrapper>
     );
 }
+
+export function RequiredInput({ type, title, onClick, value, options }) {
+    const data = {
+        title: title,
+        textSetter: onClick,
+        value: value,
+        options: options
+    };
+
+    return( 
+        type === "text" ?
+            <RequiredInputBox {...data} /> :
+        type === "number" ? 
+            <RequiredNumberBox isDecimal={ true } {...data} /> :
+        type === "int" ? 
+            <RequiredNumberBox {...data} /> :
+        type === "combo" ?
+            <RequiredSelector {...data} /> :
+        type === "bool" ?
+            <RequiredBoolean {...data} /> :
+        type === "pseudocombo" ? 
+            <RequiredOptionalSelector {...data} /> : 
+        type === "phone" ?
+            <RequiredPhoneInput {...data} /> :
+        type === "id" ?
+            <RequiredIdInput {...data} /> : null
+    );
+}
