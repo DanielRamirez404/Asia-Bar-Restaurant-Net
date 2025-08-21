@@ -100,9 +100,7 @@ export function onLogin(e, username, password, navigate) {
     });
 }
 
-export function onLogout(e, navigate) {
-    e.preventDefault(); 
-    
+export function onLogout(navigate) {
     api_fetch({
         endpoint: "logout",
         onOk: (res) => { navigate(routes['Inicio de Sesion']); },

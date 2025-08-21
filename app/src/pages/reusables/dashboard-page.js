@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Menu, LogOut } from 'lucide-react'; 
@@ -5,12 +6,12 @@ import { dashboardItems } from '../../config/dashboard-items.js';
 import { getPageFromPath } from '../../config/pages.js';
 import './dashboard-page.css';
 import { Link } from 'react-router-dom';
-import Popup from '../reusables/Pop-up.js'; 
 import { onLogout } from '../../utils/api.js';
 import { useTableChanger, useLateTableChanger } from "../../hooks/session.js";
 
-import MenuItem from "../../components/features/dashboard/menu-item.js";
 import Sidebar from "../../components/features/dashboard/sidebar.js";
+
+import { questionAlert } from "../../utils/alerts.js";
 
 function MenuToggleButton({ isSidebarOpen, onClick }) {
     const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
@@ -57,10 +58,17 @@ const DashboardPage = ({ content }) => {
         lateTableChanger(subitem.table); 
         navigate(subitem.route);
     };
+
+    const onQuit = () =>
+        questionAlert(
+            "¿Desea Salir?",
+            "¿Está seguro de que desea salir? Su sesión será cerrada.",
+            () => onLogout(navigate)
+        );
     
     return (
         <div className="dashboard">
-            <button className="logout-icon" onClick={handleOpenPopup}>
+            <button className="logout-icon" onClick={onQuit}>
                 <LogOut size={24} color="#fff" />
             </button>
 
@@ -84,21 +92,6 @@ const DashboardPage = ({ content }) => {
             >
                 {content}
             </main>
-            
-            <Popup
-                message="¿Está seguro que desea salir?"
-                isOpen={isQuitPopupOpen}
-                onClose={handleClosePopup}
-            >
-                <form onSubmit={ (e) => onLogout(e, navigate) } className="popup-buttons">
-                    <button type="post" className="popup-confirm-button">
-                        Sí
-                    </button>
-                    <button className="popup-cancel-button" onClick={handleClosePopup}>
-                        No
-                    </button>
-                </form>
-            </Popup>
         </div>
     );
 };
