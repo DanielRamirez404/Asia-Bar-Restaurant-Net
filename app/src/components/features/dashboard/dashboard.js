@@ -2,13 +2,13 @@ import Sidebar from './sidebar.js';
 
 import { Menu, LogOut } from 'lucide-react'; 
 
+import './dashboard.css';
+
 function ToggleButton({ isSidebarOpen, onClick }) {
-    const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
+    const className = `toggle-button ${isSidebarOpen ? 'open-sidebar' : ''}`;
 
     return (
-        <button className={ className } onClick={ onClick }>
-            <Menu size={30} color="#000" />
-        </button>
+        <Menu className={className} onClick={onClick} />
     );
 }
 
