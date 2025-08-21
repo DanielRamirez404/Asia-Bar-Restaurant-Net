@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Dashboard from "../reusables/dashboard-page";
 import "./widgetsInicioCss/Mesa.css"
 import "./widgetsInicioCss/RecienAgregado.css"
 import "./widgetsInicioCss/MasVendidos.css"
