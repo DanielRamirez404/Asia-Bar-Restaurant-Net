@@ -31,7 +31,7 @@
     border-radius: 0.5rem; 
     padding: 0.5rem 1rem; 
     font-size: .9rem;
-    font-weight: 500; 
+    font-weight: bold; 
     color: var(--yellow-background-hue);    
     text-decoration: none;
     background: transparent;    
@@ -39,7 +39,10 @@
     cursor: pointer; 
     transition: background-color 0.2s;
         
-    text-align: end;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 .submenu-button:hover, .menu-button:hover { 
