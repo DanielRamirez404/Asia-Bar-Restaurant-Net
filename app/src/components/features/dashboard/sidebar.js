@@ -45,12 +45,12 @@ function LogoContainer() {
     );
 }
 
-export default function Sidebar({ dashboardItems, isSidebarOpen, onSidebarClick, expandedMenuItemIndex, onMenuItemClick, onMenuItemSubClick }) {
-    const statusString = (isSidebarOpen) ? "open" : "";
+export default function Sidebar({ dashboardItems, isOpen, onClick, expandedMenuItemIndex, onMenuItemClick, onMenuItemSubClick }) {
+    const statusString = (isOpen) ? "open" : "";
     const className = "sidebar " + statusString;
 
     return (
-        <aside className={className} onClick={onSidebarClick}>
+        <aside className={className} onClick={onClick}>
             <LogoContainer />
             <div className="menu-title">
                 Asia Menú

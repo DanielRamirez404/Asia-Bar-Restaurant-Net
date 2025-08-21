@@ -1,7 +1,6 @@
 import Swal from 'sweetalert2';
 import React, { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
-import { Menu, LogOut } from 'lucide-react'; 
 import { dashboardItems } from '../../config/dashboard-items.js';
 import { getPageFromPath } from '../../config/pages.js';
 import './dashboard-page.css';
@@ -9,19 +8,9 @@ import { Link } from 'react-router-dom';
 import { onLogout } from '../../utils/api.js';
 import { useTableChanger, useLateTableChanger } from "../../hooks/session.js";
 
-import Sidebar from "../../components/features/dashboard/sidebar.js";
+import Dashboard from "../../components/features/dashboard/dashboard.js";
 
 import { questionAlert } from "../../utils/alerts.js";
-
-function MenuToggleButton({ isSidebarOpen, onClick }) {
-    const className = `menu-toggle-button ${isSidebarOpen ? 'sidebar-open' : ''}`;
-
-    return (
-        <button className={ className } onClick={ onClick }>
-            <Menu size={30} color="#000" />
-        </button>
-    );
-}
 
 function handleSidebarClick(event, setExpandedIndex) {
     if (event.target.classList.contains('sidebar')) {
@@ -65,34 +54,21 @@ const DashboardPage = ({ content }) => {
             "¿Está seguro de que desea salir? Su sesión será cerrada.",
             () => onLogout(navigate)
         );
-    
+
     return (
-        <div className="dashboard">
-            <button className="logout-icon" onClick={onQuit}>
-                <LogOut size={24} color="#fff" />
-            </button>
-
-            <MenuToggleButton
-                isSidebarOpen={ isSidebarOpen }
-                onClick={ () => handleToggleSidebar(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) }
-            />
-                
-            <Sidebar 
-                dashboardItems={ dashboardItems }
-                isSidebarOpen={ isSidebarOpen }
-                onSidebarClick={ (event) => handleSidebarClick(event, setExpandedIndex) }
-                expandedMenuItemIndex={ expandedIndex }
-                onMenuItemClick={ (index) => setExpandedIndex(expandedIndex === index ? null : index) }
-                onMenuItemSubClick={ onMenuItemSubClick }
-            />
-
-            <main
-                className="dashboard-main"
-                onClick={() => handleDashboardEvent(isSidebarOpen, setIsSidebarOpen, setExpandedIndex)}
-            >
-                {content}
-            </main>
-        </div>
+        <Dashboard
+            isOpen={isSidebarOpen}
+            onToggle={ () => handleToggleSidebar(isSidebarOpen, setIsSidebarOpen, setExpandedIndex) }
+            onSidebarClick={ (event) => handleSidebarClick(event, setExpandedIndex) }
+            onMenuItemClick={ (index) => setExpandedIndex(expandedIndex === index ? null : index) }
+            onMenuItemSubClick={ onMenuItemSubClick }
+            onMainClick={() => handleDashboardEvent(isSidebarOpen, setIsSidebarOpen, setExpandedIndex)}
+            onQuit={onQuit}
+            dashboardItems={dashboardItems}
+            expandedIndex={expandedIndex}
+        >
+            {content}
+        </Dashboard>
     );
 };
 
