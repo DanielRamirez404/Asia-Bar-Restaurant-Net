@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import DashboardPage from "../../../pages/reusables/dashboard-page.js";
+import DashboardPage from '../../layout/dashboard-page.js';
 
 import Table from './table.js';
 
@@ -63,13 +63,9 @@ function TableContent({ fields, data, onEdit, onDelete }) {
 
 export default function TablePage({ title, fields, data, onEdit, onDelete, onNew, onSearch }) {
     return( 
-        <DashboardPage 
-            content={
-                <>
-                    <Header title={ title } onNew={ onNew } onSearch={ onSearch } />
-                    <TableContent fields={ fields } data={ data } onEdit={ onEdit } onDelete={ onDelete } />
-                </>
-            } 
-        />
+        <DashboardPage>
+            <Header title={ title } onNew={ onNew } onSearch={ onSearch } />
+            <TableContent fields={ fields } data={ data } onEdit={ onEdit } onDelete={ onDelete } />
+        </DashboardPage>
     );
 }

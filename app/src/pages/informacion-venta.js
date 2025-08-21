@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useOrderInfoChanger, useOrderClearer } from "../hooks/order.js";
 import { useFormFields } from "../hooks/form.js";
 
-import DashboardPage from "./reusables/dashboard-page.js";
+import DashboardPage from "../components/layout/dashboard-page.js";
 import Form from "../components/layout/form.js";
 
 import { SubmitButton } from '../components/ui/buttons.js';
@@ -34,24 +34,22 @@ export default function InformacionVenta() {
     const navigate = useNavigate();
     
     return (
-        <DashboardPage 
-            content={
-                <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger, clearer) } title={ "Información de Venta" } >
-                    <>
-                        <RequiredInputBox title={ "Documento de Identidad del Cliente" } onChange={ setters[0] } />
-                        <RequiredInputBox title={ "Nombre del Cliente" } onChange={ setters[1] } />
-                        <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } onChange={ setters[2] } value={ values[2] } />  
-                        
-                        {   
-                            (values[2] === saleOptions[2]) 
-                                ? <RequiredInputBox title={ "Dirección" } onChange={ setters[3] } />
-                                : null
-                        } 
+        <DashboardPage> 
+            <Form onSubmit={ (e) => onSubmitInfo(e, navigate, infoChanger, clearer) } title={ "Información de Venta" } >
+                <>
+                    <RequiredInputBox title={ "Documento de Identidad del Cliente" } onChange={ setters[0] } />
+                    <RequiredInputBox title={ "Nombre del Cliente" } onChange={ setters[1] } />
+                    <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } onChange={ setters[2] } value={ values[2] } />  
+                    
+                    {   
+                        (values[2] === saleOptions[2]) 
+                            ? <RequiredInputBox title={ "Dirección" } onChange={ setters[3] } />
+                            : null
+                    } 
 
-                        <SubmitButton text="Continuar" />
-                    </>
-                </Form>
-            } 
-        />
+                    <SubmitButton text="Continuar" />
+                </>
+            </Form>
+        </DashboardPage>
     );
 }

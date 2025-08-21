@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { Producto } from "./Widgets";
 import { Pedido as WidgethPedido } from "./Widgets" ;
 import { WidgetNota } from "./Widgets";
-import Dashboard from "../reusables/dashboard-page";
+import DashboardPage from "../../components/layout/dashboard-page.js";
 
 import { useNavigate } from "react-router-dom";
 import { categories, useCategory, useDishes, useProducts, useOrderChanger } from "../../hooks/order.js";
@@ -227,7 +227,9 @@ function ContenidoPedido() {
 
 const Pedido = () => {
     return (
-        <Dashboard content={ <ContenidoPedido/> } />
+        <DashboardPage>
+            <ContenidoPedido/>
+        </DashboardPage>
     );
 }
 

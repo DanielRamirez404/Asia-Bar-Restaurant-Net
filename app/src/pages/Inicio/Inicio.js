@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-import Dashboard from "../reusables/dashboard-page";
+import DashboardPage from "../../components/layout/dashboard-page.js";
 import "./Inicio.css"
 import { ModalInformacionDelProducto, ModalInicio, InformacionDelProductoModal } from "./modalesInicio";
 
@@ -143,7 +143,9 @@ function Inicio(){
 
 const Home = () => {
     return (
-        <Dashboard content={ <Inicio/> } />
+        <DashboardPage> 
+            <Inicio/> 
+        </DashboardPage>
     );
 }
 

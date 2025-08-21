@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Dashboard from "../reusables/dashboard-page";
+import DashboardPage from "../../components/layout/dashboard-page.js";
 import Swal from 'sweetalert2'; 
 import './confirmacionVenta.css';
 import './ticket.css';
@@ -212,7 +212,11 @@ function ContenidoConfirmacionVenta() {
 
 
 function ConfirmacionVenta(){
-    return (<Dashboard content={ <ContenidoConfirmacionVenta/> } />)
+    return (
+        <DashboardPage>
+            <ContenidoConfirmacionVenta/> 
+        </DashboardPage>
+    );
 }
 
 export default ConfirmacionVenta
