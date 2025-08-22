@@ -114,7 +114,7 @@ export function onLogin(e, username, password, navigate) {
         body: { username: username, password: password },
         onError: () => { errorAlert("Credenciales invalidas", "Sus credenciales no corresponden a ninguna sesión existente") },
         onOk: (res) => {
-            iconlessAlert("Bienvenida", `¡Bienvenido de vuelta!, ${username}`);
+            iconlessAlert("Bienvenida", `¡Bienvenido de vuelta, ${username}!`);
             navigate(routes['Inicio']);
         }
     });
