@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import DashboardPage from "../../components/layout/dashboard-page.js";
-import Swal from 'sweetalert2'; 
 import './confirmacionVenta.css';
 import './ticket.css';
 import { TarjetaProductoInformacionVenta, TarjetaNota, TarjetaDelivery } from './widgetsConfirmacionVenta';
@@ -10,6 +9,8 @@ import { generarTicket } from '../../utils/ticketImpresion';
 import { useOrder, useOrderClearer } from "../../hooks/order.js";
 
 import { getLastSaleID, onNewSale } from "../../utils/api.js";
+
+import { questionAlert, successAlert, infoAlert } from "../../utils/alerts.js";
 
 function printTicket(ticket, afterPrintDialog, id) {
     const printContent = `
@@ -75,27 +76,23 @@ function ContenidoConfirmacionVenta() {
 
 
     const afterPrintDialog = (id) => {
-        Swal.fire({
-                title: "Confirmación",
-                text: "¿Se ha completado la venta e impreso el ticket correctamente?",
-                showDenyButton: true,
-                icon: "question",
-                confirmButtonText: "Sí",
-                denyButtonText: "No"
-            }).then( (result) => {
-                if (result.isConfirmed) {
-                    onNewSale({
-                        id: id,
-                        clientID: order.clientID,
-                        type: order.type,
-                        total: total
-                    }, () => {} ); 
-                    orderClearer();
-                    navegar('/Inicio');
-                }                       
-            });
+        questionAlert(
+            "Confirmacion",
+            "¿Se ha completado la venta e impreso el ticket correctamente?",
+            () => {
+                onNewSale({
+                    id: id,
+                    clientID: order.clientID,
+                    type: order.type,
+                    total: total
+                }, () => {} ); 
+                orderClearer();
+                navegar('/Inicio');
+                successAlert("Venta Registrada", "Su venta ha sido exitosamente registrada en el sistema");
+            },
+            () => infoAlert("Información", "Si desea registrar la venta, imprima el ticket y confírmerla nuevamente")
+        ); 
     };
-   
 
     const imprimirTicket = async () => {
         const ultimaVenta = await getLastSaleID();
