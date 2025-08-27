@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./widgetsInicioCss/Mesa.css"
-import "./widgetsInicioCss/RecienAgregado.css"
+/*import "./widgetsInicioCss/RecienAgregado.css"*/
 import "./widgetsInicioCss/MasVendidos.css"
 import "./widgetsInicioCss/PedidoTicket.css"
 import {InformacionDelProductoModal, InformacionDelPedidoModal} from "./modalesInicio.js"
@@ -134,7 +134,7 @@ export function Mesa({nombre, onOpen}){
 
 
 // Esta funcion recibe "onOpen" como argumento, esta es una funcion que se encarga de abrir el modal cuando se le da click al boton de informacion. La idea seria que al darle al boton se ejecute otra funcion que busque los datos del producto en la base de datos y luego ejecute la funcion onOpen abriendo el modal conteniendo el componente "InformacionDelProductoModal" y a su ves este tendria en "datosPorducto" un diccionario que tiene los datos necesarios para rellenar el modal. 
-export function RecienAgregado({nombre, precio, categoria, onOpen}){
+/*export function RecienAgregado({nombre, precio, categoria, onOpen}){
 
    
 
@@ -155,7 +155,7 @@ export function RecienAgregado({nombre, precio, categoria, onOpen}){
 
    )
 
-}
+}*/
 
 
 

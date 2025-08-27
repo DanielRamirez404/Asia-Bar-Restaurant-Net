@@ -14,7 +14,7 @@
 
 .logout-icon {
     position: fixed; 
-    top: 2.75rem; 
+    top: 1.5rem; 
     right: 1rem; 
     background-color: var(--red-hue); 
     border: none; 
@@ -36,7 +36,7 @@
 .toggle-button {
     position: fixed;
     left: 1rem;
-    top: 2.75rem;
+    top: 1.5rem;
     z-index: 50;
     background-color: transparent; 
     border: none;
