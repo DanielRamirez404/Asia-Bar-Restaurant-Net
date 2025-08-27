@@ -47,7 +47,7 @@ function Inicio(){
 
                     </div>
 
-
+                    {/*
                     <div className="frameResumen" id="productosRecienAgregados">
                         <h3 className="tituloResumen">Recien Agregados</h3>
                         <div className="scrollFrameRecienAgregado">
@@ -63,7 +63,7 @@ function Inicio(){
 
                     </div>
 
-                   
+                   */}
 
                 </div>
             <div className="frameMesas">
