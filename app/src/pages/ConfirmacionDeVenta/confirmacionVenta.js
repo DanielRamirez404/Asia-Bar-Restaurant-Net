@@ -70,10 +70,8 @@ function ContenidoConfirmacionVenta() {
 
     const products = order.products;
         
-    const subtotal = products.reduce((sum, product) => sum + product[3] * product[1], 0);
-    const iva = subtotal * 0.16; // 16% de IVA
-    const total = subtotal + iva; 
-
+    // Calcular el total directo sin IVA
+    const total = products.reduce((sum, product) => sum + (product[3] * product[1]), 0);
 
     const afterPrintDialog = (id) => {
         questionAlert(
@@ -104,7 +102,7 @@ function ContenidoConfirmacionVenta() {
         
         const datosTicket = {
             empresa: 'RESTAURANTE ASIA',
-            direccion: 'Av. Principal #123',
+            direccion: order.type === 'Delivery' ? order.address : 'Av. Principal #123',
             telefono: '555-123-4567',
             fecha: fecha,
             hora: hora,
@@ -118,7 +116,6 @@ function ContenidoConfirmacionVenta() {
                 precio: product[1] * product[3],
                 precioUnitario: product[1] 
             })),
-            subtotal: subtotal,
             total: total,
             mensaje: order.note || '¡Gracias por su preferencia!'
         };
@@ -139,48 +136,43 @@ function ContenidoConfirmacionVenta() {
         
         <div className='contenedorResumenVenta'>
 
-        { 
-            (order.type !== "Delivery") ? null :
-                (<div className='frameResumenCliente' id='resumenCliente'>
-
-                    <div className='informacionCliente'>
-                            <span className='nombreApellido'>{ order.clientName }</span>
-                            <span className='datoCliente' id='ci'>{ order.clientID }</span>
-
-                            <span className='datoCliente' id='informacionDireccion'>{ order.address }</span>
-                           
-                    </div>
-
-                </div>)
-        }
-
-        <div className='frameResumenVenta' id='resumenVenta'>
-
-            <div className='scrollResumenProductos'>
-
-                { products.map((product, index) => (
-                    <TarjetaProductoInformacionVenta 
-                        key={`producto-${index}`}
-                        nombre={product[0]}
-                        cantidad={product[3]}
-                        precio={product[1]}
-                    />
-                ))}
-                
-                {order.note && (
-                    <TarjetaNota nota={ order.note } />
-                )}
-
-
+            <div className='frameResumenCliente' id='resumenCliente'>
+                <div className='informacionCliente'>
+                    {order.clientName && <span className='nombreApellido'>{order.clientName}</span>}
+                    {order.clientID && <span className='datoCliente' id='ci'>{order.clientID}</span>}
+                    {order.type === "Delivery" && order.address && (
+                        <span className='datoCliente' id='informacionDireccion'>{order.address}</span>
+                    )}
+                </div>
             </div>
 
-            <div className='totalVenta'>
+            <div className='frameResumenVenta' id='resumenVenta'>
 
-                <span className='totalTexto'>Total: ${total.toFixed(2)}</span>
+                <div className='scrollResumenProductos'>
+
+                    { products.map((product, index) => (
+                        <TarjetaProductoInformacionVenta 
+                            key={`producto-${index}`}
+                            nombre={product[0]}
+                            cantidad={product[3]}
+                            precio={product[1]}
+                        />
+                    ))}
+                    
+                    {order.note && (
+                        <TarjetaNota nota={ order.note } />
+                    )}
+
+
+                </div>
+
+                <div className='totalVenta'>
+
+                    <span className='totalTexto'>Total: ${total.toFixed(2)}</span>
+
+                </div>
 
             </div>
-
-        </div>
 
 
         </div>
