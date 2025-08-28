@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import './form.css';
 
-import { idTypes, phonePrefixes } from "../../config/tables.js";
+import { idTypes, phonePrefixes, cityOptions } from "../../config/tables.js";
 
 function InputBoxWrapper({ title, children }) {
     return(
@@ -193,6 +193,17 @@ export function RequiredOptionalSelector({ title, options, onChange, value }) {
     );
 }
 
+export function RequiredCityInput({ title, onChange, value }) {
+    return(
+        <RequiredOptionalSelector 
+            title={title}
+            onChange={onChange}
+            value={value}
+            options={cityOptions}
+        />        
+    );  
+}
+
 function getCombinedText(selectorText, inputText) {
     if (selectorText === "N/A")
         return inputText;
@@ -291,10 +302,33 @@ export function RequiredInput({ type, title, onChange, value, options }) {
         type === "bool" ?
             <RequiredBoolean {...data} /> :
         type === "pseudocombo" ? 
-            <RequiredOptionalSelector {...data} /> : 
+            <RequiredOptionalSelector {...data} /> :
+        type === "city" ?
+            <RequiredCityInput {...data} /> :
         type === "phone" ?
             <RequiredPhoneInput {...data} /> :
         type === "id" ?
             <RequiredIdInput {...data} /> : null
+    );
+}
+
+export function DisabledInputBox({ title, value }) {
+    return (
+        <InputBoxWrapper title={title} >
+            <input 
+                className="disabled-input"
+                type="text" 
+                id={ title } 
+                value={ value }
+                disabled
+            >
+            </input>
+        </InputBoxWrapper>
+    );
+}
+
+export function WarningText({ text }) {
+    return (
+        <p className="warning-text">{text}</p>
     );
 }

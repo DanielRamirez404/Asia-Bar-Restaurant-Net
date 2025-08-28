@@ -17,6 +17,21 @@
     transition: border-color .6s ease;
 }
 
+.disabled-input {
+    height: 30px;
+    border-radius: 30px;
+    
+    border:  solid var(--dark-gray-hue) 2px;
+    padding: 10px;
+
+    background-color: var(--gray-hue);
+    
+    font-size: 16px;
+    font-weight: bold;
+
+    transition: border-color .6s ease;
+}
+
 .simple-input::placeholder {
     color: var(--gray-hue);
     font-weight: bold;
@@ -85,4 +100,9 @@
 
 .phone-text-container {
     width: 75%;
+}
+
+.warning-text {
+    color: var(--red-hue);
+    font-weight: bold;
 }

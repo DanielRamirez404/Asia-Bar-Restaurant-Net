@@ -3,7 +3,7 @@ import Table from "../utils/table.js";
 export const fieldTypes = ["number", "int", "combo", "pseudocombo", "bool", "phone", "id", "text"];
 
 export const saleOptions = ["Comer Aquí", "Para llevar", "Delivery"];
-export const addressOptions = ["Barcelona", "Lechería", "Puerto la Cruz", "Guanta"];
+export const cityOptions = ["Barcelona", "Lechería", "Puerto la Cruz", "Guanta"];
 export const userRoles = ["Administrador", "Usuario"];
 
 export const phonePrefixes = ["0414", "0424", "0416", "0426", "0412", "0422"];
@@ -19,7 +19,7 @@ const salesFields = [
 const clientsFields = [
     { id: "Identificación" }, 
     { text: "Nombre" }, 
-    { pseudocombo: "Dirección", options: addressOptions }, 
+    { pseudocombo: "Dirección", options: cityOptions }, 
     { phone: "Teléfono" }
 ];
 
