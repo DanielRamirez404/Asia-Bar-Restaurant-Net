@@ -182,3 +182,22 @@ export const onNewSale = function(data, onDone) {
         onOk: (res) => onDone()
     });
 };
+
+export const findClient = async function(id) {
+    if (id == "")
+        return [];
+
+    let found = [];
+
+    await api_fetch({
+        endpoint: `clients/${id}`,
+        method: 'GET',
+        onError: () => {}
+    }).then(res => { 
+        found = res ? Object.values(res) : found; 
+        console.log(id); 
+        console.log(found); 
+    })
+
+    return found;
+}

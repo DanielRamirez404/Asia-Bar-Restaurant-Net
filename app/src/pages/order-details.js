@@ -13,17 +13,32 @@ import { RequiredIdInput, RequiredInputBox, RequiredSelector, DisabledInputBox }
 import { routes } from '../config/routes.js';
 import { saleOptions } from '../config/tables.js';
 
+import { findClient } from '../utils/api.js';
+
 export default function OrderDetails() {
     
     const onSubmit = useOnDetailsSubmit();
 
     const [clientId, setClientId] = useState("");
-    const [isNewClient, setNewClientStatus] = useState(true);
+
+    const [foundClient, setFoundClient] = useState([]);
+
+    const isNewClient = foundClient.length === 0;
+    const foundName = isNewClient ? "" : foundClient[1];
+    
+    useEffect(() => {
+
+        const fetchClient = async () => {
+            const found = await findClient(clientId);
+            setFoundClient(found);
+        };
+
+        fetchClient();
+
+    }, [clientId]);
     
     const [newClientValues, newClientSetters, getNewClientData] = useNewClientFormFields(clientId);
     const [typeValues, typeSetters] = useFormFields(2);
-
-    const foundName = "Sample Text";
 
     const detailsGetter = useDetailsGetter(clientId, isNewClient, newClientValues[0], foundName, typeValues[0], typeValues[1]);
     
