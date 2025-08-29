@@ -16,19 +16,14 @@ function NewClientInputs({ values, setters }) {
 
     return (
         <>
-            {inputs.map( (input, i) => {
-                console.log(input);
-                console.log(i);
-                return (<RequiredInput 
+            {inputs.map( (input, i) => 
+                <RequiredInput 
                     key={`${input.title}-${i}`}
                     type={input.type}
                     title={input.title}
                     value={values[i]}
                     onChange={setters[i]}
-                />)
-                    
-
-                }
+                />
             )}
         </>
     );

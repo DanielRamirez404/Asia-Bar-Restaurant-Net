@@ -1,7 +1,10 @@
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { getDishData } from '../utils/api.js';
+import { useFormFields } from './form.js';
+
+import { getDishData, onCreate } from '../utils/api.js';
+import { successAlert } from "../utils/alerts.js";
 
 import OrderContext from '../context/order.js';
 import Order from '../utils/order.js';
@@ -38,6 +41,21 @@ export function useOrderDetailsChanger() {
     return setNewDetails;
 }
 
+export function useNewClientFormFields(clientID) {
+    const [values, setters] = useFormFields(3);
+    
+    const getData = () => {
+        return {
+            iddocument: clientID,
+            name: values[0],
+            address: values[1],
+            phone: values[2]
+        }
+    }
+
+    return [values, setters, getData];
+}
+
 export function useOnDetailsSubmit() {
     const clearer = useOrderClearer();
 
@@ -48,8 +66,16 @@ export function useOnDetailsSubmit() {
     const navigate = useNavigate();
     const detailsChanger = useOrderDetailsChanger();
 
-    return (e, getOrderDetails, route) => {
+    return (e, isNewClient, getNewClientInfo, getOrderDetails, route) => {
         e.preventDefault();
+
+        if (isNewClient)
+            onCreate(
+                e, 
+                "clients", 
+                getNewClientInfo, 
+                () => successAlert("Cliente Agregado", "Los datos del cliente han sido correctamente registrados en el sistema")
+            );
 
         const details = getOrderDetails();
 

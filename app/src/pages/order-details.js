@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useOnDetailsSubmit, useDetailsGetter } from "../hooks/order.js";
+import { useOnDetailsSubmit, useDetailsGetter, useNewClientFormFields } from "../hooks/order.js";
 import { useFormFields } from "../hooks/form.js";
 
 import DashboardPage from "../components/layout/dashboard-page.js";
@@ -20,7 +20,7 @@ export default function OrderDetails() {
     const [clientId, setClientId] = useState("");
     const [isNewClient, setNewClientStatus] = useState(true);
     
-    const [newClientValues, newClientSetters] = useFormFields(3);
+    const [newClientValues, newClientSetters, getNewClientData] = useNewClientFormFields(clientId);
     const [typeValues, typeSetters] = useFormFields(2);
 
     const foundName = "Sample Text";
@@ -29,7 +29,7 @@ export default function OrderDetails() {
     
     return (
         <DashboardPage> 
-            <Form onSubmit={ (e) => onSubmit(e, detailsGetter, routes['Pedido']) } title={ "Información de Venta" } >
+            <Form onSubmit={ (e) => onSubmit(e, isNewClient, getNewClientData, detailsGetter, routes['Pedido']) } title={ "Información de Venta" } >
                 <>
                     <RequiredIdInput title={ "Documento de Identidad del Cliente" } onChange={ setClientId } value={ clientId } />
                   
