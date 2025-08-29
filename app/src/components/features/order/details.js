@@ -1,4 +1,7 @@
 import { RequiredInput, WarningText, DisabledInputBox } from '../../ui/form.js';
+import { SubmitButton } from '../../ui/buttons.js';
+
+import { saleOptions } from '../../../config/tables.js';
 
 function Input(title, type) {
     this.title = title;
@@ -42,4 +45,31 @@ export function ClientInfo({ isNewClient, foundName, values, setters }) {
     return isNewClient ? 
         <NewClientInfo values={values} setters={setters}/> : 
         <DisabledInputBox title="Nombre de Cliente Encontrado" value={foundName} />;
+}
+
+export function TypeInputs({ values, setters }) {
+    return(
+        <>
+            <RequiredInput type="combo" title="Tipo de Venta" options={saleOptions} onChange={setters[0]} value={values[0]} />  
+            
+            {   
+                (values[0] === saleOptions[2]) ? 
+                    <RequiredInput type="text" title="Dirección" onChange={ setters[1] } /> : null
+            } 
+        </>
+    );
+}
+
+export function OrderDetailsContent({ clientId, setClientId, isNewClient, foundName, newClientValues, newClientSetters, typeValues, typeSetters }) {
+    return (
+        <>
+            <RequiredInput type="id" title="Documento de Identidad del Cliente" value={clientId} onChange={setClientId} />
+
+            <ClientInfo isNewClient={isNewClient} foundName={foundName} values={newClientValues} setters={newClientSetters} />
+
+            <TypeInputs values={typeValues} setters={typeSetters} />
+
+            <SubmitButton text="Continuar" />
+        </>
+    );
 }

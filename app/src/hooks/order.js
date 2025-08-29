@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useFormFields } from './form.js';
 
-import { getDishData, onCreate } from '../utils/api.js';
+import { getDishData, onCreate, findClient } from '../utils/api.js';
 import { successAlert } from "../utils/alerts.js";
 
 import OrderContext from '../context/order.js';
@@ -96,6 +96,26 @@ export function useDetailsGetter(clientID, isNewClient, newName, foundName, type
             address: address
         }
     };
+}
+
+export function useClientFetchData(clientId) {
+    const [foundClient, setFoundClient] = useState([]);
+
+    const isNewClient = foundClient.length === 0;
+    const foundName = isNewClient ? "" : foundClient[1];
+    
+    useEffect(() => {
+
+        const fetchClient = async () => {
+            const found = await findClient(clientId);
+            setFoundClient(found);
+        };
+
+        fetchClient();
+
+    }, [clientId]);
+
+    return [isNewClient, foundName];
 }
 
 export function useCategory() {

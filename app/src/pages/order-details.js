@@ -1,41 +1,20 @@
 import { useState, useEffect } from 'react';
-import { useOnDetailsSubmit, useDetailsGetter, useNewClientFormFields } from "../hooks/order.js";
+import { useClientFetchData, useOnDetailsSubmit, useDetailsGetter, useNewClientFormFields } from "../hooks/order.js";
 import { useFormFields } from "../hooks/form.js";
 
 import DashboardPage from "../components/layout/dashboard-page.js";
 import Form from "../components/layout/form.js";
 
-import { ClientInfo } from "../components/features/order/details.js";
-
-import { SubmitButton } from '../components/ui/buttons.js';
-import { RequiredIdInput, RequiredInputBox, RequiredSelector, DisabledInputBox } from '../components/ui/form.js';
+import { OrderDetailsContent } from "../components/features/order/details.js";
 
 import { routes } from '../config/routes.js';
-import { saleOptions } from '../config/tables.js';
-
-import { findClient } from '../utils/api.js';
 
 export default function OrderDetails() {
     
     const onSubmit = useOnDetailsSubmit();
 
     const [clientId, setClientId] = useState("");
-
-    const [foundClient, setFoundClient] = useState([]);
-
-    const isNewClient = foundClient.length === 0;
-    const foundName = isNewClient ? "" : foundClient[1];
-    
-    useEffect(() => {
-
-        const fetchClient = async () => {
-            const found = await findClient(clientId);
-            setFoundClient(found);
-        };
-
-        fetchClient();
-
-    }, [clientId]);
+    const [isNewClient, foundName] = useClientFetchData(clientId);
     
     const [newClientValues, newClientSetters, getNewClientData] = useNewClientFormFields(clientId);
     const [typeValues, typeSetters] = useFormFields(2);
@@ -44,21 +23,17 @@ export default function OrderDetails() {
     
     return (
         <DashboardPage> 
-            <Form onSubmit={ (e) => onSubmit(e, isNewClient, getNewClientData, detailsGetter, routes['Pedido']) } title={ "Información de Venta" } >
-                <>
-                    <RequiredIdInput title={ "Documento de Identidad del Cliente" } onChange={ setClientId } value={ clientId } />
-                  
-                    <ClientInfo isNewClient={isNewClient} foundName={foundName} values={newClientValues} setters={newClientSetters} />
-
-                    <RequiredSelector title={ "Tipo de Venta" } options={ saleOptions } onChange={ typeSetters[0] } value={ typeValues[0] } />  
-                    
-                    {   
-                        (typeValues[0] === saleOptions[2]) ? 
-                            <RequiredInputBox title={ "Dirección" } onChange={ typeSetters[1] } /> : null
-                    } 
-
-                    <SubmitButton text="Continuar" />
-                </>
+            <Form onSubmit={ (e) => onSubmit(e, isNewClient, getNewClientData, detailsGetter, routes['Pedido']) } title="Información de Venta">
+                <OrderDetailsContent
+                    clientId={clientId}
+                    setClientId={setClientId}
+                    isNewClient={isNewClient}
+                    foundName={foundName}
+                    newClientValues={newClientValues}
+                    newClientSetters={newClientSetters}
+                    typeValues={typeValues}
+                    typeSetters={typeSetters}
+                /> 
             </Form>
         </DashboardPage>
     );
