@@ -5,7 +5,7 @@ import Login from "../pages/login";
 
 import Pedido from "../pages/PatallaPedido/Pedido";
 
-import InformacionVenta from "../pages/informacion-venta.js";
+import OrderDetails from "../pages/order-details.js";
 import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 
 import ControlPage from "../pages/control.js";
@@ -17,7 +17,7 @@ const components = [
     Home,
     Login,
     Pedido,
-    InformacionVenta,
+    OrderDetails,
     ConfirmacionVenta,
     ControlPage,
     ControlFormPage,

@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useContext, useRef } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import { getDishData } from '../utils/api.js';
 
@@ -26,15 +27,49 @@ export function useOrderClearer() {
     return () => setNewInfo();
 };
 
-export function useOrderInfoChanger(clientID, clientName, type, address) {
+export function useOrderDetailsChanger() {
     const { order, setOrder } = useContext(OrderContext);
 
-    const setNewInfo = async () => {
+    const setNewDetails = async (clientID, clientName, type, address) => {
         const newOrder = await new Order(clientID, clientName, type, address, order.products, order.note); 
         await setOrder(newOrder);
     };
     
-    return () => setNewInfo();
+    return setNewDetails;
+}
+
+export function useOnDetailsSubmit() {
+    const clearer = useOrderClearer();
+
+    useEffect(() => {
+        clearer();
+    }, []);
+
+    const navigate = useNavigate();
+    const detailsChanger = useOrderDetailsChanger();
+
+    return (e, getOrderDetails, route) => {
+        e.preventDefault();
+
+        const details = getOrderDetails();
+
+        detailsChanger(details.clientID, details.clientName, details.type, details.address);
+
+        navigate(route);
+    } 
+}
+
+export function useDetailsGetter(clientID, isNewClient, newName, foundName, type, address) {
+    const clientName = isNewClient ? newName : foundName;
+
+    return () => { 
+        return {
+            clientID: clientID,
+            clientName: clientName, 
+            type: type,
+            address: address
+        }
+    };
 }
 
 export function useCategory() {
