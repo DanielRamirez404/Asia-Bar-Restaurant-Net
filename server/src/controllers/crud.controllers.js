@@ -5,7 +5,6 @@ import { sendAllRegistersFrom, sendFromId, createRegister, deleteById, updateByI
 const tables = [
     new Table("Users", "Username", ["Username", "Type", "Password"]),
     new Table("Clients", "IdDocument", ["IdDocument", "Address", "Name", "Phone"]),
-    new Table("Sales", "ID", ["ID", "ClientIdDocument", "Type", "Total" ]),
     new Table("MainDish", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
     new Table("SideDish", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
     new Table("Product", "Name", ["Name", "Availability", "Price", "Category", "Description"]),
