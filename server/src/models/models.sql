@@ -41,9 +41,17 @@ CREATE TABLE Product (
 
 CREATE TABLE Sales (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    ClientIdDocument VARCHAR(20),
-    Type VARCHAR(20) NOT NULL,
-    Total FLOAT NOT NULL
+    ClientIdDocument VARCHAR(20) NOT NULL,
+    ClientName VARCHAR(50) NOT NULL,
+    Type VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE SaleDetails (
+    ID INT NOT NULL,
+    Name VARCHAR(50) NOT NULL,
+    Price FLOAT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (ID) REFERENCES Sales(ID) ON DELETE CASCADE
 );
 
 CREATE TABLE Deliverymen (
