@@ -1,19 +1,21 @@
 import TablePage from "../components/features/table/table-page.js";
 import useTable from "../hooks/useTable.js";
-import { useTableData, useActionButtons } from "../hooks/control.js";
-import { useHeaderButtons } from "../hooks/sales.js";
+import { useActionButtons } from "../hooks/control.js";
+import { useData, useHeaderButtons } from "../hooks/sales.js";
+
+const fields = ["N°", "ID. Cliente", "Cliente", "Tipo", "Total"];
 
 function SalesControl() {
     const table = useTable();
-    const [data, setData] = useTableData(table);
+    const [data, setData] = useData();
     const [onEdit, onDelete] = useActionButtons(table);
-    const [onNew, onSearch] = useHeaderButtons(table, setData)
+    const [onNew, onSearch] = useHeaderButtons(setData)
 
     return (
         <TablePage 
             key="sales-control" 
             title="Control de Ventas"
-            fields={table.fields} 
+            fields={fields} 
             data={data}
             onEdit={onEdit}
             onDelete={onDelete}
