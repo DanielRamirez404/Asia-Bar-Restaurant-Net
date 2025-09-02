@@ -11,6 +11,8 @@ import ConfirmacionVenta from "../pages/ConfirmacionDeVenta/confirmacionVenta";
 import ControlPage from "../pages/control.js";
 import ControlFormPage from '../pages/control-form.js';
 
+import Sales from "../pages/sales.js";
+
 import { names } from "./routes.js"
 
 const components = [
@@ -21,6 +23,7 @@ const components = [
     ConfirmacionVenta,
     ControlPage,
     ControlFormPage,
+    Sales,
 ]
 
 export const pages = components.map((Component, index) => 
