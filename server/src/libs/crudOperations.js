@@ -152,6 +152,36 @@ export async function updateSale(req, res) {
     });
 }
 
+export async function searchSale(req, res) {
+    handleQueryExecution(res, async (db) => {
+        const id = req.params.id;
+        const userQuery = ['%' + req.params.id + '%'];
+        
+        const hasID = id && id !== "";
+
+        const condition = hasID ? "WHERE CONCAT_WS(' ', s.ID, s.ClientIdDocument, s.ClientName, s.Type) LIKE ?" : "";
+
+        const dbQuery = `
+            SELECT 
+                s.ID, 
+                s.ClientIdDocument, 
+                s.ClientName, 
+                s.Type, 
+                Sum(sd.Quantity * sd.Price) As Total 
+            FROM 
+                Sales s 
+                INNER JOIN SaleDetails sd ON s.ID = sd.ID
+            ${condition}
+            GROUP BY
+                s.ID, s.ClientIdDocument, s.ClientName, s.Type
+        `;
+        
+        const [results, fields] = await db.execute(dbQuery, hasID ? userQuery : null);
+
+        res.status(200).json(results);
+    });
+}
+
 export async function getSaleSummary(req, res) {
     handleQueryExecution(res, async (db) => {
         const id = req.params.id;

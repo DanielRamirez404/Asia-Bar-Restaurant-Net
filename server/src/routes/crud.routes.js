@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getAllEndpointFunctions, getEndpointFunctions, postEndpointFunctions, deleteEndpointFunctions, putEndpointFunctions, searchEndpointFunctions } from '../controllers/crud.controllers.js';
-import { getLastSaleID, getSaleSummary, addSale, deleteSale, getDetailedSale, updateSale } from '../libs/crudOperations.js';
+import { getLastSaleID, getSaleSummary, addSale, deleteSale, getDetailedSale, updateSale, searchSale } from '../libs/crudOperations.js';
 import { validateToken } from '../middlewares/validateToken.js';
 
 const crudRouter = Router();
@@ -34,6 +34,8 @@ Object.entries(searchEndpointFunctions).forEach( ( [ table, endpointFunction ] )
 crudRouter.get("/sales", getSaleSummary);
 crudRouter.get("/sales/:id", getSaleSummary);
 crudRouter.get("/sales/details/:id", getDetailedSale);
+crudRouter.get("/search/sales/", searchSale);
+crudRouter.get("/search/sales/:id", searchSale);
 crudRouter.post("/sales", addSale);
 crudRouter.delete("/sales/:id", deleteSale);
 crudRouter.put("/sales/:id", updateSale);
