@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getTableData, onDelete } from '../utils/api.js';
+import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
 
-import { successAlert } from '../utils/alerts.js';
+import { successAlert, productsAlert } from '../utils/alerts.js';
 
 import { routes } from '../config/routes.js';
 
@@ -36,8 +36,24 @@ export function useHeaderButtons(setData) {
 }
 
 export function useActionButtons() {
-    const onInfo = () => {
+    const onInfo = (id) => {
+        
+        const loadAndshowAlert = async () => {
+            const fetched = await getRegisterData('sales/details', id); 
+            const products = fetched[4];
 
+            const productsArray = [];
+
+            products.map((product) => productsArray.push([
+                product.Name, 
+                Number.parseFloat(product.Price).toFixed(2),
+                product.Quantity
+            ]));
+
+            productsAlert(productsArray);
+        };
+
+        loadAndshowAlert();
     }; 
 
     const onDeleteClick = (id, hideRow) => {

@@ -1,5 +1,7 @@
 import Swal from 'sweetalert2';
 
+import './alerts.css';
+
 const redHue = "#D9534F";
 const greenHue = "#5CB85C";
 const textHue = "#333333";
@@ -52,4 +54,47 @@ export function successAlert(title, message) {
 
 export function errorAlert(title, message) {
     simpleAlert(title, message, "error", redHue);
+}
+
+function getRowHtmlString(row) {
+    let htmlString = "\t\t<tr>\n";
+    
+    row.map( (value) => {
+        htmlString += "\t\t\t<td>" + value + "</td>\n";
+    });
+    
+    htmlString += "\t\t</tr>\n";
+
+    return htmlString;
+}
+
+function getProductsTable(data) {
+    const fields = ["Nombre", "Precio Unitario", "Cantidad"];
+
+    let htmlString = "<table class=\"products-table\">\n";
+
+    htmlString += "\t<tr>\n";
+    
+    fields.map( (field) => {
+        htmlString += "\t\t<th>" + field + "</th>\n"
+    });
+
+    data.map( (row) => {
+        htmlString += getRowHtmlString(row);
+    });
+
+    htmlString += "\t</tr>\n";
+
+    htmlString += "</table>";
+
+    return htmlString;
+}
+
+export function productsAlert(data) {
+    Swal.fire({
+        title: "Productos",
+        html: getProductsTable(data),
+        confirmButtonText: "Vale",
+        confirmButtonColor: redHue,
+    });
 }

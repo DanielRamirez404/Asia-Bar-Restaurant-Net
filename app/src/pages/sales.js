@@ -15,6 +15,7 @@ function SalesControl() {
             fields={fields} 
             data={data}
             onDelete={onDelete}
+            onInfo={onInfo}
             onNew={onNew}
             onSearch={onSearch}
         />
