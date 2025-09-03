@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { getTableData, onDelete } from '../utils/api.js';
 
+import { successAlert } from '../utils/alerts.js';
+
 import { routes } from '../config/routes.js';
 
 export function useData() {
@@ -31,4 +33,19 @@ export function useHeaderButtons(setData) {
     };
 
     return [onNew, onSearch];
-} 
+}
+
+export function useActionButtons() {
+    const onInfo = () => {
+
+    }; 
+
+    const onDeleteClick = (id, hideRow) => {
+        onDelete('sales', () => id, () => {
+            successAlert("Completado", "Registro exitosamente eliminado");
+            hideRow();
+        });
+    };
+
+    return [onDeleteClick, onInfo];
+}
