@@ -1,28 +1,28 @@
 USE AsiaBarRestaurant;
 
 INSERT INTO Users (Username, Type, Password) VALUES
-('admin', 'admin', 'admin'),
-('paulo', 'admin', 'paulo2'),
-('anthony', 'admin', '4nTh0n1'),
-('crodriguez', 'cook', 'CarlosR_123'),
-('lopezj', 'cook', 'L0pezJ@lp'),
-('ana_t', 'cook', 'AnaT3ch!'),
-('sys_ro', 'cook', 'R0otTemp$'),
-('mcontreras', 'cashier', 'Mcont2024#'),
-('ventas1', 'cashier', 'Vta$2024'),
-('sergio_a', 'cashier', 'SergioA_789');
+('admin', 'Administrador', 'admin'),
+('paulo', 'Administrador', 'paulo2'),
+('anthony', 'Administrador', '4nTh0n1'),
+('crodriguez', 'Usuario', 'CarlosR_123'),
+('lopezj', 'Usuario', 'L0pezJ@lp'),
+('ana_t', 'Usuario', 'AnaT3ch!'),
+('sys_ro', 'Usuario', 'R0otTemp$'),
+('mcontreras', 'Usuario', 'Mcont2024#'),
+('ventas1', 'Usuario', 'Vta$2024'),
+('sergio_a', 'Usuario', 'SergioA_789');
 
 INSERT INTO Clients (IdDocument, Name, Address, Phone) VALUES
-('V-12345678', 'Carlos Mendoza', 'Barcelona', '+58 412-5551234'),
-('J-987654321', 'TecnoSoluciones CA', 'Puerto La Cruz', '+58 424-9876543'),
-('V-98765432', 'María Rodríguez', 'Lechería', '+58 416-7894561'),
-('G-123456789', 'Distribuidora Lider C.A', 'Guanta', '+58 414-1237890'),
-('V-20345678', 'José Pereira', 'Anaco', '+58 412-3698741'),
-('J-298765432', 'Farmacia Salud Total', 'Cantaura', '+58 426-6549873'),
-('V-18234567', 'Laura Sánchez', 'El Tigre', '+58 414-2589637'),
-('E-876543210', 'Constructora Horizonte', 'San Tomé', '+58 412-7418529'),
-('V-22456189', 'Roberto Díaz', 'Aragua de Barcelona', '+58 424-7531598'),
-('J-301234567', 'Inversiones Delta CA', 'Pariaguán', '+58 416-9517532');
+('V-12345678', 'Carlos Mendoza', 'Barcelona', '04125551234'),
+('J-987654321', 'TecnoSoluciones CA', 'Puerto La Cruz', '04249876543'),
+('V-98765432', 'María Rodríguez', 'Lechería', '04167894561'),
+('G-123456789', 'Distribuidora Lider C.A', 'Guanta', '04141237890'),
+('V-20345678', 'José Pereira', 'Anaco', '04123698741'),
+('J-298765432', 'Farmacia Salud Total', 'Cantaura', '04266549873'),
+('V-18234567', 'Laura Sánchez', 'El Tigre', '04142589637'),
+('E-876543210', 'Constructora Horizonte', 'San Tomé', '04127418529'),
+('V-22456189', 'Roberto Díaz', 'Aragua de Barcelona', '04247531598'),
+('J-301234567', 'Inversiones Delta CA', 'Pariaguán', '04169517532');
 
 INSERT INTO MainDish (Name, Availability, Price, Category, Description) VALUES
 ('Pabellón Criollo', 1, 12.99, 'Plato Nacional', 'Carne mechada, caraotas negras, arroz y tajadas'),
@@ -61,25 +61,49 @@ INSERT INTO Product (Name, Availability, Price, Category, Description) VALUES
 ('Tequila Líder', 1, 12.75, 'Licores', 'Tequila reposado mexicano');
 
 INSERT INTO Deliverymen (Name, Area, Availability, Phone) VALUES
-('Luis Martínez', 'Zona 1', 1, '+58 412-5551001'),
-('Carlos Rojas', 'Zona 1', 1, '+58 414-1234567'),
-('Pedro González', 'Zona 2', 1, '+58 416-7890123'),
-('José Rodríguez', 'Zona 2', 0, '+58 424-5557890'),  -- No disponible
-('Miguel Suárez', 'Zona 3', 1, '+58 426-3216549'),
-('Juan Contreras', 'Zona 3', 1, '+58 412-9876543'),
-('Ricardo Pérez', 'Zona 4', 1, '+58 414-5552468'),
-('Francisco Díaz', 'Zona 4', 1, '+58 416-1357924'),
-('Antonio Hernández', 'Zona 5', 1, '+58 424-8642097'),
-('Roberto Sánchez', 'Zona 5', 1, '+58 426-5551357');
+('Luis Martínez', 'Zona 1', 1, '04125551001'),
+('Carlos Rojas', 'Zona 1', 1, '04141234567'),
+('Pedro González', 'Zona 2', 1, '04167890123'),
+('José Rodríguez', 'Zona 2', 0, '04245557890'),  -- No disponible
+('Miguel Suárez', 'Zona 3', 1, '04263216549'),
+('Juan Contreras', 'Zona 3', 1, '04129876543'),
+('Ricardo Pérez', 'Zona 4', 1, '04145552468'),
+('Francisco Díaz', 'Zona 4', 1, '04161357924'),
+('Antonio Hernández', 'Zona 5', 1, '04248642097'),
+('Roberto Sánchez', 'Zona 5', 1, '04265551357');
 
-INSERT INTO Sales (ClientIdDocument, Type, Total) VALUES
-('V-12345678', 'Delivery', 28.50),
-('J-987654321', 'Pickup', 42.75),
-('V-98765432', 'In-store', 35.20),
-('G-123456789', 'Delivery', 67.30),
-('V-20345678', 'Delivery', 19.99),
-('J-298765432', 'Pickup', 55.45),
-('V-18234567', 'Delivery', 38.75),
-('E-876543210', 'Corporate', 120.50),
-('V-22456189', 'In-store', 27.80),
-('J-301234567', 'Delivery', 89.95);
+INSERT INTO Sales (ID, ClientIdDocument, ClientName, Type) VALUES
+(1, 'V-12345678', 'Carlos Mendoza', 'Por Aquí'),
+(2, 'J-987654321', 'TecnoSoluciones CA', 'Delivery'),
+(3, 'V-98765432', 'María Rodríguez', 'Delivery'),
+(4, 'G-123456789', 'Distribuidora Lider C.A', 'Por Aquí'),
+(5, 'V-20345678', 'José Pereira', 'Por Aquí'),
+(6, 'J-298765432', 'Farmacia Salud Total', 'Para llevar'),
+(7, 'V-18234567', 'Laura Sánchez', 'Para llevar'),
+(8, 'E-876543210', 'Constructora Horizonte', 'Delivery'),
+(9, 'V-22456189', 'Roberto Díaz', 'Para llevar'),
+(10, 'J-301234567', 'Inversiones Delta CA', 'Por Aquí');
+
+INSERT INTO SaleDetails (ID, Name, Price, Quantity) VALUES
+(1, 'Pabellón Criollo', 12.99, 2),
+(1, 'Cerveza Polar', 2.50, 3),
+(2, 'Asado Negro', 14.25, 1),
+(2, 'Yuca Frita', 2.99, 2),
+(2, 'Ron Santa Teresa', 7.99, 1),
+(3, 'Cachapa con Queso', 8.99, 3),
+(3, 'Jugo de Tamarindo', 3.25, 2),
+(4, 'Parrilla Mixta', 18.99, 2),
+(4, 'Tostones', 3.50, 2),
+(5, 'Pescado Frito al Limón', 15.50, 1),
+(5, 'Arroz con Coco', 4.25, 1),
+(6, 'Sancocho de Cangrejo', 16.75, 1),
+(6, 'Verduras Salteadas', 3.99, 2),
+(7, 'Hallaca Oriental', 9.50, 4),
+(7, 'Agua Mineral', 1.50, 3),
+(8, 'Carne en Vara', 13.50, 2),
+(8, 'Papas Chorreadas', 4.50, 1),
+(9, 'Hervido de Gallina', 11.75, 1),
+(9, 'Arepitas Dulces', 3.25, 3),
+(10, 'Flan de Coco', 4.50, 2),
+(10, 'Café Guayanés', 2.25, 3);
+
