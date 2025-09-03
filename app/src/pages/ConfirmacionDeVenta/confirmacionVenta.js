@@ -74,21 +74,33 @@ function ContenidoConfirmacionVenta() {
     const total = products.reduce((sum, product) => sum + (product[3] * product[1]), 0);
 
     const afterPrintDialog = (id) => {
+
+        const productsArray = [];
+        products.map( (product) => productsArray.push({
+            name: product[0],
+            price: product[1],
+            quantity: product[3],
+        }));
+
         questionAlert(
-            "Confirmacion",
+            "Confirmación",
             "¿Se ha completado la venta e impreso el ticket correctamente?",
             () => {
                 onNewSale({
                     id: id,
-                    clientID: order.clientID,
+                    clientId: order.clientID,
+                    clientName: order.clientName,
                     type: order.type,
-                    total: total
+                    products: productsArray
                 }, () => {} ); 
                 orderClearer();
                 navegar('/Inicio');
                 successAlert("Venta Registrada", "Su venta ha sido exitosamente registrada en el sistema");
             },
-            () => infoAlert("Información", "Si desea registrar la venta, imprima el ticket y confírmerla nuevamente")
+            () => {
+                console.log(products);
+                infoAlert("Información", "Si desea registrar la venta, imprima el ticket y confírmerla nuevamente");
+            }
         ); 
     };
 
