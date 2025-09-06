@@ -235,7 +235,6 @@ export async function getDetailedSale(req, res) {
 
 export async function deleteSale(req, res) {
     handleQueryExecution(res, async (db) => {
-
         let query = "DELETE FROM Sales WHERE ID = ?";
 
         const [results, fields] = await db.execute(query, [req.params.id]);
@@ -244,4 +243,29 @@ export async function deleteSale(req, res) {
             ? res.status(404).json({message: "No entry with such id"})
             : res.status(200).json({message: "Deleted Successfully!"});
     });
-} 
+}
+
+export async function getTopProducts(req, res) {
+    handleQueryExecution(res, async (db) => {
+        const query = `
+            SELECT 
+                Name,
+                Price,
+                Sum(Quantity) As TotalSales
+            FROM 
+                SaleDetails
+            GROUP BY
+                Name
+            ORDER BY 
+                TotalSales DESC
+        `;
+        
+        const [results, fields] = await db.execute(query);
+        
+        const topSize = Math.min(3, results.length);
+
+        const topProducts = results.filter((_, i) => i <= topSize);
+       
+        res.status(200).json(topProducts);
+    });
+}
