@@ -262,9 +262,9 @@ export async function getTopProducts(req, res) {
         
         const [results, fields] = await db.execute(query);
         
-        const topSize = Math.min(3, results.length);
+        const topSize = Math.min(5, results.length);
 
-        const topProducts = results.filter((_, i) => i <= topSize);
+        const topProducts = results.filter((_, i) => i < topSize);
        
         res.status(200).json(topProducts);
     });
