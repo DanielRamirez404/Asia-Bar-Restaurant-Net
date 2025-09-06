@@ -57,13 +57,13 @@ export function errorAlert(title, message) {
 }
 
 function getRowHtmlString(row) {
-    let htmlString = "\t\t<tr>\n";
+    let htmlString = "\t\t\t<tr>\n";
     
     row.map( (value) => {
-        htmlString += "\t\t\t<td>" + value + "</td>\n";
+        htmlString += "\t\t\t\t<td>" + value + "</td>\n";
     });
     
-    htmlString += "\t\t</tr>\n";
+    htmlString += "\t\t\t</tr>\n";
 
     return htmlString;
 }
@@ -72,21 +72,23 @@ function getProductsTable(data) {
     const fields = ["Nombre", "Precio Unitario", "Cantidad"];
 
     let htmlString = "<h3 class=\"alert-subtitle\">Productos</h3>\n";
-    htmlString += "<table class=\"products-table\">\n";
-
-    htmlString += "\t<tr>\n";
     
-    fields.forEach( (field) => {
-        htmlString += "\t\t<th>" + field + "</th>\n"
+    htmlString += "<div class=\"products-table-container\">";
+    
+    data.forEach((product) => {
+        const name = product[0];
+        const unitaryCost = product[1];
+        const quantity = product[2];
+
+        const getFieldHtml = (title, value) => "\t<p class=\"product-field\"><b>" + title + ":</b> " + value + "</p>\n";
+
+        htmlString += getFieldHtml("Nombre", name) + getFieldHtml("Costo Unitario", unitaryCost + "$") + getFieldHtml("Cantidad", quantity);
+       
+        htmlString += "\t<p class=\"total-field\">" + "<span>Total:</span> <span>" + unitaryCost * quantity + "$</span>" + "</p>\n";
     });
+        
 
-    data.forEach( (row) => {
-        htmlString += getRowHtmlString(row);
-    });
-
-    htmlString += "\t</tr>\n";
-
-    htmlString += "</table>";
+    htmlString += "</div>";
 
     return htmlString;
 }
