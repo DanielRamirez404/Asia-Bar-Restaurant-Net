@@ -73,16 +73,16 @@ INSERT INTO Deliverymen (Name, Area, Availability, Phone) VALUES
 ('Roberto Sánchez', 'Zona 5', 1, '04265551357');
 
 INSERT INTO Sales (ID, ClientIdDocument, ClientName, Type) VALUES
-(1, 'V-12345678', 'Carlos Mendoza', 'Por Aquí'),
+(1, 'V-12345678', 'Carlos Mendoza', 'Comer Aquí'),
 (2, 'J-987654321', 'TecnoSoluciones CA', 'Delivery'),
 (3, 'V-98765432', 'María Rodríguez', 'Delivery'),
-(4, 'G-123456789', 'Distribuidora Lider C.A', 'Por Aquí'),
+(4, 'G-123456789', 'Distribuidora Lider C.A', 'Comer Aquí'),
 (5, 'V-20345678', 'José Pereira', 'Por Aquí'),
 (6, 'J-298765432', 'Farmacia Salud Total', 'Para llevar'),
 (7, 'V-18234567', 'Laura Sánchez', 'Para llevar'),
 (8, 'E-876543210', 'Constructora Horizonte', 'Delivery'),
 (9, 'V-22456189', 'Roberto Díaz', 'Para llevar'),
-(10, 'J-301234567', 'Inversiones Delta CA', 'Por Aquí');
+(10, 'J-301234567', 'Inversiones Delta CA', 'Comer Aquí');
 
 INSERT INTO SaleDetails (ID, Name, Price, Quantity) VALUES
 (1, 'Pabellón Criollo', 12.99, 2),
