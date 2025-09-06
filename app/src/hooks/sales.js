@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
 
-import { successAlert, productsAlert } from '../utils/alerts.js';
+import { successAlert, saleAlert } from '../utils/alerts.js';
 
 import { routes } from '../config/routes.js';
 
@@ -40,6 +40,11 @@ export function useActionButtons() {
         
         const loadAndshowAlert = async () => {
             const fetched = await getRegisterData('sales/details', id); 
+            const client = {
+                id: fetched[1],
+                name: fetched[2]
+            };
+            
             const products = fetched[4];
 
             const productsArray = [];
@@ -50,7 +55,12 @@ export function useActionButtons() {
                 product.Quantity
             ]));
 
-            productsAlert(productsArray);
+            saleAlert(
+                fetched[0],
+                client,
+                fetched[3],
+                productsArray
+            );
         };
 
         loadAndshowAlert();

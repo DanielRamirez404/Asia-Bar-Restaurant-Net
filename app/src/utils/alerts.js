@@ -71,15 +71,16 @@ function getRowHtmlString(row) {
 function getProductsTable(data) {
     const fields = ["Nombre", "Precio Unitario", "Cantidad"];
 
-    let htmlString = "<table class=\"products-table\">\n";
+    let htmlString = "<h3 class=\"alert-subtitle\">Productos</h3>\n";
+    htmlString += "<table class=\"products-table\">\n";
 
     htmlString += "\t<tr>\n";
     
-    fields.map( (field) => {
+    fields.forEach( (field) => {
         htmlString += "\t\t<th>" + field + "</th>\n"
     });
 
-    data.map( (row) => {
+    data.forEach( (row) => {
         htmlString += getRowHtmlString(row);
     });
 
@@ -90,10 +91,41 @@ function getProductsTable(data) {
     return htmlString;
 }
 
-export function productsAlert(data) {
+export default class InfoField {
+    constructor(title, value) {
+        this.title = title; 
+        this.value = value;
+    }
+}
+
+function getSaleInfoHtml(client, type) {
+    let htmlString = "<h3 class=\"alert-subtitle\">Información del Pedido</h3>\n";
+
+    const data = [
+        new InfoField("Cliente", client.name),
+        new InfoField("Documento de Identidad", client.id),
+        new InfoField("Tipo de Pedido", type)
+    ];
+
+    htmlString += "\t<div class=\"info-fields-container\">";
+
+    data.forEach( (field) => {
+        htmlString += "\t\t<p><b>" + field.title + ":</b> " + field.value + "</p>\n";
+    });
+
+    htmlString += "\t</div>";
+
+    return htmlString;
+}
+
+function getSaleHtml(client, type, products) {
+    return getSaleInfoHtml(client, type) + getProductsTable(products);
+}
+
+export function saleAlert(number, client, type, products) {
     Swal.fire({
-        title: "Productos",
-        html: getProductsTable(data),
+        title: `Orden #${number}`,
+        html: getSaleHtml(client, type, products),
         confirmButtonText: "Vale",
         confirmButtonColor: redHue,
     });

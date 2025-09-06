@@ -1,3 +1,16 @@
+.alert-subtitle {
+    text-align: left;
+    margin: 15px 0px;
+}
+
+.info-fields-container p {
+    text-align: left;
+    color: var(--dark-gray-hue);
+    border-bottom: 1px solid var(--gray-hue);
+    font-size: 16px;
+    margin: 7px 0px;
+}
+
 .products-table {
     width: 100%;
     border-collapse: collapse;
