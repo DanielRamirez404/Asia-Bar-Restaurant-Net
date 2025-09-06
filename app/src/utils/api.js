@@ -201,3 +201,15 @@ export const findClient = async function(id) {
 
     return found;
 }
+
+
+export const getTopProducts = async function() {
+    let data = [];
+
+    await api_fetch({
+        endpoint: "top-products",
+        method: 'GET',
+    }).then(res => { data = res; });
+
+    return data;
+}

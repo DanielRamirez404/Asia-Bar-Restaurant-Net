@@ -1,54 +1,56 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import DashboardPage from "../../components/layout/dashboard-page.js";
 import "./Inicio.css"
 import { ModalInformacionDelProducto, ModalInicio, InformacionDelProductoModal } from "./modalesInicio";
 
 import { Mesa, RecienAgregado, MasVendidos, PedidoTicket } from "./widgetsInicio";
 
+import { getTopProducts } from '../../utils/api.js';
 
 
 function Inicio(){
 
-   
-    //Funcion para cargar el modal, la primea constante define si el modal esta visible o no y la segunda es el contenido del modal
+    const [topProducts, setTopProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const products = await getTopProducts();
+            setTopProducts(products);
+        };
+
+        fetchProducts();
+    }, []);
+
     const [ModalAbierto, setModalAbierto] = useState(false);
     const [modalContenido, setModalContenido] = useState("");
 
     const onOpen = (modalContenido) => {
-
         setModalContenido(modalContenido);
         setModalAbierto(true);
-
     };
-
 
     return (
     
     
-    <div className="mainInicio">
+        <div className="mainInicio">
+            {ModalAbierto && <ModalInicio contenido={modalContenido} onClose={()=> setModalAbierto(false)}/>}
 
-     
-    
+                    <div className="frameResumenes">
+                        <div className="framepedidos">
+                            <h2 className="tituloframe">Pedidos</h2>
+                            <div className="scrollframePedidos">
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
+                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
 
-        {ModalAbierto && <ModalInicio contenido={modalContenido} onClose={()=> setModalAbierto(false)}/>}
-
-
-                <div className="frameResumenes">
-                    <div className="framepedidos">
-                        <h2 className="tituloframe">Pedidos</h2>
-                        <div className="scrollframePedidos">
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                            <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-
+                            </div>
                         </div>
                     </div>
-                </div>
 
                 <div className="frameMesas">
                     <h2 className="tituloframe">Mesas</h2>
@@ -84,21 +86,22 @@ function Inicio(){
                 </div>
 
                 <div className="FrameMasVendidos">
-                    <h2 className= "tituloframe"> Mayor Vendidos</h2>
+                    <h2 className= "tituloframe">Más Vendidos</h2>
                     <div className="scrollframeMasVendidos">
-                        <MasVendidos nombre={"Nombre Producto 2"} precio={20} totalVentas={200} onOpen={onOpen}/>
-                        <MasVendidos nombre={"Nombre Producto 1"} precio={20} totalVentas={250} top={"top1"} onOpen={onOpen}/>
-                        <MasVendidos nombre={"Nombre Producto 3"} precio={20} totalVentas={120} onOpen={onOpen}/>
+
+                    { 
+                        topProducts.length <= 0 ? (<p>Sin Datos</p>) : (
+                            <>
+                                {topProducts.map((product) => (<MasVendidos nombre={product.Name} precio={product.Price} totalVentas={product.TotalSales} />))}
+                            </>
+                        )
+                    }
+
                     </div>
                 </div>
-            </div>
-    
-
-
-)
-
+        </div>
+    )
 }
-
 
 const Home = () => {
     return (

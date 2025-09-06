@@ -179,11 +179,9 @@ export function MasVendidos({top, nombre, srcImg, precio, totalVentas, onOpen}){
          
          
          <span className="nombreMasVendido">{nombre}</span>
-         <span className="precioMasVendido">{precio}$</span>
-         <span className="totalDeVentas">total de ventas: {totalVentas}</span>
-         <button className="btnInformacionMasVendidos" onClick={() => onOpen(<InformacionDelProductoModal datosProducto={DatosPrueba} />)}><Info size={20} /></button>
+         <span className="precioMasVendido">{Number.parseFloat(precio).toFixed(2)}$</span>
+         <span className="totalDeVentas">Total de Ventas: {totalVentas}</span>
          
-
 
       </div>
 
