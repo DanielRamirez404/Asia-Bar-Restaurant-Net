@@ -32,7 +32,7 @@ const dishFields = [
 
 const usersFields = [ 
     { text: "Usuario" }, 
-    { text: "Tipo" }, 
+    { combo: "Tipo", options: userRoles }, 
     { text: "Contraseña" }
 ];
 
