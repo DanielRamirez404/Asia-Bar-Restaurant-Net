@@ -19,7 +19,6 @@ CREATE TABLE MainDish (
     Name VARCHAR(50) PRIMARY KEY NOT NULL,
     Availability INT DEFAULT TRUE NOT NULL,
     Price FLOAT NOT NULL,
-    Category VARCHAR(50) NOT NULL,
     Description VARCHAR(100)
 );
 
@@ -27,7 +26,6 @@ CREATE TABLE SideDish (
     Name VARCHAR(50) PRIMARY KEY NOT NULL,
     Availability INT DEFAULT TRUE NOT NULL,
     Price FLOAT NOT NULL,
-    Category VARCHAR(50) NOT NULL,
     Description VARCHAR(100)
 );
 
@@ -35,7 +33,6 @@ CREATE TABLE Product (
     Name VARCHAR(50) PRIMARY KEY NOT NULL,
     Availability INT DEFAULT TRUE NOT NULL,
     Price FLOAT NOT NULL,
-    Category VARCHAR(50) NOT NULL,
     Description VARCHAR(100)
 );
 

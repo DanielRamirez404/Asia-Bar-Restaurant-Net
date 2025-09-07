@@ -24,41 +24,41 @@ INSERT INTO Clients (IdDocument, Name, Address, Phone) VALUES
 ('V-22456189', 'Roberto Díaz', 'Aragua de Barcelona', '04247531598'),
 ('J-301234567', 'Inversiones Delta CA', 'Pariaguán', '04169517532');
 
-INSERT INTO MainDish (Name, Availability, Price, Category, Description) VALUES
-('Pabellón Criollo', 1, 12.99, 'Plato Nacional', 'Carne mechada, caraotas negras, arroz y tajadas'),
-('Pescado Frito al Limón', 1, 15.50, 'Pescados', 'Pargo rojo frito con salsa de limón y ajo'),
-('Asado Negro', 1, 14.25, 'Carnes', 'Lomito de res guisado con papas y zanahorias'),
-('Hervido de Gallina', 1, 11.75, 'Sopas', 'Caldo espeso con gallina, verduras y tubérculos'),
-('Cachapa con Queso', 1, 8.99, 'Vegetariano', 'Cachapa de maíz con queso guayanés y mantequilla'),
-('Carne en Vara', 1, 13.50, 'Parrillas', 'Brochetas de res con vegetales a la parrilla'),
-('Pastel de Morrocoy', 0, 22.99, 'Especialidades', 'Tradicional de Oriente - Disponibilidad limitada'),
-('Sancocho de Cangrejo', 1, 16.75, 'Mariscos', 'Cangrejos frescos de Guanta con aliños'),
-('Hallaca Oriental', 1, 9.50, 'Tradicional', 'Variante anzoatiguense con pescado y ají dulce'),
-('Parrilla Mixta', 1, 18.99, 'Parrillas', 'Res, pollo y chorizo con guarnición');
+INSERT INTO MainDish (Name, Availability, Price, Description) VALUES
+('Pabellón Criollo', 1, 12.99, 'Carne mechada, caraotas negras, arroz y tajadas'),
+('Pescado Frito al Limón', 1, 15.50, 'Pargo rojo frito con salsa de limón y ajo'),
+('Asado Negro', 1, 14.25, 'Lomito de res guisado con papas y zanahorias'),
+('Hervido de Gallina', 1, 11.75, 'Caldo espeso con gallina, verduras y tubérculos'),
+('Cachapa con Queso', 1, 8.99, 'Cachapa de maíz con queso guayanés y mantequilla'),
+('Carne en Vara', 1, 13.50, 'Brochetas de res con vegetales a la parrilla'),
+('Pastel de Morrocoy', 0, 22.99, 'Tradicional de Oriente - Disponibilidad limitada'),
+('Sancocho de Cangrejo', 1, 16.75, 'Cangrejos frescos de Guanta con aliños'),
+('Hallaca Oriental', 1, 9.50, 'Variante anzoatiguense con pescado y ají dulce'),
+('Parrilla Mixta', 1, 18.99, 'Res, pollo y chorizo con guarnición');
 
-INSERT INTO SideDish (Name, Availability, Price, Category, Description) VALUES
-('Tostones', 1, 3.50, 'Fritos', 'Plátanos verdes fritos y aplastados'),
-('Arroz con Coco', 1, 4.25, 'Arroces', 'Arroz con leche de coco y ají dulce'),
-('Yuca Frita', 1, 2.99, 'Tubérculos', 'Yuca fresca frita con salsa de ajo'),
-('Ensalada de Aguacate', 1, 4.75, 'Ensaladas', 'Aguacate con cebolla y tomate fresco'),
-('Arepitas Dulces', 1, 3.25, 'Panadería', 'Pequeñas arepas de maíz endulzado'),
-('Papas Chorreadas', 1, 4.50, 'Guarniciones', 'Papas con salsa de cebolla y queso'),
-('Caraotas Negras', 1, 3.75, 'Legumbres', 'Frijoles negros guisados'),
-('Tajadas de Maduro', 1, 2.50, 'Fritos', 'Plátano maduro frito en láminas'),
-('Arroz Blanco', 1, 2.25, 'Arroces', 'Arroz blanco tradicional'),
-('Verduras Salteadas', 1, 3.99, 'Vegetales', 'Mezcla de vegetales frescos al wok');
+INSERT INTO SideDish (Name, Availability, Price, Description) VALUES
+('Tostones', 1, 3.50, 'Plátanos verdes fritos y aplastados'),
+('Arroz con Coco', 1, 4.25, 'Arroz con leche de coco y ají dulce'),
+('Yuca Frita', 1, 2.99, 'Yuca fresca frita con salsa de ajo'),
+('Ensalada de Aguacate', 1, 4.75, 'Aguacate con cebolla y tomate fresco'),
+('Arepitas Dulces', 1, 3.25, 'Pequeñas arepas de maíz endulzado'),
+('Papas Chorreadas', 1, 4.50, 'Papas con salsa de cebolla y queso'),
+('Caraotas Negras', 1, 3.75, 'Frijoles negros guisados'),
+('Tajadas de Maduro', 1, 2.50, 'Plátano maduro frito en láminas'),
+('Arroz Blanco', 1, 2.25, 'Arroz blanco tradicional'),
+('Verduras Salteadas', 1, 3.99, 'Mezcla de vegetales frescos al wok');
 
-INSERT INTO Product (Name, Availability, Price, Category, Description) VALUES
-('Cerveza Polar', 1, 2.50, 'Bebidas', 'Cerveza lager venezolana'),
-('Ron Santa Teresa', 1, 7.99, 'Licores', 'Ron añejo venezolano'),
-('Jugo de Tamarindo', 1, 3.25, 'Jugos', 'Refrescante jugo natural'),
-('Queso Telita', 1, 6.75, 'Lácteos', 'Queso fresco típico'),
-('Flan de Coco', 1, 4.50, 'Postres', 'Postre tradicional oriental'),
-('Café Guayanés', 1, 2.25, 'Bebidas Calientes', 'Café de la región oriental'),
-('Salsa Picante', 1, 1.99, 'Condimentos', 'Salsa de ají margariteño'),
-('Pan de Jamón', 1, 8.50, 'Panadería', 'Especialidad navideña'),
-('Agua Mineral', 1, 1.50, 'Agua', 'Agua embotellada 500ml'),
-('Tequila Líder', 1, 12.75, 'Licores', 'Tequila reposado mexicano');
+INSERT INTO Product (Name, Availability, Price, Description) VALUES
+('Cerveza Polar', 1, 2.50, 'Cerveza lager venezolana'),
+('Ron Santa Teresa', 1, 7.99, 'Ron añejo venezolano'),
+('Jugo de Tamarindo', 1, 3.25, 'Refrescante jugo natural'),
+('Queso Telita', 1, 6.75, 'Queso fresco típico'),
+('Flan de Coco', 1, 4.50, 'Postre tradicional oriental'),
+('Café Guayanés', 1, 2.25, 'Café de la región oriental'),
+('Salsa Picante', 1, 1.99, 'Salsa de ají margariteño'),
+('Pan de Jamón', 1, 8.50, 'Especialidad navideña'),
+('Agua Mineral', 1, 1.50, 'Agua embotellada 500ml'),
+('Tequila Líder', 1, 12.75, 'Tequila reposado mexicano');
 
 INSERT INTO Deliverymen (Name, Area, Availability, Phone) VALUES
 ('Luis Martínez', 'Zona 1', 1, '04125551001'),
