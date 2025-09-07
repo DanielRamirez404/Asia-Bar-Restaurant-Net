@@ -4,7 +4,7 @@ export const dashboardItems = [
     {
         title: "Control de Ventas",
         subItems: [ 
-            new DashboardSubItem('Informacion de Venta', 'Ventas', 'Nueva Venta'), 
+            new DashboardSubItem('Informacion de Venta', 'Menú', 'Nueva Venta'), 
             new DashboardSubItem('Control de Ventas', 'Menú', 'Control') 
         ] 
     },
