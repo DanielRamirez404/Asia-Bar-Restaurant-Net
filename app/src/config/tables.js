@@ -27,7 +27,6 @@ const dishFields = [
     { text: "Nombre" }, 
     { bool: "Disponibilidad" }, 
     { number: "Precio" }, 
-    { text: "Categoría" }, 
     { text: "Descripción" }
 ];
 
@@ -39,7 +38,7 @@ const usersFields = [
 
 const clientsDbFields = ["iddocument", "name", "address", "phone" ];
 const deliverymenDbFields = ["name", "area", "availability", "phone"];
-const dishDbFields = ["name", "availability", "price", "category", "description"];
+const dishDbFields = ["name", "availability", "price", "description"];
 const usersDbFields = [ "users", "type", "password" ];
 
 export const tables = [
