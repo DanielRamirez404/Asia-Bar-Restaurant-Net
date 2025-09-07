@@ -5,17 +5,25 @@ import { ModalInformacionDelProducto, ModalInicio, InformacionDelProductoModal }
 
 import { Mesa, RecienAgregado, MasVendidos, PedidoTicket } from "./widgetsInicio";
 
-import { getTopProducts } from '../../utils/api.js';
+import { getTopProducts, getTableData, getRegisterData } from '../../utils/api.js';
 
+import { saleAlert } from '../../utils/alerts.js';
 
 function Inicio(){
 
+    const [mostRecentProducts, setMostRecentProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const products = await getTopProducts();
-            setTopProducts(products);
+            const topFetched = await getTopProducts();
+            setTopProducts(topFetched);
+
+            const allProducts = await getTableData('sales');
+            
+            const mostRecent = allProducts.slice(-15).reverse();
+
+            setMostRecentProducts(mostRecent);
         };
 
         fetchProducts();
@@ -39,15 +47,47 @@ function Inicio(){
                         <div className="framepedidos">
                             <h2 className="tituloframe">Pedidos</h2>
                             <div className="scrollframePedidos">
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
-                                <PedidoTicket numeroPedido={1} nombreCompletoComprador={"Nombre Apellido"} totalProductos={3} totalTicket={65} tipoDePedido={"Delivery"} onOpen={onOpen}/>
 
+                                {
+                                    mostRecentProducts.map((product) => {
+
+                                        const showAlert = async () => {
+                                            const fetched = await getRegisterData(`sales/details`, product[0]);
+
+                                            const client = {
+                                                id: fetched[1],
+                                                name: fetched[2]
+                                            };
+                                            
+                                            const products = fetched[4];
+
+                                            const productsArray = [];
+
+                                            products.map((product) => productsArray.push([
+                                                product.Name, 
+                                                Number.parseFloat(product.Price).toFixed(2),
+                                                product.Quantity
+                                            ]));
+
+                                            saleAlert(
+                                                fetched[0],
+                                                client,
+                                                fetched[3],
+                                                productsArray
+                                            );
+                                        };
+
+                                        return (
+                                            <PedidoTicket 
+                                                numeroPedido={product[0]}
+                                                clientName={product[2]}
+                                                tipoDePedido={product[3]}
+                                                totalTicket={product[4]} 
+                                                onOpen={() => showAlert()}
+                                            />
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>

@@ -202,20 +202,19 @@ export function MasVendidos({top, nombre, srcImg, precio, totalVentas, onOpen}){
 
 
 
-export function PedidoTicket({numeroPedido, nombreCompletoComprador, totalProductos, tipoDePedido, totalTicket, onOpen}){
+export function PedidoTicket({numeroPedido, clientName, totalProductos, tipoDePedido, totalTicket, onOpen}){
 
    return (
 
       <div className="mainPedidoTicket"> {/* ticket visual en computadora, no la impresion*/}
 
          <div className="informacionPedidoTicket">
-            <h3 className="numeroDePedido">Pedido Nro: {numeroPedido}</h3>
-            <span className="NombreComprador">{nombreCompletoComprador}</span>
-            <span className="totalProductosTicket">cantidad productos: x{totalProductos}</span>
+            <h3 className="numeroDePedido">Pedido N° {numeroPedido}</h3>
+            <span className="NombreComprador">{clientName}</span>
             <span className="tipoDePedidoTicket">Tipo de pedido: {tipoDePedido}</span>
          </div>
 
-         <span className="totalTicket">{totalTicket}$</span>
+         <span className="totalTicket">{Number.parseFloat(totalTicket).toFixed(2)}$</span>
 
          <div className="contenedorBtnPedidoTicket">
             <button className="botonInformacionTicket" onClick={() => onOpen(<InformacionDelPedidoModal datosPedido={DatosPedidoPrueba}/>)}><Info size={20} /></button>
