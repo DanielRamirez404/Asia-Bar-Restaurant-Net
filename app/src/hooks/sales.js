@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
@@ -6,6 +6,24 @@ import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
 import { successAlert, saleAlert } from '../utils/alerts.js';
 
 import { routes } from '../config/routes.js';
+
+import SaleContext from "../context/sale.js";
+
+export function useSaleIDChanger() {
+    const {id, setID} = useContext(SaleContext);
+
+    return (value) => setID(value);
+}
+
+export function useSaleID() {
+    const {id, setID} = useContext(SaleContext);
+
+    return id;
+}
+
+export function useEditSaleFormFields() {
+
+}
 
 export function useData() {
     const [data, setData] = useState([]);
@@ -36,6 +54,9 @@ export function useHeaderButtons(setData) {
 }
 
 export function useActionButtons() {
+    const navigate = useNavigate();
+    const idChanger = useSaleIDChanger();
+    
     const onInfo = (id) => {
         
         const loadAndshowAlert = async () => {
@@ -73,5 +94,11 @@ export function useActionButtons() {
         });
     };
 
-    return [onDeleteClick, onInfo];
+    const onEdit = (id) => {
+        idChanger(id);
+        navigate(routes['Edicion de Venta']);
+    };
+
+    return [onDeleteClick, onInfo, onEdit];
 }
+
