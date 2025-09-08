@@ -12,6 +12,7 @@ import ControlPage from "../pages/control.js";
 import ControlFormPage from '../pages/control-form.js';
 
 import Sales from "../pages/sales.js";
+import EditOrder from "../pages/edit-order.js";
 
 import { names } from "./routes.js"
 
@@ -24,6 +25,7 @@ const components = [
     ControlPage,
     ControlFormPage,
     Sales,
+    EditOrder
 ]
 
 export const pages = components.map((Component, index) => 
