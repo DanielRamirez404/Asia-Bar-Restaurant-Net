@@ -1,5 +1,25 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { getRegisterData } from '../utils/api.js';
+
+export function usePairs() {
+    const [pairs, setPairs] = useState();
+
+    const push = useCallback((initialValue) => {
+        setPairs(prevPairs => {
+            const newPair = {
+                value: initialValue,
+                setter: (newValue) => {
+                    setPairs(currentPairs => currentPairs.map((pair, index) => 
+                        index === prevPairs.length ? { ...pair, value: newValue } : pair
+                    ));
+                }
+            };
+            return [...prevPairs, newPair];
+        });
+    }, []);
+
+    return Object.assign([...pairs], { push });
+}
 
 export function useFormFields(count) {
     const [fields, setFields] = useState(
