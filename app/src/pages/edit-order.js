@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useFormFields } from "../hooks/form.js";
-import { useSaleID } from "../hooks/sales.js";
+import { useSaleID, useEditSaleFormFields } from "../hooks/sales.js";
 
 import ControlForm from '../components/layout/control-form.js';
 
@@ -14,15 +14,21 @@ function ControlFormPage() {
 
     const id = useSaleID();
 
-    const [values, setters] = useFormFields(3);
+    const [values, setters, products] = useEditSaleFormFields();
     
     const navigate = useNavigate();
 
     return (
-        <ControlForm title={ `Venta #${id}` } onSubmit={ (e) => navigate(routes['Control de Ventas']) } > 
-            <RequiredInput type="id" title="Identifiación del Cliente" onChange={setters[0]} value={values[0]} /> 
+        <ControlForm title={ `Venta N°${id}` } onSubmit={ (e) => navigate(routes['Control de Ventas']) } > 
+            <RequiredInput type="id" title="Identificación del Cliente" onChange={setters[0]} value={values[0]} /> 
             <RequiredInput type="text" title="Nombre del Cliente" onChange={setters[1]} value={values[1]} /> 
             <RequiredInput type="combo" title="Tipo de Venta" onChange={setters[2]} value={values[2]} options={ saleOptions } /> 
+        
+            { 
+                products.map((product, i) => (
+                    <RequiredInput type="text" title={`Producto N°${i + 1}`} value={product.value[0]} onChange={product.setter} />
+                )) 
+            }
         </ControlForm>
     );
 };

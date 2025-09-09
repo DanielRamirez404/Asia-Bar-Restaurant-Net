@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
+import { useFormFields, usePairs } from './form.js';
 
+import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
 import { successAlert, saleAlert } from '../utils/alerts.js';
 
 import { routes } from '../config/routes.js';
@@ -22,7 +23,38 @@ export function useSaleID() {
 }
 
 export function useEditSaleFormFields() {
+    const id = useSaleID(); 
+    const saleProducts = usePairs();
+    const [values, setters] = useFormFields(3);
 
+    let areProductsInitialized = false;
+
+    useEffect(() => {
+        const getValues = async () => {
+            const fetched = await getRegisterData('sales/details', id); 
+
+            setters.forEach((setter, i) => setter(fetched[i + 1]));
+
+            const products = fetched[4];
+
+            const productsArray = [];
+
+            products.forEach((product) => productsArray.push([
+                product.Name, 
+                Number.parseFloat(product.Price).toFixed(2),
+                product.Quantity
+            ]));
+
+            if (!areProductsInitialized)
+                productsArray.forEach((product) => saleProducts.push(product) );
+
+            areProductsInitialized = true;
+        };
+        
+        getValues();
+    }, []);
+
+    return [values, setters, saleProducts];
 }
 
 export function useData() {
@@ -70,7 +102,7 @@ export function useActionButtons() {
 
             const productsArray = [];
 
-            products.map((product) => productsArray.push([
+            products.forEach((product) => productsArray.push([
                 product.Name, 
                 Number.parseFloat(product.Price).toFixed(2),
                 product.Quantity
