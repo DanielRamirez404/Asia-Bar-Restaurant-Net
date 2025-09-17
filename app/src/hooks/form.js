@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { getRegisterData } from '../utils/api.js';
 
 export function usePairs() {
-    const [pairs, setPairs] = useState();
+    const [pairs, setPairs] = useState([]);
 
     const push = useCallback((initialValue) => {
         setPairs(prevPairs => {
@@ -18,7 +18,14 @@ export function usePairs() {
         });
     }, []);
 
-    return Object.assign([...pairs], { push });
+    const deleteIf = useCallback((predicate) => {
+        setPairs(prevPairs => {
+            const newPairs = prevPairs.filter((pair, index) => !predicate(pair.value, index));
+            return newPairs;
+        });
+    }, []);
+
+    return Object.assign([...pairs], { push, deleteIf });
 }
 
 export function useFormFields(count) {
