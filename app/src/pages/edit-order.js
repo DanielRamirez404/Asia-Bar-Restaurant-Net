@@ -10,12 +10,14 @@ import { saleOptions } from '../config/tables.js';
 
 import { routes } from '../config/routes.js';
 
+import { EditProductsSection } from '../components/features/order/edit.js';
+
 function ControlFormPage() {
 
     const id = useSaleID();
 
     const [values, setters, products] = useEditSaleFormFields();
-    
+
     const navigate = useNavigate();
 
     return (
@@ -24,11 +26,8 @@ function ControlFormPage() {
             <RequiredInput type="text" title="Nombre del Cliente" onChange={setters[1]} value={values[1]} /> 
             <RequiredInput type="combo" title="Tipo de Venta" onChange={setters[2]} value={values[2]} options={ saleOptions } /> 
         
-            { 
-                products.map((product, i) => (
-                    <RequiredInput type="text" title={`Producto N°${i + 1}`} value={product.value[0]} onChange={product.setter} />
-                )) 
-            }
+            <EditProductsSection products={products} />
+            
         </ControlForm>
     );
 };
