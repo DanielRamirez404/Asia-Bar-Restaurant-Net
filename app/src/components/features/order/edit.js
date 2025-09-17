@@ -1,3 +1,5 @@
+import { Trash, CirclePlus } from "lucide-react";
+
 import './edit.css';
 
 function ProductInput({name, value, onChange, type = "text"}) {
@@ -28,6 +30,7 @@ function ProductCard({ name, cost, quantity }) {
             <ProductInput name={"Nombre"} value={name.value} onChange={name.setter} />
             <ProductInput name={"Costo ($)"} type="number" value={cost.value} onChange={cost.setter} />
             <ProductInput name={"Cant."} type="int" value={quantity.value} onChange={quantity.setter} />
+            <Trash className="trash-icon" size={25} color="#5a5a5a" onClick={() => alert("wow") } /> 
         </div>
     );
 }
@@ -58,6 +61,9 @@ export function EditProductsSection({ products }) {
                     );
                 })
             }
+            <div className="plus-icon-container">
+                <CirclePlus className="plus-icon" size={25} color="#5a5a5a"  onClick={() => alert("add")} /> 
+            </div> 
         </div>
     );
 }

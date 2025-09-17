@@ -20,10 +20,26 @@
     margin: 7px 0px;
 }
 
+
+.plus-icon-container {
+    margin-top: 15px; 
+    display: flex;
+    justify-content: end;
+}
+
+.plus-icon {
+    cursor: pointer;
+}
+
 .product-card {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
+}
+
+.trash-icon {
+    margin-bottom: 1.5px;
+    cursor: pointer;
 }
 
 .product-input-container {
@@ -40,7 +56,7 @@
 }
 
 .product-input-container:nth-child(1) > .product-input {
-    width: 175px;
+    width: 150px;
 }
 
 .product-input-container:nth-child(2) > .product-input {
