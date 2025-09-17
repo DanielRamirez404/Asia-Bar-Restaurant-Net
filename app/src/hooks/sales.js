@@ -54,7 +54,11 @@ export function useEditSaleFormFields() {
         getValues();
     }, []);
 
-    return [values, setters, saleProducts];
+    const onAddProduct = () => saleProducts.push(["", 0, 0]);
+
+    const onDeleteProduct = (name) => saleProducts.deleteIf((product) => product[0] === name);
+
+    return [values, setters, saleProducts, onAddProduct, onDeleteProduct];
 }
 
 export function useData() {

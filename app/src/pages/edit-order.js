@@ -16,7 +16,7 @@ function ControlFormPage() {
 
     const id = useSaleID();
 
-    const [values, setters, products] = useEditSaleFormFields();
+    const [values, setters, products, onAdd, onDelete] = useEditSaleFormFields();
 
     const navigate = useNavigate();
 
@@ -26,7 +26,11 @@ function ControlFormPage() {
             <RequiredInput type="text" title="Nombre del Cliente" onChange={setters[1]} value={values[1]} /> 
             <RequiredInput type="combo" title="Tipo de Venta" onChange={setters[2]} value={values[2]} options={ saleOptions } /> 
         
-            <EditProductsSection products={products} />
+            <EditProductsSection 
+                products={products} 
+                onAdd={onAdd}
+                onDelete={onDelete}
+            />
             
         </ControlForm>
     );
