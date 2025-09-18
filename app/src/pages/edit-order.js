@@ -12,7 +12,7 @@ import { routes } from '../config/routes.js';
 
 import { EditProductsSection } from '../components/features/order/edit.js';
 
-function ControlFormPage() {
+function EditOrder() {
 
     const id = useSaleID();
 
@@ -25,10 +25,8 @@ function ControlFormPage() {
 
     const onContinue = useOnEditContinue(id, client, values[2], products);
 
-    const navigate = useNavigate();
-
     return (
-        <ControlForm title={ `Venta N°${id}` } onSubmit={onContinue} > 
+        <ControlForm title={`Venta N°${id}`} backRoute={routes['Control de Ventas']} onSubmit={onContinue} > 
             <RequiredInput type="id" title="Identificación del Cliente" onChange={setters[0]} value={values[0]} /> 
             <RequiredInput type="text" title="Nombre del Cliente" onChange={setters[1]} value={values[1]} /> 
             <RequiredInput type="combo" title="Tipo de Venta" onChange={setters[2]} value={values[2]} options={ saleOptions } /> 
@@ -43,4 +41,4 @@ function ControlFormPage() {
     );
 };
 
-export default ControlFormPage;
+export default EditOrder;
