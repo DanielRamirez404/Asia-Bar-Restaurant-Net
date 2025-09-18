@@ -183,6 +183,15 @@ export const onNewSale = function(data, onDone) {
     });
 };
 
+export const onUpdateSale = function(id, data, onDone) {
+    api_fetch({
+        endpoint: `sales/${id}`,
+        method: 'PUT',
+        body: data,
+        onOk: (res) => onDone()
+    });
+}
+
 export const findClient = async function(id) {
     if (id == "")
         return [];

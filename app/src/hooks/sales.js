@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useFormFields, usePairs } from './form.js';
 
-import { getTableData, getRegisterData, onDelete } from '../utils/api.js';
+import { getTableData, getRegisterData, onDelete, onUpdateSale } from '../utils/api.js';
 import { successAlert, saleAlert } from '../utils/alerts.js';
 
 import { routes } from '../config/routes.js';
@@ -59,6 +59,36 @@ export function useEditSaleFormFields() {
     const onDeleteProduct = (name) => saleProducts.deleteIf((product) => product[0] === name);
 
     return [values, setters, saleProducts, onAddProduct, onDeleteProduct];
+}
+
+export function useOnEditContinue(id, client, type, products) {
+    const navigate = useNavigate();
+
+    const productsArray = products.reduce((array, { value }) => [...array, {
+        name: value[0],
+        price: value[1],
+        quantity: value[2],
+    }], []);
+    
+
+    const data = {
+        clientId: client.id,
+        clientName: client.name,
+        type: type,
+        products: productsArray || []
+    };
+
+    return (e) => {
+        e.preventDefault();
+        onUpdateSale(
+            id, 
+            data, 
+            () => {
+                successAlert("Completado", "Se ha actualizado la venta correctamente");
+                navigate(routes['Control de Ventas']);
+            }
+        );
+    };
 }
 
 export function useData() {

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useFormFields } from "../hooks/form.js";
-import { useSaleID, useEditSaleFormFields } from "../hooks/sales.js";
+import { useSaleID, useEditSaleFormFields, useOnEditContinue } from "../hooks/sales.js";
 
 import ControlForm from '../components/layout/control-form.js';
 
@@ -18,10 +18,17 @@ function ControlFormPage() {
 
     const [values, setters, products, onAdd, onDelete] = useEditSaleFormFields();
 
+    const client = {
+        id: values[0],
+        name: values[1]
+    };
+
+    const onContinue = useOnEditContinue(id, client, values[2], products);
+
     const navigate = useNavigate();
 
     return (
-        <ControlForm title={ `Venta N°${id}` } onSubmit={ (e) => navigate(routes['Control de Ventas']) } > 
+        <ControlForm title={ `Venta N°${id}` } onSubmit={onContinue} > 
             <RequiredInput type="id" title="Identificación del Cliente" onChange={setters[0]} value={values[0]} /> 
             <RequiredInput type="text" title="Nombre del Cliente" onChange={setters[1]} value={values[1]} /> 
             <RequiredInput type="combo" title="Tipo de Venta" onChange={setters[2]} value={values[2]} options={ saleOptions } /> 
