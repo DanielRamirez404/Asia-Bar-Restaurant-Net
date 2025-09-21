@@ -165,6 +165,10 @@ export function useActionButtons() {
         navigate(routes['Edicion de Venta']);
     };
 
-    return [onDeleteClick, onInfo, onEdit];
+    const onTicket = (id) => {
+        console.log("LOL");
+    };
+
+    return [onDeleteClick, onInfo, onEdit, onTicket];
 }
 
