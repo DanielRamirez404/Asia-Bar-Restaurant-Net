@@ -47,7 +47,7 @@ const dividirEnLineas = (texto, maxCaracteres) => {
   return lineas;
 };
 
-export const generarTicket = (datos) => {
+export const generateTicket = (datos) => {
   // Caracteres máximos por línea (para impresora de 58mm)
   const MAX_CHARS = 32;
   
@@ -193,8 +193,8 @@ export const generarTicket = (datos) => {
   // Línea divisoria antes del total
   ticket.push(lineaDivisoria('-'));
   
-  // Total
-  const totalFormateado = `$ ${datos.total.toFixed(2)}`;
+  const total = datos.items.reduce((sum, item) => sum + item.cantidad * item.precio, 0); 
+  const totalFormateado = `$ ${total.toFixed(2)}`;
   ticket.push(alinearLados('TOTAL:', totalFormateado));
   
   // Línea divisoria después del total
