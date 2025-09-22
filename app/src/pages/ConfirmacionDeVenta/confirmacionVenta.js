@@ -12,65 +12,14 @@ import { getLastSaleID, onNewSale } from "../../utils/api.js";
 
 import { questionAlert, successAlert, infoAlert } from "../../utils/alerts.js";
 
-function printTicket(ticket, afterPrintDialog, id) {
-    const printContent = `
-        <div id="ticket-print-content">
-            <div class="ticket-container">
-                <pre>${ticket}</pre>
-            </div>
-        </div>
-    `;
-    
-    document.body.insertAdjacentHTML('beforeend', printContent);
-    
-    let reallyPrinted = false;
-    const printMediaQuery = window.matchMedia('print');
-    
-    const cleanup = () => {
-        const printElement = document.getElementById('ticket-print-content');
-        if (printElement) printElement.remove();
-        window.removeEventListener('afterprint', afterPrint);
-        printMediaQuery.removeEventListener('change', handlePrintChange);
-    };
-
-    const handlePrintChange = (mql) => {
-        if (mql.matches) {
-            reallyPrinted = true;
-        } else if (reallyPrinted) {
-            cleanup();
-        }
-    };
-
-    const afterPrint = () => {
-        afterPrintDialog(id);
-        cleanup();
-    };
-
-    printMediaQuery.addEventListener('change', handlePrintChange);
-    window.addEventListener('afterprint', afterPrint);
-    
-    const timeoutId = setTimeout(() => {
-        if (!reallyPrinted) cleanup();
-    }, 30000);
-    
-    try {
-        window.print();
-    } catch (error) {
-        console.error('Print error:', error);
-        cleanup();
-        clearTimeout(timeoutId);
-    }
-}
+import { printOrderTicket } from '../../utils/ticket.js';
 
 function ContenidoConfirmacionVenta() {
-
-
     const order = useOrder();
     const orderClearer = useOrderClearer();
 
     const products = order.products;
         
-    // Calcular el total directo sin IVA
     const total = products.reduce((sum, product) => sum + (product[3] * product[1]), 0);
 
     const afterPrintDialog = (id) => {
@@ -98,7 +47,6 @@ function ContenidoConfirmacionVenta() {
                 successAlert("Venta Registrada", "Su venta ha sido exitosamente registrada en el sistema");
             },
             () => {
-                console.log(products);
                 infoAlert("Información", "Si desea registrar la venta, imprima el ticket y confírmerla nuevamente");
             }
         ); 
@@ -108,33 +56,32 @@ function ContenidoConfirmacionVenta() {
         const ultimaVenta = await getLastSaleID();
         const id = ultimaVenta + 1;
 
-        const ahora = new Date();
-        const fecha = ahora.toLocaleDateString('es-MX');
-        const hora = ahora.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+        const now = new Date();
+        const date = now.toLocaleDateString('es-MX');
+        const time = now.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
         
-        const datosTicket = {
-            empresa: 'RESTAURANTE ASIA',
-            direccion: order.type === 'Delivery' ? order.address : 'Av. Principal #123',
-            telefono: '555-123-4567',
-            fecha: fecha,
-            hora: hora,
-            numeroTicket: id,
-            tipoVenta: order.type,
-            clienteNombre: order.clientName,
-            clienteId: order.clientID,
-            items: products.map(product => ({
+        const data = {
+            id: id,
+            type: order.type,
+            address: order.address,
+            note: order.note,
+            client: {
+                id: order.clientID,
+                name: order.clientName,
+            },
+            clock: {
+                date: date,
+                time: time,
+            },
+            products: products.map(product => ({
                 nombre: product[0], 
                 cantidad: product[3],
                 precio: product[1] * product[3],
                 precioUnitario: product[1] 
             })),
-            total: total,
-            mensaje: order.note || '¡Gracias por su preferencia!'
         };
 
-        const ticket = generarTicket(datosTicket);
-        
-        printTicket(ticket, afterPrintDialog, id); 
+        printOrderTicket(data, () => afterPrintDialog(id)); 
     };
 
     const navegar = useNavigate()
