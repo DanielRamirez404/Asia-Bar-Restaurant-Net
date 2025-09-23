@@ -5,6 +5,8 @@ import { ModalInformacionDelProducto, ModalInicio, InformacionDelProductoModal }
 
 import { Mesa, RecienAgregado, MasVendidos, PedidoTicket } from "./widgetsInicio";
 
+import { useTicketPrinter } from '../../hooks/home.js';
+
 import { getTopProducts, getTableData, getRegisterData } from '../../utils/api.js';
 
 import { saleAlert } from '../../utils/alerts.js';
@@ -13,6 +15,7 @@ function Inicio(){
 
     const [mostRecentProducts, setMostRecentProducts] = useState([]);
     const [topProducts, setTopProducts] = useState([]);
+    const onPrint = useTicketPrinter();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -84,6 +87,7 @@ function Inicio(){
                                                 tipoDePedido={product[3]}
                                                 totalTicket={product[4]} 
                                                 onOpen={() => showAlert()}
+                                                onPrint={() => onPrint(product[0])}
                                             />
                                         )
                                     })

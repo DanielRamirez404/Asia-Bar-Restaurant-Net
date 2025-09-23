@@ -6,7 +6,7 @@ import "./widgetsInicioCss/PedidoTicket.css"
 import {InformacionDelProductoModal, InformacionDelPedidoModal} from "./modalesInicio.js"
 import { useNavigate } from "react-router-dom"; 
 
-import { Info } from "lucide-react";
+import { Info, ReceiptText } from "lucide-react";
 
 
 
@@ -202,7 +202,7 @@ export function MasVendidos({top, nombre, srcImg, precio, totalVentas, onOpen}){
 
 
 
-export function PedidoTicket({numeroPedido, clientName, totalProductos, tipoDePedido, totalTicket, onOpen}){
+export function PedidoTicket({numeroPedido, clientName, totalProductos, tipoDePedido, totalTicket, onOpen, onPrint}){
 
    return (
 
@@ -217,7 +217,12 @@ export function PedidoTicket({numeroPedido, clientName, totalProductos, tipoDePe
          <span className="totalTicket">{Number.parseFloat(totalTicket).toFixed(2)}$</span>
 
          <div className="contenedorBtnPedidoTicket">
-            <button className="botonInformacionTicket" onClick={() => onOpen(<InformacionDelPedidoModal datosPedido={DatosPedidoPrueba}/>)}><Info size={20} /></button>
+            <button className="botonInformacionTicket" onClick={() => onOpen()}>
+                <Info size={20} />
+            </button>
+            <button className="botonInformacionTicket" onClick={() => onPrint()}>
+                <ReceiptText size={20} />
+            </button>
             
          </div>
       </div>

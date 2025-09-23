@@ -5,6 +5,7 @@ import { useFormFields, usePairs } from './form.js';
 
 import { getTableData, getRegisterData, onDelete, onUpdateSale } from '../utils/api.js';
 import { successAlert, saleAlert } from '../utils/alerts.js';
+import { printOrderTicket } from '../utils/ticket.js';
 
 import { routes } from '../config/routes.js';
 
@@ -166,7 +167,35 @@ export function useActionButtons() {
     };
 
     const onTicket = (id) => {
-        console.log("LOL");
+
+        const print = async () => {
+            const fetched = await getRegisterData('sales/details', id); 
+            
+            const client = {
+                id: fetched[1],
+                name: fetched[2]
+            };
+            
+            const products = fetched[4];
+
+            const productsArray = [];
+
+            products.forEach((product) => productsArray.push({
+                nombre: product.Name, 
+                cantidad: product.Quantity,
+                precio: product.Quantity * product.Price,
+                precioUnitario: product.Price 
+            }));
+
+            printOrderTicket({
+                id: id,
+                type: fetched[3],
+                client: client,
+                products: productsArray
+            });
+        };
+
+        print();
     };
 
     return [onDeleteClick, onInfo, onEdit, onTicket];
