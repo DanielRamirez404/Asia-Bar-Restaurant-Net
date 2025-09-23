@@ -1,7 +1,9 @@
 import { generateTicket } from './ticketImpresion.js'; 
 import PrintManager from './print-manager.js';
 
-export function printOrderTicket({id, type, address, note, client, clock, products}, afterPrint) {
+import './ticket.css';
+
+export function printOrderTicket({ id, type, address, note, client, clock, products }, afterPrint = () => {}) {
     const ticket = generateTicket({
         numeroTicket: id,
         tipoVenta: type,
@@ -9,8 +11,8 @@ export function printOrderTicket({id, type, address, note, client, clock, produc
         mensaje: note || '¡Gracias por su preferencia!',
         clienteId: client.id,
         clienteNombre: client.name,
-        fecha: clock.date,
-        hora: clock.time,
+        fecha: clock ? clock.date : null,
+        hora: clock ? clock.time : null,
         items: products
     });
 

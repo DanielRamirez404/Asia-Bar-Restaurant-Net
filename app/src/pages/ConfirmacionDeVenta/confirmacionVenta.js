@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DashboardPage from "../../components/layout/dashboard-page.js";
 import './confirmacionVenta.css';
-import './ticket.css';
 import { TarjetaProductoInformacionVenta, TarjetaNota, TarjetaDelivery } from './widgetsConfirmacionVenta';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { generarTicket } from '../../utils/ticketImpresion';

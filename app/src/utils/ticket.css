@@ -1,6 +1,3 @@
-/* Estilos para impresión de tickets térmicos de 58mm */
-
-/* Estilos generales que se aplican siempre */
 #ticket-print-content {
     display: block !important;
     width: 100%;
