@@ -26,13 +26,15 @@ function api_fetch(fetch_settings) {
             if (!res.ok)
                 throw { code: res.status };
 
-            fetch_settings.onOk?.(res);
+            const json_res = res.json();
+
+            fetch_settings.onOk?.(json_res);
             
-            return res.json();
+            return json_res;
         })
         .catch(error => {
             const onError = fetch_settings.onError;
-
+            
             if (onError) {
                 onError();
                 return;
@@ -106,7 +108,7 @@ export const onUpdate = function(e, tableName, getData, getID, onDone) {
     });
 };
 
-export function onLogin(e, username, password, navigate) {
+export function onLogin(e, username, password, navigate, rolSetter) {
     e.preventDefault(); 
 
     api_fetch({
@@ -114,8 +116,12 @@ export function onLogin(e, username, password, navigate) {
         body: { username: username, password: password },
         onError: () => { errorAlert("Credenciales invalidas", "Sus credenciales no corresponden a ninguna sesión existente") },
         onOk: (res) => {
-            iconlessAlert("Bienvenida", `¡Bienvenido de vuelta, ${username}!`);
-            navigate(routes['Inicio']);
+            
+            res.then((user) => {
+                rolSetter(user.type);
+                iconlessAlert("Bienvenida", `¡Bienvenido de vuelta, ${username}!`);
+                navigate(routes['Inicio']);
+            });
         }
     });
 }
