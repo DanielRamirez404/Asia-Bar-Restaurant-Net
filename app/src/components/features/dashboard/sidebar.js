@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import MenuItem from './menu-item.js';
+import { useRol } from '../../../hooks/session.js'
 
 import { routes } from '../../../config/routes.js';
 
@@ -17,13 +18,15 @@ function HomeButton() {
 }
 
 function SideBarMenu({ dashboardItems, expandedIndex, onItemClick, onSubItemClick }) {
+    const rol = useRol(); 
+
     return (
         <nav className="menu">
             <ul className="menu-items">
                 <HomeButton />
 
                 {dashboardItems.map((menuItem, index) => (
-                    <MenuItem
+                    (rol !== "Administrador" && menuItem.isForAdminOnly) ? null : <MenuItem
                         key={menuItem.title}
                         title={menuItem.title}
                         isExpanded={expandedIndex === index}

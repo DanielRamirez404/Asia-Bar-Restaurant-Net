@@ -31,3 +31,9 @@ export function useRolChanger() {
     
     return (rol) => setSession(new Session(rol, session.username, session.table, session.modifyID));
 }
+
+export function useRol() {
+    const { session, setSession } = useContext(SessionContext);
+
+    return session.rol;
+}
