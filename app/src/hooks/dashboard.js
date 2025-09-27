@@ -35,7 +35,9 @@ export function useDashboardFunctions(isOpen, setOpenStatus, expandedIndex, setE
         "¿Está seguro de que desea salir? Su sesión será cerrada.",
         () => {
             onLogout(navigate);
-            rolChanger(null);
+            setTimeout(() => {
+                rolChanger(null);
+            }, 200);
         }
     );
 
